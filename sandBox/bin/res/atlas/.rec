@@ -1,3 +1,6 @@
 D .
 D source
+D source/resident
+P CF5CB010 residentNormal1.png
+P 43266093 residentNormal2.png
 D source/scene

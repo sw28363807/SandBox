@@ -1,1 +1,1 @@
-{"type":"Scene","props":{"width":1336,"height":750},"loadList":[],"loadList3D":[]}
+{"type":"Scene","props":{"width":1336,"height":750},"compId":2,"child":[{"type":"Script","props":{"runtime":"scene/TestSceneLogic.js"},"compId":3}],"loadList":[],"loadList3D":[]}
