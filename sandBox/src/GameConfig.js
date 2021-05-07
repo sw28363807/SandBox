@@ -14,10 +14,10 @@ export default class GameConfig {
 		reg("script/DropBox.js",DropBox);
     }
 }
-GameConfig.width = 640;
-GameConfig.height = 1136;
+GameConfig.width = 1136;
+GameConfig.height = 640;
 GameConfig.scaleMode ="fixedwidth";
-GameConfig.screenMode = "none";
+GameConfig.screenMode = "horizontal";
 GameConfig.alignV = "top";
 GameConfig.alignH = "left";
 GameConfig.startScene = "test/TestScene.scene";
