@@ -2,18 +2,20 @@
     "x":0,
     "type":"Scene",
     "selectedBox":2,
+    "selecteID":9,
     "searchKey":"Scene",
     "props":{"width":1336,"sceneColor":"#000000","height":750},
     "nodeParent":-1,
-    "maxID":4,
+    "maxID":21,
     "label":"Scene",
-    "isOpen":null,
+    "isOpen":true,
     "isDirectory":true,
     "isAniNode":true,
     "hasChild":true,
     "compId":2,
     "child":[
         {
+            "x":15,
             "type":"Script",
             "switchAble":true,
             "source":"src/scene/TestSceneLogic.js",
@@ -28,6 +30,104 @@
             "compId":3,
             "child":[
                 ]
+        },
+        {
+            "x":15,
+            "type":"Box",
+            "searchKey":"Box",
+            "props":{"presetID":1,"preset":"laya/pages/prefab/ScrollView.prefab"},
+            "nodeParent":2,
+            "label":"ScrollView",
+            "isOpen":true,
+            "isDirectory":true,
+            "isAniNode":true,
+            "hasChild":true,
+            "compId":9,
+            "child":[
+                {
+                    "x":30,
+                    "type":"Box",
+                    "searchKey":"Box",
+                    "props":{"presetID":2,"preset":"laya/pages/prefab/ScrollView.prefab"},
+                    "nodeParent":9,
+                    "label":"container",
+                    "isOpen":null,
+                    "isDirectory":true,
+                    "isAniNode":true,
+                    "hasChild":true,
+                    "compId":10,
+                    "child":[
+                        {
+                            "type":"Box",
+                            "searchKey":"Box",
+                            "props":{"presetID":3,"preset":"laya/pages/prefab/ScrollView.prefab"},
+                            "nodeParent":10,
+                            "label":"Box(ScrollView)",
+                            "isDirectory":false,
+                            "isAniNode":true,
+                            "hasChild":false,
+                            "compId":11,
+                            "child":[
+                                ]
+                        },
+                        {
+                            "type":"Box",
+                            "searchKey":"Box",
+                            "props":{"presetID":4,"preset":"laya/pages/prefab/ScrollView.prefab"},
+                            "nodeParent":10,
+                            "label":"Box(ScrollView)",
+                            "isDirectory":false,
+                            "isAniNode":true,
+                            "hasChild":false,
+                            "compId":12,
+                            "child":[
+                                ]
+                        },
+                        {
+                            "type":"Box",
+                            "searchKey":"Box",
+                            "props":{"presetID":5,"preset":"laya/pages/prefab/ScrollView.prefab"},
+                            "nodeParent":10,
+                            "label":"Box(ScrollView)",
+                            "isOpen":true,
+                            "isDirectory":false,
+                            "isAniNode":true,
+                            "hasChild":false,
+                            "compId":13,
+                            "child":[
+                                ]
+                        },
+                        {
+                            "type":"Box",
+                            "searchKey":"Box",
+                            "props":{"presetID":6,"preset":"laya/pages/prefab/ScrollView.prefab"},
+                            "nodeParent":10,
+                            "label":"Box(ScrollView)",
+                            "isDirectory":false,
+                            "isAniNode":true,
+                            "hasChild":false,
+                            "compId":14,
+                            "child":[
+                                ]
+                        }]
+                },
+                {
+                    "x":30,
+                    "type":"Script",
+                    "switchAble":true,
+                    "source":"src/helper/MapScrollView.js",
+                    "searchKey":"Script,MapScrollView",
+                    "removeAble":true,
+                    "props":{"presetID":7,"preset":"laya/pages/prefab/ScrollView.prefab"},
+                    "nodeParent":9,
+                    "label":"MapScrollView",
+                    "isDirectory":false,
+                    "isAniNode":true,
+                    "hasChild":false,
+                    "compId":15,
+                    "child":[
+                        ]
+                }]
         }],
     "animations":[
         {
