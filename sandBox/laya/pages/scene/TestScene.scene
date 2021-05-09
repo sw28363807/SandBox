@@ -1,11 +1,12 @@
 {
+    "x":0,
     "type":"Scene",
-    "selectedBox":2,
-    "selecteID":33,
+    "selectedBox":10,
+    "selecteID":35,
     "searchKey":"Scene",
     "props":{"width":1336,"sceneColor":"#000000","height":750},
     "nodeParent":-1,
-    "maxID":35,
+    "maxID":38,
     "label":"Scene",
     "isOpen":true,
     "isDirectory":true,
@@ -14,6 +15,7 @@
     "compId":2,
     "child":[
         {
+            "x":15,
             "type":"Script",
             "switchAble":true,
             "source":"src/scene/TestSceneLogic.js",
@@ -30,6 +32,7 @@
                 ]
         },
         {
+            "x":15,
             "type":"Box",
             "searchKey":"Box",
             "props":{"presetID":1,"preset":"laya/pages/prefab/ScrollView.prefab"},
@@ -42,18 +45,20 @@
             "compId":9,
             "child":[
                 {
+                    "x":30,
                     "type":"Box",
                     "searchKey":"Box",
                     "props":{"presetID":2,"preset":"laya/pages/prefab/ScrollView.prefab"},
                     "nodeParent":9,
                     "label":"container",
-                    "isOpen":false,
+                    "isOpen":true,
                     "isDirectory":true,
                     "isAniNode":true,
                     "hasChild":true,
                     "compId":10,
                     "child":[
                         {
+                            "x":45,
                             "type":"Box",
                             "searchKey":"Box",
                             "props":{"presetID":3,"preset":"laya/pages/prefab/ScrollView.prefab"},
@@ -67,6 +72,7 @@
                                 ]
                         },
                         {
+                            "x":45,
                             "type":"Box",
                             "searchKey":"Box",
                             "props":{"presetID":4,"preset":"laya/pages/prefab/ScrollView.prefab"},
@@ -80,6 +86,7 @@
                                 ]
                         },
                         {
+                            "x":45,
                             "type":"Box",
                             "searchKey":"Box",
                             "props":{"presetID":5,"preset":"laya/pages/prefab/ScrollView.prefab"},
@@ -94,6 +101,7 @@
                                 ]
                         },
                         {
+                            "x":45,
                             "type":"Box",
                             "searchKey":"Box",
                             "props":{"presetID":6,"preset":"laya/pages/prefab/ScrollView.prefab"},
@@ -107,6 +115,7 @@
                                 ]
                         },
                         {
+                            "x":45,
                             "type":"Box",
                             "searchKey":"Box",
                             "props":{"presetID":8,"preset":"laya/pages/prefab/ScrollView.prefab"},
@@ -313,9 +322,40 @@
                                     "child":[
                                         ]
                                 }]
+                        },
+                        {
+                            "x":45,
+                            "type":"Box",
+                            "searchKey":"Box",
+                            "props":{"presetID":24,"preset":"laya/pages/prefab/ScrollView.prefab"},
+                            "nodeParent":10,
+                            "label":"FoodTrigger",
+                            "isOpen":null,
+                            "isDirectory":true,
+                            "isAniNode":true,
+                            "hasChild":true,
+                            "compId":35,
+                            "child":[
+                                {
+                                    "type":"Script",
+                                    "switchAble":true,
+                                    "source":"src/food/FoodTrigger.js",
+                                    "searchKey":"Script,FoodTrigger",
+                                    "removeAble":true,
+                                    "props":{},
+                                    "nodeParent":35,
+                                    "label":"FoodTrigger",
+                                    "isDirectory":false,
+                                    "isAniNode":true,
+                                    "hasChild":false,
+                                    "compId":37,
+                                    "child":[
+                                        ]
+                                }]
                         }]
                 },
                 {
+                    "x":30,
                     "type":"Script",
                     "switchAble":true,
                     "source":"src/helper/MapScrollView.js",
@@ -328,34 +368,6 @@
                     "isAniNode":true,
                     "hasChild":false,
                     "compId":15,
-                    "child":[
-                        ]
-                }]
-        },
-        {
-            "type":"Box",
-            "searchKey":"Box",
-            "props":{"y":350,"x":508,"presetID":1,"preset":"laya/pages/prefab/FoodTrigger.prefab"},
-            "nodeParent":2,
-            "label":"FoodTrigger",
-            "isDirectory":true,
-            "isAniNode":true,
-            "hasChild":true,
-            "compId":33,
-            "child":[
-                {
-                    "type":"Script",
-                    "switchAble":true,
-                    "source":"src/food/FoodTrigger.js",
-                    "searchKey":"Script,FoodTrigger",
-                    "removeAble":true,
-                    "props":{"presetID":2,"preset":"laya/pages/prefab/FoodTrigger.prefab"},
-                    "nodeParent":33,
-                    "label":"FoodTrigger",
-                    "isDirectory":false,
-                    "isAniNode":true,
-                    "hasChild":false,
-                    "compId":34,
                     "child":[
                         ]
                 }]

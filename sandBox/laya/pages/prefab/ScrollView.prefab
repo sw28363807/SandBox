@@ -1,12 +1,12 @@
 {
     "x":0,
     "type":"Box",
-    "selectedBox":18,
-    "selecteID":33,
+    "selectedBox":10,
+    "selecteID":34,
     "searchKey":"Box,ScrollView",
     "props":{"y":0,"x":0,"width":1336,"presetID":1,"preset":"laya/pages/prefab/ScrollView.prefab","name":"ScrollView","isPresetRoot":true,"height":750,"bgColor":"#f8f3f7"},
     "nodeParent":-1,
-    "maxID":34,
+    "maxID":36,
     "label":"ScrollView",
     "isOpen":true,
     "isDirectory":true,
@@ -91,14 +91,13 @@
                     "props":{"width":3000,"presetID":8,"preset":"laya/pages/prefab/ScrollView.prefab","name":"spring","height":3000,"bgColor":"#c8ef8c"},
                     "nodeParent":10,
                     "label":"spring",
-                    "isOpen":true,
+                    "isOpen":false,
                     "isDirectory":true,
                     "isAniNode":true,
                     "hasChild":true,
                     "compId":18,
                     "child":[
                         {
-                            "x":45,
                             "type":"Sprite",
                             "searchKey":"Sprite",
                             "props":{"y":529,"x":336,"texture":"source/tree/tree1.png","presetID":9,"preset":"laya/pages/prefab/ScrollView.prefab"},
@@ -112,7 +111,6 @@
                                 ]
                         },
                         {
-                            "x":45,
                             "type":"Sprite",
                             "searchKey":"Sprite",
                             "props":{"y":440,"x":968,"texture":"source/tree/tree2.png","presetID":10,"preset":"laya/pages/prefab/ScrollView.prefab"},
@@ -126,7 +124,6 @@
                                 ]
                         },
                         {
-                            "x":45,
                             "type":"Sprite",
                             "searchKey":"Sprite",
                             "props":{"y":864,"x":1143,"texture":"source/tree/tree3.png","presetID":11,"preset":"laya/pages/prefab/ScrollView.prefab"},
@@ -140,7 +137,6 @@
                                 ]
                         },
                         {
-                            "x":45,
                             "type":"Sprite",
                             "searchKey":"Sprite",
                             "props":{"y":728,"x":1695,"texture":"source/tree/tree4.png","presetID":12,"preset":"laya/pages/prefab/ScrollView.prefab"},
@@ -154,7 +150,6 @@
                                 ]
                         },
                         {
-                            "x":45,
                             "type":"Sprite",
                             "searchKey":"Sprite",
                             "props":{"y":1284,"x":1135,"texture":"source/tree/tree5.png","presetID":13,"preset":"laya/pages/prefab/ScrollView.prefab"},
@@ -168,7 +163,6 @@
                                 ]
                         },
                         {
-                            "x":45,
                             "type":"Sprite",
                             "searchKey":"Sprite",
                             "props":{"y":1140,"x":2087,"texture":"source/tree/tree6.png","presetID":14,"preset":"laya/pages/prefab/ScrollView.prefab"},
@@ -182,7 +176,6 @@
                                 ]
                         },
                         {
-                            "x":45,
                             "type":"Sprite",
                             "searchKey":"Sprite",
                             "props":{"y":1560,"x":2295,"texture":"source/tree/tree7.png","presetID":15,"preset":"laya/pages/prefab/ScrollView.prefab"},
@@ -196,7 +189,6 @@
                                 ]
                         },
                         {
-                            "x":45,
                             "type":"Sprite",
                             "searchKey":"Sprite",
                             "props":{"y":1893,"x":931,"texture":"source/tree/tree8.png","presetID":16,"preset":"laya/pages/prefab/ScrollView.prefab"},
@@ -210,7 +202,6 @@
                                 ]
                         },
                         {
-                            "x":45,
                             "type":"Sprite",
                             "searchKey":"Sprite",
                             "props":{"y":910,"x":2597,"texture":"source/tree/tree9.png","presetID":17,"preset":"laya/pages/prefab/ScrollView.prefab"},
@@ -224,7 +215,6 @@
                                 ]
                         },
                         {
-                            "x":45,
                             "type":"Sprite",
                             "searchKey":"Sprite",
                             "props":{"y":2326,"x":1361,"texture":"source/tree/tree8.png","presetID":18,"preset":"laya/pages/prefab/ScrollView.prefab"},
@@ -238,7 +228,6 @@
                                 ]
                         },
                         {
-                            "x":45,
                             "type":"Sprite",
                             "searchKey":"Sprite",
                             "props":{"y":2150,"x":2077,"texture":"source/tree/tree1.png","presetID":19,"preset":"laya/pages/prefab/ScrollView.prefab"},
@@ -252,7 +241,6 @@
                                 ]
                         },
                         {
-                            "x":45,
                             "type":"Sprite",
                             "searchKey":"Sprite",
                             "props":{"y":2390,"x":481,"texture":"source/tree/tree2.png","presetID":20,"preset":"laya/pages/prefab/ScrollView.prefab"},
@@ -266,7 +254,6 @@
                                 ]
                         },
                         {
-                            "x":45,
                             "type":"Sprite",
                             "searchKey":"Sprite",
                             "props":{"y":1462,"x":673,"texture":"source/tree/tree3.png","presetID":21,"preset":"laya/pages/prefab/ScrollView.prefab"},
@@ -280,7 +267,6 @@
                                 ]
                         },
                         {
-                            "x":45,
                             "type":"Sprite",
                             "searchKey":"Sprite",
                             "props":{"y":2654,"x":2085,"texture":"source/tree/tree4.png","presetID":22,"preset":"laya/pages/prefab/ScrollView.prefab"},
@@ -294,7 +280,6 @@
                                 ]
                         },
                         {
-                            "x":45,
                             "type":"Sprite",
                             "searchKey":"Sprite",
                             "props":{"y":2602,"x":1045,"texture":"source/tree/tree7.png","presetID":23,"preset":"laya/pages/prefab/ScrollView.prefab"},
@@ -304,6 +289,36 @@
                             "isAniNode":true,
                             "hasChild":false,
                             "compId":33,
+                            "child":[
+                                ]
+                        }]
+                },
+                {
+                    "x":30,
+                    "type":"Box",
+                    "searchKey":"Box,FoodTrigger",
+                    "props":{"y":350,"x":508,"width":50,"presetID":24,"preset":"laya/pages/prefab/ScrollView.prefab","name":"FoodTrigger","height":50,"bgColor":"#e06e2e"},
+                    "nodeParent":10,
+                    "label":"FoodTrigger",
+                    "isOpen":null,
+                    "isDirectory":true,
+                    "isAniNode":true,
+                    "hasChild":true,
+                    "compId":34,
+                    "child":[
+                        {
+                            "type":"Script",
+                            "switchAble":true,
+                            "source":"src/food/FoodTrigger.js",
+                            "searchKey":"Script,FoodTrigger",
+                            "removeAble":true,
+                            "props":{"presetID":25,"preset":"laya/pages/prefab/ScrollView.prefab"},
+                            "nodeParent":34,
+                            "label":"FoodTrigger",
+                            "isDirectory":false,
+                            "isAniNode":true,
+                            "hasChild":false,
+                            "compId":35,
                             "child":[
                                 ]
                         }]
