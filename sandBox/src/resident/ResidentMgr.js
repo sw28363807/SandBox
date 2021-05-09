@@ -13,12 +13,15 @@ export default class ResidentMgr extends Laya.Script {
     onDisable() {
     }
 
+    static getInstance() {
+        return ResidentMgr.instance = ResidentMgr.instance || new ResidentMgr();
+    }
+
     // 创建居民
-    static createResidentByConfig(config, callback) {
+    createResidentByConfig(config, callback) {
         Laya.loader.create(GameMeta.ResidentPrefabPath, Laya.Handler.create(this, function (prefabDef) {
             let resident = prefabDef.create();
-            let residentLogic = new ResidentLogic(config);
-            resident.addComponentIntance(residentLogic);
+            config.parent.addChild(resident);
             if (callback) {
                 callback.runWith(resident);
             }

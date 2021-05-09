@@ -1,3 +1,5 @@
+import GameContext from "../meta/GameContext";
+
 export default class MapScrollView extends Laya.Script {
 
     constructor() { 
@@ -5,10 +7,10 @@ export default class MapScrollView extends Laya.Script {
     }
     
     onEnable() {
-        this.container = this.owner.getChildByName("container");
         this.startPos = null;
-        this.containerWidth = this.container.width;
-        this.containerHeight = this.container.height;
+        this.container = this.owner.getChildByName("container");
+        GameContext.mapWidth = this.container.width;
+        GameContext.mapHeight = this.container.height;
     }
 
     onDisable() {
@@ -44,11 +46,11 @@ export default class MapScrollView extends Laya.Script {
             if (toY > 0) {
                 toY = 0;
             }
-            if (toX < this.owner.width - this.containerWidth) {
-                toX = this.owner.width - this.containerWidth;
+            if (toX < this.owner.width - GameContext.mapWidth) {
+                toX = this.owner.width - GameContext.mapWidth;
             }
-            if (toY < this.owner.height - this.containerHeight) {
-                toY = this.owner.height - this.containerHeight;
+            if (toY < this.owner.height - GameContext.mapHeight) {
+                toY = this.owner.height - GameContext.mapHeight;
             }
             this.container.x = toX;
             this.container.y = toY;

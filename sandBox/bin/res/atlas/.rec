@@ -1,6 +1,18 @@
 D .
 D source
+D source/food
+P 43B7F2FA food1.png
 D source/resident
 P CF5CB010 residentNormal1.png
 P 43266093 residentNormal2.png
 D source/scene
+D source/tree
+P 0BAFB2C2 tree1.png
+P C7D73FA8 tree2.png
+P 3FD52CA8 tree3.png
+P 2B936604 tree4.png
+P 154531AC tree5.png
+P FBA84BFC tree6.png
+P 795E8C07 tree7.png
+P D87D66CD tree8.png
+P CB25EA90 tree9.png

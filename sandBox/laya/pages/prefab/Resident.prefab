@@ -4,7 +4,7 @@
     "selectedBox":3,
     "selecteID":4,
     "searchKey":"Box,Resident",
-    "props":{"y":0,"x":0,"width":48,"presetID":1,"preset":"laya/pages/prefab/Resident.prefab","name":"Resident","isPresetRoot":true,"height":48},
+    "props":{"width":48,"presetID":1,"preset":"laya/pages/prefab/Resident.prefab","name":"Resident","isPresetRoot":true,"height":48},
     "nodeParent":-1,
     "maxID":7,
     "label":"Resident",
@@ -26,7 +26,8 @@
             "hasChild":false,
             "compId":4,
             "child":[
-                ]
+                ],
+            "$HIDDEN":false
         },
         {
             "x":15,
@@ -35,7 +36,7 @@
             "source":"src/resident/ResidentLogic.js",
             "searchKey":"Script,ResidentLogic",
             "removeAble":true,
-            "props":{"presetID":3,"preset":"laya/pages/prefab/Resident.prefab"},
+            "props":{"y":0,"x":-67,"presetID":3,"preset":"laya/pages/prefab/Resident.prefab"},
             "nodeParent":3,
             "label":"ResidentLogic",
             "isDirectory":false,
