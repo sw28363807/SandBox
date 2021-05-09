@@ -31,12 +31,13 @@ export default class ResidentLogic extends Laya.Script {
 
     //初始化属性
     initModel() {
-        this.life = 100;    //生命
-        this.water = 100;   //水源
-        this.enjoy = 100;   //娱乐
-        this.food = 100;    //食物
+        this.life = 75;    //生命
+        this.water = 50;   //水源
+        this.enjoy = 40;   //娱乐
+        this.food = 50;    //食物
         this.teach = 0;     //教育
-        this.health = 100;  //健康
+        this.health = 75;  //健康
+        this.social = 30;    //社交
 
         this.temperature = 36;  //体温
         this.age = 1;       //年龄
@@ -63,7 +64,8 @@ export default class ResidentLogic extends Laya.Script {
                 age: this.age,
                 sex: this.sex,
                 married: this.married,
-                residentName: this.residentName
+                residentName: this.residentName,
+                social: this.social,
             });
         });
     }

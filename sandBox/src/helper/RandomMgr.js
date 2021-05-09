@@ -11,6 +11,14 @@ export default class RandomMgr {
         return {x: Math.floor(retX), y: Math.floor(retY)};
     };
 
+    // 做一个是否的随机
+    static randomYes() {
+        if (Math.random() >= 0.5) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 
     static randomSign() {
         if (Math.random() >= 0.5) {

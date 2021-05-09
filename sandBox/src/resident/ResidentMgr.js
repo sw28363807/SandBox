@@ -1,3 +1,4 @@
+import RandomMgr from "../helper/RandomMgr";
 import GameMeta from "../meta/GameMeta";
 import ResidentLogic from "./ResidentLogic";
 
@@ -25,7 +26,20 @@ export default class ResidentMgr extends Laya.Script {
         Laya.timer.loop(5000, this, function () {
             this.residents.forEach(function (item, idnex, array) {
                 let script = item.getComponent(ResidentLogic);
-                script.food = script.food - 1;
+                if (RandomMgr.randomYes()) {
+                    // 减少食物
+                    script.food = script.food - 1;
+                    if (script.food < 0) {
+                        script.food = 0;
+                    }                   
+                }
+                if (RandomMgr.randomYes()) {
+                    // 减少水源
+                    script.water = script.water - 1;
+                    if (script.water < 0) {
+                        script.water = 0;
+                    }                   
+                }
             });
         });
     }
