@@ -9,6 +9,7 @@ export default class FoodTrigger extends Laya.Script {
     }
     
     onEnable() {
+        this.curNum = 0;
     }
 
     onDisable() {
@@ -16,8 +17,12 @@ export default class FoodTrigger extends Laya.Script {
 
     onStart() {
         this.owner.timer.loop(5000, this, function() {
+            if (this.curNum >= 1) {
+                return;
+            }
             let pos = RandomMgr.randomByArea(this.owner.x, this.owner.y, 200);
             EventMgr.getInstance().postEvent(GameMeta.ADD_FOOD_TO_MAP, pos);
+            this.curNum++;
         });
     }
 }

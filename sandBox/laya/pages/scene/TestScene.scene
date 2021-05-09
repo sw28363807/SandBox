@@ -2,11 +2,11 @@
     "x":0,
     "type":"Scene",
     "selectedBox":2,
-    "selecteID":49,
+    "selecteID":83,
     "searchKey":"Scene",
     "props":{"width":1336,"sceneColor":"#000000","height":750},
     "nodeParent":-1,
-    "maxID":79,
+    "maxID":84,
     "label":"Scene",
     "isOpen":true,
     "isDirectory":true,
@@ -38,13 +38,14 @@
             "props":{"presetID":1,"preset":"laya/pages/prefab/ScrollView.prefab"},
             "nodeParent":2,
             "label":"ScrollView",
-            "isOpen":false,
+            "isOpen":true,
             "isDirectory":true,
             "isAniNode":true,
             "hasChild":true,
             "compId":9,
             "child":[
                 {
+                    "x":30,
                     "type":"Box",
                     "searchKey":"Box",
                     "props":{"presetID":2,"preset":"laya/pages/prefab/ScrollView.prefab"},
@@ -57,6 +58,7 @@
                     "compId":10,
                     "child":[
                         {
+                            "x":45,
                             "type":"Box",
                             "searchKey":"Box",
                             "props":{"presetID":3,"preset":"laya/pages/prefab/ScrollView.prefab"},
@@ -70,6 +72,7 @@
                                 ]
                         },
                         {
+                            "x":45,
                             "type":"Box",
                             "searchKey":"Box",
                             "props":{"presetID":4,"preset":"laya/pages/prefab/ScrollView.prefab"},
@@ -83,6 +86,7 @@
                                 ]
                         },
                         {
+                            "x":45,
                             "type":"Box",
                             "searchKey":"Box",
                             "props":{"presetID":5,"preset":"laya/pages/prefab/ScrollView.prefab"},
@@ -97,6 +101,7 @@
                                 ]
                         },
                         {
+                            "x":45,
                             "type":"Box",
                             "searchKey":"Box",
                             "props":{"presetID":6,"preset":"laya/pages/prefab/ScrollView.prefab"},
@@ -110,220 +115,28 @@
                                 ]
                         },
                         {
+                            "x":45,
                             "type":"Box",
                             "searchKey":"Box",
                             "props":{"presetID":8,"preset":"laya/pages/prefab/ScrollView.prefab"},
                             "nodeParent":10,
                             "label":"spring",
-                            "isOpen":null,
-                            "isDirectory":true,
+                            "isOpen":false,
+                            "isDirectory":false,
                             "isAniNode":true,
-                            "hasChild":true,
+                            "hasChild":false,
                             "compId":16,
                             "child":[
-                                {
-                                    "type":"Sprite",
-                                    "searchKey":"Sprite",
-                                    "props":{"presetID":9,"preset":"laya/pages/prefab/ScrollView.prefab"},
-                                    "nodeParent":16,
-                                    "label":"Sprite(ScrollView)",
-                                    "isDirectory":false,
-                                    "isAniNode":true,
-                                    "hasChild":false,
-                                    "compId":17,
-                                    "child":[
-                                        ]
-                                },
-                                {
-                                    "type":"Sprite",
-                                    "searchKey":"Sprite",
-                                    "props":{"presetID":10,"preset":"laya/pages/prefab/ScrollView.prefab"},
-                                    "nodeParent":16,
-                                    "label":"Sprite(ScrollView)",
-                                    "isDirectory":false,
-                                    "isAniNode":true,
-                                    "hasChild":false,
-                                    "compId":18,
-                                    "child":[
-                                        ]
-                                },
-                                {
-                                    "type":"Sprite",
-                                    "searchKey":"Sprite",
-                                    "props":{"presetID":11,"preset":"laya/pages/prefab/ScrollView.prefab"},
-                                    "nodeParent":16,
-                                    "label":"Sprite(ScrollView)",
-                                    "isDirectory":false,
-                                    "isAniNode":true,
-                                    "hasChild":false,
-                                    "compId":19,
-                                    "child":[
-                                        ]
-                                },
-                                {
-                                    "type":"Sprite",
-                                    "searchKey":"Sprite",
-                                    "props":{"presetID":12,"preset":"laya/pages/prefab/ScrollView.prefab"},
-                                    "nodeParent":16,
-                                    "label":"Sprite(ScrollView)",
-                                    "isDirectory":false,
-                                    "isAniNode":true,
-                                    "hasChild":false,
-                                    "compId":20,
-                                    "child":[
-                                        ]
-                                },
-                                {
-                                    "type":"Sprite",
-                                    "searchKey":"Sprite",
-                                    "props":{"presetID":13,"preset":"laya/pages/prefab/ScrollView.prefab"},
-                                    "nodeParent":16,
-                                    "label":"Sprite(ScrollView)",
-                                    "isDirectory":false,
-                                    "isAniNode":true,
-                                    "hasChild":false,
-                                    "compId":21,
-                                    "child":[
-                                        ]
-                                },
-                                {
-                                    "type":"Sprite",
-                                    "searchKey":"Sprite",
-                                    "props":{"presetID":14,"preset":"laya/pages/prefab/ScrollView.prefab"},
-                                    "nodeParent":16,
-                                    "label":"Sprite(ScrollView)",
-                                    "isDirectory":false,
-                                    "isAniNode":true,
-                                    "hasChild":false,
-                                    "compId":22,
-                                    "child":[
-                                        ]
-                                },
-                                {
-                                    "type":"Sprite",
-                                    "searchKey":"Sprite",
-                                    "props":{"presetID":15,"preset":"laya/pages/prefab/ScrollView.prefab"},
-                                    "nodeParent":16,
-                                    "label":"Sprite(ScrollView)",
-                                    "isDirectory":false,
-                                    "isAniNode":true,
-                                    "hasChild":false,
-                                    "compId":23,
-                                    "child":[
-                                        ]
-                                },
-                                {
-                                    "type":"Sprite",
-                                    "searchKey":"Sprite",
-                                    "props":{"presetID":16,"preset":"laya/pages/prefab/ScrollView.prefab"},
-                                    "nodeParent":16,
-                                    "label":"Sprite(ScrollView)",
-                                    "isDirectory":false,
-                                    "isAniNode":true,
-                                    "hasChild":false,
-                                    "compId":24,
-                                    "child":[
-                                        ]
-                                },
-                                {
-                                    "type":"Sprite",
-                                    "searchKey":"Sprite",
-                                    "props":{"presetID":17,"preset":"laya/pages/prefab/ScrollView.prefab"},
-                                    "nodeParent":16,
-                                    "label":"Sprite(ScrollView)",
-                                    "isDirectory":false,
-                                    "isAniNode":true,
-                                    "hasChild":false,
-                                    "compId":25,
-                                    "child":[
-                                        ]
-                                },
-                                {
-                                    "type":"Sprite",
-                                    "searchKey":"Sprite",
-                                    "props":{"presetID":18,"preset":"laya/pages/prefab/ScrollView.prefab"},
-                                    "nodeParent":16,
-                                    "label":"Sprite(ScrollView)",
-                                    "isDirectory":false,
-                                    "isAniNode":true,
-                                    "hasChild":false,
-                                    "compId":26,
-                                    "child":[
-                                        ]
-                                },
-                                {
-                                    "type":"Sprite",
-                                    "searchKey":"Sprite",
-                                    "props":{"presetID":19,"preset":"laya/pages/prefab/ScrollView.prefab"},
-                                    "nodeParent":16,
-                                    "label":"Sprite(ScrollView)",
-                                    "isDirectory":false,
-                                    "isAniNode":true,
-                                    "hasChild":false,
-                                    "compId":27,
-                                    "child":[
-                                        ]
-                                },
-                                {
-                                    "type":"Sprite",
-                                    "searchKey":"Sprite",
-                                    "props":{"presetID":20,"preset":"laya/pages/prefab/ScrollView.prefab"},
-                                    "nodeParent":16,
-                                    "label":"Sprite(ScrollView)",
-                                    "isDirectory":false,
-                                    "isAniNode":true,
-                                    "hasChild":false,
-                                    "compId":28,
-                                    "child":[
-                                        ]
-                                },
-                                {
-                                    "type":"Sprite",
-                                    "searchKey":"Sprite",
-                                    "props":{"presetID":21,"preset":"laya/pages/prefab/ScrollView.prefab"},
-                                    "nodeParent":16,
-                                    "label":"Sprite(ScrollView)",
-                                    "isDirectory":false,
-                                    "isAniNode":true,
-                                    "hasChild":false,
-                                    "compId":29,
-                                    "child":[
-                                        ]
-                                },
-                                {
-                                    "type":"Sprite",
-                                    "searchKey":"Sprite",
-                                    "props":{"presetID":22,"preset":"laya/pages/prefab/ScrollView.prefab"},
-                                    "nodeParent":16,
-                                    "label":"Sprite(ScrollView)",
-                                    "isDirectory":false,
-                                    "isAniNode":true,
-                                    "hasChild":false,
-                                    "compId":30,
-                                    "child":[
-                                        ]
-                                },
-                                {
-                                    "type":"Sprite",
-                                    "searchKey":"Sprite",
-                                    "props":{"presetID":23,"preset":"laya/pages/prefab/ScrollView.prefab"},
-                                    "nodeParent":16,
-                                    "label":"Sprite(ScrollView)",
-                                    "isDirectory":false,
-                                    "isAniNode":true,
-                                    "hasChild":false,
-                                    "compId":31,
-                                    "child":[
-                                        ]
-                                }]
+                                ]
                         },
                         {
+                            "x":45,
                             "type":"Box",
                             "searchKey":"Box",
                             "props":{"presetID":24,"preset":"laya/pages/prefab/ScrollView.prefab"},
                             "nodeParent":10,
                             "label":"FoodTrigger",
-                            "isOpen":null,
+                            "isOpen":false,
                             "isDirectory":true,
                             "isAniNode":true,
                             "hasChild":true,
@@ -335,19 +148,20 @@
                                     "source":"src/food/FoodTrigger.js",
                                     "searchKey":"Script,FoodTrigger",
                                     "removeAble":true,
-                                    "props":{},
+                                    "props":{"presetID":25,"preset":"laya/pages/prefab/ScrollView.prefab"},
                                     "nodeParent":35,
                                     "label":"FoodTrigger",
                                     "isDirectory":false,
                                     "isAniNode":true,
                                     "hasChild":false,
-                                    "compId":37,
+                                    "compId":38,
                                     "child":[
                                         ]
                                 }]
                         }]
                 },
                 {
+                    "x":30,
                     "type":"Script",
                     "switchAble":true,
                     "source":"src/helper/MapScrollView.js",

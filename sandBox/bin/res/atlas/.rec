@@ -1,11 +1,16 @@
 D .
 D source
+D source/building
+P 6A2CE112 building1_1.png
+P A40CE787 building1_2.png
+P 233A6581 building1_3.png
 D source/food
 P 43B7F2FA food1.png
 D source/resident
 P 21D5D16A femal.png
 P 43266093 residentNormal1.png
 P CF5CB010 residentNormal2.png
+P 8BA2E94E residentWalk1.png
 D source/scene
 D source/tree
 P 0BAFB2C2 tree1.png

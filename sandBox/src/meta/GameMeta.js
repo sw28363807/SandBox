@@ -19,6 +19,7 @@ GameMeta.ResidentZOrder = 100;  //居民层级
 // 人物图片资源路径
 GameMeta.ResidentStateImagePath = {
     "normalState":"source/resident/residentNormal1.png",
+    "walkState":"source/resident/residentWalk1.png"
 };
 
 // 食物图片资源
