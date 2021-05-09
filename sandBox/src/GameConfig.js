@@ -4,6 +4,7 @@ import FoodTrigger from "./food/FoodTrigger"
 import MapScrollView from "./helper/MapScrollView"
 import FoodLogic from "./food/FoodLogic"
 import ResidentLogic from "./resident/ResidentLogic"
+import ResidentDetailsPanel from "./panel/ResidentDetailsPanel"
 
 export default class GameConfig {
     static init() {
@@ -14,6 +15,7 @@ export default class GameConfig {
 		reg("helper/MapScrollView.js",MapScrollView);
 		reg("food/FoodLogic.js",FoodLogic);
 		reg("resident/ResidentLogic.js",ResidentLogic);
+		reg("panel/ResidentDetailsPanel.js",ResidentDetailsPanel);
     }
 }
 GameConfig.width = 1336;

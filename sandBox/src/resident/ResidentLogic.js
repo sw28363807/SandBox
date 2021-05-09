@@ -1,5 +1,7 @@
 import ResidentIdleAction from "../action/ResidentIdleAction";
 import GameMeta from "../meta/GameMeta";
+import NameMeta from "../meta/NameMeta";
+import ResidentDetailsPanelMgr from "../panel/ResidentDetailsPanelMgr";
 
 export default class ResidentLogic extends Laya.Script {
 
@@ -15,6 +17,7 @@ export default class ResidentLogic extends Laya.Script {
     onEnable() {
         this.initModel();
         this.initControl();
+        this.initTouch();
     }
 
     onDisable() {
@@ -34,19 +37,40 @@ export default class ResidentLogic extends Laya.Script {
         this.food = 100;    //食物
         this.teach = 0;     //教育
         this.health = 100;  //健康
-        
+
         this.temperature = 36;  //体温
         this.age = 1;       //年龄
         this.sex = 1;   // 性别 1 男 2 女
-        this.residentName = "";
+        this.married = 1; //1 未婚 2 已婚
+        this.residentName = NameMeta.randomOneName();
 
 
         this.stateAnim = null;
         this.curFSMState = 0;   //0-空状态 1-待机
     }
 
+    initTouch() {
+        this.owner.on(Laya.Event.CLICK, this, function () {
+            ResidentDetailsPanelMgr.getInstance().showPanel({
+                parent: this.owner,
+                life: this.life,
+                water: this.water,
+                enjoy: this.enjoy,
+                food: this.food,
+                teach: this.teach,
+                health: this.health,
+                temperature: this.temperature,
+                age: this.age,
+                sex: this.sex,
+                married: this.married,
+                residentName: this.residentName
+            });
+        });
+    }
+
+    // 刷新性别
     refreshSex() {
-        if (this.sexImage && this.sex == 2) {
+        if (this.sexImage && this.sex == 1) {
             this.sexImage.visible = false;
         }
     }

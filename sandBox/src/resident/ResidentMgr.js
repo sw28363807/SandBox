@@ -34,6 +34,7 @@ export default class ResidentMgr extends Laya.Script {
     createResidentByConfig(config, callback) {
         Laya.loader.create(GameMeta.ResidentPrefabPath, Laya.Handler.create(this, function (prefabDef) {
             let resident = prefabDef.create();
+            resident.zOrder = GameMeta.ResidentZOrder;
             config.parent.addChild(resident);
             let script = resident.getComponent(ResidentLogic);
             if (config.x) {

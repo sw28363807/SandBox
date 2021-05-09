@@ -7,6 +7,13 @@ GameMeta.ADD_FOOD_TO_MAP = "ADD_FOOD_TO_MAP";              //触发器通知生�
 // 资源路径
 GameMeta.ResidentPrefabPath = "prefab/Resident.prefab";   //居民prefab路径
 GameMeta.FoodPrefabPath = "prefab/Food.prefab";           //食物prefab路径
+GameMeta.ResdientDetailsPanelPath = "prefab/ResidentDetailsPanel.prefab";   //显示居民信息prfab路径
+
+
+// 层级
+GameMeta.ResidentZOrder = 100;  //居民层级
+
+
 
 
 // 人物图片资源路径

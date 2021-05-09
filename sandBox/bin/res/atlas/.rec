@@ -3,9 +3,9 @@ D source
 D source/food
 P 43B7F2FA food1.png
 D source/resident
-P 6F0BF6EF femal.png
-P CF5CB010 residentNormal1.png
-P 43266093 residentNormal2.png
+P 21D5D16A femal.png
+P 43266093 residentNormal1.png
+P CF5CB010 residentNormal2.png
 D source/scene
 D source/tree
 P 0BAFB2C2 tree1.png

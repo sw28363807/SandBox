@@ -2,11 +2,11 @@
     "x":0,
     "type":"Box",
     "selectedBox":49,
-    "selecteID":84,
+    "selecteID":75,
     "searchKey":"Box,ResidentDetailsPanel",
     "props":{"y":0,"x":0,"width":250,"presetID":1,"preset":"laya/pages/prefab/ResidentDetailsPanel.prefab","name":"ResidentDetailsPanel","isPresetRoot":true,"height":150},
     "nodeParent":-1,
-    "maxID":85,
+    "maxID":87,
     "label":"ResidentDetailsPanel",
     "isOpen":true,
     "isDirectory":true,
@@ -26,7 +26,8 @@
             "hasChild":false,
             "compId":50,
             "child":[
-                ]
+                ],
+            "$LOCKED":true
         },
         {
             "x":15,
@@ -283,8 +284,8 @@
         {
             "x":15,
             "type":"Text",
-            "searchKey":"Text,name",
-            "props":{"y":22,"x":16,"width":19,"text":"李二狗","presetID":18,"preset":"laya/pages/prefab/ResidentDetailsPanel.prefab","name":"name","height":12,"font":"Microsoft YaHei","color":"#277be5","bold":true,"align":"left"},
+            "searchKey":"Text,name,resname",
+            "props":{"y":12,"x":16,"width":19,"var":"resname","text":"李二狗","presetID":18,"preset":"laya/pages/prefab/ResidentDetailsPanel.prefab","name":"name","height":12,"font":"Microsoft YaHei","color":"#277be5","bold":true,"align":"left"},
             "nodeParent":49,
             "label":"name",
             "isDirectory":false,
@@ -297,10 +298,11 @@
         {
             "x":15,
             "type":"Text",
-            "searchKey":"Text,sex",
-            "props":{"y":70,"x":16,"width":19,"text":"性别: 女","rotation":0,"presetID":19,"preset":"laya/pages/prefab/ResidentDetailsPanel.prefab","name":"sex","height":12,"font":"Microsoft YaHei","color":"#277be5","bold":true,"align":"left"},
+            "searchKey":"Text,sex,sex",
+            "props":{"y":27,"x":16,"width":19,"var":"sex","text":"性别: 女","rotation":0,"presetID":19,"preset":"laya/pages/prefab/ResidentDetailsPanel.prefab","name":"sex","height":12,"font":"Microsoft YaHei","color":"#277be5","bold":true,"align":"left"},
             "nodeParent":49,
             "label":"sex",
+            "isOpen":true,
             "isDirectory":false,
             "isAniNode":true,
             "hasChild":false,
@@ -311,8 +313,22 @@
         {
             "x":15,
             "type":"Text",
-            "searchKey":"Text,temperature",
-            "props":{"y":93,"x":16,"width":19,"text":"体温: 37","presetID":20,"preset":"laya/pages/prefab/ResidentDetailsPanel.prefab","name":"temperature","height":12,"font":"Microsoft YaHei","color":"#277be5","bold":true,"align":"left"},
+            "searchKey":"Text,married,married",
+            "props":{"y":42,"x":16,"width":19,"var":"married","text":"未婚","rotation":0,"presetID":32,"preset":"laya/pages/prefab/ResidentDetailsPanel.prefab","name":"married","height":12,"font":"Microsoft YaHei","color":"#277be5","bold":true,"align":"left"},
+            "nodeParent":49,
+            "label":"married",
+            "isDirectory":false,
+            "isAniNode":true,
+            "hasChild":false,
+            "compId":86,
+            "child":[
+                ]
+        },
+        {
+            "x":15,
+            "type":"Text",
+            "searchKey":"Text,temperature,temperature",
+            "props":{"y":72,"x":16,"width":19,"var":"temperature","text":"体温: 37","presetID":20,"preset":"laya/pages/prefab/ResidentDetailsPanel.prefab","name":"temperature","height":12,"font":"Microsoft YaHei","color":"#277be5","bold":true,"align":"left"},
             "nodeParent":49,
             "label":"temperature",
             "isDirectory":false,
@@ -325,8 +341,8 @@
         {
             "x":15,
             "type":"Text",
-            "searchKey":"Text,age",
-            "props":{"y":45,"x":16,"width":19,"text":"年龄: 29","presetID":24,"preset":"laya/pages/prefab/ResidentDetailsPanel.prefab","name":"age","height":12,"font":"Microsoft YaHei","color":"#277be5","bold":true,"align":"left"},
+            "searchKey":"Text,age,age",
+            "props":{"y":57,"x":16,"width":19,"var":"age","text":"年龄: 29","presetID":24,"preset":"laya/pages/prefab/ResidentDetailsPanel.prefab","name":"age","height":12,"font":"Microsoft YaHei","color":"#277be5","bold":true,"align":"left"},
             "nodeParent":49,
             "label":"age",
             "isOpen":true,
@@ -341,7 +357,7 @@
             "x":15,
             "type":"Text",
             "searchKey":"Text,label",
-            "props":{"y":11,"x":69,"width":19,"text":"生命","presetID":25,"preset":"laya/pages/prefab/ResidentDetailsPanel.prefab","name":"label","height":12,"font":"Microsoft YaHei","color":"#e526e5","bold":true,"align":"left"},
+            "props":{"y":12,"x":69,"width":19,"text":"生命","presetID":25,"preset":"laya/pages/prefab/ResidentDetailsPanel.prefab","name":"label","height":12,"font":"Microsoft YaHei","color":"#e526e5","bold":true,"align":"left"},
             "nodeParent":49,
             "label":"label",
             "isDirectory":false,
@@ -418,6 +434,23 @@
             "isAniNode":true,
             "hasChild":false,
             "compId":84,
+            "child":[
+                ]
+        },
+        {
+            "x":15,
+            "type":"Script",
+            "switchAble":true,
+            "source":"src/panel/ResidentDetailsPanel.js",
+            "searchKey":"Script,ResidentDetailsPanel",
+            "removeAble":true,
+            "props":{"presetID":31,"preset":"laya/pages/prefab/ResidentDetailsPanel.prefab"},
+            "nodeParent":49,
+            "label":"ResidentDetailsPanel",
+            "isDirectory":false,
+            "isAniNode":true,
+            "hasChild":false,
+            "compId":85,
             "child":[
                 ]
         }],
