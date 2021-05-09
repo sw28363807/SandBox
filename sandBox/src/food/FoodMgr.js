@@ -4,14 +4,9 @@ export default class FoodMgr extends Laya.Script {
 
     constructor() { 
         super();
+        this.foods = [];
     }
     
-    onEnable() {
-    }
-
-    onDisable() {
-    }
-
     static getInstance() {
         return FoodMgr.instance = FoodMgr.instance || new FoodMgr();
     }
@@ -23,9 +18,17 @@ export default class FoodMgr extends Laya.Script {
             config.parent.addChild(food);
             food.x = config.x;
             food.y = config.y;
+            this.foods.push(food);
             if (callback) {
                 callback.runWith(food);
             }
         }));
+    }
+
+    // 获得距离最近的一个食物
+    getNearestFood(x, y) {
+        this.foods.forEach(function (item, idnex, array) {
+
+        });
     }
 }

@@ -3,18 +3,18 @@ import GameMeta from "../meta/GameMeta";
 
 export default class ResidentLogic extends Laya.Script {
 
-    constructor(config) { 
+    constructor() { 
         super();
     }
 
     onStart() {
-        this.initModel();
-        this.initControl();
+        this.refreshSex();
         this.setFSMState(1);
-        // this.setAnim("normalState");
     }
     
     onEnable() {
+        this.initModel();
+        this.initControl();
     }
 
     onDisable() {
@@ -23,6 +23,7 @@ export default class ResidentLogic extends Laya.Script {
     //初始化控件
     initControl() {
         this.residentImage = this.owner.getChildByName("image");
+        this.sexImage = this.residentImage.getChildByName("sexImage");
     }
 
     //初始化属性
@@ -32,21 +33,22 @@ export default class ResidentLogic extends Laya.Script {
         this.enjoy = 100;   //娱乐
         this.food = 100;    //食物
         this.teach = 0;     //教育
-        this.temperature = 36;  //体温
         this.health = 100;  //健康
+        
+        this.temperature = 36;  //体温
         this.age = 1;       //年龄
         this.sex = 1;   // 性别 1 男 2 女
+        this.residentName = "";
 
 
         this.stateAnim = null;
         this.curFSMState = 0;   //0-空状态 1-待机
     }
 
-    //  时间流失
-    intiTimer() {
-        this.owner.timer.loop(5000, this, function () {
-            this.food = this.food - 1;
-        });
+    refreshSex() {
+        if (this.sexImage && this.sex == 2) {
+            this.sexImage.visible = false;
+        }
     }
 
     // 设置动画
@@ -73,6 +75,8 @@ export default class ResidentLogic extends Laya.Script {
             this.setAnim("normalState");
         }
     }
+
+    
 
     // 做出策略
     makeIdea() {

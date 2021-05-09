@@ -1,12 +1,12 @@
 {
     "x":0,
     "type":"Scene",
-    "selectedBox":10,
-    "selecteID":35,
+    "selectedBox":2,
+    "selecteID":49,
     "searchKey":"Scene",
     "props":{"width":1336,"sceneColor":"#000000","height":750},
     "nodeParent":-1,
-    "maxID":38,
+    "maxID":79,
     "label":"Scene",
     "isOpen":true,
     "isDirectory":true,
@@ -38,14 +38,13 @@
             "props":{"presetID":1,"preset":"laya/pages/prefab/ScrollView.prefab"},
             "nodeParent":2,
             "label":"ScrollView",
-            "isOpen":true,
+            "isOpen":false,
             "isDirectory":true,
             "isAniNode":true,
             "hasChild":true,
             "compId":9,
             "child":[
                 {
-                    "x":30,
                     "type":"Box",
                     "searchKey":"Box",
                     "props":{"presetID":2,"preset":"laya/pages/prefab/ScrollView.prefab"},
@@ -58,7 +57,6 @@
                     "compId":10,
                     "child":[
                         {
-                            "x":45,
                             "type":"Box",
                             "searchKey":"Box",
                             "props":{"presetID":3,"preset":"laya/pages/prefab/ScrollView.prefab"},
@@ -72,7 +70,6 @@
                                 ]
                         },
                         {
-                            "x":45,
                             "type":"Box",
                             "searchKey":"Box",
                             "props":{"presetID":4,"preset":"laya/pages/prefab/ScrollView.prefab"},
@@ -86,7 +83,6 @@
                                 ]
                         },
                         {
-                            "x":45,
                             "type":"Box",
                             "searchKey":"Box",
                             "props":{"presetID":5,"preset":"laya/pages/prefab/ScrollView.prefab"},
@@ -101,7 +97,6 @@
                                 ]
                         },
                         {
-                            "x":45,
                             "type":"Box",
                             "searchKey":"Box",
                             "props":{"presetID":6,"preset":"laya/pages/prefab/ScrollView.prefab"},
@@ -115,7 +110,6 @@
                                 ]
                         },
                         {
-                            "x":45,
                             "type":"Box",
                             "searchKey":"Box",
                             "props":{"presetID":8,"preset":"laya/pages/prefab/ScrollView.prefab"},
@@ -324,7 +318,6 @@
                                 }]
                         },
                         {
-                            "x":45,
                             "type":"Box",
                             "searchKey":"Box",
                             "props":{"presetID":24,"preset":"laya/pages/prefab/ScrollView.prefab"},
@@ -355,7 +348,6 @@
                         }]
                 },
                 {
-                    "x":30,
                     "type":"Script",
                     "switchAble":true,
                     "source":"src/helper/MapScrollView.js",
@@ -368,6 +360,423 @@
                     "isAniNode":true,
                     "hasChild":false,
                     "compId":15,
+                    "child":[
+                        ]
+                }]
+        },
+        {
+            "x":15,
+            "type":"Box",
+            "searchKey":"Box",
+            "props":{"y":146,"x":382,"presetID":1,"preset":"laya/pages/prefab/ResidentDetailsPanel.prefab"},
+            "nodeParent":2,
+            "label":"ResidentDetailsPanel",
+            "isOpen":true,
+            "isDirectory":true,
+            "isAniNode":true,
+            "hasChild":true,
+            "compId":49,
+            "child":[
+                {
+                    "x":30,
+                    "type":"Image",
+                    "searchKey":"Image",
+                    "props":{"presetID":2,"preset":"laya/pages/prefab/ResidentDetailsPanel.prefab"},
+                    "nodeParent":49,
+                    "label":"Image(ResidentDetailsPanel)",
+                    "isDirectory":false,
+                    "isAniNode":true,
+                    "hasChild":false,
+                    "compId":50,
+                    "child":[
+                        ]
+                },
+                {
+                    "x":30,
+                    "type":"Box",
+                    "searchKey":"Box",
+                    "props":{"presetID":3,"preset":"laya/pages/prefab/ResidentDetailsPanel.prefab"},
+                    "nodeParent":49,
+                    "label":"sliderLife",
+                    "isDirectory":true,
+                    "isAniNode":true,
+                    "hasChild":true,
+                    "compId":51,
+                    "child":[
+                        {
+                            "type":"Sprite",
+                            "searchKey":"Sprite",
+                            "props":{"presetID":4,"preset":"laya/pages/prefab/ResidentDetailsPanel.prefab"},
+                            "nodeParent":51,
+                            "label":"Sprite(ResidentDetailsPanel)",
+                            "isDirectory":false,
+                            "isAniNode":true,
+                            "hasChild":false,
+                            "compId":52,
+                            "child":[
+                                ]
+                        },
+                        {
+                            "type":"Sprite",
+                            "searchKey":"Sprite",
+                            "props":{"presetID":5,"preset":"laya/pages/prefab/ResidentDetailsPanel.prefab"},
+                            "nodeParent":51,
+                            "label":"slider",
+                            "isDirectory":false,
+                            "isAniNode":true,
+                            "hasChild":false,
+                            "compId":53,
+                            "child":[
+                                ]
+                        }]
+                },
+                {
+                    "x":30,
+                    "type":"Box",
+                    "searchKey":"Box",
+                    "props":{"presetID":6,"preset":"laya/pages/prefab/ResidentDetailsPanel.prefab"},
+                    "nodeParent":49,
+                    "label":"sliderWater",
+                    "isOpen":false,
+                    "isDirectory":true,
+                    "isAniNode":true,
+                    "hasChild":true,
+                    "compId":54,
+                    "child":[
+                        {
+                            "type":"Sprite",
+                            "searchKey":"Sprite",
+                            "props":{"presetID":7,"preset":"laya/pages/prefab/ResidentDetailsPanel.prefab"},
+                            "nodeParent":54,
+                            "label":"Sprite(ResidentDetailsPanel)",
+                            "isDirectory":false,
+                            "isAniNode":true,
+                            "hasChild":false,
+                            "compId":55,
+                            "child":[
+                                ],
+                            "$LOCKED":true
+                        },
+                        {
+                            "type":"Sprite",
+                            "searchKey":"Sprite",
+                            "props":{"presetID":8,"preset":"laya/pages/prefab/ResidentDetailsPanel.prefab"},
+                            "nodeParent":54,
+                            "label":"slider",
+                            "isDirectory":false,
+                            "isAniNode":true,
+                            "hasChild":false,
+                            "compId":56,
+                            "child":[
+                                ],
+                            "$LOCKED":true
+                        }]
+                },
+                {
+                    "x":30,
+                    "type":"Box",
+                    "searchKey":"Box",
+                    "props":{"presetID":9,"preset":"laya/pages/prefab/ResidentDetailsPanel.prefab"},
+                    "nodeParent":49,
+                    "label":"sliderFood",
+                    "isOpen":false,
+                    "isDirectory":true,
+                    "isAniNode":true,
+                    "hasChild":true,
+                    "compId":57,
+                    "child":[
+                        {
+                            "type":"Sprite",
+                            "searchKey":"Sprite",
+                            "props":{"presetID":10,"preset":"laya/pages/prefab/ResidentDetailsPanel.prefab"},
+                            "nodeParent":57,
+                            "label":"Sprite(ResidentDetailsPanel)",
+                            "isDirectory":false,
+                            "isAniNode":true,
+                            "hasChild":false,
+                            "compId":58,
+                            "child":[
+                                ],
+                            "$LOCKED":true
+                        },
+                        {
+                            "type":"Sprite",
+                            "searchKey":"Sprite",
+                            "props":{"presetID":11,"preset":"laya/pages/prefab/ResidentDetailsPanel.prefab"},
+                            "nodeParent":57,
+                            "label":"slider",
+                            "isDirectory":false,
+                            "isAniNode":true,
+                            "hasChild":false,
+                            "compId":59,
+                            "child":[
+                                ],
+                            "$LOCKED":true
+                        }]
+                },
+                {
+                    "x":30,
+                    "type":"Box",
+                    "searchKey":"Box",
+                    "props":{"presetID":12,"preset":"laya/pages/prefab/ResidentDetailsPanel.prefab"},
+                    "nodeParent":49,
+                    "label":"sliderEnjoy",
+                    "isOpen":false,
+                    "isDirectory":true,
+                    "isAniNode":true,
+                    "hasChild":true,
+                    "compId":60,
+                    "child":[
+                        {
+                            "type":"Sprite",
+                            "searchKey":"Sprite",
+                            "props":{"presetID":13,"preset":"laya/pages/prefab/ResidentDetailsPanel.prefab"},
+                            "nodeParent":60,
+                            "label":"Sprite(ResidentDetailsPanel)",
+                            "isDirectory":false,
+                            "isAniNode":true,
+                            "hasChild":false,
+                            "compId":61,
+                            "child":[
+                                ],
+                            "$LOCKED":true
+                        },
+                        {
+                            "type":"Sprite",
+                            "searchKey":"Sprite",
+                            "props":{"presetID":14,"preset":"laya/pages/prefab/ResidentDetailsPanel.prefab"},
+                            "nodeParent":60,
+                            "label":"slider",
+                            "isDirectory":false,
+                            "isAniNode":true,
+                            "hasChild":false,
+                            "compId":62,
+                            "child":[
+                                ],
+                            "$LOCKED":true
+                        }]
+                },
+                {
+                    "x":30,
+                    "type":"Box",
+                    "searchKey":"Box",
+                    "props":{"presetID":15,"preset":"laya/pages/prefab/ResidentDetailsPanel.prefab"},
+                    "nodeParent":49,
+                    "label":"sliderTeach",
+                    "isOpen":false,
+                    "isDirectory":true,
+                    "isAniNode":true,
+                    "hasChild":true,
+                    "compId":63,
+                    "child":[
+                        {
+                            "type":"Sprite",
+                            "searchKey":"Sprite",
+                            "props":{"presetID":16,"preset":"laya/pages/prefab/ResidentDetailsPanel.prefab"},
+                            "nodeParent":63,
+                            "label":"Sprite(ResidentDetailsPanel)",
+                            "isDirectory":false,
+                            "isAniNode":true,
+                            "hasChild":false,
+                            "compId":64,
+                            "child":[
+                                ],
+                            "$LOCKED":true
+                        },
+                        {
+                            "type":"Sprite",
+                            "searchKey":"Sprite",
+                            "props":{"presetID":17,"preset":"laya/pages/prefab/ResidentDetailsPanel.prefab"},
+                            "nodeParent":63,
+                            "label":"slider",
+                            "isDirectory":false,
+                            "isAniNode":true,
+                            "hasChild":false,
+                            "compId":65,
+                            "child":[
+                                ],
+                            "$LOCKED":true
+                        }]
+                },
+                {
+                    "x":30,
+                    "type":"Text",
+                    "searchKey":"Text",
+                    "props":{"presetID":18,"preset":"laya/pages/prefab/ResidentDetailsPanel.prefab"},
+                    "nodeParent":49,
+                    "label":"name",
+                    "isDirectory":false,
+                    "isAniNode":true,
+                    "hasChild":false,
+                    "compId":66,
+                    "child":[
+                        ]
+                },
+                {
+                    "x":30,
+                    "type":"Text",
+                    "searchKey":"Text",
+                    "props":{"presetID":19,"preset":"laya/pages/prefab/ResidentDetailsPanel.prefab"},
+                    "nodeParent":49,
+                    "label":"sex",
+                    "isDirectory":false,
+                    "isAniNode":true,
+                    "hasChild":false,
+                    "compId":67,
+                    "child":[
+                        ]
+                },
+                {
+                    "x":30,
+                    "type":"Text",
+                    "searchKey":"Text",
+                    "props":{"presetID":20,"preset":"laya/pages/prefab/ResidentDetailsPanel.prefab"},
+                    "nodeParent":49,
+                    "label":"temperature",
+                    "isDirectory":false,
+                    "isAniNode":true,
+                    "hasChild":false,
+                    "compId":68,
+                    "child":[
+                        ]
+                },
+                {
+                    "x":30,
+                    "type":"Box",
+                    "searchKey":"Box",
+                    "props":{"presetID":21,"preset":"laya/pages/prefab/ResidentDetailsPanel.prefab"},
+                    "nodeParent":49,
+                    "label":"sliderHealth",
+                    "isOpen":false,
+                    "isDirectory":true,
+                    "isAniNode":true,
+                    "hasChild":true,
+                    "compId":69,
+                    "child":[
+                        {
+                            "type":"Sprite",
+                            "searchKey":"Sprite",
+                            "props":{"presetID":22,"preset":"laya/pages/prefab/ResidentDetailsPanel.prefab"},
+                            "nodeParent":69,
+                            "label":"Sprite(ResidentDetailsPanel)",
+                            "isDirectory":false,
+                            "isAniNode":true,
+                            "hasChild":false,
+                            "compId":70,
+                            "child":[
+                                ],
+                            "$LOCKED":true
+                        },
+                        {
+                            "type":"Sprite",
+                            "searchKey":"Sprite",
+                            "props":{"presetID":23,"preset":"laya/pages/prefab/ResidentDetailsPanel.prefab"},
+                            "nodeParent":69,
+                            "label":"slider",
+                            "isDirectory":false,
+                            "isAniNode":true,
+                            "hasChild":false,
+                            "compId":71,
+                            "child":[
+                                ],
+                            "$LOCKED":true
+                        }]
+                },
+                {
+                    "x":30,
+                    "type":"Text",
+                    "searchKey":"Text",
+                    "props":{"presetID":24,"preset":"laya/pages/prefab/ResidentDetailsPanel.prefab"},
+                    "nodeParent":49,
+                    "label":"age",
+                    "isDirectory":false,
+                    "isAniNode":true,
+                    "hasChild":false,
+                    "compId":72,
+                    "child":[
+                        ]
+                },
+                {
+                    "x":30,
+                    "type":"Text",
+                    "searchKey":"Text",
+                    "props":{"presetID":25,"preset":"laya/pages/prefab/ResidentDetailsPanel.prefab"},
+                    "nodeParent":49,
+                    "label":"label",
+                    "isDirectory":false,
+                    "isAniNode":true,
+                    "hasChild":false,
+                    "compId":73,
+                    "child":[
+                        ]
+                },
+                {
+                    "x":30,
+                    "type":"Text",
+                    "searchKey":"Text",
+                    "props":{"presetID":26,"preset":"laya/pages/prefab/ResidentDetailsPanel.prefab"},
+                    "nodeParent":49,
+                    "label":"label",
+                    "isDirectory":false,
+                    "isAniNode":true,
+                    "hasChild":false,
+                    "compId":74,
+                    "child":[
+                        ]
+                },
+                {
+                    "x":30,
+                    "type":"Text",
+                    "searchKey":"Text",
+                    "props":{"presetID":27,"preset":"laya/pages/prefab/ResidentDetailsPanel.prefab"},
+                    "nodeParent":49,
+                    "label":"label",
+                    "isDirectory":false,
+                    "isAniNode":true,
+                    "hasChild":false,
+                    "compId":75,
+                    "child":[
+                        ]
+                },
+                {
+                    "x":30,
+                    "type":"Text",
+                    "searchKey":"Text",
+                    "props":{"presetID":28,"preset":"laya/pages/prefab/ResidentDetailsPanel.prefab"},
+                    "nodeParent":49,
+                    "label":"label",
+                    "isDirectory":false,
+                    "isAniNode":true,
+                    "hasChild":false,
+                    "compId":76,
+                    "child":[
+                        ]
+                },
+                {
+                    "x":30,
+                    "type":"Text",
+                    "searchKey":"Text",
+                    "props":{"presetID":29,"preset":"laya/pages/prefab/ResidentDetailsPanel.prefab"},
+                    "nodeParent":49,
+                    "label":"label",
+                    "isDirectory":false,
+                    "isAniNode":true,
+                    "hasChild":false,
+                    "compId":77,
+                    "child":[
+                        ]
+                },
+                {
+                    "x":30,
+                    "type":"Text",
+                    "searchKey":"Text",
+                    "props":{"presetID":30,"preset":"laya/pages/prefab/ResidentDetailsPanel.prefab"},
+                    "nodeParent":49,
+                    "label":"label",
+                    "isDirectory":false,
+                    "isAniNode":true,
+                    "hasChild":false,
+                    "compId":78,
                     "child":[
                         ]
                 }]

@@ -3,6 +3,7 @@ D source
 D source/food
 P 43B7F2FA food1.png
 D source/resident
+P 6F0BF6EF femal.png
 P CF5CB010 residentNormal1.png
 P 43266093 residentNormal2.png
 D source/scene
@@ -16,3 +17,8 @@ P FBA84BFC tree6.png
 P 795E8C07 tree7.png
 P D87D66CD tree8.png
 P CB25EA90 tree9.png
+D source/ui
+P 47B95C29 arrow.png
+P 9BE5D38F slider.png
+P 41CAA2E4 sliderBg.png
+P 9DE7041A under.png
