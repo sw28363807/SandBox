@@ -3,6 +3,7 @@ import TestSceneLogic from "./scene/TestSceneLogic"
 import FoodTrigger from "./food/FoodTrigger"
 import MapScrollView from "./helper/MapScrollView"
 import FoodLogic from "./food/FoodLogic"
+import HomeLogic from "./building/HomeLogic"
 import ResidentLogic from "./resident/ResidentLogic"
 import ResidentDetailsPanel from "./panel/ResidentDetailsPanel"
 
@@ -14,6 +15,7 @@ export default class GameConfig {
 		reg("food/FoodTrigger.js",FoodTrigger);
 		reg("helper/MapScrollView.js",MapScrollView);
 		reg("food/FoodLogic.js",FoodLogic);
+		reg("building/HomeLogic.js",HomeLogic);
 		reg("resident/ResidentLogic.js",ResidentLogic);
 		reg("panel/ResidentDetailsPanel.js",ResidentDetailsPanel);
     }
