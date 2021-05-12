@@ -3,7 +3,9 @@ import RandomMgr from "../helper/RandomMgr";
 import GameContext from "../meta/GameContext";
 import GameMeta from "../meta/GameMeta";
 import NameMeta from "../meta/NameMeta";
+import ResidentMeta from "../meta/ResidentMeta";
 import ResidentDetailsPanelMgr from "../panel/ResidentDetailsPanelMgr";
+import TreeMgr from "../source/TreeMgr";
 
 export default class ResidentLogic extends Laya.Script {
 
@@ -12,8 +14,7 @@ export default class ResidentLogic extends Laya.Script {
     }
 
     onStart() {
-        this.refreshSex();
-        this.setFSMState(2);
+        this.setFSMState(ResidentMeta.ResidentState.FindTree);
     }
     
     onEnable() {
@@ -45,6 +46,7 @@ export default class ResidentLogic extends Laya.Script {
         // 隐藏数值
         this.createBuildingIdea = 0;    //盖房的心态
         this.findCreateHomeTimes = 0;   //寻找盖房地点的次数
+        this.myHomeID = 0;              //我的家的ID
 
         this.temperature = 36;  //体温
         this.age = 1;       //年龄
@@ -54,7 +56,8 @@ export default class ResidentLogic extends Laya.Script {
 
 
         this.stateAnim = null;
-        this.curFSMState = 0;   //0-空状态 1-待机 2-搜索寻找盖房的地方 3-建造房子
+        this.curFSMState = ResidentMeta.ResidentState.NullState;
+
     }
 
     initTouch() {
@@ -75,6 +78,19 @@ export default class ResidentLogic extends Laya.Script {
                 social: this.social,
             });
         });
+    }
+
+    refreshInfo(config) {
+        if (config.x) {
+            this.owner.x = config.x;
+        }
+        if (config.y) {
+            this.owner.y = config.y;   
+        }
+        if (config.sex) {
+            this.sex = config.sex;
+            this.refreshSex();
+        }
     }
 
     // 刷新性别
@@ -153,24 +169,29 @@ export default class ResidentLogic extends Laya.Script {
         }
         this.curFSMState = state;
         // 待机
-        if (this.curFSMState == 1) {
+        if (this.curFSMState == ResidentMeta.ResidentState.IdleState) {
             this.setAnim("normalState");
         }
         // 寻找可以盖房子的地方
-        else if (this.curFSMState == 2) {
+        else if (this.curFSMState == ResidentMeta.ResidentState.FindBlockForCreateHome) {
             this.setAnim("walkState");
             this.startFindCreateHomeBlock();
         }
         // 盖房子
-        else if (this.curFSMState == 3) {
+        else if (this.curFSMState == ResidentMeta.ResidentState.CreateHome) {
             this.setAnim("createBuildingState");
+        }
+        // 寻找树木
+        else if (this.curFSMState == ResidentMeta.ResidentState.FindTree) {
+            this.setAnim("walkState");
+            this.startFindANearstTree();
         }
     }
 
     // 开始寻找可以建房子的空地
     startFindCreateHomeBlock() {
         if (this.findCreateHomeTimes < 3) {
-            if (this.curFSMState == 2) {
+            if (this.curFSMState == ResidentMeta.ResidentState.FindBlockForCreateHome) {
                 let dstP = RandomMgr.randomByArea2(this.owner.x,
                      this.owner.y,
                       400,
@@ -179,19 +200,35 @@ export default class ResidentLogic extends Laya.Script {
                     this.findCreateHomeTimes++;
                     // 查看此处可不可以盖房
                     if (BuildingMgr.getInstance().isCanBuildHome(this.owner.x, this.owner.y)) {
-                        BuildingMgr.getInstance().createHomeByConfig({
+                        this.myHomeID = BuildingMgr.getInstance().createHomeByConfig({
                             parent:this.owner.parent,
                             x:this.owner.x,
                             y:this.owner.y
-                        });                        
+                        });
+                        this.setFSMState(ResidentMeta.ResidentState.CreateHome);                        
                     } else {
                         this.startFindCreateHomeBlock();
                     }
                 }));
             }   
         } else {
-            this.curFSMState = 0;
+            this.curFSMState = ResidentMeta.ResidentState.NullState;
             this.findCreateHomeTimes = 0;
+            this.makeIdea();
+        }
+    }
+
+    startFindANearstTree() {
+        if (this.curFSMState == ResidentMeta.ResidentState.FindTree) {
+            let nearstTree = TreeMgr.getInstance().getNearstTree(this.owner.x, this.owner.y);
+            if (nearstTree) {
+                this.goto(nearstTree.x, nearstTree.y, Laya.Handler.create(this, function () {
+                    
+                }));
+            } else {
+                this.makeIdea();
+            }
+        } else {
             this.makeIdea();
         }
     }
@@ -211,8 +248,8 @@ export default class ResidentLogic extends Laya.Script {
     // 做出策略
     makeIdea() {
         let state = this.curFSMState;
-        if (state == 0) {
-            // 
+        if (state == ResidentMeta.ResidentState.NullState) {
+            
         }
     }
 

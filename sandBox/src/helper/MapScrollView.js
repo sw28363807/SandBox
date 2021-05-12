@@ -1,4 +1,6 @@
 import GameContext from "../meta/GameContext";
+import Treelogic from "../source/Treelogic";
+import TreeMgr from "../source/TreeMgr";
 
 export default class MapScrollView extends Laya.Script {
 
@@ -14,6 +16,16 @@ export default class MapScrollView extends Laya.Script {
     }
 
     onDisable() {
+    }
+
+    onStart() {
+        for (let index = 0; index < this.container.numChildren; index++) {
+            let child = this.container.getChildAt(index);
+            let treeScript = child.getComponent(Treelogic);
+            if (treeScript) {
+                TreeMgr.getInstance().pushTree(child);
+            }
+        }
     }
 
     onMouseDown(e) {

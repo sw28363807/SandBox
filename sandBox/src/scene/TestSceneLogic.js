@@ -26,6 +26,10 @@ export default class TestSceneLogic extends Laya.Script {
         }));
     }
 
+    onDisable() {
+    }
+
+    
     // 注册消息
     initEvent() {
         EventMgr.getInstance().registEvent(GameMeta.ADD_FOOD_TO_MAP, this, this.onAddFoodToMap);
@@ -39,8 +43,5 @@ export default class TestSceneLogic extends Laya.Script {
         }, Laya.Handler.create(this, function(obj) {
             
         }));
-    }
-
-    onDisable() {
     }
 }

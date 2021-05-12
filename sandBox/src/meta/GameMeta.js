@@ -17,6 +17,13 @@ GameMeta.ResidentStateImagePath = {
     "createBuildingState":"source/resident/residentNormal2.png"
 };
 
+GameMeta.TreeImageImagePath = [
+    "source/tree/tree1.png",
+    "source/tree/tree2.png",
+    "source/tree/tree3.png",
+    "source/tree/tree4.png"
+];
+
 // 食物图片资源
 GameMeta.FoodImagePath = [
     {

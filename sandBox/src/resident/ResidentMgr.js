@@ -7,6 +7,7 @@ export default class ResidentMgr extends Laya.Script {
     constructor() { 
         super();
         this.residents = [];
+        this.maxID = 0;
     }
     
     onEnable() {
@@ -65,20 +66,13 @@ export default class ResidentMgr extends Laya.Script {
 
     // 创建居民
     createResidentByConfig(config, callback) {
+        this.maxID++;
         Laya.loader.create(GameMeta.ResidentPrefabPath, Laya.Handler.create(this, function (prefabDef) {
             let resident = prefabDef.create();
             resident.zOrder = GameMeta.ResidentZOrder;
             config.parent.addChild(resident);
             let script = resident.getComponent(ResidentLogic);
-            if (config.x) {
-                resident.x = config.x;
-            }
-            if (config.y) {
-                resident.y = config.y;   
-            }
-            if (config.sex) {
-                script.sex = config.sex;
-            }
+            script.refreshInfo(config);
             this.residents.push(resident);
             if (callback) {
                 callback.runWith(resident);
