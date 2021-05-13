@@ -1,9 +1,8 @@
 import BuildingMgr from "../building/BuildingMgr";
 import RandomMgr from "../helper/RandomMgr";
 import GameContext from "../meta/GameContext";
-import GameMeta from "../meta/GameMeta";
-import NameMeta from "../meta/NameMeta";
 import ResidentMeta from "../meta/ResidentMeta";
+import ResidentModel from "../model/ResidentModel";
 import ResidentDetailsPanelMgr from "../panel/ResidentDetailsPanelMgr";
 import TreeMgr from "../source/TreeMgr";
 
@@ -33,49 +32,15 @@ export default class ResidentLogic extends Laya.Script {
 
     //初始化属性
     initModel() {
-        // 面上的数值
-        this.life = 100;    //生命
-        this.water = 50;   //水源
-        this.enjoy = 40;   //娱乐
-        this.food = 50;    //食物
-        this.teach = 0;     //教育
-        this.health = 75;  //健康
-        this.social = 30;    //社交
-
-        // 隐藏数值
-        this.createBuildingIdea = 0;    //盖房的心态
+        this.model = new ResidentModel();
         this.findCreateHomeTimes = 0;   //寻找盖房地点的次数
-        this.myHomeID = 0;              //我的家的ID
-
-        this.temperature = 36;  //体温
-        this.age = 1;       //年龄
-        this.sex = 1;   // 性别 1 男 2 女
-        this.married = 1; //1 未婚 2 已婚
-        this.residentName = NameMeta.randomOneName();
-
-
-        this.stateAnim = null;
+        this.stateAnim = ResidentMeta.ResidentAnim.Null;
         this.curFSMState = ResidentMeta.ResidentState.NullState;
-
     }
 
     initTouch() {
         this.owner.on(Laya.Event.CLICK, this, function () {
-            ResidentDetailsPanelMgr.getInstance().showPanel({
-                parent: this.owner,
-                life: this.life,
-                water: this.water,
-                enjoy: this.enjoy,
-                food: this.food,
-                teach: this.teach,
-                health: this.health,
-                temperature: this.temperature,
-                age: this.age,
-                sex: this.sex,
-                married: this.married,
-                residentName: this.residentName,
-                social: this.social,
-            });
+            ResidentDetailsPanelMgr.getInstance().showPanel(this.model);
         });
     }
 
@@ -84,10 +49,10 @@ export default class ResidentLogic extends Laya.Script {
             this.owner.x = config.x;
         }
         if (config.y) {
-            this.owner.y = config.y;   
+            this.owner.y = config.y;
         }
         if (config.sex) {
-            this.sex = config.sex;
+            this.model.sex = config.sex;
         }
     }
 
@@ -98,12 +63,12 @@ export default class ResidentLogic extends Laya.Script {
         }
         // new Laya.Animation().play();
         this.stateAnim = anim;
-        let ext  = String(this.sex);
-        if (anim == "normalState") {
+        let ext  = String(this.model.getSex());
+        if (anim == ResidentMeta.ResidentAnim.Idle) {
             this.ani.play(0, true, "idle"+ext);
-        } else if (anim == "walkState") {
+        } else if (anim == ResidentMeta.ResidentAnim.Walk) {
             this.ani.play(0, true, "walk"+ext);
-        } else if (anim == "createBuildingState") {
+        } else if (anim == ResidentMeta.ResidentAnim.CreateBuilding) {
             this.ani.play(0, true, "idle"+ext);
         }
     }
@@ -117,20 +82,20 @@ export default class ResidentLogic extends Laya.Script {
         this.curFSMState = state;
         // 待机
         if (this.curFSMState == ResidentMeta.ResidentState.IdleState) {
-            this.setAnim("normalState");
+            this.setAnim(ResidentMeta.ResidentAnim.Idle);
         }
         // 寻找可以盖房子的地方
         else if (this.curFSMState == ResidentMeta.ResidentState.FindBlockForCreateHome) {
-            this.setAnim("walkState");
+            this.setAnim(ResidentMeta.ResidentAnim.Walk);
             this.startFindCreateHomeBlock();
         }
         // 盖房子
         else if (this.curFSMState == ResidentMeta.ResidentState.CreateHome) {
-            this.setAnim("createBuildingState");
+            this.setAnim(ResidentMeta.ResidentAnim.CreateBuilding);
         }
         // 寻找树木
         else if (this.curFSMState == ResidentMeta.ResidentState.FindTree) {
-            this.setAnim("walkState");
+            this.setAnim(ResidentMeta.ResidentAnim.Walk);
             this.startFindANearstTree();
         }
     }

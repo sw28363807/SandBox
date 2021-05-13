@@ -1,5 +1,6 @@
 import RandomMgr from "../helper/RandomMgr";
 import GameMeta from "../meta/GameMeta";
+import ResidentMeta from "../meta/ResidentMeta";
 import ResidentLogic from "./ResidentLogic";
 
 export default class ResidentMgr extends Laya.Script {
@@ -43,20 +44,20 @@ export default class ResidentMgr extends Laya.Script {
             if (step == 5) {
                 this.residents.forEach(function (item, idnex, array) {
                     let script = item.getComponent(ResidentLogic);
-                    if (RandomMgr.randomYes()) {
-                        // 减少食物
-                        script.food = script.food - 1;
-                        if (script.food < 0) {
-                            script.food = 0;
-                        }                   
-                    }
-                    if (RandomMgr.randomYes()) {
-                        // 减少水源
-                        script.water = script.water - 1;
-                        if (script.water < 0) {
-                            script.water = 0;
-                        }                   
-                    }
+                    // if (RandomMgr.randomYes()) {
+                    //     // 减少食物
+                    //     script.food = script.food - 1;
+                    //     if (script.food < 0) {
+                    //         script.food = 0;
+                    //     }                   
+                    // }
+                    // if (RandomMgr.randomYes()) {
+                    //     // 减少水源
+                    //     script.water = script.water - 1;
+                    //     if (script.water < 0) {
+                    //         script.water = 0;
+                    //     }                   
+                    // }
                 });
                 step = 0; 
             }

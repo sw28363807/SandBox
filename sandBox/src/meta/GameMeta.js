@@ -31,10 +31,6 @@ GameMeta.HomeImagePath = [
     }
 ]
 
-// 层级
-GameMeta.ResidentZOrder = 100;  //居民层级
-
-
 // 尺寸
 GameMeta.HomeWidth = 256;   //建筑宽度
 GameMeta.HomeHeight = 256;   //建筑高度
