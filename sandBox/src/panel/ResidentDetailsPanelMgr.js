@@ -28,7 +28,7 @@ export default class ResidentDetailsPanelMgr extends Laya.Script {
             this.curPanel.y = -120;
             config.parent.addChild(this.curPanel);
             let script = this.curPanel.getComponent(ResidentDetailsPanel);
-            script.refreshInfo(config);
+            script.refreshInfo(config.data);
             this.curPanel.alpha = 0;
             Laya.Tween.to(this.curPanel, {alpha: 1}, 200);
             Laya.timer.once(3000, this, this.fadeOutFunc);

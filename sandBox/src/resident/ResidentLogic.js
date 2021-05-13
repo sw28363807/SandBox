@@ -23,11 +23,14 @@ export default class ResidentLogic extends Laya.Script {
     }
 
     onDisable() {
+        Laya.timer.clear(this, this.onCutDownTreeFinish);
     }
 
     //初始化控件
     initControl() {
         this.ani = this.owner.getChildByName("ani");
+        this.axAni = this.owner.getChildByName("ax");
+        this.axAni.visible = false;
     }
 
     //初始化属性
@@ -40,7 +43,10 @@ export default class ResidentLogic extends Laya.Script {
 
     initTouch() {
         this.owner.on(Laya.Event.CLICK, this, function () {
-            ResidentDetailsPanelMgr.getInstance().showPanel(this.model);
+            ResidentDetailsPanelMgr.getInstance().showPanel({
+                data:this.model,
+                parent: this.owner
+            });
         });
     }
 
@@ -74,12 +80,16 @@ export default class ResidentLogic extends Laya.Script {
     }
 
 
+
     //  设置状态机状态
     setFSMState(state) {
         if (this.curFSMState == state) {
             return;
         }
         this.curFSMState = state;
+        this.axAni.visible = false;
+        this.axAni.stop();
+        Laya.timer.clear(this, this.onCutDownTreeFinish);
         // 待机
         if (this.curFSMState == ResidentMeta.ResidentState.IdleState) {
             this.setAnim(ResidentMeta.ResidentAnim.Idle);
@@ -97,7 +107,19 @@ export default class ResidentLogic extends Laya.Script {
         else if (this.curFSMState == ResidentMeta.ResidentState.FindTree) {
             this.setAnim(ResidentMeta.ResidentAnim.Walk);
             this.startFindANearstTree();
+        // 砍树
+        } else if (this.curFSMState == ResidentMeta.ResidentState.CutDownTree) {
+            this.setAnim(ResidentMeta.ResidentAnim.Idle);
+            this.axAni.visible = true;
+            this.axAni.play(0, true, "ani1");
+            Laya.timer.once(ResidentMeta.CutDownTreeTimeStep * 3, this, this.onCutDownTreeFinish);
         }
+    }
+
+    // 砍树回调
+    onCutDownTreeFinish() {
+        Laya.timer.clear(this, this.onCutDownTreeFinish);
+        this.setFSMState(ResidentMeta.ResidentState.IdleState);
     }
 
     // 开始寻找可以建房子的空地
@@ -135,7 +157,7 @@ export default class ResidentLogic extends Laya.Script {
             let nearstTree = TreeMgr.getInstance().getNearstTree(this.owner.x, this.owner.y);
             if (nearstTree) {
                 this.goto(nearstTree.x, nearstTree.y, Laya.Handler.create(this, function () {
-                    
+                    this.setFSMState(ResidentMeta.ResidentState.CutDownTree);
                 }));
             } else {
                 this.makeIdea();
@@ -147,9 +169,8 @@ export default class ResidentLogic extends Laya.Script {
 
     // 行走到某个位置
     goto(dstX, dstY, handler) {
-        let speed = 40;
         let distance = new Laya.Point(dstX, dstY).distance(this.owner.x, this.owner.y);
-        let time = distance/speed;
+        let time = distance/ResidentMeta.ResidentMoveSpeed;
         Laya.Tween.to(this.owner, {x: dstX, y: dstY}, time*1000, null, handler);
     }
 

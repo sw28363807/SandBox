@@ -21,3 +21,9 @@ ResidentMeta.ResidentAnim = {
 
 // 层级
 ResidentMeta.ResidentZOrder = 100;  //居民层级
+
+// 砍树消耗单位时间(秒)
+ResidentMeta.CutDownTreeTimeStep = 1000;
+
+// 人物移动速度
+ResidentMeta.ResidentMoveSpeed = 150;

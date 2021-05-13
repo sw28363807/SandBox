@@ -12,7 +12,6 @@ export default class ResidentDetailsPanel extends Laya.Script {
 
     // 刷新信息
     refreshInfo(config) {
-        console.debug(config);
         this.owner.getChildByName("name").text = config.residentName;
         let sexString = "男";
         if (config.sex == 2) {

@@ -7,12 +7,16 @@ P 233A6581 building1_3.png
 D source/food
 P 43B7F2FA food1.png
 D source/resident
+P 385613DC cutdown.png
 P 21D5D16A femal.png
 P 43266093 residentNormal1.png
 P CF5CB010 residentNormal2.png
 P 8BA2E94E residentWalk1.png
 D source/scene
 D source/tree
+P FF42B11C stone1.png
+P BDEA36EE stone2.png
+P 3FFBA97B stone3.png
 P 0BAFB2C2 tree1.png
 P C7D73FA8 tree2.png
 P 3FD52CA8 tree3.png
