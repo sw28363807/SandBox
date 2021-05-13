@@ -28,8 +28,7 @@ export default class ResidentLogic extends Laya.Script {
 
     //初始化控件
     initControl() {
-        this.residentImage = this.owner.getChildByName("image");
-        this.sexImage = this.residentImage.getChildByName("sexImage");
+        this.ani = this.owner.getChildByName("ani");
     }
 
     //初始化属性
@@ -89,14 +88,6 @@ export default class ResidentLogic extends Laya.Script {
         }
         if (config.sex) {
             this.sex = config.sex;
-            this.refreshSex();
-        }
-    }
-
-    // 刷新性别
-    refreshSex() {
-        if (this.sexImage && this.sex == 1) {
-            this.sexImage.visible = false;
         }
     }
 
@@ -105,61 +96,17 @@ export default class ResidentLogic extends Laya.Script {
         if (this.stateAnim == anim) {
             return;
         }
+        // new Laya.Animation().play();
         this.stateAnim = anim;
-        this.stopAnimAction();
+        let ext  = String(this.sex);
         if (anim == "normalState") {
-            this.residentImage.loadImage(GameMeta.ResidentStateImagePath[anim], Laya.Handler.create(this, function() {
-            }));
-            this.setIdleAction();
+            this.ani.play(0, true, "idle"+ext);
         } else if (anim == "walkState") {
-            this.residentImage.loadImage(GameMeta.ResidentStateImagePath[anim], Laya.Handler.create(this, function() {
-            }));
-            this.setMoveAction();
+            this.ani.play(0, true, "walk"+ext);
         } else if (anim == "createBuildingState") {
-            this.residentImage.loadImage(GameMeta.ResidentStateImagePath[anim], Laya.Handler.create(this, function() {
-            }));
-            this.setIdleAction();
+            this.ani.play(0, true, "idle"+ext);
         }
     }
-
-    stopAnimAction() {
-        // 停止待机动作
-        Laya.Tween.clearAll(this.residentImage);
-        Laya.timer.clear(this, this.setIdleAction1);
-        Laya.timer.clear(this, this.setMoveAction1);
-        this.residentImage.rotation = 0;
-    }
-
-    // -------------------------------------待机动作
-    setIdleAction1() {
-        let time = 200;
-        let scaleBig = 1;
-        let scaleSmall = 0.9;
-        Laya.Tween.to(this.residentImage, {scaleY:scaleSmall}, time, null, Laya.Handler.create(this, function() {
-            Laya.Tween.to(this.residentImage, {scaleY:scaleBig}, time, null, Laya.Handler.create(this, function() {
-            }), 0, true, true);
-        }), 0, true, true);
-    }
-    setIdleAction() {
-        let time = 200;
-        this.setIdleAction1();
-        Laya.timer.loop(2*time, this, this.setIdleAction1);
-    }
-    // -------------------------------------行走动作
-    setMoveAction1() {
-        let time = 200;
-        let rotation = 10
-        Laya.Tween.to(this.residentImage, {rotation:rotation}, time, null, Laya.Handler.create(this, function() {
-            Laya.Tween.to(this.residentImage, {rotation:-rotation}, time, null, Laya.Handler.create(this, function() {
-            }), 0, true, true);
-        }), 0, true, true);
-    }
-    setMoveAction() {
-        let time = 200;
-        this.setMoveAction1();
-        Laya.timer.loop(2*time, this, this.setMoveAction1);
-    }
-    // -------------------------------------建造动作
 
 
     //  设置状态机状态

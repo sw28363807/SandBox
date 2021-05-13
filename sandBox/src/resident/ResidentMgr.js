@@ -64,8 +64,7 @@ export default class ResidentMgr extends Laya.Script {
         });
     }
 
-    // 创建居民
-    createResidentByConfig(config, callback) {
+    ceateFunc(config, callback) {
         this.maxID++;
         Laya.loader.create(GameMeta.ResidentPrefabPath, Laya.Handler.create(this, function (prefabDef) {
             let resident = prefabDef.create();
@@ -78,5 +77,16 @@ export default class ResidentMgr extends Laya.Script {
                 callback.runWith(resident);
             }
         }));
+    }
+
+    // 创建居民
+    createResidentByConfig(config, callback) {
+        if (Laya.loader.getRes("res/atlas/source/resident.atlas")) {
+            // this.ceateFunc(config, callback);
+        } else {
+            Laya.loader.load("res/atlas/source/resident.atlas",Laya.Handler.create(this, function() {
+                this.ceateFunc(config, callback);
+            }));
+        }
     }
 }

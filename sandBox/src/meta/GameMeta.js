@@ -10,13 +10,6 @@ GameMeta.FoodPrefabPath = "prefab/Food.prefab";           //食物prefab路径
 GameMeta.ResdientDetailsPanelPath = "prefab/ResidentDetailsPanel.prefab";   //显示居民信息prfab路径
 GameMeta.HomePrefabPath = "prefab/Home.prefab";       //家prefab路径
 
-// 人物图片资源路径
-GameMeta.ResidentStateImagePath = {
-    "normalState":"source/resident/residentNormal1.png",
-    "walkState":"source/resident/residentWalk1.png",
-    "createBuildingState":"source/resident/residentNormal2.png"
-};
-
 GameMeta.TreeImageImagePath = [
     "source/tree/tree1.png",
     "source/tree/tree2.png",

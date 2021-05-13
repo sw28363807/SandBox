@@ -2,11 +2,11 @@
     "x":0,
     "type":"Box",
     "selectedBox":3,
-    "selecteID":8,
+    "selecteID":7,
     "searchKey":"Box,Resident",
     "props":{"width":48,"presetID":1,"preset":"laya/pages/prefab/Resident.prefab","name":"Resident","isPresetRoot":true,"height":48},
     "nodeParent":-1,
-    "maxID":9,
+    "maxID":10,
     "label":"Resident",
     "isOpen":true,
     "isDirectory":true,
@@ -16,31 +16,17 @@
     "child":[
         {
             "x":15,
-            "type":"Sprite",
-            "searchKey":"Sprite,image,image",
-            "props":{"y":48,"x":24,"width":48,"var":"image","texture":"source/resident/residentNormal2.png","presetID":2,"preset":"laya/pages/prefab/Resident.prefab","pivotY":48,"pivotX":24,"name":"image","height":48},
+            "type":"Animation",
+            "searchKey":"Animation,ani",
+            "props":{"source":"anim/ResideAni.ani","presetID":5,"preset":"laya/pages/prefab/Resident.prefab","name":"ani"},
             "nodeParent":3,
-            "label":"image",
-            "isOpen":false,
-            "isDirectory":true,
+            "label":"ani",
+            "isDirectory":false,
             "isAniNode":true,
-            "hasChild":true,
-            "compId":4,
+            "hasChild":false,
+            "compId":9,
             "child":[
-                {
-                    "type":"Sprite",
-                    "searchKey":"Sprite,sexImage",
-                    "props":{"y":-10.5,"x":30.5,"width":25,"texture":"source/resident/femal.png","rotation":19,"presetID":4,"preset":"laya/pages/prefab/Resident.prefab","name":"sexImage","height":25},
-                    "nodeParent":4,
-                    "label":"sexImage",
-                    "isDirectory":false,
-                    "isAniNode":true,
-                    "hasChild":false,
-                    "compId":7,
-                    "child":[
-                        ]
-                }],
-            "$HIDDEN":false
+                ]
         },
         {
             "x":15,
