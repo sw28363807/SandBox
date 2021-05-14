@@ -15,7 +15,7 @@ export default class Treelogic extends Laya.Script {
     }
 
     onStart() {
-        this.treeImage.loadImage(GameMeta.TreeImageImagePath[0], Laya.Handler.create(this, function() {
+        this.treeImage.loadImage(GameMeta.TreeImagePath[0], Laya.Handler.create(this, function() {
         }));
     }
 

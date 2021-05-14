@@ -1,12 +1,12 @@
 {
     "x":0,
     "type":"Scene",
-    "selectedBox":2,
-    "selecteID":91,
+    "selectedBox":10,
+    "selecteID":98,
     "searchKey":"Scene",
     "props":{"width":1336,"sceneColor":"#000000","height":750},
     "nodeParent":-1,
-    "maxID":92,
+    "maxID":99,
     "label":"Scene",
     "isOpen":true,
     "isDirectory":true,
@@ -133,44 +133,17 @@
                             "x":45,
                             "type":"Box",
                             "searchKey":"Box",
-                            "props":{"y":0,"x":0,"presetID":1,"preset":"laya/pages/prefab/Stone.prefab"},
-                            "nodeParent":10,
-                            "label":"Stone",
-                            "isOpen":true,
-                            "isDirectory":true,
-                            "isAniNode":true,
-                            "hasChild":true,
-                            "compId":90,
-                            "child":[
-                                {
-                                    "x":60,
-                                    "type":"Sprite",
-                                    "searchKey":"Sprite",
-                                    "props":{"y":305,"x":734,"presetID":2,"preset":"laya/pages/prefab/Stone.prefab"},
-                                    "nodeParent":90,
-                                    "label":"image",
-                                    "isDirectory":false,
-                                    "isAniNode":true,
-                                    "hasChild":false,
-                                    "compId":91,
-                                    "child":[
-                                        ]
-                                }]
-                        },
-                        {
-                            "x":45,
-                            "type":"Box",
-                            "searchKey":"Box",
                             "props":{"y":613,"x":715,"presetID":1,"preset":"laya/pages/prefab/Tree.prefab"},
                             "nodeParent":10,
                             "label":"Tree",
-                            "isOpen":false,
+                            "isOpen":true,
                             "isDirectory":true,
                             "isAniNode":true,
                             "hasChild":true,
                             "compId":84,
                             "child":[
                                 {
+                                    "x":60,
                                     "type":"Sprite",
                                     "searchKey":"Sprite",
                                     "props":{"presetID":2,"preset":"laya/pages/prefab/Tree.prefab"},
@@ -184,6 +157,7 @@
                                         ]
                                 },
                                 {
+                                    "x":60,
                                     "type":"Script",
                                     "switchAble":true,
                                     "source":"src/source/Treelogic.js",
@@ -198,6 +172,106 @@
                                     "compId":86,
                                     "child":[
                                         ]
+                                }]
+                        },
+                        {
+                            "x":45,
+                            "type":"Box",
+                            "selectedBox":35,
+                            "selecteID":38,
+                            "searchKey":"Box",
+                            "props":{"y":547,"x":444,"presetID":1,"preset":"laya/pages/prefab/FoodTrigger.prefab"},
+                            "nodeParent":10,
+                            "maxID":40,
+                            "label":"FoodTrigger",
+                            "isOpen":true,
+                            "isDirectory":true,
+                            "isAniNode":true,
+                            "hasChild":true,
+                            "compId":97,
+                            "child":[
+                                {
+                                    "x":60,
+                                    "type":"Script",
+                                    "switchAble":true,
+                                    "source":"src/source/FoodTrigger.js",
+                                    "searchKey":"Script,FoodTrigger",
+                                    "removeAble":true,
+                                    "props":{"presetID":2,"preset":"laya/pages/prefab/FoodTrigger.prefab"},
+                                    "nodeParent":97,
+                                    "label":"FoodTrigger",
+                                    "isDirectory":false,
+                                    "isAniNode":true,
+                                    "hasChild":false,
+                                    "compId":39,
+                                    "child":[
+                                        ]
+                                }],
+                            "animations":[
+                                {
+                                    "nodes":[
+                                        ],
+                                    "name":"ani1",
+                                    "id":1,
+                                    "frameRate":24,
+                                    "action":0
+                                }]
+                        },
+                        {
+                            "x":45,
+                            "type":"Box",
+                            "selectedBox":90,
+                            "selecteID":94,
+                            "searchKey":"Box",
+                            "props":{"y":407,"x":1156,"presetID":1,"preset":"laya/pages/prefab/Stone.prefab"},
+                            "nodeParent":10,
+                            "maxID":96,
+                            "label":"Stone",
+                            "isOpen":true,
+                            "isDirectory":true,
+                            "isAniNode":true,
+                            "hasChild":true,
+                            "compId":98,
+                            "child":[
+                                {
+                                    "x":60,
+                                    "type":"Sprite",
+                                    "searchKey":"Sprite",
+                                    "props":{"presetID":2,"preset":"laya/pages/prefab/Stone.prefab"},
+                                    "nodeParent":98,
+                                    "label":"image",
+                                    "isDirectory":false,
+                                    "isAniNode":true,
+                                    "hasChild":false,
+                                    "compId":93,
+                                    "child":[
+                                        ]
+                                },
+                                {
+                                    "x":60,
+                                    "type":"Script",
+                                    "switchAble":true,
+                                    "source":"src/source/StoneLogic.js",
+                                    "searchKey":"Script,StoneLogic",
+                                    "removeAble":true,
+                                    "props":{"presetID":3,"preset":"laya/pages/prefab/Stone.prefab"},
+                                    "nodeParent":98,
+                                    "label":"StoneLogic",
+                                    "isDirectory":false,
+                                    "isAniNode":true,
+                                    "hasChild":false,
+                                    "compId":95,
+                                    "child":[
+                                        ]
+                                }],
+                            "animations":[
+                                {
+                                    "nodes":[
+                                        ],
+                                    "name":"ani1",
+                                    "id":1,
+                                    "frameRate":24,
+                                    "action":0
                                 }]
                         }]
                 },

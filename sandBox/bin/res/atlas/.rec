@@ -6,14 +6,7 @@ P A40CE787 building1_2.png
 P 233A6581 building1_3.png
 D source/food
 P 43B7F2FA food1.png
-D source/resident
-P 385613DC cutdown.png
-P 21D5D16A femal.png
-P 43266093 residentNormal1.png
-P CF5CB010 residentNormal2.png
-P 8BA2E94E residentWalk1.png
-D source/scene
-D source/tree
+D source/landscape
 P FF42B11C stone1.png
 P BDEA36EE stone2.png
 P 3FFBA97B stone3.png
@@ -26,6 +19,16 @@ P FBA84BFC tree6.png
 P 795E8C07 tree7.png
 P D87D66CD tree8.png
 P CB25EA90 tree9.png
+D source/resident
+P DCAB066A collect.png
+P 0CC498BA cutdown.png
+P 88341B4D eat.png
+P 21D5D16A femal.png
+P 5295B4D6 residentEat.png
+P 43266093 residentNormal1.png
+P CF5CB010 residentNormal2.png
+P 8BA2E94E residentWalk1.png
+D source/scene
 D source/ui
 P 47B95C29 arrow.png
 P 9BE5D38F slider.png

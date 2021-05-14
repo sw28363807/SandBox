@@ -1,6 +1,3 @@
-import FoodMgr from "../food/FoodMgr";
-import EventMgr from "../helper/EventMgr";
-import GameMeta from "../meta/GameMeta";
 import ResidentMgr from "../resident/ResidentMgr";
 
 export default class TestSceneLogic extends Laya.Script {
@@ -10,7 +7,6 @@ export default class TestSceneLogic extends Laya.Script {
     }
     
     onEnable() {
-        this.initEvent();
         this.ScrollView = this.owner.getChildByName("ScrollView");
         this.container = this.ScrollView.getChildByName("container");
         ResidentMgr.getInstance().createResidentByConfig({
@@ -27,21 +23,5 @@ export default class TestSceneLogic extends Laya.Script {
     }
 
     onDisable() {
-    }
-
-    
-    // 注册消息
-    initEvent() {
-        EventMgr.getInstance().registEvent(GameMeta.ADD_FOOD_TO_MAP, this, this.onAddFoodToMap);
-    }
-
-    onAddFoodToMap(param) {
-        FoodMgr.getInstance().createFoodByConfig({
-            parent:this.container,
-            x: param.x,
-            y: param.y
-        }, Laya.Handler.create(this, function(obj) {
-            
-        }));
     }
 }

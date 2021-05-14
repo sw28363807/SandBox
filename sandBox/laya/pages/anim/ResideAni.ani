@@ -222,7 +222,7 @@
                             }]
                     }
                 }],
-            "name":"idle2",
+            "name":"idle_role1_sex2",
             "id":1,
             "frameRate":24,
             "action":0
@@ -561,7 +561,7 @@
                             }]
                     }
                 }],
-            "name":"walk2",
+            "name":"walk_role1_sex2",
             "id":2,
             "frameRate":24,
             "action":0
@@ -658,7 +658,7 @@
 
                     }
                 }],
-            "name":"idle1",
+            "name":"idle_role1_sex1",
             "id":1,
             "frameRate":24,
             "action":0
@@ -997,7 +997,7 @@
                             }]
                     }
                 }],
-            "name":"walk1",
+            "name":"walk_role1_sex1",
             "id":2,
             "frameRate":24,
             "action":0

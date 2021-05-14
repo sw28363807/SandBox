@@ -15,6 +15,7 @@ export default class ResidentModel extends Laya.Script {
         // 隐藏数值
         this.createBuildingIdea = 0;    //盖房的欲望值
         this.cutDownTreeIdea = 0;       //砍树的欲望值
+        this.transportStoneIdea = 0;    //搬运石头的欲望值
         this.myHomeID = 0;              //我的家的ID
 
         this.temperature = 36;  //体温

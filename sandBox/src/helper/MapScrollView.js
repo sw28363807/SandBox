@@ -1,6 +1,8 @@
 import GameContext from "../meta/GameContext";
 import Treelogic from "../source/Treelogic";
 import TreeMgr from "../source/TreeMgr";
+import StoneLogic from "../source/StoneLogic";
+import StoneMgr from "../source/StoneMgr";
 
 export default class MapScrollView extends Laya.Script {
 
@@ -11,6 +13,7 @@ export default class MapScrollView extends Laya.Script {
     onEnable() {
         this.startPos = null;
         this.container = this.owner.getChildByName("container");
+        GameContext.mapContainer = this.container;
         GameContext.mapWidth = this.container.width;
         GameContext.mapHeight = this.container.height;
     }
@@ -24,6 +27,10 @@ export default class MapScrollView extends Laya.Script {
             let treeScript = child.getComponent(Treelogic);
             if (treeScript) {
                 TreeMgr.getInstance().pushTree(child);
+            }
+            let stoneScript = child.getComponent(StoneLogic);
+            if (stoneScript) {
+                StoneMgr.getInstance().pushStone(child);
             }
         }
     }

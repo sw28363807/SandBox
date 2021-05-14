@@ -26,9 +26,17 @@ export default class FoodMgr extends Laya.Script {
     }
 
     // 获得距离最近的一个食物
-    getNearestFood(x, y) {
-        this.foods.forEach(function (item, idnex, array) {
-
-        });
+    getNearstFood(x, y) {
+        let distance = 99999999;
+        let ret = null;
+        for (let index = 0; index < this.foods.length; index++) {
+            let food = this.foods[index];
+            let curDistance = new Laya.Point(food.x, food.y).distance(x, y);
+            if (curDistance < distance) {
+                distance = curDistance;
+                ret = food;
+            }
+        }
+        return ret;
     }
 }

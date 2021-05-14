@@ -5,6 +5,8 @@ import ResidentMeta from "../meta/ResidentMeta";
 import ResidentModel from "../model/ResidentModel";
 import ResidentDetailsPanelMgr from "../panel/ResidentDetailsPanelMgr";
 import TreeMgr from "../source/TreeMgr";
+import StoneMgr from "../source/StoneMgr";
+import FoodMgr from "../source/FoodMgr";
 
 export default class ResidentLogic extends Laya.Script {
 
@@ -13,7 +15,9 @@ export default class ResidentLogic extends Laya.Script {
     }
 
     onStart() {
-        this.setFSMState(ResidentMeta.ResidentState.FindTree);
+        Laya.timer.once(1000, this, function () {
+            this.setFSMState(ResidentMeta.ResidentState.FindFood);
+        });
     }
     
     onEnable() {
@@ -23,7 +27,7 @@ export default class ResidentLogic extends Laya.Script {
     }
 
     onDisable() {
-        Laya.timer.clear(this, this.onCutDownTreeFinish);
+        Laya.timer.clear(this, this.onDoWorkFinish);
     }
 
     //初始化控件
@@ -71,11 +75,9 @@ export default class ResidentLogic extends Laya.Script {
         this.stateAnim = anim;
         let ext  = String(this.model.getSex());
         if (anim == ResidentMeta.ResidentAnim.Idle) {
-            this.ani.play(0, true, "idle"+ext);
+            this.ani.play(0, true, "idle_role1_sex"+ext);
         } else if (anim == ResidentMeta.ResidentAnim.Walk) {
-            this.ani.play(0, true, "walk"+ext);
-        } else if (anim == ResidentMeta.ResidentAnim.CreateBuilding) {
-            this.ani.play(0, true, "idle"+ext);
+            this.ani.play(0, true, "walk_role1_sex"+ext);
         }
     }
 
@@ -89,7 +91,7 @@ export default class ResidentLogic extends Laya.Script {
         this.curFSMState = state;
         this.axAni.visible = false;
         this.axAni.stop();
-        Laya.timer.clear(this, this.onCutDownTreeFinish);
+        Laya.timer.clear(this, this.onDoWorkFinish);
         // 待机
         if (this.curFSMState == ResidentMeta.ResidentState.IdleState) {
             this.setAnim(ResidentMeta.ResidentAnim.Idle);
@@ -101,7 +103,7 @@ export default class ResidentLogic extends Laya.Script {
         }
         // 盖房子
         else if (this.curFSMState == ResidentMeta.ResidentState.CreateHome) {
-            this.setAnim(ResidentMeta.ResidentAnim.CreateBuilding);
+            this.setAnim(ResidentMeta.ResidentAnim.Idle);
         }
         // 寻找树木
         else if (this.curFSMState == ResidentMeta.ResidentState.FindTree) {
@@ -112,13 +114,37 @@ export default class ResidentLogic extends Laya.Script {
             this.setAnim(ResidentMeta.ResidentAnim.Idle);
             this.axAni.visible = true;
             this.axAni.play(0, true, "ani1");
-            Laya.timer.once(ResidentMeta.CutDownTreeTimeStep * 3, this, this.onCutDownTreeFinish);
+            Laya.timer.once(ResidentMeta.CutDownTreeTimeStep * 3, this, this.onDoWorkFinish);
+        }
+        // 寻找石头
+        else if (this.curFSMState == ResidentMeta.ResidentState.FindStone) {
+            this.setAnim(ResidentMeta.ResidentAnim.Walk);
+            this.startFindANearstStone();
+        }
+        // 收集石头
+        else if (this.curFSMState == ResidentMeta.ResidentState.CollectStone) {
+            this.axAni.visible = true;
+            this.axAni.play(0, true, "ani2");
+            Laya.timer.once(ResidentMeta.CollectStoneTimeStep* 3, this, this.onDoWorkFinish);
+        }
+        // 搜索食物
+        else if (this.curFSMState == ResidentMeta.ResidentState.FindFood) {
+            this.setAnim(ResidentMeta.ResidentAnim.Walk);
+            this.startFindANearstFood();
+        }
+        // 吃食物
+        else if (this.curFSMState == ResidentMeta.ResidentState.EatFood) {
+            this.axAni.visible = true;
+            this.setAnim(ResidentMeta.ResidentAnim.Idle);
+            this.axAni.play(0, true, "ani3");
+            Laya.timer.once(ResidentMeta.EatFoodTimeStep * 3, this, this.onDoWorkFinish);
         }
     }
 
-    // 砍树回调
-    onCutDownTreeFinish() {
-        Laya.timer.clear(this, this.onCutDownTreeFinish);
+
+    // 工作完成
+    onDoWorkFinish() {
+        Laya.timer.clear(this, this.onDoWorkFinish);
         this.setFSMState(ResidentMeta.ResidentState.IdleState);
     }
 
@@ -130,7 +156,7 @@ export default class ResidentLogic extends Laya.Script {
                      this.owner.y,
                       400,
                     GameContext.mapWidth, GameContext.mapHeight, 200, 200);
-                this.goto(dstP.x, dstP.y, Laya.Handler.create(this, function () {
+                this.gotoDest({x:dstP.x, y:dstP.y}, Laya.Handler.create(this, function () {
                     this.findCreateHomeTimes++;
                     // 查看此处可不可以盖房
                     if (BuildingMgr.getInstance().isCanBuildHome(this.owner.x, this.owner.y)) {
@@ -156,7 +182,7 @@ export default class ResidentLogic extends Laya.Script {
         if (this.curFSMState == ResidentMeta.ResidentState.FindTree) {
             let nearstTree = TreeMgr.getInstance().getNearstTree(this.owner.x, this.owner.y);
             if (nearstTree) {
-                this.goto(nearstTree.x, nearstTree.y, Laya.Handler.create(this, function () {
+                this.gotoDest({x:nearstTree.x, y:nearstTree.y} , Laya.Handler.create(this, function () {
                     this.setFSMState(ResidentMeta.ResidentState.CutDownTree);
                 }));
             } else {
@@ -167,11 +193,43 @@ export default class ResidentLogic extends Laya.Script {
         }
     }
 
+    startFindANearstFood() {
+        if (this.curFSMState == ResidentMeta.ResidentState.FindFood) {
+            let nearstFood = FoodMgr.getInstance().getNearstFood(this.owner.x, this.owner.y);
+            if (nearstFood) {
+                this.gotoDest({x: nearstFood.x, y: nearstFood.y}, Laya.Handler.create(this, function () {
+                    this.setFSMState(ResidentMeta.ResidentState.EatFood);
+                }));
+            } else {
+                this.makeIdea();
+            }
+        } else {
+            this.makeIdea();
+        }
+    }
+
+    startFindANearstStone() {
+        if (this.curFSMState == ResidentMeta.ResidentState.FindStone) {
+            let nearstStone = StoneMgr.getInstance().getNearstStone(this.owner.x, this.owner.y);
+            if (nearstStone) {
+                this.gotoDest({x: nearstStone.x, y: nearstStone.y}, Laya.Handler.create(this, function () {
+                    this.setFSMState(ResidentMeta.ResidentState.CollectStone);
+                }));
+            } else {
+                this.makeIdea();
+            }
+        } else {
+            this.makeIdea();
+        }
+    }
+
     // 行走到某个位置
-    goto(dstX, dstY, handler) {
+    gotoDest(info, handler) {
+        let dstX = info.x;
+        let dstY = info.y;
         let distance = new Laya.Point(dstX, dstY).distance(this.owner.x, this.owner.y);
         let time = distance/ResidentMeta.ResidentMoveSpeed;
-        Laya.Tween.to(this.owner, {x: dstX, y: dstY}, time*1000, null, handler);
+        Laya.Tween.to(this.owner, {x:dstX, y: dstY}, time*1000, null, handler);
     }
 
     getFSMState() {
