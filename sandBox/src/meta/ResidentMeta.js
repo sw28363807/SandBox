@@ -12,7 +12,9 @@ ResidentMeta.ResidentState = {
     FindStone: 6,       //寻找石材
     CollectStone: 7,    //收集石头
     FindFood: 8,        //搜索食物
-    EatFood: 9          //吃饭饭
+    EatFood: 9,         //吃饭饭
+    FindWater: 10,      //寻找水源
+    DrinkWater: 11,    //喝水
 };
 
 // 动画枚举

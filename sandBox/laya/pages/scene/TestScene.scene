@@ -2,11 +2,11 @@
     "x":0,
     "type":"Scene",
     "selectedBox":10,
-    "selecteID":98,
+    "selecteID":16,
     "searchKey":"Scene",
     "props":{"width":1336,"sceneColor":"#000000","height":750},
     "nodeParent":-1,
-    "maxID":99,
+    "maxID":106,
     "label":"Scene",
     "isOpen":true,
     "isDirectory":true,
@@ -136,14 +136,13 @@
                             "props":{"y":613,"x":715,"presetID":1,"preset":"laya/pages/prefab/Tree.prefab"},
                             "nodeParent":10,
                             "label":"Tree",
-                            "isOpen":true,
+                            "isOpen":false,
                             "isDirectory":true,
                             "isAniNode":true,
                             "hasChild":true,
                             "compId":84,
                             "child":[
                                 {
-                                    "x":60,
                                     "type":"Sprite",
                                     "searchKey":"Sprite",
                                     "props":{"presetID":2,"preset":"laya/pages/prefab/Tree.prefab"},
@@ -157,7 +156,6 @@
                                         ]
                                 },
                                 {
-                                    "x":60,
                                     "type":"Script",
                                     "switchAble":true,
                                     "source":"src/source/Treelogic.js",
@@ -184,14 +182,13 @@
                             "nodeParent":10,
                             "maxID":40,
                             "label":"FoodTrigger",
-                            "isOpen":true,
+                            "isOpen":false,
                             "isDirectory":true,
                             "isAniNode":true,
                             "hasChild":true,
                             "compId":97,
                             "child":[
                                 {
-                                    "x":60,
                                     "type":"Script",
                                     "switchAble":true,
                                     "source":"src/source/FoodTrigger.js",
@@ -227,14 +224,13 @@
                             "nodeParent":10,
                             "maxID":96,
                             "label":"Stone",
-                            "isOpen":true,
+                            "isOpen":false,
                             "isDirectory":true,
                             "isAniNode":true,
                             "hasChild":true,
                             "compId":98,
                             "child":[
                                 {
-                                    "x":60,
                                     "type":"Sprite",
                                     "searchKey":"Sprite",
                                     "props":{"presetID":2,"preset":"laya/pages/prefab/Stone.prefab"},
@@ -248,7 +244,6 @@
                                         ]
                                 },
                                 {
-                                    "x":60,
                                     "type":"Script",
                                     "switchAble":true,
                                     "source":"src/source/StoneLogic.js",
@@ -261,6 +256,87 @@
                                     "isAniNode":true,
                                     "hasChild":false,
                                     "compId":95,
+                                    "child":[
+                                        ]
+                                }],
+                            "animations":[
+                                {
+                                    "nodes":[
+                                        ],
+                                    "name":"ani1",
+                                    "id":1,
+                                    "frameRate":24,
+                                    "action":0
+                                }]
+                        },
+                        {
+                            "x":45,
+                            "type":"Box",
+                            "selectedBox":99,
+                            "selecteID":101,
+                            "searchKey":"Box",
+                            "props":{"y":633,"x":970,"presetID":1,"preset":"laya/pages/prefab/Water1.prefab"},
+                            "nodeParent":10,
+                            "maxID":106,
+                            "label":"Water1",
+                            "isOpen":false,
+                            "isDirectory":true,
+                            "isAniNode":true,
+                            "hasChild":true,
+                            "compId":104,
+                            "child":[
+                                {
+                                    "type":"Sprite",
+                                    "searchKey":"Sprite",
+                                    "props":{"presetID":2,"preset":"laya/pages/prefab/Water1.prefab"},
+                                    "nodeParent":104,
+                                    "label":"Sprite(Water1)",
+                                    "isDirectory":false,
+                                    "isAniNode":true,
+                                    "hasChild":false,
+                                    "compId":101,
+                                    "child":[
+                                        ]
+                                },
+                                {
+                                    "type":"Sprite",
+                                    "searchKey":"Sprite",
+                                    "props":{"presetID":3,"preset":"laya/pages/prefab/Water1.prefab"},
+                                    "nodeParent":104,
+                                    "label":"Sprite(Water1)",
+                                    "isDirectory":false,
+                                    "isAniNode":true,
+                                    "hasChild":false,
+                                    "compId":102,
+                                    "child":[
+                                        ]
+                                },
+                                {
+                                    "type":"Sprite",
+                                    "searchKey":"Sprite",
+                                    "props":{"presetID":4,"preset":"laya/pages/prefab/Water1.prefab"},
+                                    "nodeParent":104,
+                                    "label":"Sprite(Water1)",
+                                    "isDirectory":false,
+                                    "isAniNode":true,
+                                    "hasChild":false,
+                                    "compId":103,
+                                    "child":[
+                                        ]
+                                },
+                                {
+                                    "type":"Script",
+                                    "switchAble":true,
+                                    "source":"src/source/Waterlogic.js",
+                                    "searchKey":"Script,Waterlogic",
+                                    "removeAble":true,
+                                    "props":{"presetID":5,"preset":"laya/pages/prefab/Water1.prefab"},
+                                    "nodeParent":104,
+                                    "label":"Waterlogic",
+                                    "isDirectory":false,
+                                    "isAniNode":true,
+                                    "hasChild":false,
+                                    "compId":105,
                                     "child":[
                                         ]
                                 }],

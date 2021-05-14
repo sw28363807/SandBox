@@ -7,6 +7,7 @@ import ResidentDetailsPanelMgr from "../panel/ResidentDetailsPanelMgr";
 import TreeMgr from "../source/TreeMgr";
 import StoneMgr from "../source/StoneMgr";
 import FoodMgr from "../source/FoodMgr";
+import WaterMgr from "../source/WaterMgr";
 
 export default class ResidentLogic extends Laya.Script {
 
@@ -16,7 +17,7 @@ export default class ResidentLogic extends Laya.Script {
 
     onStart() {
         Laya.timer.once(1000, this, function () {
-            this.setFSMState(ResidentMeta.ResidentState.FindFood);
+            this.setFSMState(ResidentMeta.ResidentState.FindWater);
         });
     }
     
@@ -139,6 +140,19 @@ export default class ResidentLogic extends Laya.Script {
             this.axAni.play(0, true, "ani3");
             Laya.timer.once(ResidentMeta.EatFoodTimeStep * 3, this, this.onDoWorkFinish);
         }
+        // 寻找水源
+        else if (this.curFSMState == ResidentMeta.ResidentState.FindWater) {
+            this.setAnim(ResidentMeta.ResidentAnim.Walk);
+            this.startFindANearstWater();
+        }
+        // 喝水
+        else if (this.curFSMState == ResidentMeta.ResidentState.DrinkWater) {
+            this.setAnim(ResidentMeta.ResidentAnim.DrinkWater);
+            this.axAni.visible = true;
+            this.setAnim(ResidentMeta.ResidentAnim.Idle);
+            this.axAni.play(0, true, "ani4");
+            Laya.timer.once(ResidentMeta.EatFoodTimeStep * 3, this, this.onDoWorkFinish);
+        }
     }
 
 
@@ -193,6 +207,23 @@ export default class ResidentLogic extends Laya.Script {
         }
     }
 
+    // 寻找最近的水源
+    startFindANearstWater() {
+        if (this.curFSMState == ResidentMeta.ResidentState.FindWater) {
+            let nearstWater = WaterMgr.getInstance().getNearstWater(this.owner.x, this.owner.y);
+            if (nearstWater) {
+                this.gotoDest({x: nearstWater.x, y: nearstWater.y}, Laya.Handler.create(this, function () {
+                    this.setFSMState(ResidentMeta.ResidentState.DrinkWater);
+                }));
+            } else {
+                this.makeIdea();
+            }
+        } else {
+            this.makeIdea();
+        }
+    }
+
+    // 寻找最近的食物
     startFindANearstFood() {
         if (this.curFSMState == ResidentMeta.ResidentState.FindFood) {
             let nearstFood = FoodMgr.getInstance().getNearstFood(this.owner.x, this.owner.y);

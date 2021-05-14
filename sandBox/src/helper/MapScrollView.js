@@ -3,6 +3,8 @@ import Treelogic from "../source/Treelogic";
 import TreeMgr from "../source/TreeMgr";
 import StoneLogic from "../source/StoneLogic";
 import StoneMgr from "../source/StoneMgr";
+import Waterlogic from "../source/Waterlogic";
+import WaterMgr from "../source/WaterMgr";
 
 export default class MapScrollView extends Laya.Script {
 
@@ -31,6 +33,10 @@ export default class MapScrollView extends Laya.Script {
             let stoneScript = child.getComponent(StoneLogic);
             if (stoneScript) {
                 StoneMgr.getInstance().pushStone(child);
+            }
+            let waterScript = child.getComponent(Waterlogic);
+            if (waterScript) {
+                WaterMgr.getInstance().pushWater(child);
             }
         }
     }

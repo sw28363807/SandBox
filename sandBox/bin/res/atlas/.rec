@@ -19,9 +19,11 @@ P FBA84BFC tree6.png
 P 795E8C07 tree7.png
 P D87D66CD tree8.png
 P CB25EA90 tree9.png
+P A2663D43 water.png
 D source/resident
 P DCAB066A collect.png
 P 0CC498BA cutdown.png
+P A6A5C082 drinkwater.png
 P 88341B4D eat.png
 P 21D5D16A femal.png
 P 5295B4D6 residentEat.png
@@ -36,4 +38,3 @@ P A508BEED slider2.png
 P 41CAA2E4 sliderBg.png
 P 76F0627B sliderBg2.png
 P 9DE7041A under.png
-D source/water
