@@ -1,16 +1,17 @@
 import NameMeta from "../meta/NameMeta";
+import ResidentMeta from "../meta/ResidentMeta";
 
 export default class ResidentModel extends Laya.Script {
     constructor() { 
         super();
         // 面上的数值
         this.life = 100;    //生命
-        this.water = 50;   //水源
-        this.enjoy = 40;   //娱乐
-        this.food = 50;    //食物
+        this.water = 100;   //水源
+        this.enjoy = 100;   //娱乐
+        this.food = 100;    //食物
         this.teach = 0;     //教育
-        this.health = 75;  //健康
-        this.social = 30;    //社交
+        this.health = 100;  //健康
+        this.social = 100;    //社交
 
         // 隐藏数值
         this.createBuildingIdea = 0;    //盖房的欲望值
@@ -23,6 +24,11 @@ export default class ResidentModel extends Laya.Script {
         this.sex = 1;   // 性别 1 男 2 女
         this.married = 1; //1 未婚 2 已婚
         this.residentName = NameMeta.randomOneName();
+
+
+        this.x = 0;     //当前角色所处坐标x
+        this.y = 0;     //当前角色所处坐标y
+        this.residentId = 0;    //角色Id
     }
 
     uopdateData(data) {
@@ -69,11 +75,66 @@ export default class ResidentModel extends Laya.Script {
             if (data.residentName) {
                 this.residentName = data.residentName;
             }
+            if (data.x) {
+                this.x = data.x;
+            }
+            if (data.y) {
+                this.y = data.y;
+            }
+            if (data.residentId) {
+                this.residentId = data.residentId;
+            }
+        }
+    }
+
+    // 下降需求和上升满足
+    onStep() {
+        this.changeWater(ResidentMeta.ResidentReduceWaterBaseValue);
+        this.changeFood(ResidentMeta.ResidentReduceFoodBaseValue);
+    }
+
+    // 调整食物
+    changeFood(delta) {
+        this.food = this.food + delta;
+        if (this.food < 0) {
+            this.food = 0;
+        } else if (this.food > 100) {
+            this.food = 100;  
+        }
+    }
+
+    // 调整水源
+    changeWater(delta) {
+        this.water = this.water + delta;
+        if (this.water < 0) {
+            this.water = 0;
+        } else if (this.water > 100) {
+            this.water = 100;  
         }
     }
 
     // 获得性别
     getSex() {
         return this.sex;
+    }
+
+    // 获得坐标x
+    getX() {
+        return this.x;
+    }
+
+    // 获得坐标x
+    getY() {
+        return this.y;
+    }
+
+    // 获得水源
+    getWater() {
+        return this.water;
+    }
+
+    // 获得食物
+    getFood() {
+        return this.food;
     }
 }

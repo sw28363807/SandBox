@@ -16,9 +16,9 @@ export default class ResidentLogic extends Laya.Script {
     }
 
     onStart() {
-        Laya.timer.once(1000, this, function () {
-            this.setFSMState(ResidentMeta.ResidentState.FindWater);
-        });
+        // Laya.timer.once(1000, this, function () {
+        //     this.setFSMState(ResidentMeta.ResidentState.FindWater);
+        // });
     }
     
     onEnable() {
@@ -40,7 +40,6 @@ export default class ResidentLogic extends Laya.Script {
 
     //初始化属性
     initModel() {
-        this.model = new ResidentModel();
         this.findCreateHomeTimes = 0;   //寻找盖房地点的次数
         this.stateAnim = ResidentMeta.ResidentAnim.Null;
         this.curFSMState = ResidentMeta.ResidentState.NullState;
@@ -55,16 +54,12 @@ export default class ResidentLogic extends Laya.Script {
         });
     }
 
-    refreshInfo(config) {
-        if (config.x) {
-            this.owner.x = config.x;
-        }
-        if (config.y) {
-            this.owner.y = config.y;
-        }
-        if (config.sex) {
-            this.model.sex = config.sex;
-        }
+    // 刷新数据
+    refreshByModel(model) {
+        this.model = model;
+        this.owner.x = this.model.getX();
+        this.owner.y = this.model.getY();
+        this.setFSMState(ResidentMeta.ResidentState.IdleState);
     }
 
     // 设置动画
@@ -76,9 +71,9 @@ export default class ResidentLogic extends Laya.Script {
         this.stateAnim = anim;
         let ext  = String(this.model.getSex());
         if (anim == ResidentMeta.ResidentAnim.Idle) {
-            this.ani.play(0, true, "idle_role1_sex"+ext);
+            this.ani.play(0, true, "idle_role1_sex" + ext);
         } else if (anim == ResidentMeta.ResidentAnim.Walk) {
-            this.ani.play(0, true, "walk_role1_sex"+ext);
+            this.ani.play(0, true, "walk_role1_sex" + ext);
         }
     }
 
@@ -200,9 +195,11 @@ export default class ResidentLogic extends Laya.Script {
                     this.setFSMState(ResidentMeta.ResidentState.CutDownTree);
                 }));
             } else {
+                this.setFSMState(ResidentMeta.ResidentState.IdleState);
                 this.makeIdea();
             }
         } else {
+            this.setFSMState(ResidentMeta.ResidentState.IdleState);
             this.makeIdea();
         }
     }
@@ -216,9 +213,11 @@ export default class ResidentLogic extends Laya.Script {
                     this.setFSMState(ResidentMeta.ResidentState.DrinkWater);
                 }));
             } else {
+                this.setFSMState(ResidentMeta.ResidentState.IdleState);
                 this.makeIdea();
             }
         } else {
+            this.setFSMState(ResidentMeta.ResidentState.IdleState);
             this.makeIdea();
         }
     }
@@ -232,9 +231,11 @@ export default class ResidentLogic extends Laya.Script {
                     this.setFSMState(ResidentMeta.ResidentState.EatFood);
                 }));
             } else {
+                this.setFSMState(ResidentMeta.ResidentState.IdleState);
                 this.makeIdea();
             }
         } else {
+            this.setFSMState(ResidentMeta.ResidentState.IdleState);
             this.makeIdea();
         }
     }
@@ -247,9 +248,11 @@ export default class ResidentLogic extends Laya.Script {
                     this.setFSMState(ResidentMeta.ResidentState.CollectStone);
                 }));
             } else {
+                this.setFSMState(ResidentMeta.ResidentState.IdleState);
                 this.makeIdea();
             }
         } else {
+            this.setFSMState(ResidentMeta.ResidentState.IdleState);
             this.makeIdea();
         }
     }
@@ -269,9 +272,16 @@ export default class ResidentLogic extends Laya.Script {
 
     // 做出策略
     makeIdea() {
-        let state = this.curFSMState;
-        if (state == ResidentMeta.ResidentState.NullState) {
-            
+        if (this.curFSMState != ResidentMeta.ResidentState.IdleState) {
+            return;
+        }
+        if (this.model.getWater() < 90 && RandomMgr.randomYes()) {
+            this.setFSMState(ResidentMeta.ResidentState.FindWater);
+            return;
+        }
+        if (this.model.getFood() < 90 && RandomMgr.randomYes()) {
+            this.setFSMState(ResidentMeta.ResidentState.FindFood);
+            return;
         }
     }
 

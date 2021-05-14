@@ -1,4 +1,5 @@
 ﻿import GameConfig from "./GameConfig";
+import GameModel from "./model/GameModel";
 class Main {
 	constructor() {
 		//根据IDE设置初始化引擎		
@@ -29,6 +30,7 @@ class Main {
 	}
 
 	onConfigLoaded() {
+		GameModel.getInstance();
 		//加载IDE指定的场景
 		GameConfig.startScene && Laya.Scene.open(GameConfig.startScene);
 	}

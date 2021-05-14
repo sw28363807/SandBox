@@ -118,7 +118,7 @@
                             "x":45,
                             "type":"Box",
                             "searchKey":"Box,spring",
-                            "props":{"width":3000,"name":"spring","height":3000,"bgColor":"#c8ef8c"},
+                            "props":{"width":3000,"name":"spring","height":3000,"bgColor":"#c8eea0"},
                             "nodeParent":10,
                             "label":"spring",
                             "isOpen":false,

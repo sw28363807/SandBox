@@ -38,3 +38,9 @@ ResidentMeta.EatFoodTimeStep = 1000;
 
 // 人物移动速度
 ResidentMeta.ResidentMoveSpeed = 150;
+
+// 属性掉落基础值
+ResidentMeta.ResidentValueStep = 2000;  //人物数值消耗Step
+ResidentMeta.ResidentMakeIdeaStep = 1000;  //人物做决策Step
+ResidentMeta.ResidentReduceWaterBaseValue = -9;
+ResidentMeta.ResidentReduceFoodBaseValue = -6;
