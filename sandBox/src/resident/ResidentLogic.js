@@ -313,27 +313,27 @@ export default class ResidentLogic extends Laya.Script {
         if (this.curFSMState != ResidentMeta.ResidentState.IdleState) {
             return;
         }
-        //喝水
-        if (this.model.getWater() < 30) {
-            this.setFSMState(ResidentMeta.ResidentState.FindWater);
-            return;
-        }
-        //吃饭
-        if (this.model.getFood() < 30 && FoodMgr.getInstance().canFindFood()) {
-            this.setFSMState(ResidentMeta.ResidentState.FindFood);
-            return;
-        }
-        // 砍树
-        if (RandomMgr.randomYes()) {
-            this.setFSMState(ResidentMeta.ResidentState.FindTree);
-            return;
-        }
+        // //喝水
+        // if (this.model.getWater() < 30) {
+        //     this.setFSMState(ResidentMeta.ResidentState.FindWater);
+        //     return;
+        // }
+        // //吃饭
+        // if (this.model.getFood() < 30 && FoodMgr.getInstance().canFindFood()) {
+        //     this.setFSMState(ResidentMeta.ResidentState.FindFood);
+        //     return;
+        // }
+        // // 砍树
+        // if (RandomMgr.randomYes()) {
+        //     this.setFSMState(ResidentMeta.ResidentState.FindTree);
+        //     return;
+        // }
 
-        // 收集石头
-        if (RandomMgr.randomYes()) {
-            this.setFSMState(ResidentMeta.ResidentState.FindStone);
-            return;
-        }
+        // // 收集石头
+        // if (RandomMgr.randomYes()) {
+        //     this.setFSMState(ResidentMeta.ResidentState.FindStone);
+        //     return;
+        // }
 
         // 盖房子
         if (RandomMgr.randomYes() && this.model.getMyHomeId() == 0) {

@@ -16,3 +16,5 @@ BuildingMeta.BuildingState = {
 // 尺寸
 BuildingMeta.HomeWidth = 256;   //建筑宽度
 BuildingMeta.HomeHeight = 256;   //建筑高度
+BuildingMeta.HomeCreatingStep = 100; //家建造时间间隔
+BuildingMeta.HomeCreatingStepValue = 100; //家建造时间间隔

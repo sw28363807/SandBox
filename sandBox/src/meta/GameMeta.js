@@ -21,13 +21,6 @@ GameMeta.FoodImagePath = [
     }
 ];
 
-// 家图片资源
-GameMeta.HomeImagePath = [
-    {
-        "homeImage":"source/building/building1_1.png"
-    }
-]
-
 // 石头图片资源
 GameMeta.StoneImagePath = [
     "source/landscape/stone1.png",
