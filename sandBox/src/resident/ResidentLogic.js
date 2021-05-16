@@ -174,12 +174,12 @@ export default class ResidentLogic extends Laya.Script {
         // 砍树完成
         else if (this.curFSMState == ResidentMeta.ResidentState.CutDownTree) {
             GameModel.getInstance().addTreeNum(ResidentMeta.ResidentAddTreeBaseValue);
-            EventMgr.getInstance().postEvent(GameEvent.Refresh_Resource_Panel);
+            EventMgr.getInstance().postEvent(GameEvent.REFRESH_RESOURCE_PANEL);
         }
         // 收集石头完成
         else if (this.curFSMState == ResidentMeta.ResidentState.CollectStone) {
             GameModel.getInstance().addStoneNum(ResidentMeta.ResidentAddStoneBaseValue);
-            EventMgr.getInstance().postEvent(GameEvent.Refresh_Resource_Panel);
+            EventMgr.getInstance().postEvent(GameEvent.REFRESH_RESOURCE_PANEL);
         }
         Laya.timer.clear(this, this.onDoWorkFinish);
         this.setFSMState(ResidentMeta.ResidentState.IdleState);
@@ -197,11 +197,12 @@ export default class ResidentLogic extends Laya.Script {
                     this.findCreateHomeTimes++;
                     // 查看此处可不可以盖房
                     if (BuildingMgr.getInstance().isCanBuildHome(this.owner.x, this.owner.y)) {
-                        this.myHomeID = BuildingMgr.getInstance().createHomeByConfig({
+                        let buildingCell = BuildingMgr.getInstance().createHomeByConfig({
                             parent:this.owner.parent,
                             x:this.owner.x,
                             y:this.owner.y
                         });
+                        this.model.setMyHomeId(buildingCell.model.getBuildingId());
                         this.setFSMState(ResidentMeta.ResidentState.CreateHome);                        
                     } else {
                         this.startFindCreateHomeBlock();
@@ -331,6 +332,12 @@ export default class ResidentLogic extends Laya.Script {
         // 收集石头
         if (RandomMgr.randomYes()) {
             this.setFSMState(ResidentMeta.ResidentState.FindStone);
+            return;
+        }
+
+        // 盖房子
+        if (RandomMgr.randomYes() && this.model.getMyHomeId() == 0) {
+            this.setFSMState(ResidentMeta.ResidentState.FindBlockForCreateHome);
             return;
         }
     }

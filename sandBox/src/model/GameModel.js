@@ -1,5 +1,7 @@
+import BuildingMeta from "../meta/BuildingMeta";
 import GameMeta from "../meta/GameMeta";
 import ResidentMeta from "../meta/ResidentMeta";
+import BuildingModel from "./BuildingModel";
 import FoodModel from "./FoodModel";
 import ResidentModel from "./ResidentModel";
 
@@ -12,7 +14,7 @@ export default class GameModel extends Laya.Script {
         this.maxBuildingID = 0;         //建筑最大ID
         this.residentModels = {};       //角色数据
         this.foodModels = {};           //食物数据
-
+        this.buildingModels = {};       //建筑物数据
 
 
         // 通用数值
@@ -66,6 +68,20 @@ export default class GameModel extends Laya.Script {
        this.setStoneNum(this.getStoneNum() + num);
     }
 
+    // 添加住房Model
+    newHomeModel(param) {
+        this.maxBuildingID++;
+        let model = new BuildingModel();
+        model.updateData({
+            x: param.x,
+            y: param.y,
+            buildingId: this.maxBuildingID,
+            buildingType: BuildingMeta.BuildingType.HomeType,
+            buildingState: BuildingMeta.BuildingState.Creating,
+        });
+        this.buildingModels[String(this.maxBuildingID)] = model;
+        return model;
+    }
 
     // 添加食物Model
     newFoodModel(param) {

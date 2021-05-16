@@ -35,7 +35,3 @@ GameMeta.StoneImagePath = [
     "source/landscape/stone3.png",
 ];
 
-// 尺寸
-GameMeta.HomeWidth = 256;   //建筑宽度
-GameMeta.HomeHeight = 256;   //建筑高度
-

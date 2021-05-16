@@ -11,12 +11,12 @@ export default class ResourcePanel extends Laya.Script {
     onEnable() {
         this.waterLabel = this.owner.getChildByName("water");
         this.stoneLabel = this.owner.getChildByName("stone");
-        EventMgr.getInstance().registEvent(GameEvent.Refresh_Resource_Panel, this, this.refreshLabel);
+        EventMgr.getInstance().registEvent(GameEvent.REFRESH_RESOURCE_PANEL, this, this.refreshLabel);
         this.refreshLabel();
     }
 
     onDisable() {
-        EventMgr.getInstance().removeEvent(GameEvent.Refresh_Resource_Panel, this, this.refreshLabel);
+        EventMgr.getInstance().removeEvent(GameEvent.REFRESH_RESOURCE_PANEL, this, this.refreshLabel);
     }
 
     refreshLabel() {

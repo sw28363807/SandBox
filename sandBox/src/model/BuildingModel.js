@@ -12,6 +12,10 @@ export default class BuildingModel extends Laya.Script {
         this.buildingState = BuildingMeta.BuildingState.NullState;  //建筑状态
     }
 
+    getBuildingId() {
+        return this.buildingId
+    }
+
     // 设置建筑状态
     setBuildingState(state) {
         this.buildingState = state;
@@ -20,6 +24,14 @@ export default class BuildingModel extends Laya.Script {
     //获取建筑状态
     getBuidlingState() {
         return this.buildingState;
+    }
+
+    getX() {
+        return this.x;
+    }
+
+    getY() {
+        return this.y;
     }
 
     updateData(data) {

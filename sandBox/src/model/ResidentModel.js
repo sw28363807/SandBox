@@ -17,7 +17,7 @@ export default class ResidentModel extends Laya.Script {
         this.createBuildingIdea = 0;    //盖房的欲望值
         this.cutDownTreeIdea = 0;       //砍树的欲望值
         this.transportStoneIdea = 0;    //搬运石头的欲望值
-        this.myHomeID = 0;              //我的家的ID
+        this.myHomeId = 0;              //我的家的ID
 
         this.temperature = 36;  //体温
         this.age = 1;       //年龄
@@ -57,8 +57,8 @@ export default class ResidentModel extends Laya.Script {
             if (data.createBuildingIdea) {
                 this.createBuildingIdea = data.createBuildingIdea;
             }
-            if (data.myHomeID) {
-                this.myHomeID = data.myHomeID;
+            if (data.myHomeId) {
+                this.myHomeId = data.myHomeId;
             }
             if (data.temperature) {
                 this.temperature = data.temperature;
@@ -85,6 +85,14 @@ export default class ResidentModel extends Laya.Script {
                 this.residentId = data.residentId;
             }
         }
+    }
+
+    setMyHomeId(buildingId) {
+        this.myHomeId = buildingId;
+    }
+
+    getMyHomeId() {
+        return this.myHomeId;
     }
 
     // 下降需求和上升满足

@@ -17,15 +17,18 @@ export default class HomeLogic extends Laya.Script {
     onDisable() {
     }
 
-    refreshInfo(config) {
+    refreshByModel(model) {
+        this.model = model;
         this.homeImage.loadImage(GameMeta.HomeImagePath[0].homeImage, Laya.Handler.create(this, function () {
-            this.homeImage.width = 128;
-            this.homeImage.height = 128;
-            this.homeImage.x = (128 - this.owner.width)/2;
+            console.debug(this.homeImage.texture);
+            this.homeImage.width = this.homeImage.texture.sourceWidth;
+            this.homeImage.height = this.homeImage.texture.sourceHeight;
+            
+            this.homeImage.x = (this.homeImage.width - this.owner.width)/2;
             this.homeImage.y = - this.homeImage.height;
         }));
-        this.owner.x = config.x;
-        this.owner.y = config.y;
+        this.owner.x = model.getX();
+        this.owner.y = model.getY();
         this.startCreate();
     }
 

@@ -1,4 +1,6 @@
+import BuildingMeta from "../meta/BuildingMeta";
 import GameMeta from "../meta/GameMeta";
+import GameModel from "../model/GameModel";
 import HomeLogic from "./HomeLogic";
 
 export default class BuildingMgr extends Laya.Script {
@@ -20,31 +22,32 @@ export default class BuildingMgr extends Laya.Script {
 
     // 建造家园
     createHomeByConfig(config, callback) {
-        // let cell = {
-        //     x: config.x,
-        //     y: config.y,
-        //     width: GameMeta.HomeWidth,
-        //     height: GameMeta.HomeHeight,
-        //     building: "loadingRes",
-        //     id: this.maxID,
-        // };
-        // Laya.loader.create(GameMeta.HomePrefabPath, Laya.Handler.create(this, function (prefabDef) {
-        //     let home = prefabDef.create();
-        //     config.parent.addChild(home);
-        //     let script = home.getComponent(HomeLogic);
-        //     script.refreshInfo(config);
-        //     cell.building = home;
-        //     this.buildings.push(cell);
-        //     if (callback) {
-        //         callback.runWith(cell);
-        //     }
-        // }));
-        // return this.maxID;
+        let model = GameModel.getInstance().newHomeModel(config);
+        let cell = {
+            x: config.x,
+            y: config.y,
+            width: BuildingMeta.HomeWidth,
+            height: BuildingMeta.HomeHeight,
+            model: model,
+            building: "noBuilding",
+        };
+        this.buildings.push(cell);
+        Laya.loader.create(GameMeta.HomePrefabPath, Laya.Handler.create(this, function (prefabDef) {
+            let home = prefabDef.create();
+            config.parent.addChild(home);
+            let script = home.getComponent(HomeLogic);
+            cell.building = home;
+            script.refreshByModel(model);
+            if (callback) {
+                callback.runWith(cell);
+            }
+        }));
+        return cell;
     }
 
     // 是否可以盖房
     isCanBuildHome(x, y) {
-        let cur = new Laya.Rectangle(x, y, GameMeta.HomeWidth, GameMeta.HomeHeight);
+        let cur = new Laya.Rectangle(x, y, BuildingMeta.HomeWidth, BuildingMeta.HomeHeight);
         for (let index = 0; index < this.buildings.length; index++) {
             let item = this.buildings[index];
             if (cur.intersects(new Laya.Rectangle(item.x, item.y, item.width, item.height))) {

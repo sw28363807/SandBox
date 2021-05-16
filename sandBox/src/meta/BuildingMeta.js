@@ -11,3 +11,8 @@ BuildingMeta.BuildingState = {
     Creating: 1,        //正在建造
     Noraml: 2,          //正常状态
 };
+
+
+// 尺寸
+BuildingMeta.HomeWidth = 256;   //建筑宽度
+BuildingMeta.HomeHeight = 256;   //建筑高度
