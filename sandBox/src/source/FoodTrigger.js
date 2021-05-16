@@ -1,6 +1,6 @@
 import RandomMgr from "../helper/RandomMgr";
+import FoodMeta from "../meta/FoodMeta";
 import GameContext from "../meta/GameContext";
-import GameMeta from "../meta/GameMeta";
 import FoodMgr from "./FoodMgr";
 
 export default class FoodTrigger extends Laya.Script {
@@ -17,19 +17,28 @@ export default class FoodTrigger extends Laya.Script {
     }
 
     onStart() {
-        this.owner.timer.loop(GameMeta.FoodUpdateTime, this, function() {
-            if (this.curNum >= GameMeta.FoodMaxNumPerTrigger) {
+        this.owner.timer.loop(FoodMeta.FoodUpdateTime, this, function() {
+            if (this.curNum >= FoodMeta.FoodMaxNumPerTrigger) {
                 return;
             }
-            let pos = RandomMgr.randomByArea(this.owner.x, this.owner.y, GameMeta.FoodTriggerArea);
+            let pos = RandomMgr.randomByArea(this.owner.x, this.owner.y, FoodMeta.FoodTriggerArea);
             FoodMgr.getInstance().createFoodByConfig({
                 parent:GameContext.mapContainer,
                 x: pos.x,
-                y: pos.y
+                y: pos.y,
+                trigger: this
             }, Laya.Handler.create(this, function(obj) {
                 
             }));
-            this.curNum++;
+            this.addNum(1);
         });
+    }
+
+    // 增加一个计数
+    addNum(num) {
+        this.curNum = this.curNum + num;
+        if (this.curNum >= FoodMeta.FoodMaxNumPerTrigger) {
+            this.curNum = FoodMeta.FoodMaxNumPerTrigger;
+        }
     }
 }

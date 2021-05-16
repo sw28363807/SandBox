@@ -38,7 +38,4 @@ GameMeta.StoneImagePath = [
 // 尺寸
 GameMeta.HomeWidth = 256;   //建筑宽度
 GameMeta.HomeHeight = 256;   //建筑高度
-GameMeta.FoodMaxNumPerTrigger = 1;  //每个食物触发器的最大生成食物数量
-GameMeta.FoodTriggerArea = 50;      //食物出现的范围
-GameMeta.FoodUpdateTime = 0;        //更新食物出现的时间
 

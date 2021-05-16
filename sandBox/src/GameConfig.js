@@ -5,6 +5,7 @@ import FoodTrigger from "./source/FoodTrigger"
 import StoneLogic from "./source/StoneLogic"
 import Waterlogic from "./source/Waterlogic"
 import MapScrollView from "./helper/MapScrollView"
+import ResourcePanel from "./panel/ResourcePanel"
 import FoodLogic from "./source/FoodLogic"
 import HomeLogic from "./building/HomeLogic"
 import ResidentLogic from "./resident/ResidentLogic"
@@ -20,6 +21,7 @@ export default class GameConfig {
 		reg("source/StoneLogic.js",StoneLogic);
 		reg("source/Waterlogic.js",Waterlogic);
 		reg("helper/MapScrollView.js",MapScrollView);
+		reg("panel/ResourcePanel.js",ResourcePanel);
 		reg("source/FoodLogic.js",FoodLogic);
 		reg("building/HomeLogic.js",HomeLogic);
 		reg("resident/ResidentLogic.js",ResidentLogic);

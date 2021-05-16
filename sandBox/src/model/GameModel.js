@@ -1,5 +1,6 @@
 import GameMeta from "../meta/GameMeta";
 import ResidentMeta from "../meta/ResidentMeta";
+import FoodModel from "./FoodModel";
 import ResidentModel from "./ResidentModel";
 
 export default class GameModel extends Laya.Script {
@@ -7,7 +8,16 @@ export default class GameModel extends Laya.Script {
     constructor() { 
         super();
         this.maxResidentID = 0;         //人物最大ID
+        this.maxFoodID = 0;             //食物最大ID
+        this.maxBuildingID = 0;         //建筑最大ID
         this.residentModels = {};       //角色数据
+        this.foodModels = {};           //食物数据
+
+
+
+        // 通用数值
+        this.treeNum = 0;
+        this.stoneNum = 0; 
     }
     
     onEnable() {
@@ -25,11 +35,56 @@ export default class GameModel extends Laya.Script {
         return GameModel.instance;
     }
 
+
+    getTreeNum() {
+        return this.treeNum;
+    }
+
+    setTreeNum(num) {
+        this.treeNum = num;
+        if (this.treeNum < 0) {
+            this.treeNum = 0;
+        }
+    }
+
+    addTreeNum(num) {
+        this.setTreeNum(this.getTreeNum() + num);
+    }
+
+    setStoneNum(num) {
+        this.stoneNum = num;
+        if (this.stoneNum < 0) {
+            this.stoneNum = 0;
+        }
+    }
+
+    getStoneNum() {
+        return this.stoneNum;
+    }
+
+    addStoneNum(num) {
+       this.setStoneNum(this.getStoneNum() + num);
+    }
+
+
+    // 添加食物Model
+    newFoodModel(param) {
+        this.maxFoodID++;
+        let model = new FoodModel();
+        model.updateData({
+            x: param.x,
+            y: param.y,
+            foodId: this.maxFoodID
+        });
+        this.foodModels[String(this.maxFoodID)] = model;
+        return model;
+    }
+
     // 添加角色Model
     newResidentModel(param) {
         this.maxResidentID++;
         let model = new ResidentModel();
-        model.uopdateData({
+        model.updateData({
             x: param.x,
             y: param.y,
             sex: param.sex,

@@ -1,0 +1,1 @@
+{"type":"Box","props":{"y":0,"x":0,"width":50,"presetID":1,"name":"FoodTrigger","isPresetRoot":true,"height":50,"bgColor":"#e06e2e"},"compId":35,"child":[{"type":"Script","props":{"presetID":2,"runtime":"source/FoodTrigger.js"},"compId":39}],"loadList":[],"loadList3D":[]}

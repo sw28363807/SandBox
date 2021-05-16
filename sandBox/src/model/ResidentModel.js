@@ -31,7 +31,7 @@ export default class ResidentModel extends Laya.Script {
         this.residentId = 0;    //角色Id
     }
 
-    uopdateData(data) {
+    updateData(data) {
         if (data) {
             if (data.life) {
                 this.life = data.life;
@@ -89,12 +89,12 @@ export default class ResidentModel extends Laya.Script {
 
     // 下降需求和上升满足
     onStep() {
-        this.changeWater(ResidentMeta.ResidentReduceWaterBaseValue);
-        this.changeFood(ResidentMeta.ResidentReduceFoodBaseValue);
+        this.setWater(ResidentMeta.ResidentReduceWaterBaseValue);
+        this.setFood(ResidentMeta.ResidentReduceFoodBaseValue);
     }
 
     // 调整食物
-    changeFood(delta) {
+    setFood(delta) {
         this.food = this.food + delta;
         if (this.food < 0) {
             this.food = 0;
@@ -103,14 +103,33 @@ export default class ResidentModel extends Laya.Script {
         }
     }
 
+    
+    // 获得食物
+    getFood() {
+        return this.food;
+    }
+
+    addFood(food) {
+        this.setFood(this.getFood() + food);
+    }
+
     // 调整水源
-    changeWater(delta) {
+    setWater(delta) {
         this.water = this.water + delta;
         if (this.water < 0) {
             this.water = 0;
         } else if (this.water > 100) {
             this.water = 100;  
         }
+    }
+    
+    // 获得水源
+    getWater() {
+        return this.water;
+    }
+
+    addWater(water) {
+        this.setWater(this.getWater() + water);
     }
 
     // 获得性别
@@ -126,15 +145,5 @@ export default class ResidentModel extends Laya.Script {
     // 获得坐标x
     getY() {
         return this.y;
-    }
-
-    // 获得水源
-    getWater() {
-        return this.water;
-    }
-
-    // 获得食物
-    getFood() {
-        return this.food;
     }
 }

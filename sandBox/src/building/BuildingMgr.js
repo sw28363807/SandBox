@@ -6,7 +6,6 @@ export default class BuildingMgr extends Laya.Script {
     constructor() { 
         super();
         this.buildings = [];
-        this.maxID = 0;
     }
 
     static getInstance() {
@@ -21,28 +20,26 @@ export default class BuildingMgr extends Laya.Script {
 
     // 建造家园
     createHomeByConfig(config, callback) {
-        this.maxID++;
-        let cell = {
-            x: config.x,
-            y: config.y,
-            width: GameMeta.HomeWidth,
-            height: GameMeta.HomeHeight,
-            building: "loadingRes",
-            id: this.maxID,
-        };
-        Laya.loader.create(GameMeta.HomePrefabPath, Laya.Handler.create(this, function (prefabDef) {
-            config.id = this.maxID;
-            let home = prefabDef.create();
-            config.parent.addChild(home);
-            let script = home.getComponent(HomeLogic);
-            script.refreshInfo(config);
-            cell.building = home;
-            this.buildings.push(cell);
-            if (callback) {
-                callback.runWith(cell);
-            }
-        }));
-        return this.maxID;
+        // let cell = {
+        //     x: config.x,
+        //     y: config.y,
+        //     width: GameMeta.HomeWidth,
+        //     height: GameMeta.HomeHeight,
+        //     building: "loadingRes",
+        //     id: this.maxID,
+        // };
+        // Laya.loader.create(GameMeta.HomePrefabPath, Laya.Handler.create(this, function (prefabDef) {
+        //     let home = prefabDef.create();
+        //     config.parent.addChild(home);
+        //     let script = home.getComponent(HomeLogic);
+        //     script.refreshInfo(config);
+        //     cell.building = home;
+        //     this.buildings.push(cell);
+        //     if (callback) {
+        //         callback.runWith(cell);
+        //     }
+        // }));
+        // return this.maxID;
     }
 
     // 是否可以盖房

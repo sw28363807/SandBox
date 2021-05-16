@@ -2,12 +2,16 @@ import BuildingMgr from "../building/BuildingMgr";
 import RandomMgr from "../helper/RandomMgr";
 import GameContext from "../meta/GameContext";
 import ResidentMeta from "../meta/ResidentMeta";
-import ResidentModel from "../model/ResidentModel";
 import ResidentDetailsPanelMgr from "../panel/ResidentDetailsPanelMgr";
 import TreeMgr from "../source/TreeMgr";
 import StoneMgr from "../source/StoneMgr";
 import FoodMgr from "../source/FoodMgr";
 import WaterMgr from "../source/WaterMgr";
+import FoodMeta from "../meta/FoodMeta";
+import FoodLogic from "../source/FoodLogic";
+import GameModel from "../model/GameModel";
+import EventMgr from "../helper/EventMgr";
+import GameEvent from "../meta/GameEvent";
 
 export default class ResidentLogic extends Laya.Script {
 
@@ -25,6 +29,7 @@ export default class ResidentLogic extends Laya.Script {
         this.initModel();
         this.initControl();
         this.initTouch();
+        this.owner.zOrder = ResidentMeta.ResidentZOrder;
     }
 
     onDisable() {
@@ -121,6 +126,7 @@ export default class ResidentLogic extends Laya.Script {
         else if (this.curFSMState == ResidentMeta.ResidentState.CollectStone) {
             this.axAni.visible = true;
             this.axAni.play(0, true, "ani2");
+            this.setAnim(ResidentMeta.ResidentAnim.Idle);
             Laya.timer.once(ResidentMeta.CollectStoneTimeStep* 3, this, this.onDoWorkFinish);
         }
         // 搜索食物
@@ -150,9 +156,31 @@ export default class ResidentLogic extends Laya.Script {
         }
     }
 
-
     // 工作完成
     onDoWorkFinish() {
+        // 吃食物完成
+        if (this.curFSMState == ResidentMeta.ResidentState.EatFood) {
+            let script = this.curEatingFood.getComponent(FoodLogic);
+            let foodModel =  script.getModel();
+            this.model.addFood(foodModel.getFood());
+            foodModel.setState(FoodMeta.FoodState.EatFinish);
+            FoodMgr.getInstance().removeFoodById(foodModel.getFoodId());
+            this.curEatingFood = null;
+        }
+        // 喝水完成
+        else if (this.curFSMState == ResidentMeta.ResidentState.DrinkWater) {
+            this.model.addWater(100);
+        }
+        // 砍树完成
+        else if (this.curFSMState == ResidentMeta.ResidentState.CutDownTree) {
+            GameModel.getInstance().addTreeNum(ResidentMeta.ResidentAddTreeBaseValue);
+            EventMgr.getInstance().postEvent(GameEvent.Refresh_Resource_Panel);
+        }
+        // 收集石头完成
+        else if (this.curFSMState == ResidentMeta.ResidentState.CollectStone) {
+            GameModel.getInstance().addStoneNum(ResidentMeta.ResidentAddStoneBaseValue);
+            EventMgr.getInstance().postEvent(GameEvent.Refresh_Resource_Panel);
+        }
         Laya.timer.clear(this, this.onDoWorkFinish);
         this.setFSMState(ResidentMeta.ResidentState.IdleState);
     }
@@ -225,9 +253,18 @@ export default class ResidentLogic extends Laya.Script {
     // 寻找最近的食物
     startFindANearstFood() {
         if (this.curFSMState == ResidentMeta.ResidentState.FindFood) {
-            let nearstFood = FoodMgr.getInstance().getNearstFood(this.owner.x, this.owner.y);
+            let nearstFood = FoodMgr.getInstance().getNearstFood({
+                x: this.owner.x,
+                y: this.owner.y,
+                state: FoodMeta.FoodState.CanEat,
+            });
             if (nearstFood) {
+                let script = nearstFood.getComponent(FoodLogic);
+                script.getModel().setState(FoodMeta.FoodState.Occupy);
                 this.gotoDest({x: nearstFood.x, y: nearstFood.y}, Laya.Handler.create(this, function () {
+                    let script = nearstFood.getComponent(FoodLogic);
+                    script.getModel().setState(FoodMeta.FoodState.Eating);
+                    this.curEatingFood = nearstFood;
                     this.setFSMState(ResidentMeta.ResidentState.EatFood);
                 }));
             } else {
@@ -275,12 +312,25 @@ export default class ResidentLogic extends Laya.Script {
         if (this.curFSMState != ResidentMeta.ResidentState.IdleState) {
             return;
         }
-        if (this.model.getWater() < 90 && RandomMgr.randomYes()) {
+        //喝水
+        if (this.model.getWater() < 30) {
             this.setFSMState(ResidentMeta.ResidentState.FindWater);
             return;
         }
-        if (this.model.getFood() < 90 && RandomMgr.randomYes()) {
+        //吃饭
+        if (this.model.getFood() < 30 && FoodMgr.getInstance().canFindFood()) {
             this.setFSMState(ResidentMeta.ResidentState.FindFood);
+            return;
+        }
+        // 砍树
+        if (RandomMgr.randomYes()) {
+            this.setFSMState(ResidentMeta.ResidentState.FindTree);
+            return;
+        }
+
+        // 收集石头
+        if (RandomMgr.randomYes()) {
+            this.setFSMState(ResidentMeta.ResidentState.FindStone);
             return;
         }
     }

@@ -217,6 +217,30 @@
                                 "target":4,
                                 "key":"rotation",
                                 "index":2
+                            },
+                            {
+                                "value":0,
+                                "tweenMethod":"linearNone",
+                                "tween":true,
+                                "target":4,
+                                "key":"rotation",
+                                "index":4
+                            },
+                            {
+                                "value":-20,
+                                "tweenMethod":"linearNone",
+                                "tween":true,
+                                "target":4,
+                                "key":"rotation",
+                                "index":6
+                            },
+                            {
+                                "value":0,
+                                "tweenMethod":"linearNone",
+                                "tween":true,
+                                "target":4,
+                                "key":"rotation",
+                                "index":8
                             }],
                         "pivotY":[
                             {

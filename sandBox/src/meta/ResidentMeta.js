@@ -42,5 +42,7 @@ ResidentMeta.ResidentMoveSpeed = 150;
 // 属性掉落基础值
 ResidentMeta.ResidentValueStep = 2000;  //人物数值消耗Step
 ResidentMeta.ResidentMakeIdeaStep = 1000;  //人物做决策Step
-ResidentMeta.ResidentReduceWaterBaseValue = -9;
-ResidentMeta.ResidentReduceFoodBaseValue = -6;
+ResidentMeta.ResidentReduceWaterBaseValue = -3;
+ResidentMeta.ResidentReduceFoodBaseValue = -4;
+ResidentMeta.ResidentAddTreeBaseValue = 1;  //人物砍树增加的数值
+ResidentMeta.ResidentAddStoneBaseValue = 1;  //人物收集石头增加的数值

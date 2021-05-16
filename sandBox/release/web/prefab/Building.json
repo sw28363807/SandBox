@@ -1,0 +1,1 @@
+{"type":"Box","props":{"y":0,"x":0,"width":256,"presetID":1,"name":"Building","isPresetRoot":true,"height":256},"compId":83,"child":[{"type":"Box","props":{"y":256,"x":128,"width":100,"presetID":3,"name":"pos","height":100},"compId":85,"child":[{"type":"Sprite","props":{"width":128,"presetID":2,"name":"image","height":128},"compId":84}]}],"loadList":[],"loadList3D":[]}
