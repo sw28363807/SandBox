@@ -124,7 +124,7 @@ export default class ResidentModel extends Laya.Script {
 
     // 获得年龄
     getAge() {
-        return this.married;
+        return this.age;
     }
 
     setMyHomeId(buildingId) {

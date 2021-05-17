@@ -2,7 +2,7 @@
     "x":0,
     "type":"Box",
     "selectedBox":3,
-    "selecteID":10,
+    "selecteID":9,
     "searchKey":"Box,Resident",
     "props":{"width":48,"presetID":1,"preset":"laya/pages/prefab/Resident.prefab","name":"Resident","isPresetRoot":true,"height":48},
     "nodeParent":-1,

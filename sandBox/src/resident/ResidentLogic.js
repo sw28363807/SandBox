@@ -82,13 +82,20 @@ export default class ResidentLogic extends Laya.Script {
         if (this.stateAnim == anim) {
             return;
         }
-        // new Laya.Animation().play();
         this.stateAnim = anim;
-        let ext = String(this.model.getSex());
-        if (anim == ResidentMeta.ResidentAnim.Idle) {
-            this.ani.play(0, true, "idle_role1_sex" + ext);
-        } else if (anim == ResidentMeta.ResidentAnim.Walk) {
-            this.ani.play(0, true, "walk_role1_sex" + ext);
+        if (this.model.getAge() < ResidentMeta.ResidentAdultAge) {
+            if (anim == ResidentMeta.ResidentAnim.Idle) {
+                this.ani.play(0, true, "idle_baby");
+            } else if (anim == ResidentMeta.ResidentAnim.Walk) {
+                this.ani.play(0, true, "walk_baby");
+            }
+        } else {
+            let ext = String(this.model.getSex());
+            if (anim == ResidentMeta.ResidentAnim.Idle) {
+                this.ani.play(0, true, "idle_role1_sex" + ext);
+            } else if (anim == ResidentMeta.ResidentAnim.Walk) {
+                this.ani.play(0, true, "walk_role1_sex" + ext);
+            }
         }
     }
 
@@ -230,6 +237,12 @@ export default class ResidentLogic extends Laya.Script {
                 let woman = this.residentMgrInstance.getResidentById(womanId);
                 woman.getComponent(ResidentLogic).refreshFSMState(ResidentMeta.ResidentState.IdleState);
                 this.refreshFSMState(ResidentMeta.ResidentState.IdleState);
+                
+                this.residentMgrInstance.createResidentByConfig({
+                    parent: GameContext.mapContainer,
+                    x: woman.x, y: woman.y, age: 1
+                }, Laya.Handler.create(this, function (obj) {
+                }));
             }));
         }
     }

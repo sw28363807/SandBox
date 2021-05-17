@@ -51,3 +51,4 @@ ResidentMeta.ResidentReduceFoodBaseValue = -4;
 ResidentMeta.ResidentAddTreeBaseValue = 1;  //人物砍树增加的数值
 ResidentMeta.ResidentAddStoneBaseValue = 1;  //人物收集石头增加的数值
 ResidentMeta.ResidentFindPathTimes = 5;      //人物寻路的次数
+ResidentMeta.ResidentAdultAge = 15;         //成年的年纪

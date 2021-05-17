@@ -132,6 +132,7 @@ export default class GameModel extends Laya.Script {
             x: param.x,
             y: param.y,
             sex: param.sex,
+            age: param.age,
             residentId: this.maxResidentID,
         });
         this.residentModels[String(this.maxResidentID)] = model;
