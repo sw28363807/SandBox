@@ -7,7 +7,7 @@ export default class BuildingMgr extends Laya.Script {
 
     constructor() { 
         super();
-        this.buildings = [];
+        this.buildings = {};
     }
 
     static getInstance() {
@@ -18,6 +18,11 @@ export default class BuildingMgr extends Laya.Script {
     }
 
     onDisable() {
+    }
+
+    // 获取建筑物
+    getBuildingById(id) {
+        return this.buildings[String(id)];
     }
 
     ceateHomeFunc(config, model, cell, callback) {
@@ -44,11 +49,11 @@ export default class BuildingMgr extends Laya.Script {
             model: model,
             building: "noBuilding",
         };
-        this.buildings.push(cell);
-        if (Laya.loader.getRes("res/atlas/source/building.atlas")) {
+        this.buildings[String(model.getBuildingId())] = cell;
+        if (Laya.loader.getRes(GameMeta.BuildingAtlasPath)) {
             this.ceateHomeFunc(config, model, cell, callback);
         } else {
-            Laya.loader.load("res/atlas/source/building.atlas",Laya.Handler.create(this, function() {
+            Laya.loader.load(GameMeta.BuildingAtlasPath,Laya.Handler.create(this, function() {
                 this.ceateHomeFunc(config, model, cell, callback);
             }));
         }
@@ -58,12 +63,12 @@ export default class BuildingMgr extends Laya.Script {
     // 是否可以盖房
     isCanBuildHome(x, y) {
         let cur = new Laya.Rectangle(x, y, BuildingMeta.HomeWidth, BuildingMeta.HomeHeight);
-        for (let index = 0; index < this.buildings.length; index++) {
-            let item = this.buildings[index];
+        for (let key in this.buildings) {
+            let item = this.buildings[key];
             if (cur.intersects(new Laya.Rectangle(item.x, item.y, item.width, item.height))) {
                 return false;
             }
-        };
+        }
         return true;
     }
 }

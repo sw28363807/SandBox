@@ -11,13 +11,14 @@ export default class ResidentModel extends Laya.Script {
         this.food = 100;    //食物
         this.teach = 0;     //教育
         this.health = 100;  //健康
-        this.social = 100;    //社交
+        this.social = 100;  //社交
 
         // 隐藏数值
         this.createBuildingIdea = 0;    //盖房的欲望值
         this.cutDownTreeIdea = 0;       //砍树的欲望值
         this.transportStoneIdea = 0;    //搬运石头的欲望值
         this.myHomeId = 0;              //我的家的ID
+        this.loverId = 0;               //配偶ID
 
         this.temperature = 36;  //体温
         this.age = 1;       //年龄
@@ -29,6 +30,7 @@ export default class ResidentModel extends Laya.Script {
         this.x = 0;     //当前角色所处坐标x
         this.y = 0;     //当前角色所处坐标y
         this.residentId = 0;    //角色Id
+        this.curFSMState = ResidentMeta.ResidentState.NullState;
     }
 
     updateData(data) {
@@ -84,7 +86,45 @@ export default class ResidentModel extends Laya.Script {
             if (data.residentId) {
                 this.residentId = data.residentId;
             }
+            if (data.curFSMState) {
+                this.curFSMState = data.curFSMState;
+            }
         }
+    }
+
+    setLoverId(id) {
+        this.loverId = id;
+    }
+
+    getLoverId() {
+        return this.loverId;
+    }
+
+    getResidentId() {
+        return this.residentId;
+    }
+
+    getFSMState() {
+        return this.curFSMState;
+    }
+
+    setFSMState(state) {
+        this.curFSMState = state;
+    }
+
+    // 获得婚配
+    getMarried() {
+        return this.married;
+    }
+
+    // 设置结婚
+    setMarried(married) {
+        this.married = married;
+    }
+
+    // 获得年龄
+    getAge() {
+        return this.married;
     }
 
     setMyHomeId(buildingId) {

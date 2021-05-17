@@ -1,4 +1,6 @@
+import EventMgr from "../helper/EventMgr";
 import BuildingMeta from "../meta/BuildingMeta";
+import GameEvent from "../meta/GameEvent";
 import GameMeta from "../meta/GameMeta";
 export default class HomeLogic extends Laya.Script {
 
@@ -16,6 +18,8 @@ export default class HomeLogic extends Laya.Script {
     }
 
     onDisable() {
+        Laya.timer.clear(this, this.onMakeLove);
+        Laya.timer.clear(this, this.onCreateProgress);
     }
 
     refreshByModel(model) {
@@ -23,6 +27,22 @@ export default class HomeLogic extends Laya.Script {
         this.owner.x = model.getX();
         this.owner.y = model.getY();
         this.startCreate();
+    }
+
+    // 开始生孩子
+    startMakeLove(handler) {
+        this.makeLoveHandler = handler;
+        this.ani.play(0, true, "makelove");
+        Laya.timer.once(5000, this, this.onMakeLove);
+    }
+
+    onMakeLove() {
+        if (this.makeLoveHandler) {
+            this.makeLoveHandler.run();
+            this.makeLoveHandler = null;
+            this.ani.play(0, true, "idle");
+            Laya.timer.clear(this, this.onMakeLove);
+        }
     }
 
     // 开始建造
@@ -45,5 +65,7 @@ export default class HomeLogic extends Laya.Script {
         this.ani.play(0, true, "idle");
         this.sliderControl.visible = false;
         Laya.timer.clear(this, this.onCreateProgress);
+        this.model.setBuildingState(BuildingMeta.BuildingState.Noraml);
+        EventMgr.getInstance().postEvent(GameEvent.CREATE_HOME_FINISH, {model: this.model});
     }
 }

@@ -8,20 +8,14 @@ export default class StoneLogic extends Laya.Script {
     }
     
     onEnable() {
-        this.stoneImage = this.owner.getChildByName("image");
+        this.ani = this.owner.getChildByName("ani");
     }
 
     onDisable() {
     }
 
     onStart() {
-        // new Laya.Sprite().
-        this.stoneImage.loadImage(GameMeta.StoneImagePath[0], Laya.Handler.create(this, function() {
-            this.stoneImage.width = this.stoneImage.texture.sourceWidth;
-            this.stoneImage.height = this.stoneImage.texture.sourceHeight;
-            this.stoneImage.y = this.owner.height - this.stoneImage.texture.sourceHeight;
-            this.stoneImage.x = Math.floor((this.owner.width - this.stoneImage.texture.sourceWidth)/2);
-        }));
+        this.ani.play(0, true, "idle1");
     }
 
     setStoneID(id) {

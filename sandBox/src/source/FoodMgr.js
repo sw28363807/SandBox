@@ -14,8 +14,8 @@ export default class FoodMgr extends Laya.Script {
         return FoodMgr.instance = FoodMgr.instance || new FoodMgr();
     }
 
-    // 创建食物
-    createFoodByConfig(config, callback) {
+
+    createFoodFunc(config, callback) {
         Laya.loader.create(GameMeta.FoodPrefabPath, Laya.Handler.create(this, function (prefabDef) {
             let food = prefabDef.create();
             config.parent.addChild(food);
@@ -28,6 +28,17 @@ export default class FoodMgr extends Laya.Script {
                 callback.runWith(food);
             }
         }));
+    }
+
+    // 创建食物
+    createFoodByConfig(config, callback) {
+        if (Laya.loader.getRes(GameMeta.FoodAtlasPath)) {
+            this.createFoodFunc(config, callback);
+        } else {
+            Laya.loader.load(GameMeta.FoodAtlasPath, Laya.Handler.create(this, function() {
+                this.createFoodFunc(config, callback);
+            }));
+        }
     }
 
     // 获得距离最近的一个食物

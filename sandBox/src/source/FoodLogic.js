@@ -8,19 +8,23 @@ export default class FoodLogic extends Laya.Script {
     }
     
     onEnable() {
-        this.foodImage = this.owner.getChildByName("image");
+        this.ani = this.owner.getChildByName("ani");
         this.owner.zOrder = FoodMeta.FoodZOrder;
         this.trigger = null;
     }
 
     onDisable() {
+        Laya.timer.clear(this, this.fadeOutFinish);
     }
 
     onStart() {
-        this.owner.alpha = 0;
-        this.foodImage.loadImage(GameMeta.FoodImagePath[0]["normalState"], Laya.Handler.create(this, function() {
-        }));
-        Laya.Tween.to(this.owner, {alpha: 1}, 500);
+        Laya.timer.once(1000, this, this.fadeOutFinish);
+        this.ani.play(0, false, "fadeOut1");
+    }
+
+    fadeOutFinish() {
+        this.ani.play(0, true, "idle1");
+        Laya.timer.clear(this, this.fadeOutFinish);
     }
 
     onDestroy() {

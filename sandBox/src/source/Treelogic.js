@@ -8,15 +8,14 @@ export default class Treelogic extends Laya.Script {
     }
     
     onEnable() {
-        this.treeImage = this.owner.getChildByName("image");
+        this.ani = this.owner.getChildByName("ani");
     }
 
     onDisable() {
     }
 
     onStart() {
-        this.treeImage.loadImage(GameMeta.TreeImagePath[0], Laya.Handler.create(this, function() {
-        }));
+        this.ani.play(0, true, "idle1");
     }
 
     setTreeID(id) {

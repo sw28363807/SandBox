@@ -14,7 +14,11 @@ ResidentMeta.ResidentState = {
     FindFood: 8,        //搜索食物
     EatFood: 9,         //吃饭饭
     FindWater: 10,      //寻找水源
-    DrinkWater: 11,    //喝水
+    DrinkWater: 11,    //喝水,
+    LoverMan: 12,        //恋人1(主动)
+    LoverWoman: 13,        //恋人2(被动),
+    LoverGoHomeMakeLove: 14, //恋人回家生孩子行进中
+    LoverMakeLove: 15,       //生孩子
 };
 
 // 动画枚举
@@ -46,3 +50,4 @@ ResidentMeta.ResidentReduceWaterBaseValue = -3;
 ResidentMeta.ResidentReduceFoodBaseValue = -4;
 ResidentMeta.ResidentAddTreeBaseValue = 1;  //人物砍树增加的数值
 ResidentMeta.ResidentAddStoneBaseValue = 1;  //人物收集石头增加的数值
+ResidentMeta.ResidentFindPathTimes = 5;      //人物寻路的次数

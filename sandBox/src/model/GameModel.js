@@ -7,7 +7,7 @@ import ResidentModel from "./ResidentModel";
 
 export default class GameModel extends Laya.Script {
 
-    constructor() { 
+    constructor() {
         super();
         this.maxResidentID = 0;         //人物最大ID
         this.maxFoodID = 0;             //食物最大ID
@@ -19,9 +19,9 @@ export default class GameModel extends Laya.Script {
 
         // 通用数值
         this.treeNum = 0;
-        this.stoneNum = 0; 
+        this.stoneNum = 0;
     }
-    
+
     onEnable() {
     }
 
@@ -32,7 +32,7 @@ export default class GameModel extends Laya.Script {
         if (GameModel.instance) {
             return GameModel.instance
         }
-        GameModel.instance =  new GameModel();
+        GameModel.instance = new GameModel();
         GameModel.instance.initSelf();
         return GameModel.instance;
     }
@@ -65,7 +65,12 @@ export default class GameModel extends Laya.Script {
     }
 
     addStoneNum(num) {
-       this.setStoneNum(this.getStoneNum() + num);
+        this.setStoneNum(this.getStoneNum() + num);
+    }
+
+    // 获取家信息
+    getBuildingModel(id) {
+        return this.buildingModels[String(id)];
     }
 
     // 添加住房Model
@@ -94,6 +99,29 @@ export default class GameModel extends Laya.Script {
         });
         this.foodModels[String(this.maxFoodID)] = model;
         return model;
+    }
+
+    // 设置结婚
+    setMarried(man, woman) {
+        man.setMarried(2);
+        woman.setMarried(2);
+        man.setLoverId(woman.getResidentId());
+        woman.setLoverId(man.getResidentId());
+        woman.setMyHomeId(man.getMyHomeId());
+    }
+
+    // 获得一个可以结婚的女性Model
+    getCanMarriedFemaleNModel() {
+        for (let key in this.residentModels) {
+            let model = this.residentModels[key];
+            if (model.getAge() > 0 &&
+                model.getMarried() == 1 &&
+                model.getFSMState() == ResidentMeta.ResidentState.IdleState &&
+                model.getSex() == 2) {
+                return model;
+            }
+        }
+        return null;
     }
 
     // 添加角色Model
