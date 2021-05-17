@@ -3,11 +3,11 @@ import ResidentDetailsPanel from "./ResidentDetailsPanel";
 
 export default class ResidentDetailsPanelMgr extends Laya.Script {
 
-    constructor() { 
+    constructor() {
         super();
         this.curPanel = null;
     }
-    
+
     onEnable() {
     }
 
@@ -24,19 +24,19 @@ export default class ResidentDetailsPanelMgr extends Laya.Script {
         this.removePanel();
         Laya.loader.create(GameMeta.ResdientDetailsPanelPath, Laya.Handler.create(this, function (prefabDef) {
             this.curPanel = prefabDef.create();
-            this.curPanel.x = 50;
-            this.curPanel.y = -120;
+            this.curPanel.x = 65;
+            this.curPanel.y = -this.curPanel.height + 15;
             config.parent.addChild(this.curPanel);
             let script = this.curPanel.getComponent(ResidentDetailsPanel);
             script.refreshInfo(config.data);
             this.curPanel.alpha = 0;
-            Laya.Tween.to(this.curPanel, {alpha: 1}, 200);
+            Laya.Tween.to(this.curPanel, { alpha: 1 }, 200);
             Laya.timer.once(3000, this, this.fadeOutFunc);
         }));
     }
 
     fadeOutFunc() {
-        Laya.Tween.to(this.curPanel, {alpha: 0}, 200, null, Laya.Handler.create(this, function () {
+        Laya.Tween.to(this.curPanel, { alpha: 0 }, 200, null, Laya.Handler.create(this, function () {
             this.removePanel();
         }));
     }

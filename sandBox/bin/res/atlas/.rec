@@ -22,7 +22,7 @@ P CB25EA90 tree9.png
 P A2663D43 water.png
 P F00114D0 waterIcon.png
 D source/resident
-P 939E5575 baby.png
+P D124E7AA baby.png
 P DCAB066A collect.png
 P 0CC498BA cutdown.png
 P 9B2D9708 dialog.png
@@ -30,11 +30,9 @@ P A6A5C082 drinkwater.png
 P 88341B4D eat.png
 P 21D5D16A femal.png
 P 55920CF2 heart.png
-P 4FB825D7 lover.png
-P 5295B4D6 residentEat.png
-P 43266093 residentNormal1.png
-P CF5CB010 residentNormal2.png
-P 8BA2E94E residentWalk1.png
+P 3E08A536 lover.png
+P A662F395 residentEat.png
+P 7544A170 residentNormal1.png
 D source/scene
 D source/ui
 P 47B95C29 arrow.png

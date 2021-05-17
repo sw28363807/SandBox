@@ -316,7 +316,7 @@
                     "keyframes":{
                         "y":[
                             {
-                                "value":107,
+                                "value":129,
                                 "tweenMethod":"linearNone",
                                 "tween":true,
                                 "target":5,
@@ -429,6 +429,12 @@
                 },
                 {
                     "target":6,
+                    "keyframes":{
+
+                    }
+                },
+                {
+                    "target":7,
                     "keyframes":{
 
                     }

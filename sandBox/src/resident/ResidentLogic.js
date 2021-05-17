@@ -237,7 +237,7 @@ export default class ResidentLogic extends Laya.Script {
                 let woman = this.residentMgrInstance.getResidentById(womanId);
                 woman.getComponent(ResidentLogic).refreshFSMState(ResidentMeta.ResidentState.IdleState);
                 this.refreshFSMState(ResidentMeta.ResidentState.IdleState);
-                
+
                 this.residentMgrInstance.createResidentByConfig({
                     parent: GameContext.mapContainer,
                     x: woman.x, y: woman.y, age: 1
@@ -428,11 +428,11 @@ export default class ResidentLogic extends Laya.Script {
         //     return;
         // }
 
-        // // 收集石头
-        // if (RandomMgr.randomYes()) {
-        //     this.refreshFSMState(ResidentMeta.ResidentState.FindStone);
-        //     return;
-        // }
+        // 收集石头
+        if (RandomMgr.randomYes()) {
+            this.refreshFSMState(ResidentMeta.ResidentState.FindStone);
+            return;
+        }
 
         // 找恋人
         if (this.model.getMarried() == 1 &&
