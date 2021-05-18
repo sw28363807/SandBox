@@ -1,5 +1,12 @@
 export default class RandomMgr {
 
+    // 随机一个矩形区域内的点
+    static randomPointInRect(x, y, w, h) {
+        let addX = Math.random() * w;
+        let addY = Math.random() * h;
+        return { x: x + addX, y: y + addY };
+    };
+
     //以(x, y) 为原点 distance 距离内的一个随机点
     static randomByArea(x, y, distance) {
         let signX = RandomMgr.randomSign();
@@ -8,7 +15,7 @@ export default class RandomMgr {
         let factorY = Math.random();
         let retX = x + signX * factorX * distance;
         let retY = y + signY * factorY * distance;
-        return {x: Math.floor(retX), y: Math.floor(retY)};
+        return { x: Math.floor(retX), y: Math.floor(retY) };
     };
 
     // 以(x, y) 为原点 distance 距离内的一个随机点，但是这个点不能大于maxX，maxY并且不能小于0

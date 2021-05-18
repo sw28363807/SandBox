@@ -70,4 +70,31 @@ export default class ResidentMgr extends Laya.Script {
             }));
         }
     }
+
+    // 获得一个清闲或者没事干的人
+    getACanSocialResident(x, y) {
+        let idles = [];
+        let needs = [];
+        for (const key in this.residents) {
+            let item = this.residents[key];
+            let script = item.getComponent(ResidentLogic);
+            let model = script.getModel();
+            let distance = new Laya.Point(x, y).distance(item.x, item.y);
+            if (distance <= ResidentMeta.ResidentSocialArea) {
+                if (model.getFSMState() == ResidentMeta.ResidentState.IdleState) {
+                    idles.push(item);
+                    if (model.getSocial() < ResidentMeta.ResidentSocialNeedValue) {
+                        needs.push(item);
+                    }
+                }   
+            }
+        }
+        if (needs.length != 0) {
+            return needs[0];
+        }
+        if (idles.length != 0) {
+            return idles[0];
+        }
+        return null;
+    }
 }

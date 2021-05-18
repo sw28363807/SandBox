@@ -62,7 +62,7 @@ export default class BuildingMgr extends Laya.Script {
 
     // 是否可以盖房
     isCanBuildHome(x, y) {
-        let cur = new Laya.Rectangle(x, y, BuildingMeta.HomeWidth, BuildingMeta.HomeHeight);
+        let cur = new Laya.Rectangle(x , y, BuildingMeta.HomeWidth, BuildingMeta.HomeHeight);
         for (let key in this.buildings) {
             let item = this.buildings[key];
             if (cur.intersects(new Laya.Rectangle(item.x, item.y, item.width, item.height))) {

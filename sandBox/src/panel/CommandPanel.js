@@ -6,7 +6,11 @@ export default class CommandPanel extends Laya.Script {
     
     onEnable() {
         this.listView = this.owner.getChildByName("_list");
-        this.listView.array = [1,2,3,1,2,3,1,2,3,1,2,3,1,2,3];
+        this.listView.array = [
+            {
+                path: "",
+            }
+        ];
         this.listView.refresh();
 
         this.upBtn = this.owner.getChildByName("upBtn");

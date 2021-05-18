@@ -137,13 +137,40 @@ export default class ResidentModel extends Laya.Script {
 
     // 下降需求和上升满足
     onStep() {
-        this.setWater(ResidentMeta.ResidentReduceWaterBaseValue);
-        this.setFood(ResidentMeta.ResidentReduceFoodBaseValue);
+        this.addWater(ResidentMeta.ResidentReduceWaterBaseValue);
+        this.addFood(ResidentMeta.ResidentReduceFoodBaseValue);
+        this.addSocial(ResidentMeta.ResidentReduceSocialBaseValue);
+    }
+
+    addSocial(delta) {
+        this.setSocial(this.getSocial() + delta);
+    }
+
+    setSocial(num) {
+        this.social = num;
+        if (this.social < 0) {
+            this.social = 0;
+        } else if (this.social > 100) {
+            this.social = 100;
+        }
+    }
+
+    getSocial() {
+        return this.social;
+    }
+
+    // 获得食物
+    getFood() {
+        return this.food;
+    }
+
+    addFood(delta) {
+        this.setFood(this.getFood() + delta);
     }
 
     // 调整食物
-    setFood(delta) {
-        this.food = this.food + delta;
+    setFood(num) {
+        this.food = num;
         if (this.food < 0) {
             this.food = 0;
         } else if (this.food > 100) {
@@ -151,19 +178,14 @@ export default class ResidentModel extends Laya.Script {
         }
     }
 
-    
-    // 获得食物
-    getFood() {
-        return this.food;
-    }
-
-    addFood(food) {
-        this.setFood(this.getFood() + food);
+    // 增加水源
+    addWater(delta) {
+        this.setWater(this.getWater() + delta);
     }
 
     // 调整水源
-    setWater(delta) {
-        this.water = this.water + delta;
+    setWater(num) {
+        this.water = num;
         if (this.water < 0) {
             this.water = 0;
         } else if (this.water > 100) {

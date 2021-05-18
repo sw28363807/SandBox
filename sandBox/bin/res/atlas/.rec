@@ -31,8 +31,9 @@ P 88341B4D eat.png
 P 21D5D16A femal.png
 P 55920CF2 heart.png
 P 3E08A536 lover.png
-P A662F395 residentEat.png
 P 7544A170 residentNormal1.png
+P 125EDD5C residentNormal2.png
+P 098A99ED talk.png
 D source/scene
 D source/ui
 P 47B95C29 arrow.png

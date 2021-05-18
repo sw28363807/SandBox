@@ -4,6 +4,7 @@ import ResidentMeta from "../meta/ResidentMeta";
 import BuildingModel from "./BuildingModel";
 import FoodModel from "./FoodModel";
 import ResidentModel from "./ResidentModel";
+import TalkingPointModel from "./TalkingPointModel";
 
 export default class GameModel extends Laya.Script {
 
@@ -12,9 +13,12 @@ export default class GameModel extends Laya.Script {
         this.maxResidentID = 0;         //人物最大ID
         this.maxFoodID = 0;             //食物最大ID
         this.maxBuildingID = 0;         //建筑最大ID
+        this.maxTalkingID = 0;          //聊天区域最大ID
         this.residentModels = {};       //角色数据
         this.foodModels = {};           //食物数据
         this.buildingModels = {};       //建筑物数据
+        this.talkingPoints = {};        //聊天区域数据
+
 
 
         // 通用数值
@@ -71,6 +75,38 @@ export default class GameModel extends Laya.Script {
     // 获取家信息
     getBuildingModel(id) {
         return this.buildingModels[String(id)];
+    }
+
+    // 获得一个聊天区域如果没有或者人数已经满了新建一个
+    getOrCreateTalkingPoint(x, y, area, maxNum) {
+        for (const key in this.talkingPoints) {
+            let item = this.talkingPoints[key];
+            let distance = new Laya.Point(x, y).distance(item.getX(), item.getY());
+            if (item.getTalkingNum() < item.getTalkingMaxNum() && distance <= ResidentMeta.ResidentSocialArea) {
+                return item;
+            }
+        }
+        return this.newTalkingPoint(x, y, area, maxNum);
+    }
+
+    // 移除聊天点
+    removeTalkingPoint(id) {
+        delete this.talkingPoints[String(id)];
+    }
+
+    // 新建一个聊天区域
+    newTalkingPoint(x, y, area, maxNum) {
+        this.maxTalkingID++;
+        let model = new TalkingPointModel();
+        model.updateData({
+            x: x,
+            y: y,
+            area: area,
+            talkingPointId: this.maxTalkingID,
+            talkingMaxNum: maxNum,
+        });
+        this.talkingPoints[String(this.maxTalkingID)] = model;
+        return model;
     }
 
     // 添加住房Model

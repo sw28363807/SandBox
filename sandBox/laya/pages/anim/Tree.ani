@@ -5,11 +5,11 @@
     "searchKey":"View",
     "props":{"sceneWidth":500,"sceneHeight":500,"sceneColor":"#000000"},
     "nodeParent":-1,
-    "maxID":3,
+    "maxID":5,
     "label":"View",
-    "isDirectory":false,
+    "isDirectory":true,
     "isAniNode":true,
-    "hasChild":false,
+    "hasChild":true,
     "compId":2,
     "child":[
         {
@@ -90,6 +90,12 @@
                                 "index":0
                             }]
                     }
+                },
+                {
+                    "target":4,
+                    "keyframes":{
+
+                    }
                 }],
             "name":"idle1",
             "id":1,
@@ -120,14 +126,7 @@
                                 "index":0
                             }],
                         "skin":[
-                            {
-                                "value":null,
-                                "tweenMethod":"linearNone",
-                                "tween":false,
-                                "target":3,
-                                "key":"skin",
-                                "index":0
-                            }],
+                            ],
                         "pivotY":[
                             {
                                 "value":0,
