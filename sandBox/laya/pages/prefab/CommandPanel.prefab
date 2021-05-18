@@ -1,12 +1,12 @@
 {
     "x":0,
     "type":"View",
-    "selectedBox":127,
-    "selecteID":131,
+    "selectedBox":126,
+    "selecteID":118,
     "searchKey":"View,CommandPanel",
     "props":{"y":0,"x":0,"width":128,"presetID":1,"preset":"laya/pages/prefab/CommandPanel.prefab","name":"CommandPanel","isPresetRoot":true,"height":500},
     "nodeParent":-1,
-    "maxID":132,
+    "maxID":134,
     "label":"CommandPanel",
     "isOpen":true,
     "isDirectory":true,
@@ -18,17 +18,16 @@
             "x":15,
             "type":"List",
             "searchKey":"List,_list",
-            "props":{"y":0,"x":0,"width":128,"spaceY":10,"repeatX":1,"presetID":2,"preset":"laya/pages/prefab/CommandPanel.prefab","name":"_list","height":1000,"elasticEnabled":true},
+            "props":{"y":62,"x":4,"width":128,"spaceY":10,"repeatX":1,"presetID":2,"preset":"laya/pages/prefab/CommandPanel.prefab","name":"_list","height":1000,"elasticEnabled":true},
             "nodeParent":126,
             "label":"_list",
-            "isOpen":true,
+            "isOpen":false,
             "isDirectory":true,
             "isAniNode":true,
             "hasChild":true,
             "compId":118,
             "child":[
                 {
-                    "x":30,
                     "type":"View",
                     "searchKey":"View",
                     "props":{"y":0,"x":0,"width":128,"renderType":"render","presetID":3,"preset":"laya/pages/prefab/CommandPanel.prefab","height":128},
@@ -41,7 +40,6 @@
                     "compId":127,
                     "child":[
                         {
-                            "x":45,
                             "type":"Box",
                             "searchKey":"Box",
                             "props":{"y":0,"x":0,"width":128,"presetID":7,"preset":"laya/pages/prefab/CommandPanel.prefab","height":128,"bgColor":"#23c02a"},
@@ -56,7 +54,6 @@
                         }]
                 },
                 {
-                    "x":30,
                     "type":"VScrollBar",
                     "searchKey":"VScrollBar,scrollBar",
                     "props":{"presetID":5,"preset":"laya/pages/prefab/CommandPanel.prefab","name":"scrollBar","height":1000},
@@ -77,13 +74,41 @@
             "source":"src/panel/CommandPanel.js",
             "searchKey":"Script,CommandPanel",
             "removeAble":true,
-            "props":{"presetID":6,"preset":"laya/pages/prefab/CommandPanel.prefab"},
+            "props":{"y":1,"x":0,"presetID":6,"preset":"laya/pages/prefab/CommandPanel.prefab"},
             "nodeParent":126,
             "label":"CommandPanel",
             "isDirectory":false,
             "isAniNode":true,
             "hasChild":false,
             "compId":129,
+            "child":[
+                ]
+        },
+        {
+            "x":15,
+            "type":"Sprite",
+            "searchKey":"Sprite,upBtn",
+            "props":{"y":0,"x":34,"width":64,"texture":"source/ui/btnup.png","presetID":8,"preset":"laya/pages/prefab/CommandPanel.prefab","name":"upBtn","height":64},
+            "nodeParent":126,
+            "label":"upBtn",
+            "isDirectory":false,
+            "isAniNode":true,
+            "hasChild":false,
+            "compId":132,
+            "child":[
+                ]
+        },
+        {
+            "x":15,
+            "type":"Sprite",
+            "searchKey":"Sprite,downBtn",
+            "props":{"y":0,"x":34,"texture":"source/ui/btndown.png","presetID":9,"preset":"laya/pages/prefab/CommandPanel.prefab","name":"downBtn"},
+            "nodeParent":126,
+            "label":"downBtn",
+            "isDirectory":false,
+            "isAniNode":true,
+            "hasChild":false,
+            "compId":133,
             "child":[
                 ]
         }],
