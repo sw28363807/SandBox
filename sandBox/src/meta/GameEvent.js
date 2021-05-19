@@ -5,3 +5,5 @@ export default class GameEvent{
 GameEvent.REFRESH_RESOURCE_PANEL = "REFRESH_RESOURCE_PANEL";
 // 建造家园完成
 GameEvent.CREATE_HOME_FINISH = "CREATE_HOME_FINISH";
+// 打猎完成
+GameEvent.HUNT_FINISH = "HUNT_FINISH";

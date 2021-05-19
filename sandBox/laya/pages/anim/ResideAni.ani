@@ -2117,7 +2117,7 @@
                             }],
                         "skin":[
                             {
-                                "value":"source/resident/residentNormal2.png",
+                                "value":"source/resident/anger.png",
                                 "tweenMethod":"linearNone",
                                 "tween":false,
                                 "target":3,
@@ -2422,7 +2422,7 @@
                             }],
                         "skin":[
                             {
-                                "value":"source/resident/residentNormal2.png",
+                                "value":"source/resident/anger.png",
                                 "tweenMethod":"linearNone",
                                 "tween":false,
                                 "target":3,

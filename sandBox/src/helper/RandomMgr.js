@@ -31,8 +31,17 @@ export default class RandomMgr {
         } else if (p.y > maxY - offY) {
             p.y = maxY - offY
         }
-        return p;
+        return { x: Math.floor(p.x), y: Math.floor(p.y) };
     }
+
+    // 环状范围内的一个点
+    static randomByArea3(x, y, minDistance, maxDistance) {
+        let distance1 = minDistance + Math.random() * (maxDistance - minDistance);
+        let degree = Math.random() * 360;
+        let dy = Math.sin(degree) * distance1;
+        let dx = Math.cos(degree) * distance1;
+        return { x: Math.floor(dx + x), y: Math.floor(dy + y) };
+    };
 
     // 做一个是否的随机
     static randomYes(probability) {

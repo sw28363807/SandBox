@@ -31,6 +31,7 @@ export default class ResidentLogic extends Laya.Script {
 
     onEnable() {
         EventMgr.getInstance().registEvent(GameEvent.CREATE_HOME_FINISH, this, this.onDoWorkFinish);
+        EventMgr.getInstance().registEvent(GameEvent.HUNT_FINISH, this, this.onDoWorkFinish);
 
         this.initModel();
         this.initControl();
@@ -41,6 +42,7 @@ export default class ResidentLogic extends Laya.Script {
     onDisable() {
         this.stopGoto();
         EventMgr.getInstance().removeEvent(GameEvent.CREATE_HOME_FINISH, this, this.onDoWorkFinish);
+        EventMgr.getInstance().removeEvent(GameEvent.HUNT_FINISH, this, this.onDoWorkFinish);
         Laya.timer.clear(this, this.onDoWorkFinish);
     }
 
@@ -96,6 +98,8 @@ export default class ResidentLogic extends Laya.Script {
                 this.ani.play(0, true, "walk_baby");
             } else if (anim == ResidentMeta.ResidentAnim.Enjoy) {
                 this.ani.play(0, true, "enjoy_baby");
+            } else if (anim == ResidentMeta.ResidentAnim.Anger) {
+                this.ani.play(0, true, "anger_baby");
             }
         } else {
             let ext = String(this.model.getSex());
@@ -105,6 +109,8 @@ export default class ResidentLogic extends Laya.Script {
                 this.ani.play(0, true, "walk_role1_sex" + ext);
             } else if (anim == ResidentMeta.ResidentAnim.Enjoy) {
                 this.ani.play(0, true, "enjoy_role1_sex" + ext);
+            } else if (anim == ResidentMeta.ResidentAnim.Anger) {
+                this.ani.play(0, true, "anger_role1_sex" + ext);
             }
         }
     }
@@ -227,9 +233,21 @@ export default class ResidentLogic extends Laya.Script {
         }
         // 赶去打猎
         else if (state == ResidentMeta.ResidentState.JoinHunt) {
+            this.hurtAnimal = param;
+            let script = this.hurtAnimal.getComponent(AnimalLogic);
+            this.hurtAnimalId = script.getModel().getAnimalId();
             this.setAnim(ResidentMeta.ResidentAnim.Walk);
-            let animal = param;
-            this.startJoinHunt(animal);
+            this.startJoinHunt();
+        }
+        // 赶去打猎完成
+        else if (state == ResidentMeta.ResidentState.Hunting) {
+            if (this.hurtAnimal) {
+                let script = this.hurtAnimal.getComponent(AnimalLogic);
+                script.setHurt();
+                this.axAni.visible = true;
+                this.axAni.play(0, true, "ani7");
+                this.setAnim(ResidentMeta.ResidentAnim.Anger);   
+            }
         }
     }
 
@@ -268,20 +286,36 @@ export default class ResidentLogic extends Laya.Script {
                 GameModel.getInstance().removeTalkingPoint(talkingModel.getTalkingPointId());
             }
         }
+        // 正在赶去打猎
+        else if (state == ResidentMeta.ResidentState.JoinHunt) {
+            if (param != null && this.hurtAnimal && this.hurtAnimal == param ) {
+                AnimalMgr.getInstance().removeAnimalById(this.hurtAnimalId);
+                this.hurtAnimal = null;
+                this.hurtAnimalId = null;
+            }
+        }
+        // 打猎中
+        else if (state == ResidentMeta.ResidentState.Hunting) {
+            if (param != null && this.hurtAnimal && this.hurtAnimal == param ) {
+                AnimalMgr.getInstance().removeAnimalById(this.hurtAnimalId);
+                this.hurtAnimal = null;
+                this.hurtAnimalId = null;
+            }
+        }
         Laya.timer.clear(this, this.onDoWorkFinish);
         this.refreshFSMState(ResidentMeta.ResidentState.IdleState);
     }
 
     // 赶去打猎
-    startJoinHunt(animal) {
-        let script = animal.getComponent(AnimalLogic);
+    startJoinHunt() {
+        let script = this.hurtAnimal.getComponent(AnimalLogic);
         script.pauseWalk();
-        let pos = RandomMgr.randomByArea(animal.x, animal.y, 100);
+        let pos = RandomMgr.randomByArea3(this.hurtAnimal.x + this.hurtAnimal.width / 2, this.hurtAnimal.y + this.hurtAnimal.height / 2, 90, 150);
         this.gotoDest({
-            x: pos.x,
-            y: pos.y,
+            x: pos.x - this.owner.width / 2,
+            y: pos.y - this.owner.height / 2,
         }, Laya.Handler.create(this, function () {
-            
+            this.refreshFSMState(ResidentMeta.ResidentState.Hunting);
         }));
     }
 
@@ -535,7 +569,7 @@ export default class ResidentLogic extends Laya.Script {
             }
         }
 
-        
+
 
         // // 盖房子
         // if (RandomMgr.randomYes() && this.model.getMyHomeId() == 0 && this.model.getSex() == 1) {

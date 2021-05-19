@@ -29,6 +29,15 @@ export default class AnimalMgr extends Laya.Script {
 
     }
 
+    // 移除一个动物
+    removeAnimalById(animalId) {
+        let animal = this.animals[String(animalId)];
+        if (animal) {
+            animal.destroy(true);
+            delete this.animals[String(animalId)];   
+        }
+    }
+
     // 创建动物
     createAnimalByConfig(config, callback) {
         Laya.loader.create(GameMeta.AnimalPrefabPath, Laya.Handler.create(this, function (prefabDef) {

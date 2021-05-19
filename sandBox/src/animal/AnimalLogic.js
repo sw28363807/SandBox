@@ -1,5 +1,7 @@
+import EventMgr from "../helper/EventMgr";
 import RandomMgr from "../helper/RandomMgr";
 import Utils from "../helper/Utils";
+import GameEvent from "../meta/GameEvent";
 import AnimalMeta from "./AnimalMeta";
 
 export default class AnimalLogic extends Laya.Script {
@@ -16,6 +18,7 @@ export default class AnimalLogic extends Laya.Script {
 
     onDisable() {
         Laya.timer.clear(this, this.onWalkFinish);
+        Laya.timer.clear(this, this.onHurtFinish);
     }
 
     onStart() {
@@ -43,8 +46,27 @@ export default class AnimalLogic extends Laya.Script {
     }
 
     pauseWalk() {
-        Laya.timer.clear(this, this.onWalkFinish);
         this.setIdle();
+        Laya.timer.clear(this, this.onWalkFinish);
+    }
+
+    setHurt() {
+        if (this.model.getState() == AnimalMeta.AnimalState.Hurt) {
+            return;
+        }
+        Laya.timer.clear(this, this.onWalkFinish);
+        if (this.tweenObject) {
+            Laya.Tween.clear(this.tweenObject);
+            this.tweenObject = null;
+        }
+        this.model.setState(AnimalMeta.AnimalState.Hurt);
+        this.ani.play(0, true, "hurt1");
+        Laya.timer.once(AnimalMeta.AnimalHurtTime, this, this.onHurtFinish);
+    }
+
+    onHurtFinish() {
+        Laya.timer.clear(this, this.onHurtFinish);
+        EventMgr.getInstance().postEvent(GameEvent.HUNT_FINISH, this.owner);
     }
 
     onWalkFinish() {
