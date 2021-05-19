@@ -21,6 +21,8 @@ ResidentMeta.ResidentState = {
     LoverMakeLove: 15,       //生孩子
     JoinTalking: 16,          //加入聊天
     TalkingAbout: 17,         //聊天
+    JoinHunt: 18,             //赶去打猎
+    Hunting: 19,              //打猎
 };
 
 // 动画枚举
@@ -52,10 +54,13 @@ ResidentMeta.SocialTimeStep = 1000;
 // 属性掉落基础值
 ResidentMeta.ResidentValueStep = 2000;  //人物数值消耗Step
 ResidentMeta.ResidentMakeIdeaStep = 1000;  //人物做决策Step
-ResidentMeta.ResidentReduceWaterBaseValue = -3; //水源减少值
-ResidentMeta.ResidentReduceFoodBaseValue = -4;  //食物减少值
-ResidentMeta.ResidentReduceSocialBaseValue = -10; //社交减少值
-ResidentMeta.ResidentSocialNeedValue = 50;  //需要社交的警戒线，低于这个值就是需要社交了
+ResidentMeta.ResidentReduceWaterBaseValue = -1; //水源减少值
+ResidentMeta.ResidentReduceFoodBaseValue = -1;  //食物减少值
+ResidentMeta.ResidentReduceSocialBaseValue = -1; //社交减少值
+ResidentMeta.ResidentAddSocialBaseValue = 60; //一次社交增加值
+ResidentMeta.ResidentSocialNeedValue = 30;  //需要社交的警戒线，低于这个值就是需要社交了
+ResidentMeta.ResidentWaterNeedValue = 30;  //需要喝水的警戒线，低于这个值就是需要喝水了
+ResidentMeta.ResidentFoodNeedValue = 30;  //需要吃饭的警戒线，低于这个值就是需要吃饭了
 ResidentMeta.ResidentSocialArea = 300;      //寻找可以社交的人的范围
 ResidentMeta.ResidentAddTreeBaseValue = 1;  //人物砍树增加的数值
 ResidentMeta.ResidentAddStoneBaseValue = 1;  //人物收集石头增加的数值

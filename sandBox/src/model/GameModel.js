@@ -1,6 +1,7 @@
 import BuildingMeta from "../meta/BuildingMeta";
 import GameMeta from "../meta/GameMeta";
 import ResidentMeta from "../meta/ResidentMeta";
+import AnimalModel from "./AnimalModel";
 import BuildingModel from "./BuildingModel";
 import FoodModel from "./FoodModel";
 import ResidentModel from "./ResidentModel";
@@ -14,10 +15,13 @@ export default class GameModel extends Laya.Script {
         this.maxFoodID = 0;             //食物最大ID
         this.maxBuildingID = 0;         //建筑最大ID
         this.maxTalkingID = 0;          //聊天区域最大ID
+        this.maxAnimalID = 0;           //动物最大ID
+
         this.residentModels = {};       //角色数据
         this.foodModels = {};           //食物数据
         this.buildingModels = {};       //建筑物数据
         this.talkingPoints = {};        //聊天区域数据
+        this.animalModes = {};          //动物数据
 
 
 
@@ -70,6 +74,19 @@ export default class GameModel extends Laya.Script {
 
     addStoneNum(num) {
         this.setStoneNum(this.getStoneNum() + num);
+    }
+
+    // 新建一个动物Model
+    newAnimalModel(param) {
+        this.maxAnimalID++;
+        let model = new AnimalModel();
+        model.updateData({
+            x: param.x,
+            y: param.y,
+            animalId: this.maxAnimalID
+        });
+        this.animalModes[String(this.maxAnimalID)] = model
+        return model
     }
 
     // 获取家信息

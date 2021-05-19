@@ -1,12 +1,11 @@
 {
-    "x":0,
     "type":"Scene",
     "selectedBox":10,
-    "selecteID":97,
+    "selecteID":137,
     "searchKey":"Scene",
     "props":{"width":1336,"sceneColor":"#000000","height":750},
     "nodeParent":-1,
-    "maxID":135,
+    "maxID":139,
     "label":"Scene",
     "isOpen":true,
     "isDirectory":true,
@@ -15,7 +14,6 @@
     "compId":2,
     "child":[
         {
-            "x":15,
             "type":"Script",
             "switchAble":true,
             "source":"src/scene/TestSceneLogic.js",
@@ -32,7 +30,6 @@
                 ]
         },
         {
-            "x":15,
             "type":"Box",
             "searchKey":"Box,ScrollView",
             "props":{"y":0,"x":0,"width":1336,"name":"ScrollView","height":750,"bgColor":"#f8f3f7"},
@@ -45,7 +42,6 @@
             "compId":9,
             "child":[
                 {
-                    "x":30,
                     "type":"Box",
                     "searchKey":"Box,container",
                     "props":{"width":3000,"name":"container","height":3000},
@@ -58,7 +54,6 @@
                     "compId":10,
                     "child":[
                         {
-                            "x":45,
                             "type":"Box",
                             "searchKey":"Box",
                             "props":{"y":0,"x":0,"width":3000,"height":100,"bgColor":"#71db50"},
@@ -72,7 +67,6 @@
                                 ]
                         },
                         {
-                            "x":45,
                             "type":"Box",
                             "searchKey":"Box",
                             "props":{"y":2891,"x":0,"width":3000,"height":100,"bgColor":"#71db50"},
@@ -86,7 +80,6 @@
                                 ]
                         },
                         {
-                            "x":45,
                             "type":"Box",
                             "searchKey":"Box",
                             "props":{"y":0,"x":0,"width":100,"height":3000,"bgColor":"#71db50"},
@@ -101,7 +94,6 @@
                                 ]
                         },
                         {
-                            "x":45,
                             "type":"Box",
                             "searchKey":"Box",
                             "props":{"y":0,"x":2900,"width":100,"height":3000,"bgColor":"#71db50"},
@@ -115,7 +107,6 @@
                                 ]
                         },
                         {
-                            "x":45,
                             "type":"Box",
                             "searchKey":"Box,spring",
                             "props":{"width":3000,"name":"spring","height":3000,"bgColor":"#c8eea0"},
@@ -131,20 +122,18 @@
                             "$HIDDEN":false
                         },
                         {
-                            "x":45,
                             "type":"Box",
                             "searchKey":"Box",
                             "props":{"y":613,"x":715,"presetID":1,"preset":"laya/pages/prefab/Tree.prefab"},
                             "nodeParent":10,
                             "label":"Tree",
-                            "isOpen":true,
+                            "isOpen":false,
                             "isDirectory":true,
                             "isAniNode":true,
                             "hasChild":true,
                             "compId":84,
                             "child":[
                                 {
-                                    "x":60,
                                     "type":"Script",
                                     "switchAble":true,
                                     "source":"src/source/Treelogic.js",
@@ -161,7 +150,6 @@
                                         ]
                                 },
                                 {
-                                    "x":60,
                                     "type":"Animation",
                                     "searchKey":"Animation",
                                     "props":{"presetID":4,"preset":"laya/pages/prefab/Tree.prefab"},
@@ -176,7 +164,6 @@
                                 }]
                         },
                         {
-                            "x":45,
                             "type":"Box",
                             "selectedBox":35,
                             "selecteID":38,
@@ -218,7 +205,6 @@
                                 }]
                         },
                         {
-                            "x":45,
                             "type":"Box",
                             "selectedBox":90,
                             "selecteID":94,
@@ -274,7 +260,6 @@
                                 }]
                         },
                         {
-                            "x":45,
                             "type":"Box",
                             "selectedBox":99,
                             "selecteID":101,
@@ -353,10 +338,37 @@
                                     "frameRate":24,
                                     "action":0
                                 }]
+                        },
+                        {
+                            "type":"Box",
+                            "searchKey":"Box",
+                            "props":{"y":312,"x":856,"presetID":1,"preset":"laya/pages/prefab/AnimalTrigger.prefab"},
+                            "nodeParent":10,
+                            "label":"AnimalTrigger",
+                            "isDirectory":true,
+                            "isAniNode":true,
+                            "hasChild":true,
+                            "compId":137,
+                            "child":[
+                                {
+                                    "type":"Script",
+                                    "switchAble":true,
+                                    "source":"src/animal/AnimalTrigger.js",
+                                    "searchKey":"Script,AnimalTrigger",
+                                    "removeAble":true,
+                                    "props":{"presetID":2,"preset":"laya/pages/prefab/AnimalTrigger.prefab"},
+                                    "nodeParent":137,
+                                    "label":"AnimalTrigger",
+                                    "isDirectory":false,
+                                    "isAniNode":true,
+                                    "hasChild":false,
+                                    "compId":138,
+                                    "child":[
+                                        ]
+                                }]
                         }]
                 },
                 {
-                    "x":30,
                     "type":"Script",
                     "switchAble":true,
                     "source":"src/helper/MapScrollView.js",
@@ -374,7 +386,6 @@
                 }]
         },
         {
-            "x":15,
             "type":"Box",
             "searchKey":"Box",
             "props":{"y":0,"x":1036,"presetID":1,"preset":"laya/pages/prefab/ResourcePanel.prefab"},
@@ -457,20 +468,18 @@
                 }]
         },
         {
-            "x":15,
             "type":"View",
             "searchKey":"View",
             "props":{"presetID":1,"preset":"laya/pages/prefab/CommandPanel.prefab"},
             "nodeParent":2,
             "label":"CommandPanel",
-            "isOpen":true,
+            "isOpen":false,
             "isDirectory":true,
             "isAniNode":true,
             "hasChild":true,
             "compId":131,
             "child":[
                 {
-                    "x":30,
                     "type":"List",
                     "searchKey":"List",
                     "props":{"presetID":2,"preset":"laya/pages/prefab/CommandPanel.prefab"},
@@ -483,7 +492,6 @@
                     "compId":118,
                     "child":[
                         {
-                            "x":45,
                             "type":"View",
                             "searchKey":"View",
                             "props":{"presetID":3,"preset":"laya/pages/prefab/CommandPanel.prefab"},
@@ -496,7 +504,6 @@
                             "compId":127,
                             "child":[
                                 {
-                                    "x":60,
                                     "type":"Box",
                                     "searchKey":"Box",
                                     "props":{"presetID":7,"preset":"laya/pages/prefab/CommandPanel.prefab"},
@@ -511,7 +518,6 @@
                                 }]
                         },
                         {
-                            "x":45,
                             "type":"VScrollBar",
                             "searchKey":"VScrollBar",
                             "props":{"presetID":5,"preset":"laya/pages/prefab/CommandPanel.prefab"},
@@ -526,7 +532,6 @@
                         }]
                 },
                 {
-                    "x":30,
                     "type":"Script",
                     "switchAble":true,
                     "source":"src/panel/CommandPanel.js",
@@ -543,7 +548,6 @@
                         ]
                 },
                 {
-                    "x":30,
                     "type":"Sprite",
                     "searchKey":"Sprite",
                     "props":{"presetID":8,"preset":"laya/pages/prefab/CommandPanel.prefab"},
@@ -557,7 +561,6 @@
                         ]
                 },
                 {
-                    "x":30,
                     "type":"Sprite",
                     "searchKey":"Sprite",
                     "props":{"presetID":9,"preset":"laya/pages/prefab/CommandPanel.prefab"},

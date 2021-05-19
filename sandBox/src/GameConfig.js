@@ -4,9 +4,11 @@ import Treelogic from "./source/Treelogic"
 import FoodTrigger from "./source/FoodTrigger"
 import StoneLogic from "./source/StoneLogic"
 import Waterlogic from "./source/Waterlogic"
+import AnimalTrigger from "./animal/AnimalTrigger"
 import MapScrollView from "./helper/MapScrollView"
 import ResourcePanel from "./panel/ResourcePanel"
 import CommandPanel from "./panel/CommandPanel"
+import AnimalLogic from "./animal/AnimalLogic"
 import FoodLogic from "./source/FoodLogic"
 import HomeLogic from "./building/HomeLogic"
 import ResidentLogic from "./resident/ResidentLogic"
@@ -21,9 +23,11 @@ export default class GameConfig {
 		reg("source/FoodTrigger.js",FoodTrigger);
 		reg("source/StoneLogic.js",StoneLogic);
 		reg("source/Waterlogic.js",Waterlogic);
+		reg("animal/AnimalTrigger.js",AnimalTrigger);
 		reg("helper/MapScrollView.js",MapScrollView);
 		reg("panel/ResourcePanel.js",ResourcePanel);
 		reg("panel/CommandPanel.js",CommandPanel);
+		reg("animal/AnimalLogic.js",AnimalLogic);
 		reg("source/FoodLogic.js",FoodLogic);
 		reg("building/HomeLogic.js",HomeLogic);
 		reg("resident/ResidentLogic.js",ResidentLogic);

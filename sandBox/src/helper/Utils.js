@@ -1,10 +1,9 @@
 export default class Utils {
-
-    constructor() { 
-        super();
+    // 获得符号
+    static getSign(value) {
+        if (value > 0) {
+            return 1;
+        }
+        return -1;
     }
-
-    static getSign(srcX, srcY, dstX, dstY) {
-        
-    }
-}
+};

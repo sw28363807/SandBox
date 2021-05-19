@@ -1,0 +1,1 @@
+{"type":"Box","props":{"y":0,"x":0,"width":50,"presetID":1,"name":"AnimalTrigger","isPresetRoot":true,"height":50,"bgColor":"#1150d7"},"compId":137,"child":[{"type":"Script","props":{"presetID":2,"runtime":"animal/AnimalTrigger.js"},"compId":138}],"loadList":[],"loadList3D":[]}

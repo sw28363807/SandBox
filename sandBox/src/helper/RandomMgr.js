@@ -35,8 +35,11 @@ export default class RandomMgr {
     }
 
     // 做一个是否的随机
-    static randomYes() {
-        if (Math.random() >= 0.5) {
+    static randomYes(probability) {
+        if (probability == null) {
+            probability = 0.5;
+        }
+        if (Math.random() >= probability) {
             return true;
         } else {
             return false;

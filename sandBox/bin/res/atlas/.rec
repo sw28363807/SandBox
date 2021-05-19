@@ -7,6 +7,7 @@ P 233A6581 building1_3.png
 D source/food
 P 43B7F2FA food1.png
 D source/landscape
+P 146133C5 changjinglu.png
 P FF42B11C stone1.png
 P BDEA36EE stone2.png
 P 3FFBA97B stone3.png
@@ -22,6 +23,7 @@ P CB25EA90 tree9.png
 P A2663D43 water.png
 P F00114D0 waterIcon.png
 D source/resident
+P D4606BA7 attack.png
 P D124E7AA baby.png
 P DCAB066A collect.png
 P 0CC498BA cutdown.png
@@ -44,4 +46,3 @@ P A508BEED slider2.png
 P 41CAA2E4 sliderBg.png
 P 76F0627B sliderBg2.png
 P 9DE7041A under.png
-D source/landscape/AAA

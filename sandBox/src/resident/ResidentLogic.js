@@ -14,6 +14,8 @@ import EventMgr from "../helper/EventMgr";
 import GameEvent from "../meta/GameEvent";
 import BuildingMeta from "../meta/BuildingMeta";
 import HomeLogic from "../building/HomeLogic";
+import AnimalMgr from "../animal/AnimalMgr";
+import AnimalLogic from "../animal/AnimalLogic";
 
 export default class ResidentLogic extends Laya.Script {
 
@@ -107,7 +109,10 @@ export default class ResidentLogic extends Laya.Script {
         }
     }
 
-
+    stopAni() {
+        this.stateAnim = null;
+        this.ani.stop();
+    }
 
     //  设置状态机状态
     refreshFSMState(state, param) {
@@ -118,7 +123,7 @@ export default class ResidentLogic extends Laya.Script {
         this.axAni.visible = false;
         this.owner.visible = true;
         this.axAni.stop();
-        this.ani.stop();
+        this.stopAni();
         this.stopGoto();
         Laya.timer.clear(this, this.onDoWorkFinish);
         // 待机
@@ -218,7 +223,13 @@ export default class ResidentLogic extends Laya.Script {
             this.setAnim(ResidentMeta.ResidentAnim.Enjoy);
             this.axAni.visible = true;
             this.axAni.play(0, true, "ani6");
-            Laya.timer.once(ResidentMeta.SocialTimeStep * 3, this, this.onDoWorkFinish, [param]);
+            Laya.timer.once(ResidentMeta.SocialTimeStep * 10, this, this.onDoWorkFinish, [param]);
+        }
+        // 赶去打猎
+        else if (state == ResidentMeta.ResidentState.JoinHunt) {
+            this.setAnim(ResidentMeta.ResidentAnim.Walk);
+            let animal = param;
+            this.startJoinHunt(animal);
         }
     }
 
@@ -252,12 +263,26 @@ export default class ResidentLogic extends Laya.Script {
         else if (state == ResidentMeta.ResidentState.TalkingAbout) {
             let talkingModel = param;
             talkingModel.addTalkingNum(-1);
+            this.model.addSocial(ResidentMeta.ResidentAddSocialBaseValue);
             if (talkingModel.getTalkingNum() == 0) {
                 GameModel.getInstance().removeTalkingPoint(talkingModel.getTalkingPointId());
             }
         }
         Laya.timer.clear(this, this.onDoWorkFinish);
         this.refreshFSMState(ResidentMeta.ResidentState.IdleState);
+    }
+
+    // 赶去打猎
+    startJoinHunt(animal) {
+        let script = animal.getComponent(AnimalLogic);
+        script.pauseWalk();
+        let pos = RandomMgr.randomByArea(animal.x, animal.y, 100);
+        this.gotoDest({
+            x: pos.x,
+            y: pos.y,
+        }, Laya.Handler.create(this, function () {
+            
+        }));
     }
 
     // 走到聊天点
@@ -459,41 +484,62 @@ export default class ResidentLogic extends Laya.Script {
         if (this.model.getFSMState() != ResidentMeta.ResidentState.IdleState) {
             return;
         }
-        // 社交
-        if (this.model.getSocial() < ResidentMeta.ResidentSocialNeedValue) {
-            let resident = this.residentMgrInstance.getACanSocialResident(this.owner.x, this.owner.y);
-            if (resident) {
-                let talkingModel = GameModel.getInstance().getOrCreateTalkingPoint(this.owner.x, this.owner.y, 100, 5);
-                if (talkingModel.getTalkingNum()  == 0 ) {
-                    talkingModel.addTalkingNum(2);
-                    this.refreshFSMState(ResidentMeta.ResidentState.JoinTalking, talkingModel);
-                    resident.getComponent(ResidentLogic).refreshFSMState(ResidentMeta.ResidentState.JoinTalking, talkingModel);
-                } else {
-                    talkingModel.addTalkingNum(1);
-                    this.refreshFSMState(ResidentMeta.ResidentState.JoinTalking, talkingModel);
-                }
-                return;
-            }
-        }
+
         // //喝水
-        // if (this.model.getWater() < 100) {
+        // if (this.model.getWater() < ResidentMeta.ResidentWaterNeedValue) {
         //     this.refreshFSMState(ResidentMeta.ResidentState.FindWater);
         //     return;
         // }
+
         // //吃饭
-        // if (this.model.getFood() < 30 && FoodMgr.getInstance().canFindFood()) {
+        // if (this.model.getFood() < ResidentMeta.ResidentFoodNeedValue && FoodMgr.getInstance().canFindFood()) {
         //     this.refreshFSMState(ResidentMeta.ResidentState.FindFood);
         //     return;
         // }
+
+        // // 社交
+        // if (this.model.getSocial() < ResidentMeta.ResidentSocialNeedValue && RandomMgr.randomYes(0.9)) {
+        //     let resident = this.residentMgrInstance.getACanSocialResident(this.owner.x, this.owner.y);
+        //     if (resident) {
+        //         let talkingModel = GameModel.getInstance().getOrCreateTalkingPoint(this.owner.x, this.owner.y, 100, 5);
+        //         if (talkingModel.getTalkingNum()  == 0 ) {
+        //             talkingModel.addTalkingNum(2);
+        //             this.refreshFSMState(ResidentMeta.ResidentState.JoinTalking, talkingModel);
+        //             resident.getComponent(ResidentLogic).refreshFSMState(ResidentMeta.ResidentState.JoinTalking, talkingModel);
+        //         } else {
+        //             talkingModel.addTalkingNum(1);
+        //             this.refreshFSMState(ResidentMeta.ResidentState.JoinTalking, talkingModel);
+        //         }
+        //         return;
+        //     }
+        // }
+
         // // 砍树
-        // if (RandomMgr.randomYes()) {
+        // if (RandomMgr.randomYes(0.9)) {
         //     this.refreshFSMState(ResidentMeta.ResidentState.FindTree);
         //     return;
         // }
 
         // // 收集石头
-        // if (RandomMgr.randomYes()) {
+        // if (RandomMgr.randomYes(0.9)) {
         //     this.refreshFSMState(ResidentMeta.ResidentState.FindStone);
+        //     return;
+        // }
+
+
+
+        if (RandomMgr.randomYes()) {
+            let item = AnimalMgr.getInstance().getAnimalForAttack(this.owner.x, this.owner.y, 3000);
+            if (item) {
+                this.refreshFSMState(ResidentMeta.ResidentState.JoinHunt, item);
+            }
+        }
+
+        
+
+        // // 盖房子
+        // if (RandomMgr.randomYes() && this.model.getMyHomeId() == 0 && this.model.getSex() == 1) {
+        //     this.refreshFSMState(ResidentMeta.ResidentState.FindBlockForCreateHome);
         //     return;
         // }
 
@@ -516,12 +562,6 @@ export default class ResidentLogic extends Laya.Script {
         //             }
         //         }
         //     }
-        // }
-
-        // // 盖房子
-        // if (RandomMgr.randomYes() && this.model.getMyHomeId() == 0 && this.model.getSex() == 1) {
-        //     this.refreshFSMState(ResidentMeta.ResidentState.FindBlockForCreateHome);
-        //     return;
         // }
 
     }
