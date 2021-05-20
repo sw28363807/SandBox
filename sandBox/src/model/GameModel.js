@@ -148,7 +148,8 @@ export default class GameModel extends Laya.Script {
         model.updateData({
             x: param.x,
             y: param.y,
-            foodId: this.maxFoodID
+            foodId: this.maxFoodID,
+            foodType: param.foodType
         });
         this.foodModels[String(this.maxFoodID)] = model;
         return model;

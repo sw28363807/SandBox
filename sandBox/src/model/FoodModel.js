@@ -8,7 +8,18 @@ export default class FoodModel extends Laya.Script {
         this.foodId = 0;
         this.x;
         this.y;
+        this.foodType = 1;
         this.state = FoodMeta.FoodState.CanEat;
+    }
+
+    // 获取食物类型
+    getFoodType() {
+        return this.foodType;
+    }
+
+    // 设置食物类型
+    setFoodType(foodType) {
+        this.foodType = foodType;
     }
 
     // 获得食物ID
@@ -54,6 +65,9 @@ export default class FoodModel extends Laya.Script {
             }
             if (data.foodId) {
                 this.foodId = data.foodId;
+            }
+            if (data.foodType) {
+                this.foodType = data.foodType;
             }
         }
     }

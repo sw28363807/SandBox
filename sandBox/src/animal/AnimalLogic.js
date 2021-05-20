@@ -1,13 +1,29 @@
 import EventMgr from "../helper/EventMgr";
 import RandomMgr from "../helper/RandomMgr";
 import Utils from "../helper/Utils";
+import GameContext from "../meta/GameContext";
 import GameEvent from "../meta/GameEvent";
+import FoodMgr from "../source/FoodMgr";
 import AnimalMeta from "./AnimalMeta";
 
 export default class AnimalLogic extends Laya.Script {
 
     constructor() {
         super();
+    }
+
+    onDestroy() {
+        if (this.trigger) {
+            this.trigger.addNum(-1);
+        }
+        FoodMgr.getInstance().createFoodByConfig({
+            parent: GameContext.mapContainer,
+            x: this.owner.x + this.owner.width / 2,
+            y: this.owner.y + this.owner.height / 2,
+            foodType: 2
+        }, Laya.Handler.create(this, function (obj) {
+
+        }));
     }
 
     onEnable() {
@@ -23,7 +39,7 @@ export default class AnimalLogic extends Laya.Script {
 
     onStart() {
         this.owner.alpha = 0;
-        Laya.Tween.to(this.owner, {alpha: 1}, 1000, Laya.Ease.circIn);
+        Laya.Tween.to(this.owner, { alpha: 1 }, 1000, Laya.Ease.circIn);
         this.setIdle();
         this.setWalk();
     }

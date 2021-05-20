@@ -3,10 +3,10 @@ import GameMeta from "../meta/GameMeta";
 
 export default class FoodLogic extends Laya.Script {
 
-    constructor() { 
+    constructor() {
         super();
     }
-    
+
     onEnable() {
         this.ani = this.owner.getChildByName("ani");
         this.owner.zOrder = FoodMeta.FoodZOrder;
@@ -19,11 +19,11 @@ export default class FoodLogic extends Laya.Script {
 
     onStart() {
         Laya.timer.once(1000, this, this.fadeOutFinish);
-        this.ani.play(0, false, "fadeOut1");
+        this.ani.play(0, false, "fadeOut" + String(this.model.getFoodType()));
     }
 
     fadeOutFinish() {
-        this.ani.play(0, true, "idle1");
+        this.ani.play(0, true, "idle" + String(this.model.getFoodType()));
         Laya.timer.clear(this, this.fadeOutFinish);
     }
 

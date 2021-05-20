@@ -26,7 +26,8 @@ export default class FoodTrigger extends Laya.Script {
                 parent:GameContext.mapContainer,
                 x: pos.x,
                 y: pos.y,
-                trigger: this
+                trigger: this,
+                foodType: 1
             }, Laya.Handler.create(this, function(obj) {
                 
             }));

@@ -1,1 +1,0 @@
-{"type":"Box","props":{"y":0,"x":0,"width":128,"presetID":1,"name":"Stone","isPresetRoot":true,"height":128},"compId":90,"child":[{"type":"Sprite","props":{"width":128,"presetID":2,"name":"image","height":128},"compId":93},{"type":"Script","props":{"presetID":3,"runtime":"source/StoneLogic.js"},"compId":95}],"loadList":[],"loadList3D":[]}
