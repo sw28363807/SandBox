@@ -49,14 +49,40 @@ export default class ResidentLogic extends Laya.Script {
     //初始化控件
     initControl() {
         this.ani = this.owner.getChildByName("ani");
-        this.axAni = this.owner.getChildByName("ax");
-        this.axAni.visible = false;
+        this.stateAni = this.owner.getChildByName("stateAni");
+        this.buffAni = this.owner.getChildByName("buff");
+        this.setStateAniVisible(false);
+        this.setBuffAniVisible(false);
+    }
+
+    setBuffAni(aniName) {
+        this.buffAni.play(0, true, aniName);
+    }
+
+    setBuffAniVisible(visible) {
+        this.buffAni.visible = visible;
+    }
+
+    stopBuffAni() {
+        this.buffAni.stop();
+    }
+
+    setStateAni(aniName) {
+        this.stateAni.play(0, true, aniName);
+    }
+
+    setStateAniVisible(visible) {
+        this.stateAni.visible = visible;
+    }
+
+    stopStateAni() {
+        this.stateAni.stop();
     }
 
     //初始化属性
     initModel() {
         this.findCreateHomeTimes = 0;   //寻找盖房地点的次数
-        this.stateAnim = ResidentMeta.ResidentAnim.Null;
+        this.curStateAnim = ResidentMeta.ResidentAnim.Null;
     }
 
     initTouch() {
@@ -87,10 +113,10 @@ export default class ResidentLogic extends Laya.Script {
 
     // 设置动画
     setAnim(anim) {
-        if (this.stateAnim == anim) {
+        if (this.curStateAnim == anim) {
             return;
         }
-        this.stateAnim = anim;
+        this.curStateAnim = anim;
         if (this.model.getAge() < ResidentMeta.ResidentAdultAge) {
             if (anim == ResidentMeta.ResidentAnim.Idle) {
                 this.ani.play(0, true, "idle_baby");
@@ -116,7 +142,7 @@ export default class ResidentLogic extends Laya.Script {
     }
 
     stopAni() {
-        this.stateAnim = null;
+        this.curStateAnim = null;
         this.ani.stop();
     }
 
@@ -126,9 +152,9 @@ export default class ResidentLogic extends Laya.Script {
             return;
         }
         this.model.setFSMState(state);
-        this.axAni.visible = false;
+        this.setStateAniVisible(false);
         this.owner.visible = true;
-        this.axAni.stop();
+        this.stopStateAni();
         this.stopAni();
         this.stopGoto();
         Laya.timer.clear(this, this.onDoWorkFinish);
@@ -144,8 +170,8 @@ export default class ResidentLogic extends Laya.Script {
         // 盖房子
         else if (state == ResidentMeta.ResidentState.CreateHome) {
             this.setAnim(ResidentMeta.ResidentAnim.Idle);
-            this.axAni.visible = true;
-            this.axAni.play(0, true, "ani2");
+            this.setStateAniVisible(true);
+            this.setStateAni("ani2");
         }
         // 寻找树木
         else if (state == ResidentMeta.ResidentState.FindTree) {
@@ -154,8 +180,8 @@ export default class ResidentLogic extends Laya.Script {
             // 砍树
         } else if (state == ResidentMeta.ResidentState.CutDownTree) {
             this.setAnim(ResidentMeta.ResidentAnim.Idle);
-            this.axAni.visible = true;
-            this.axAni.play(0, true, "ani1");
+            this.setStateAniVisible(true);
+            this.setStateAni("ani1");
             Laya.timer.once(ResidentMeta.CutDownTreeTimeStep * 3, this, this.onDoWorkFinish);
         }
         // 寻找石头
@@ -165,8 +191,8 @@ export default class ResidentLogic extends Laya.Script {
         }
         // 收集石头
         else if (state == ResidentMeta.ResidentState.CollectStone) {
-            this.axAni.visible = true;
-            this.axAni.play(0, true, "ani2");
+            this.setStateAniVisible(true);
+            this.setStateAni("ani2");
             this.setAnim(ResidentMeta.ResidentAnim.Idle);
             Laya.timer.once(ResidentMeta.CollectStoneTimeStep * 3, this, this.onDoWorkFinish);
         }
@@ -177,9 +203,9 @@ export default class ResidentLogic extends Laya.Script {
         }
         // 吃食物
         else if (state == ResidentMeta.ResidentState.EatFood) {
-            this.axAni.visible = true;
+            this.setStateAniVisible(true);
             this.setAnim(ResidentMeta.ResidentAnim.Idle);
-            this.axAni.play(0, true, "ani3");
+            this.setStateAni("ani3");
             Laya.timer.once(ResidentMeta.EatFoodTimeStep * 3, this, this.onDoWorkFinish);
         }
         // 寻找水源
@@ -190,28 +216,28 @@ export default class ResidentLogic extends Laya.Script {
         // 喝水
         else if (state == ResidentMeta.ResidentState.DrinkWater) {
             this.setAnim(ResidentMeta.ResidentAnim.Idle);
-            this.axAni.visible = true;
-            this.axAni.play(0, true, "ani4");
+            this.setStateAniVisible(true);
+            this.setStateAni("ani4");
             Laya.timer.once(ResidentMeta.EatFoodTimeStep * 3, this, this.onDoWorkFinish);
         }
         // 恋爱男方
         else if (state == ResidentMeta.ResidentState.LoverMan) {
             this.setAnim(ResidentMeta.ResidentAnim.Walk);
-            this.axAni.visible = true;
-            this.axAni.play(0, true, "ani5");
+            this.setStateAniVisible(true);
+            this.setStateAni("ani5");
             this.startFindWoman();
         }
         // 恋爱女方
         else if (state == ResidentMeta.ResidentState.LoverWoman) {
             this.setAnim(ResidentMeta.ResidentAnim.Idle);
-            this.axAni.visible = true;
-            this.axAni.play(0, true, "ani5");
+            this.setStateAniVisible(true);
+            this.setStateAni("ani5");
         }
         // 两口子一起回家
         else if (state == ResidentMeta.ResidentState.LoverGoHomeMakeLove) {
             this.setAnim(ResidentMeta.ResidentAnim.Walk);
-            this.axAni.visible = true;
-            this.axAni.play(0, true, "ani5");
+            this.setStateAniVisible(true);
+            this.setStateAni("ani5");
             this.startGoHomeAndWoman();
         }
         // 生孩子
@@ -227,8 +253,8 @@ export default class ResidentLogic extends Laya.Script {
         // 聊天
         else if (state == ResidentMeta.ResidentState.TalkingAbout) {
             this.setAnim(ResidentMeta.ResidentAnim.Enjoy);
-            this.axAni.visible = true;
-            this.axAni.play(0, true, "ani6");
+            this.setStateAniVisible(true);
+            this.setStateAni("ani6");
             Laya.timer.once(ResidentMeta.SocialTimeStep * 10, this, this.onDoWorkFinish, [param]);
         }
         // 赶去打猎
@@ -244,8 +270,8 @@ export default class ResidentLogic extends Laya.Script {
             if (this.hurtAnimal) {
                 let script = this.hurtAnimal.getComponent(AnimalLogic);
                 script.setHurt();
-                this.axAni.visible = true;
-                this.axAni.play(0, true, "ani7");
+                this.setStateAniVisible(true);
+                this.setStateAni("ani7");
                 this.setAnim(ResidentMeta.ResidentAnim.Anger);   
             }
         }

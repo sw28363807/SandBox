@@ -1065,6 +1065,14 @@
                                 "target":9,
                                 "key":"skin",
                                 "index":0
+                            },
+                            {
+                                "value":"source/resident/sick.png",
+                                "tweenMethod":"linearNone",
+                                "tween":false,
+                                "target":9,
+                                "key":"skin",
+                                "index":34
                             }],
                         "scaleY":[
                             {

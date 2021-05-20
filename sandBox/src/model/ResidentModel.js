@@ -1,3 +1,4 @@
+import RandomMgr from "../helper/RandomMgr";
 import NameMeta from "../meta/NameMeta";
 import ResidentMeta from "../meta/ResidentMeta";
 
@@ -24,6 +25,7 @@ export default class ResidentModel extends Laya.Script {
         this.age = 1;       //年龄
         this.sex = 1;   // 性别 1 男 2 女
         this.married = 1; //1 未婚 2 已婚
+        this.sick = 1;  //1 健康 2 生病
         this.residentName = NameMeta.randomOneName();
 
 
@@ -89,7 +91,18 @@ export default class ResidentModel extends Laya.Script {
             if (data.curFSMState) {
                 this.curFSMState = data.curFSMState;
             }
+            if (data.sick) {
+                this.sick = data.sick;
+            }
         }
+    }
+
+    getSick() {
+        return this.sick;
+    }
+
+    setSick(sick) {
+        this.sick = sick;
     }
 
     setLoverId(id) {
@@ -140,6 +153,13 @@ export default class ResidentModel extends Laya.Script {
         this.addWater(ResidentMeta.ResidentReduceWaterBaseValue);
         this.addFood(ResidentMeta.ResidentReduceFoodBaseValue);
         this.addSocial(ResidentMeta.ResidentReduceSocialBaseValue);
+
+        if (Math.random() > 0.99) {
+            if (this.getSick() == 1) {
+                this.setSick(2);
+            }
+        }
+        
     }
 
     addSocial(delta) {

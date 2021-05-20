@@ -11,3 +11,11 @@ GameMeta.BuildingAtlasPath = "res/atlas/source/building.atlas"; //建筑引用�
 GameMeta.FoodAtlasPath = "res/atlas/source/food.atlas";         //食物所引用的图片
 
 
+// 操作界面的数据源
+GameMeta.CommandPanelDataSource = [
+    {
+        iamgeUrl:"source/building/center.png",
+    }
+];
+
+

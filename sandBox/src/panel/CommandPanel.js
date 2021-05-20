@@ -8,7 +8,7 @@ export default class CommandPanel extends Laya.Script {
         this.listView = this.owner.getChildByName("_list");
         this.listView.array = [
             {
-                path: "",
+                path: "source/building/center.png",
             }
         ];
         this.listView.refresh();
@@ -29,6 +29,18 @@ export default class CommandPanel extends Laya.Script {
             this.upBtn.visible = false;
             Laya.Tween.to(this.listView, {scaleY: 1}, 200, Laya.Ease.backOut);
         });
+
+       this.listView.renderHandler = Laya.Handler.create(this, this.onRenderCell);
+    }
+
+    onRenderCell(cell, index) {
+        if (cell) {
+            let item = cell.getChildByName("item");
+            let image = item.getChildByName("image");
+            image.loadImage("source/building/center.png", Laya.Handler.create(this, function () {
+                
+            }));
+        }
     }
 
     onDisable() {

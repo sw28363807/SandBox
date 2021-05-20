@@ -4,6 +4,7 @@ D source/building
 P 6A2CE112 building1_1.png
 P A40CE787 building1_2.png
 P 233A6581 building1_3.png
+P 8E7B9A93 center.png
 D source/landscape
 P 146133C5 changjinglu.png
 P 8C4606EF food1.png
@@ -36,6 +37,7 @@ P 55920CF2 heart.png
 P 3E08A536 lover.png
 P 7544A170 residentNormal1.png
 P 125EDD5C residentNormal2.png
+P BFCF22A1 sick.png
 P 098A99ED talk.png
 D source/scene
 D source/ui
