@@ -159,7 +159,7 @@ export default class ResidentModel extends Laya.Script {
         this.addFood(ResidentMeta.ResidentReduceFoodBaseValue);
         this.addSocial(ResidentMeta.ResidentReduceSocialBaseValue);
         if (this.getSick() == 1) {
-            if (Math.random() > 0.1) {
+            if (Math.random() > 0.999) {
                 this.setSick(2);
                 EventMgr.getInstance().postEvent(GameEvent.RESIDENT_SICK, this);
             }

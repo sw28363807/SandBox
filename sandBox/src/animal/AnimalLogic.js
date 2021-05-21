@@ -70,6 +70,7 @@ export default class AnimalLogic extends Laya.Script {
         if (this.model.getState() == AnimalMeta.AnimalState.Hurt) {
             return;
         }
+        Laya.timer.once(AnimalMeta.AnimalHurtTime, this, this.onHurtFinish);
         Laya.timer.clear(this, this.onWalkFinish);
         if (this.tweenObject) {
             Laya.Tween.clear(this.tweenObject);
@@ -77,7 +78,6 @@ export default class AnimalLogic extends Laya.Script {
         }
         this.model.setState(AnimalMeta.AnimalState.Hurt);
         this.ani.play(0, true, "hurt1");
-        Laya.timer.once(AnimalMeta.AnimalHurtTime, this, this.onHurtFinish);
     }
 
     onHurtFinish() {

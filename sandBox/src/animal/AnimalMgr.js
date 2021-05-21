@@ -34,7 +34,8 @@ export default class AnimalMgr extends Laya.Script {
         let animal = this.animals[String(animalId)];
         if (animal) {
             animal.destroy(true);
-            delete this.animals[String(animalId)];   
+            delete this.animals[String(animalId)];
+            GameModel.getInstance().removeAnimalModel(animalId); 
         }
     }
 

@@ -88,6 +88,11 @@ export default class GameModel extends Laya.Script {
         return model
     }
 
+    // 移除动物
+    removeAnimalModel(id) {
+        delete this,this.animalModes[String(id)];
+    }
+
     // 获取家信息
     getBuildingModel(id) {
         return this.buildingModels[String(id)];
