@@ -33,6 +33,7 @@ ResidentMeta.ResidentAnim = {
     Walk: 2,    //行走动画
     Enjoy: 3,   //喜悦动画
     Anger: 4,   //愤怒动画
+    Die: 5,     //死亡动画
 };
 
 // 层级
@@ -53,6 +54,9 @@ ResidentMeta.ResidentMoveSpeed = 150;
 // 聊天的时间步长
 ResidentMeta.SocialTimeStep = 1000;
 
+// 死亡需要的时间
+ResidentMeta.DieTime = 2000;
+
 // 属性掉落基础值
 ResidentMeta.ResidentValueStep = 2000;  //人物数值消耗Step
 ResidentMeta.ResidentMakeIdeaStep = 1000;  //人物做决策Step
@@ -60,7 +64,7 @@ ResidentMeta.ResidentReduceWaterBaseValue = -1; //水源减少值
 ResidentMeta.ResidentReduceFoodBaseValue = -1;  //食物减少值
 ResidentMeta.ResidentReduceSocialBaseValue = -1; //社交减少值
 ResidentMeta.ResidentAddSocialBaseValue = 60; //一次社交增加值
-ResidentMeta.ResidentReduceLifeBaseValue = -1; //生命减少值
+ResidentMeta.ResidentReduceLifeBaseValue = -20; //生命减少值
 ResidentMeta.ResidentSocialNeedValue = 30;  //需要社交的警戒线，低于这个值就是需要社交了
 ResidentMeta.ResidentWaterNeedValue = 30;  //需要喝水的警戒线，低于这个值就是需要喝水了
 ResidentMeta.ResidentFoodNeedValue = 30;  //需要吃饭的警戒线，低于这个值就是需要吃饭了

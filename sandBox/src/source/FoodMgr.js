@@ -81,6 +81,7 @@ export default class FoodMgr extends Laya.Script {
             if (foodScript.getModel().getFoodId() == foodId) {
                 food.destroy(true);
                 delete this.foods[key];
+                GameModel.getInstance().removeFoodModelById(foodId);
                 return;
             }
         }

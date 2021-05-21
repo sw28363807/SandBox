@@ -154,6 +154,8 @@ export default class ResidentLogic extends Laya.Script {
                 this.ani.play(0, true, "enjoy_baby");
             } else if (anim == ResidentMeta.ResidentAnim.Anger) {
                 this.ani.play(0, true, "anger_baby");
+            } else if (anim == ResidentMeta.ResidentAnim.Die) {
+                this.ani.play(0, true, "die");
             }
         } else {
             let ext = String(this.model.getSex());
@@ -165,6 +167,8 @@ export default class ResidentLogic extends Laya.Script {
                 this.ani.play(0, true, "enjoy_role1_sex" + ext);
             } else if (anim == ResidentMeta.ResidentAnim.Anger) {
                 this.ani.play(0, true, "anger_role1_sex" + ext);
+            } else if (anim == ResidentMeta.ResidentAnim.Die) {
+                this.ani.play(0, true, "die");
             }
         }
     }
@@ -176,7 +180,11 @@ export default class ResidentLogic extends Laya.Script {
 
     //  设置状态机状态
     refreshFSMState(state, param) {
+        let curState = this.model.getFSMState();
         if (this.model.getFSMState() == state) {
+            return;
+        }
+        if (curState == ResidentMeta.ResidentState.Die) {
             return;
         }
         this.model.setFSMState(state);
@@ -305,7 +313,10 @@ export default class ResidentLogic extends Laya.Script {
         }
         // 死亡
         else if (state == ResidentMeta.ResidentState.Die) {
-            
+            this.setBuffAniVisible(false);
+            this.setStateAniVisible(false);
+            this.setAnim(ResidentMeta.ResidentAnim.Die);
+            Laya.timer.once(ResidentMeta.DieTime, this, this.onDoWorkFinish);
         }
     }
 
@@ -359,6 +370,10 @@ export default class ResidentLogic extends Laya.Script {
                 this.hurtAnimal = null;
                 this.hurtAnimalId = null;
             }
+        }
+        else if (state == ResidentMeta.ResidentState.Die) {
+            this.residentMgrInstance.removeResidentById(this.model.getResidentId());
+            return;
         }
         Laya.timer.clear(this, this.onDoWorkFinish);
         this.refreshFSMState(ResidentMeta.ResidentState.IdleState);

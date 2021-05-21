@@ -1,5 +1,4 @@
 import BuildingMeta from "../meta/BuildingMeta";
-import GameMeta from "../meta/GameMeta";
 import ResidentMeta from "../meta/ResidentMeta";
 import AnimalModel from "./AnimalModel";
 import BuildingModel from "./BuildingModel";
@@ -155,6 +154,11 @@ export default class GameModel extends Laya.Script {
         return model;
     }
 
+    // 移除食物Model
+    removeFoodModelById(id) {
+        delete this.foodModels[String(id)];
+    }
+
     // 设置结婚
     setMarried(man, woman) {
         man.setMarried(2);
@@ -191,6 +195,11 @@ export default class GameModel extends Laya.Script {
         });
         this.residentModels[String(this.maxResidentID)] = model;
         return model;
+    }
+
+    // 移除人物Model
+    removeResientModel(id) {
+        delete this.residentModels[String(id)];
     }
 
     // 人物数值timer

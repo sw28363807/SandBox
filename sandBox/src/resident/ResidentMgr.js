@@ -71,6 +71,16 @@ export default class ResidentMgr extends Laya.Script {
         }
     }
 
+    // 移除居民
+    removeResidentById(id) {
+        let resident = this.residents[String(id)];
+        if (resident) {
+            delete this.residents[String(id)];
+            resident.destroy(true);
+            GameModel.getInstance().removeResientModel(id);
+        }
+    }
+
     // 获得一个清闲或者没事干的人
     getACanSocialResident(x, y) {
         let idles = [];
