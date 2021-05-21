@@ -32,6 +32,9 @@ export default class ResidentLogic extends Laya.Script {
     onEnable() {
         EventMgr.getInstance().registEvent(GameEvent.CREATE_HOME_FINISH, this, this.onDoWorkFinish);
         EventMgr.getInstance().registEvent(GameEvent.HUNT_FINISH, this, this.onDoWorkFinish);
+        EventMgr.getInstance().registEvent(GameEvent.RESIDENT_SICK, this, this.onSick);
+        EventMgr.getInstance().registEvent(GameEvent.RESIDENT_DIE, this, this.onDie);
+        
 
         this.initModel();
         this.initControl();
@@ -43,6 +46,8 @@ export default class ResidentLogic extends Laya.Script {
         this.stopGoto();
         EventMgr.getInstance().removeEvent(GameEvent.CREATE_HOME_FINISH, this, this.onDoWorkFinish);
         EventMgr.getInstance().removeEvent(GameEvent.HUNT_FINISH, this, this.onDoWorkFinish);
+        EventMgr.getInstance().removeEvent(GameEvent.RESIDENT_SICK, this, this.onSick);
+        EventMgr.getInstance().removeEvent(GameEvent.RESIDENT_DIE, this, this.onDie);
         Laya.timer.clear(this, this.onDoWorkFinish);
     }
 
@@ -53,6 +58,29 @@ export default class ResidentLogic extends Laya.Script {
         this.buffAni = this.owner.getChildByName("buff");
         this.setStateAniVisible(false);
         this.setBuffAniVisible(false);
+    }
+
+    onDie(residentModel) {
+        if (this.model.getResidentId() != residentModel.getResidentId()) {
+            return;
+        }
+        this.refreshFSMState(ResidentMeta.ResidentState.Die);
+    }
+
+    // 生病回调
+    onSick(residentModel) {
+        if (this.model.getResidentId() != residentModel.getResidentId()) {
+            return;
+        }
+        let sick = residentModel.getSick();
+        // 生病
+        if (sick == 2) {
+            this.setBuffAni("sickAni");
+            this.setBuffAniVisible(true);
+        } else {
+            this.stopBuffAni();
+            this.setBuffAniVisible(false);
+        }
     }
 
     setBuffAni(aniName) {
@@ -274,6 +302,10 @@ export default class ResidentLogic extends Laya.Script {
                 this.setStateAni("ani7");
                 this.setAnim(ResidentMeta.ResidentAnim.Anger);   
             }
+        }
+        // 死亡
+        else if (state == ResidentMeta.ResidentState.Die) {
+            
         }
     }
 

@@ -23,6 +23,7 @@ ResidentMeta.ResidentState = {
     TalkingAbout: 17,         //聊天
     JoinHunt: 18,             //赶去打猎
     Hunting: 19,              //打猎
+    Die: 20,                  //死亡
 };
 
 // 动画枚举
@@ -59,6 +60,7 @@ ResidentMeta.ResidentReduceWaterBaseValue = -1; //水源减少值
 ResidentMeta.ResidentReduceFoodBaseValue = -1;  //食物减少值
 ResidentMeta.ResidentReduceSocialBaseValue = -1; //社交减少值
 ResidentMeta.ResidentAddSocialBaseValue = 60; //一次社交增加值
+ResidentMeta.ResidentReduceLifeBaseValue = -1; //生命减少值
 ResidentMeta.ResidentSocialNeedValue = 30;  //需要社交的警戒线，低于这个值就是需要社交了
 ResidentMeta.ResidentWaterNeedValue = 30;  //需要喝水的警戒线，低于这个值就是需要喝水了
 ResidentMeta.ResidentFoodNeedValue = 30;  //需要吃饭的警戒线，低于这个值就是需要吃饭了

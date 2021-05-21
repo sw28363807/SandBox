@@ -1,4 +1,6 @@
+import EventMgr from "../helper/EventMgr";
 import RandomMgr from "../helper/RandomMgr";
+import GameEvent from "../meta/GameEvent";
 import NameMeta from "../meta/NameMeta";
 import ResidentMeta from "../meta/ResidentMeta";
 
@@ -150,16 +152,25 @@ export default class ResidentModel extends Laya.Script {
 
     // 下降需求和上升满足
     onStep() {
+        // if (this.curFSMState == ResidentMeta.ResidentState.) {
+            
+        // }
         this.addWater(ResidentMeta.ResidentReduceWaterBaseValue);
         this.addFood(ResidentMeta.ResidentReduceFoodBaseValue);
         this.addSocial(ResidentMeta.ResidentReduceSocialBaseValue);
-
-        if (Math.random() > 0.99) {
-            if (this.getSick() == 1) {
+        if (this.getSick() == 1) {
+            if (Math.random() > 0.1) {
                 this.setSick(2);
+                EventMgr.getInstance().postEvent(GameEvent.RESIDENT_SICK, this);
             }
         }
-        
+
+        if (this.getSick() == 2) {
+            this.addLife(ResidentMeta.ResidentReduceLifeBaseValue);
+            if (this.getLife() <= 0) {
+                EventMgr.getInstance().postEvent(GameEvent.RESIDENT_DIE, this);
+            }
+        }
     }
 
     addSocial(delta) {
@@ -177,6 +188,27 @@ export default class ResidentModel extends Laya.Script {
 
     getSocial() {
         return this.social;
+    }
+
+
+    // 获得生命值
+    getLife() {
+        return this.life;
+    }
+
+    //增加生命值
+    addLife(delta) {
+        this.setLife(this.getLife() + delta);
+    }
+
+    //设置生命值
+    setLife(num) {
+        this.life = num;
+        if (this.life < 0) {
+            this.life = 0;
+        } else if (this.life > 100) {
+            this.life = 100;  
+        }
     }
 
     // 获得食物

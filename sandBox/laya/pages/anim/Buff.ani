@@ -22,84 +22,6 @@
             "isDirectory":false,
             "isAniNode":true,
             "hasChild":false,
-            "compId":3,
-            "child":[
-                ]
-        },
-        {
-            "type":"GraphicNode",
-            "searchKey":"GraphicNode",
-            "props":{},
-            "nodeParent":2,
-            "label":"GraphicNode",
-            "isDirectory":false,
-            "isAniNode":true,
-            "hasChild":false,
-            "compId":4,
-            "child":[
-                ]
-        },
-        {
-            "type":"GraphicNode",
-            "searchKey":"GraphicNode",
-            "props":{},
-            "nodeParent":2,
-            "label":"GraphicNode",
-            "isDirectory":false,
-            "isAniNode":true,
-            "hasChild":false,
-            "compId":5,
-            "child":[
-                ]
-        },
-        {
-            "type":"GraphicNode",
-            "searchKey":"GraphicNode",
-            "props":{},
-            "nodeParent":2,
-            "label":"GraphicNode",
-            "isDirectory":false,
-            "isAniNode":true,
-            "hasChild":false,
-            "compId":6,
-            "child":[
-                ]
-        },
-        {
-            "type":"GraphicNode",
-            "searchKey":"GraphicNode",
-            "props":{},
-            "nodeParent":2,
-            "label":"GraphicNode",
-            "isDirectory":false,
-            "isAniNode":true,
-            "hasChild":false,
-            "compId":7,
-            "child":[
-                ]
-        },
-        {
-            "type":"GraphicNode",
-            "searchKey":"GraphicNode",
-            "props":{},
-            "nodeParent":2,
-            "label":"GraphicNode",
-            "isDirectory":false,
-            "isAniNode":true,
-            "hasChild":false,
-            "compId":8,
-            "child":[
-                ]
-        },
-        {
-            "type":"GraphicNode",
-            "searchKey":"GraphicNode",
-            "props":{},
-            "nodeParent":2,
-            "label":"GraphicNode",
-            "isDirectory":false,
-            "isAniNode":true,
-            "hasChild":false,
             "compId":9,
             "child":[
                 ]
@@ -107,42 +29,6 @@
     "animations":[
         {
             "nodes":[
-                {
-                    "target":3,
-                    "keyframes":{
-
-                    }
-                },
-                {
-                    "target":4,
-                    "keyframes":{
-
-                    }
-                },
-                {
-                    "target":5,
-                    "keyframes":{
-
-                    }
-                },
-                {
-                    "target":6,
-                    "keyframes":{
-
-                    }
-                },
-                {
-                    "target":7,
-                    "keyframes":{
-
-                    }
-                },
-                {
-                    "target":8,
-                    "keyframes":{
-
-                    }
-                },
                 {
                     "target":9,
                     "keyframes":{
