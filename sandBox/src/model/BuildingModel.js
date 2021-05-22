@@ -12,6 +12,11 @@ export default class BuildingModel extends Laya.Script {
         this.buildingState = BuildingMeta.BuildingState.NullState;  //建筑状态
     }
 
+    // 获得建筑类型
+    getBuildingType() {
+        return this.buildingType;
+    }
+
     getBuildingId() {
         return this.buildingId
     }
@@ -22,7 +27,7 @@ export default class BuildingModel extends Laya.Script {
     }
 
     //获取建筑状态
-    getBuidlingState() {
+    getBuildingState() {
         return this.buildingState;
     }
 

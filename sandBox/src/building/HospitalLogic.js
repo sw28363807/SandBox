@@ -1,10 +1,11 @@
 import EventMgr from "../helper/EventMgr";
 import BuildingMeta from "../meta/BuildingMeta";
 import GameEvent from "../meta/GameEvent";
-export default class HomeLogic extends Laya.Script {
+
+export default class HospitalLogic extends Laya.Script {
 
     constructor() { 
-        super();
+        super(); 
     }
     
     onEnable() {
@@ -17,7 +18,6 @@ export default class HomeLogic extends Laya.Script {
     }
 
     onDisable() {
-        Laya.timer.clear(this, this.onMakeLove);
         Laya.timer.clear(this, this.onCreateProgress);
     }
 
@@ -25,31 +25,25 @@ export default class HomeLogic extends Laya.Script {
         this.model = model;
         this.owner.x = model.getX();
         this.owner.y = model.getY();
-        this.startCreate();
+        this.setPreCreate();
     }
 
-    // 开始生孩子
-    startMakeLove(handler) {
-        this.makeLoveHandler = handler;
-        this.ani.play(0, true, "makelove");
-        Laya.timer.once(5000, this, this.onMakeLove);
-    }
-
-    onMakeLove() {
-        if (this.makeLoveHandler) {
-            this.makeLoveHandler.run();
-            this.makeLoveHandler = null;
-            this.ani.play(0, true, "idle");
-            Laya.timer.clear(this, this.onMakeLove);
-        }
+    // 准备建造
+    setPreCreate() {
+        this.ani.play(0, true, "precreate");
+        this.sliderControl.visible = true;
+        this.slider.width = 1;
     }
 
     // 开始建造
     startCreate() {
-        this.ani.play(0, true, "creating");
-        this.sliderControl.visible = true;
-        this.slider.width = 1;
-        Laya.timer.loop(BuildingMeta.HomeCreatingStep, this, this.onCreateProgress);
+        if (this.model.getBuildingState() == BuildingMeta.BuildingState.PreCreating) {
+            this.model.setBuildingState(BuildingMeta.BuildingState.Creating);
+            this.ani.play(0, true, "creating");
+            this.sliderControl.visible = true;
+            this.slider.width = 1;
+            Laya.timer.loop(BuildingMeta.HomeCreatingStep, this, this.onCreateProgress);
+        }
     }
 
     onCreateProgress() {
@@ -65,6 +59,6 @@ export default class HomeLogic extends Laya.Script {
         this.sliderControl.visible = false;
         Laya.timer.clear(this, this.onCreateProgress);
         this.model.setBuildingState(BuildingMeta.BuildingState.Noraml);
-        EventMgr.getInstance().postEvent(GameEvent.CREATE_HOME_FINISH, {model: this.model});
+        EventMgr.getInstance().postEvent(GameEvent.CREATE_HOSPITAL_FINISH, {model: this.model});
     }
 }

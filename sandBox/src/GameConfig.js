@@ -11,6 +11,7 @@ import CommandPanel from "./panel/CommandPanel"
 import AnimalLogic from "./animal/AnimalLogic"
 import FoodLogic from "./source/FoodLogic"
 import HomeLogic from "./building/HomeLogic"
+import HospitalLogic from "./building/HospitalLogic"
 import ResidentLogic from "./resident/ResidentLogic"
 import ResidentDetailsPanel from "./panel/ResidentDetailsPanel"
 
@@ -30,6 +31,7 @@ export default class GameConfig {
 		reg("animal/AnimalLogic.js",AnimalLogic);
 		reg("source/FoodLogic.js",FoodLogic);
 		reg("building/HomeLogic.js",HomeLogic);
+		reg("building/HospitalLogic.js",HospitalLogic);
 		reg("resident/ResidentLogic.js",ResidentLogic);
 		reg("panel/ResidentDetailsPanel.js",ResidentDetailsPanel);
     }

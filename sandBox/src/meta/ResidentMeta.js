@@ -24,6 +24,10 @@ ResidentMeta.ResidentState = {
     JoinHunt: 18,             //赶去打猎
     Hunting: 19,              //打猎
     Die: 20,                  //死亡
+    GotoContinueCreateHospital: 21, //跑去建造医院
+    CreateHospital: 22,     //建造医院
+    GotoTreat: 23,          //跑去治疗
+    Treating: 24,           //正在治疗
 };
 
 // 动画枚举
@@ -59,18 +63,21 @@ ResidentMeta.DieTime = 2000;
 
 // 属性掉落基础值
 ResidentMeta.ResidentValueStep = 2000;  //人物数值消耗Step
-ResidentMeta.ResidentMakeIdeaStep = 1000;  //人物做决策Step
+ResidentMeta.ResidentMakeIdeaStep = 2000;  //人物做决策Step
 ResidentMeta.ResidentReduceWaterBaseValue = -1; //水源减少值
 ResidentMeta.ResidentReduceFoodBaseValue = -1;  //食物减少值
 ResidentMeta.ResidentReduceSocialBaseValue = -1; //社交减少值
 ResidentMeta.ResidentAddSocialBaseValue = 60; //一次社交增加值
-ResidentMeta.ResidentReduceLifeBaseValue = -20; //生命减少值
+ResidentMeta.ResidentReduceLifeBaseValue = -0.5; //生命减少值
+ResidentMeta.ResidentSickProbability = 0.5; //生病的概率
+ResidentMeta.ResidentTreatTime = 5000; //治疗的时间
 ResidentMeta.ResidentSocialNeedValue = 30;  //需要社交的警戒线，低于这个值就是需要社交了
-ResidentMeta.ResidentWaterNeedValue = 30;  //需要喝水的警戒线，低于这个值就是需要喝水了
+ResidentMeta.ResidentWaterNeedValue = 100;  //需要喝水的警戒线，低于这个值就是需要喝水了
 ResidentMeta.ResidentFoodNeedValue = 30;  //需要吃饭的警戒线，低于这个值就是需要吃饭了
 ResidentMeta.ResidentSocialArea = 300;      //寻找可以社交的人的范围
 ResidentMeta.ResidentAddTreeBaseValue = 1;  //人物砍树增加的数值
 ResidentMeta.ResidentAddStoneBaseValue = 1;  //人物收集石头增加的数值
 ResidentMeta.ResidentFindPathTimes = 5;      //人物寻路的次数
 ResidentMeta.ResidentAdultAge = 15;         //成年的年纪
+ResidentMeta.ResidentMarryAge = 0;         //结婚的法定年纪
 

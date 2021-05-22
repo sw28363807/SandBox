@@ -5,7 +5,7 @@ import NameMeta from "../meta/NameMeta";
 import ResidentMeta from "../meta/ResidentMeta";
 
 export default class ResidentModel extends Laya.Script {
-    constructor() { 
+    constructor() {
         super();
         // 面上的数值
         this.life = 100;    //生命
@@ -153,13 +153,13 @@ export default class ResidentModel extends Laya.Script {
     // 下降需求和上升满足
     onStep() {
         // if (this.curFSMState == ResidentMeta.ResidentState.) {
-            
+
         // }
         this.addWater(ResidentMeta.ResidentReduceWaterBaseValue);
         this.addFood(ResidentMeta.ResidentReduceFoodBaseValue);
         this.addSocial(ResidentMeta.ResidentReduceSocialBaseValue);
         if (this.getSick() == 1) {
-            if (Math.random() > 0.999) {
+            if (Math.random() > ResidentMeta.ResidentSickProbability) {
                 this.setSick(2);
                 EventMgr.getInstance().postEvent(GameEvent.RESIDENT_SICK, this);
             }
@@ -171,6 +171,29 @@ export default class ResidentModel extends Laya.Script {
                 EventMgr.getInstance().postEvent(GameEvent.RESIDENT_DIE, this);
             }
         }
+    }
+
+    // 能够要求结婚（主动）
+    canAskMarry() {
+        if (this.getMarried() == 1 &&
+            this.getAge() >= ResidentMeta.ResidentMarryAge &&
+            this.getSex() == 1 &&
+            this.getMyHomeId() != 0 && 
+            this.getFSMState() == ResidentMeta.ResidentState.IdleState) {
+            return true;
+        }
+        return false;
+    }
+
+    // 能够结婚（被动）
+    canMarry() {
+        if (this.getAge() > ResidentMeta.ResidentMarryAge &&
+         this.getMarried() == 1 &&
+          this.getFSMState() == ResidentMeta.ResidentState.IdleState &&
+           this.getSex() == 2) {
+            return true;
+        }
+        return false;
     }
 
     addSocial(delta) {
@@ -207,7 +230,7 @@ export default class ResidentModel extends Laya.Script {
         if (this.life < 0) {
             this.life = 0;
         } else if (this.life > 100) {
-            this.life = 100;  
+            this.life = 100;
         }
     }
 
@@ -226,7 +249,7 @@ export default class ResidentModel extends Laya.Script {
         if (this.food < 0) {
             this.food = 0;
         } else if (this.food > 100) {
-            this.food = 100;  
+            this.food = 100;
         }
     }
 
@@ -241,10 +264,10 @@ export default class ResidentModel extends Laya.Script {
         if (this.water < 0) {
             this.water = 0;
         } else if (this.water > 100) {
-            this.water = 100;  
+            this.water = 100;
         }
     }
-    
+
     // 获得水源
     getWater() {
         return this.water;

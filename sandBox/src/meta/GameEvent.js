@@ -5,6 +5,8 @@ export default class GameEvent{
 GameEvent.REFRESH_RESOURCE_PANEL = "REFRESH_RESOURCE_PANEL";
 // 建造家园完成
 GameEvent.CREATE_HOME_FINISH = "CREATE_HOME_FINISH";
+// 建造医院完成
+GameEvent.CREATE_HOSPITAL_FINISH = "CREATE_HOSPITAL_FINISH";
 // 打猎完成
 GameEvent.HUNT_FINISH = "HUNT_FINISH";
 // 生病

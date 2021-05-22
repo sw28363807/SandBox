@@ -145,6 +145,21 @@ export default class GameModel extends Laya.Script {
         return model;
     }
 
+    // 添加医院Model
+    newHospitalModel(param) {
+        this.maxBuildingID++;
+        let model = new BuildingModel();
+        model.updateData({
+            x: param.x,
+            y: param.y,
+            buildingId: this.maxBuildingID,
+            buildingType: BuildingMeta.BuildingType.HospitalType,
+            buildingState: BuildingMeta.BuildingState.PreCreating,
+        });
+        this.buildingModels[String(this.maxBuildingID)] = model;
+        return model;
+    }
+
     // 添加食物Model
     newFoodModel(param) {
         this.maxFoodID++;
@@ -172,21 +187,7 @@ export default class GameModel extends Laya.Script {
         woman.setLoverId(man.getResidentId());
         woman.setMyHomeId(man.getMyHomeId());
     }
-
-    // 获得一个可以结婚的女性Model
-    getCanMarriedFemaleNModel() {
-        for (let key in this.residentModels) {
-            let model = this.residentModels[key];
-            if (model.getAge() > 0 &&
-                model.getMarried() == 1 &&
-                model.getFSMState() == ResidentMeta.ResidentState.IdleState &&
-                model.getSex() == 2) {
-                return model;
-            }
-        }
-        return null;
-    }
-
+    
     // 添加角色Model
     newResidentModel(param) {
         this.maxResidentID++;

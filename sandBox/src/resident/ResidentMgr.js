@@ -34,7 +34,7 @@ export default class ResidentMgr extends Laya.Script {
         for (let key in this.residents) {
             let resident = this.residents[key];
             let script = resident.getComponent(ResidentLogic);
-            if (RandomMgr.randomYes()) {
+            if (RandomMgr.randomYes(0.2)) {
                 script.makeIdea();
             }
         }
@@ -104,6 +104,19 @@ export default class ResidentMgr extends Laya.Script {
         }
         if (idles.length != 0) {
             return idles[0];
+        }
+        return null;
+    }
+
+    // 获得一个可以结婚的女性
+    getCanMarryWoman() {
+        for (const key in this.residents) {
+            let item = this.residents[key];
+            let script = item.getComponent(ResidentLogic);
+            let model = script.getModel();
+            if (model.canMarry()) {
+                return item;
+            }
         }
         return null;
     }
