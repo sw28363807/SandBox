@@ -499,7 +499,7 @@ export default class ResidentLogic extends Laya.Script {
         let woman = this.residentMgrInstance.getResidentById(womanId);
         if (woman) {
             this.gotoDest({
-                x: woman.x,
+                x: woman.x + woman.width,
                 y: woman.y,
             }, Laya.Handler.create(this, function () {
                 this.refreshFSMState(ResidentMeta.ResidentState.LoverGoHomeMakeLove);

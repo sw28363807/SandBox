@@ -14,6 +14,7 @@ import HomeLogic from "./building/HomeLogic"
 import HospitalLogic from "./building/HospitalLogic"
 import ResidentLogic from "./resident/ResidentLogic"
 import ResidentDetailsPanel from "./panel/ResidentDetailsPanel"
+import SchoolLogic from "./building/SchoolLogic"
 
 export default class GameConfig {
     static init() {
@@ -34,6 +35,7 @@ export default class GameConfig {
 		reg("building/HospitalLogic.js",HospitalLogic);
 		reg("resident/ResidentLogic.js",ResidentLogic);
 		reg("panel/ResidentDetailsPanel.js",ResidentDetailsPanel);
+		reg("building/SchoolLogic.js",SchoolLogic);
     }
 }
 GameConfig.width = 1336;

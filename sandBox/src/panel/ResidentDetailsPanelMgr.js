@@ -45,7 +45,7 @@ export default class ResidentDetailsPanelMgr extends Laya.Script {
         if (this.curPanel) {
             Laya.timer.clear(this, this.fadeOutFunc);
             this.curPanel.removeSelf();
-            this.curPanel.destroy();
+            this.curPanel.destroy(true);
             this.curPanel = null;
         }
     }
