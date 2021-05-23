@@ -32,7 +32,6 @@ ResidentMeta.ResidentState = {
     CreateSchool: 26,     //建造学校
     GoToSchool: 27,         //去上学的路上
     Learning: 28,           //正在学习
-
 };
 
 // 动画枚举
@@ -76,6 +75,7 @@ ResidentMeta.ResidentAddSocialBaseValue = 60; //一次社交增加值
 ResidentMeta.ResidentReduceLifeBaseValue = -0.5; //生命减少值
 ResidentMeta.ResidentSickProbability = 0.5; //生病的概率
 ResidentMeta.ResidentTreatTime = 5000; //治疗的时间
+ResidentMeta.ResidentLearnTime = 5000; //学习的时间
 ResidentMeta.ResidentSocialNeedValue = 30;  //需要社交的警戒线，低于这个值就是需要社交了
 ResidentMeta.ResidentWaterNeedValue = 100;  //需要喝水的警戒线，低于这个值就是需要喝水了
 ResidentMeta.ResidentFoodNeedValue = 30;  //需要吃饭的警戒线，低于这个值就是需要吃饭了

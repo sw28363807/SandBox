@@ -378,8 +378,20 @@ export default class ResidentLogic extends Laya.Script {
                 this.setStateAniVisible(true);
                 this.setStateAni("ani2");
                 let script = this.willCreateSchool.building.getComponent(SchoolLogic);
-                script.startCreate();                
+                script.startCreate();
             }
+        }
+        // 跑去学校
+        else if (state == ResidentMeta.ResidentState.GoToSchool) {
+            let school = param;
+            this.setAnim(ResidentMeta.ResidentAnim.Walk);
+            this.startGotoSchoolForLearn(school);
+        }
+        // 学习
+        else if (state == ResidentMeta.ResidentState.Learning) {
+            this.model.addTeach(100);
+            this.setVisible(false);
+            Laya.timer.once(ResidentMeta.ResidentLearnTime, this, this.onDoWorkFinish);
         }
     }
 
@@ -457,13 +469,28 @@ export default class ResidentLogic extends Laya.Script {
         else if (state == ResidentMeta.ResidentState.CreateHome) {
             // todo 此处要判断是不是我自己在建造的完成了，不能所有人都建造完
         }
+        // 治疗完成
         else if (state == ResidentMeta.ResidentState.Treating) {
             this.model.setSick(1);
             this.setBuffAniVisible(false);
             this.stopBuffAni();
         }
+        // 学习完成
+        else if (state == ResidentMeta.ResidentState.Learning) {
+            this.model.setSick(1);
+        }
         Laya.timer.clear(this, this.onDoWorkFinish);
         this.refreshFSMState(ResidentMeta.ResidentState.IdleState);
+    }
+
+    // 跑去学校
+    startGotoSchoolForLearn(school) {
+        this.gotoDest({
+            x: school.x + school.width / 2 - this.owner.width / 2,
+            y: school.y + school.height - this.owner.height,
+        }, Laya.Handler.create(this, function () {
+            this.refreshFSMState(ResidentMeta.ResidentState.Learning, school);
+        }));
     }
 
     // 跑去医院准备治疗
@@ -561,7 +588,7 @@ export default class ResidentLogic extends Laya.Script {
         let myHome = BuildingMgr.getInstance().getBuildingById(this.model.getMyHomeId());
         if (myHome) {
             this.gotoDest({
-                x: myHome.x + BuildingMeta.HomeWidth/2 - this.owner.width/2,
+                x: myHome.x + BuildingMeta.HomeWidth / 2 - this.owner.width / 2,
                 y: myHome.y + BuildingMeta.HomeHeight - this.owner.height,
             }, Laya.Handler.create(this, function () {
                 this.refreshFSMState(ResidentMeta.ResidentState.LoverMakeLove);
@@ -724,7 +751,8 @@ export default class ResidentLogic extends Laya.Script {
         }
 
         // 跑去上课
-        if (RandomMgr.randomYes()) {
+        console.debug(this.model.getTeach());
+        if (RandomMgr.randomYes() && this.model.getTeach() < 50) {
             let building = BuildingMgr.getInstance().getNearstBuilding(this.owner.x,
                 this.owner.y, BuildingMeta.BuildingType.SchoolType,
                 1000, BuildingMeta.BuildingState.Noraml);
@@ -733,7 +761,7 @@ export default class ResidentLogic extends Laya.Script {
                 return;
             }
         }
-  
+
         // 跑去治病
         // if (this.model.getSick() == 2) {
         //     let building = BuildingMgr.getInstance().getNearstBuilding(this.owner.x,

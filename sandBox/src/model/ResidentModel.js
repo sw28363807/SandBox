@@ -157,7 +157,6 @@ export default class ResidentModel extends Laya.Script {
         // }
         this.addWater(ResidentMeta.ResidentReduceWaterBaseValue);
         this.addFood(ResidentMeta.ResidentReduceFoodBaseValue);
-        this.addSocial(ResidentMeta.ResidentReduceSocialBaseValue);
         if (this.getSick() == 1) {
             if (Math.random() > ResidentMeta.ResidentSickProbability) {
                 this.setSick(2);
@@ -206,6 +205,23 @@ export default class ResidentModel extends Laya.Script {
             this.social = 0;
         } else if (this.social > 100) {
             this.social = 100;
+        }
+    }
+
+    getTeach() {
+        return this.teach;
+    }
+
+    addTeach(delta) {
+        this.setTeach(this.getTeach() + delta);
+    }
+
+    setTeach(num) {
+        this.teach = num;
+        if (this.teach < 0) {
+            this.teach = 0;
+        } else if (this.teach > 100) {
+            this.teach = 100;
         }
     }
 
