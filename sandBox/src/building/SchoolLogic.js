@@ -20,6 +20,10 @@ export default class SchoolLogic extends Laya.Script {
         Laya.timer.clear(this, this.onCreateProgress);
     }
 
+    getModel() {
+        return this.model;
+    }
+
     refreshByModel(model) {
         this.model = model;
         this.owner.x = model.getX();
@@ -58,6 +62,6 @@ export default class SchoolLogic extends Laya.Script {
         this.sliderControl.visible = false;
         Laya.timer.clear(this, this.onCreateProgress);
         this.model.setBuildingState(BuildingMeta.BuildingState.Noraml);
-        // EventMgr.getInstance().postEvent(GameEvent.CREATE_HOSPITAL_FINISH, {model: this.model});
+        EventMgr.getInstance().postEvent(GameEvent.CREATE_SCHOOL_FINISH, {model: this.model});
     }
 }

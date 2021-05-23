@@ -28,6 +28,11 @@ ResidentMeta.ResidentState = {
     CreateHospital: 22,     //建造医院
     GotoTreat: 23,          //跑去治疗
     Treating: 24,           //正在治疗
+    GotoContinueCreateSchool: 25, //跑去建造学校
+    CreateSchool: 26,     //建造学校
+    GoToSchool: 27,         //去上学的路上
+    Learning: 28,           //正在学习
+
 };
 
 // 动画枚举

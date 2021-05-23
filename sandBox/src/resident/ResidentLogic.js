@@ -17,6 +17,7 @@ import HomeLogic from "../building/HomeLogic";
 import AnimalMgr from "../animal/AnimalMgr";
 import AnimalLogic from "../animal/AnimalLogic";
 import HospitalLogic from "../building/HospitalLogic";
+import SchoolLogic from "../building/SchoolLogic";
 
 export default class ResidentLogic extends Laya.Script {
 
@@ -48,6 +49,7 @@ export default class ResidentLogic extends Laya.Script {
     rigsterAllEvents() {
         EventMgr.getInstance().registEvent(GameEvent.CREATE_HOME_FINISH, this, this.onDoWorkFinish);
         EventMgr.getInstance().registEvent(GameEvent.CREATE_HOSPITAL_FINISH, this, this.onDoWorkFinish);
+        EventMgr.getInstance().registEvent(GameEvent.CREATE_SCHOOL_FINISH, this, this.onDoWorkFinish);
         EventMgr.getInstance().registEvent(GameEvent.HUNT_FINISH, this, this.onDoWorkFinish);
         EventMgr.getInstance().registEvent(GameEvent.RESIDENT_SICK, this, this.onSick);
         EventMgr.getInstance().registEvent(GameEvent.RESIDENT_DIE, this, this.onDie);
@@ -56,6 +58,7 @@ export default class ResidentLogic extends Laya.Script {
     removeAllEvents() {
         EventMgr.getInstance().removeEvent(GameEvent.CREATE_HOME_FINISH, this, this.onDoWorkFinish);
         EventMgr.getInstance().removeEvent(GameEvent.CREATE_HOSPITAL_FINISH, this, this.onDoWorkFinish);
+        EventMgr.getInstance().removeEvent(GameEvent.CREATE_SCHOOL_FINISH, this, this.onDoWorkFinish);
         EventMgr.getInstance().removeEvent(GameEvent.HUNT_FINISH, this, this.onDoWorkFinish);
         EventMgr.getInstance().removeEvent(GameEvent.RESIDENT_SICK, this, this.onSick);
         EventMgr.getInstance().removeEvent(GameEvent.RESIDENT_DIE, this, this.onDie);
@@ -336,18 +339,19 @@ export default class ResidentLogic extends Laya.Script {
         }
         // 跑去建造医院
         else if (state == ResidentMeta.ResidentState.GotoContinueCreateHospital) {
-            let hospital = param;
+            this.willCreateHospital = param;
             this.setAnim(ResidentMeta.ResidentAnim.Walk);
-            this.startGoToContinueCreateHospital(hospital);
+            this.startGoToContinueCreateHospital(this.willCreateHospital);
         }
         // 建造医院
         else if (state == ResidentMeta.ResidentState.CreateHospital) {
-            let hospital = param;
-            this.setAnim(ResidentMeta.ResidentAnim.Idle);
-            this.setStateAniVisible(true);
-            this.setStateAni("ani2");
-            let script = hospital.building.getComponent(HospitalLogic);
-            script.startCreate();
+            if (this.willCreateHospital) {
+                this.setAnim(ResidentMeta.ResidentAnim.Idle);
+                this.setStateAniVisible(true);
+                this.setStateAni("ani2");
+                let script = this.willCreateSchool.building.getComponent(HospitalLogic);
+                script.startCreate();
+            }
         }
         // 去治疗
         else if (state == ResidentMeta.ResidentState.GotoTreat) {
@@ -361,13 +365,28 @@ export default class ResidentLogic extends Laya.Script {
             this.setVisible(false);
             Laya.timer.once(ResidentMeta.ResidentTreatTime, this, this.onDoWorkFinish);
         }
-
+        // 跑去建造学校
+        else if (state == ResidentMeta.ResidentState.GotoContinueCreateSchool) {
+            this.willCreateSchool = param;
+            this.setAnim(ResidentMeta.ResidentAnim.Walk);
+            this.startGoToContinueCreateSchool(this.willCreateSchool);
+        }
+        // 建造学校
+        else if (state == ResidentMeta.ResidentState.CreateSchool) {
+            if (this.willCreateSchool) {
+                this.setAnim(ResidentMeta.ResidentAnim.Idle);
+                this.setStateAniVisible(true);
+                this.setStateAni("ani2");
+                let script = this.willCreateSchool.building.getComponent(SchoolLogic);
+                script.startCreate();                
+            }
+        }
     }
 
     // 工作完成
     onDoWorkFinish(param) {
         // 吃食物完成
-        let state = this.model.getFSMState()
+        let state = this.model.getFSMState();
         if (state == ResidentMeta.ResidentState.EatFood) {
             let script = this.curEatingFood.getComponent(FoodLogic);
             let foodModel = script.getModel();
@@ -420,7 +439,23 @@ export default class ResidentLogic extends Laya.Script {
             return;
         }
         else if (state == ResidentMeta.ResidentState.CreateHospital) {
-
+            // todo 此处要判断是不是我自己在建造的完成了，不能所有人都建造完
+            let script = this.willCreateHospital.building.getComponent(HospitalLogic);
+            if (!script || script.getModel() != param.model) {
+                return;
+            }
+            this.willCreateHospital = null;
+        }
+        else if (state == ResidentMeta.ResidentState.CreateSchool) {
+            // todo 此处要判断是不是我自己在建造的完成了，不能所有人都建造完
+            let script = this.willCreateSchool.building.getComponent(SchoolLogic);
+            if (!script || script.getModel() != param.model) {
+                return;
+            }
+            this.willCreateSchool = null;
+        }
+        else if (state == ResidentMeta.ResidentState.CreateHome) {
+            // todo 此处要判断是不是我自己在建造的完成了，不能所有人都建造完
         }
         else if (state == ResidentMeta.ResidentState.Treating) {
             this.model.setSick(1);
@@ -448,6 +483,16 @@ export default class ResidentLogic extends Laya.Script {
             y: hospital.y + hospital.height - this.owner.height,
         }, Laya.Handler.create(this, function () {
             this.refreshFSMState(ResidentMeta.ResidentState.CreateHospital, hospital);
+        }));
+    }
+
+    // 跑去未建成的学校周围
+    startGoToContinueCreateSchool(school) {
+        this.gotoDest({
+            x: school.x + school.width / 2 - this.owner.width / 2,
+            y: school.y + school.height - this.owner.height,
+        }, Laya.Handler.create(this, function () {
+            this.refreshFSMState(ResidentMeta.ResidentState.CreateSchool, school);
         }));
     }
 
@@ -667,6 +712,29 @@ export default class ResidentLogic extends Laya.Script {
             return;
         }
 
+        // 赶着去建造学校
+        if (RandomMgr.randomYes()) {
+            let building = BuildingMgr.getInstance().getNearstBuilding(this.owner.x,
+                this.owner.y, BuildingMeta.BuildingType.SchoolType,
+                500, BuildingMeta.BuildingState.PreCreating);
+            if (building) {
+                this.refreshFSMState(ResidentMeta.ResidentState.GotoContinueCreateSchool, building);
+                return;
+            }
+        }
+
+        // 跑去上课
+        if (RandomMgr.randomYes()) {
+            let building = BuildingMgr.getInstance().getNearstBuilding(this.owner.x,
+                this.owner.y, BuildingMeta.BuildingType.SchoolType,
+                1000, BuildingMeta.BuildingState.Noraml);
+            if (building) {
+                this.refreshFSMState(ResidentMeta.ResidentState.GoToSchool, building);
+                return;
+            }
+        }
+  
+        // 跑去治病
         // if (this.model.getSick() == 2) {
         //     let building = BuildingMgr.getInstance().getNearstBuilding(this.owner.x,
         //         this.owner.y, BuildingMeta.BuildingType.HospitalType,
@@ -677,11 +745,11 @@ export default class ResidentLogic extends Laya.Script {
         //     }
         // }
 
+        // 赶着去建造医院
         // if (RandomMgr.randomYes()) {
         //     let building = BuildingMgr.getInstance().getNearstBuilding(this.owner.x,
         //         this.owner.y, BuildingMeta.BuildingType.HospitalType,
         //         500, BuildingMeta.BuildingState.PreCreating);
-        //         console.debug(building);
         //     if (building) {
         //         this.refreshFSMState(ResidentMeta.ResidentState.GotoContinueCreateHospital, building);
         //         return;
@@ -740,27 +808,27 @@ export default class ResidentLogic extends Laya.Script {
 
 
 
-        // 盖房子
-        if (RandomMgr.randomYes() && this.model.getMyHomeId() == 0 && this.model.getSex() == 1) {
-            this.refreshFSMState(ResidentMeta.ResidentState.FindBlockForCreateHome);
-            return;
-        }
+        // // 盖房子
+        // if (RandomMgr.randomYes() && this.model.getMyHomeId() == 0 && this.model.getSex() == 1) {
+        //     this.refreshFSMState(ResidentMeta.ResidentState.FindBlockForCreateHome);
+        //     return;
+        // }
 
-        // 找恋人
-        if (this.model.canAskMarry()) {
-            let home = BuildingMgr.getInstance().getBuildingById(this.model.getMyHomeId());
-            if (home.model.getBuildingState() == BuildingMeta.BuildingState.Noraml) {
-                let woman = this.residentMgrInstance.getCanMarryWoman();
-                if (woman) {
-                    let womanScript = woman.getComponent(ResidentLogic);
-                    let womanModel = womanScript.getModel()
-                    GameModel.getInstance().setMarried(this.model, womanModel);
-                    this.refreshFSMState(ResidentMeta.ResidentState.LoverMan);
-                    womanScript.refreshFSMState(ResidentMeta.ResidentState.LoverWoman);
-                    return;
-                }
-            }
-        }
+        // // 找恋人
+        // if (this.model.canAskMarry()) {
+        //     let home = BuildingMgr.getInstance().getBuildingById(this.model.getMyHomeId());
+        //     if (home.model.getBuildingState() == BuildingMeta.BuildingState.Noraml) {
+        //         let woman = this.residentMgrInstance.getCanMarryWoman();
+        //         if (woman) {
+        //             let womanScript = woman.getComponent(ResidentLogic);
+        //             let womanModel = womanScript.getModel()
+        //             GameModel.getInstance().setMarried(this.model, womanModel);
+        //             this.refreshFSMState(ResidentMeta.ResidentState.LoverMan);
+        //             womanScript.refreshFSMState(ResidentMeta.ResidentState.LoverWoman);
+        //             return;
+        //         }
+        //     }
+        // }
 
     }
 

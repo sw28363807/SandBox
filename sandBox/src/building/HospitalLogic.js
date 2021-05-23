@@ -21,6 +21,10 @@ export default class HospitalLogic extends Laya.Script {
         Laya.timer.clear(this, this.onCreateProgress);
     }
 
+    getModel() {
+        return this.model;
+    }
+
     refreshByModel(model) {
         this.model = model;
         this.owner.x = model.getX();

@@ -9,7 +9,7 @@ export default class CommandPanel extends Laya.Script {
     }
     
     onEnable() {
-        // new Laya.List().mouseEnabled
+        new Laya.List().mouseEnabled
         this.touchLayer = this.owner.getChildByName("touch");
         this.touchLayer.mouseEnabled = false;
         this.touchLayerWidth = this.touchLayer.width;
@@ -27,7 +27,6 @@ export default class CommandPanel extends Laya.Script {
             this.dataArray.push(item);
         }
         this.listView.array = this.dataArray;
-        this.listView.refresh();
 
         this.upBtn = this.owner.getChildByName("upBtn");
         this.downBtn = this.owner.getChildByName("downBtn");
@@ -46,7 +45,9 @@ export default class CommandPanel extends Laya.Script {
             Laya.Tween.to(this.listView, {scaleY: 1}, 200, Laya.Ease.backOut);
         });
 
-       this.listView.renderHandler = Laya.Handler.create(this, this.onRenderCell);
+       this.listView.renderHandler = Laya.Handler.create(this, this.onRenderCell, null, false);
+       this.listView.refresh();
+
        this.draging = false;
        this.dragTimeStart = false;
        this.dragStartPointY = null;
@@ -168,6 +169,7 @@ export default class CommandPanel extends Laya.Script {
         if (this.dragRender) {
             this.dragRender.destroy(true);
             this.dragRender = null;
+            this.dragData = null;
         }
         this.touchLayer.width = 0;
         this.owner.width = 0;
@@ -180,11 +182,20 @@ export default class CommandPanel extends Laya.Script {
             let dpX = point.x - this.dragRender.width/2;
             let dpY = point.y - this.dragRender.height/2;
             if (!BuildingMgr.getInstance().intersectsBuilding(dpX, dpY, this.dragRender.width, this.dragRender.height)) {
-                let buildingCell = BuildingMgr.getInstance().createHospitalByConfig({
-                    parent: GameContext.mapContainer,
-                    x: dpX,
-                    y: dpY
-                });
+                if (this.dragData.type == BuildingMeta.BuildingType.HospitalType) {
+                    let buildingCell = BuildingMgr.getInstance().createHospitalByConfig({
+                        parent: GameContext.mapContainer,
+                        x: dpX,
+                        y: dpY
+                    });  
+                } else if (this.dragData.type == BuildingMeta.BuildingType.SchoolType) {
+                    let buildingCell = BuildingMgr.getInstance().createSchoolByConfig({
+                        parent: GameContext.mapContainer,
+                        x: dpX,
+                        y: dpY
+                    });
+                }
+
             }
         }
 
@@ -195,6 +206,7 @@ export default class CommandPanel extends Laya.Script {
         }
         this.touchLayer.width = 0;
         this.owner.width = 0;
+        this.dragData = null;
     }
 
     onDisable() {
