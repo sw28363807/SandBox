@@ -62,4 +62,10 @@ export default class RandomMgr {
             return -1;
         }
     }
+
+    // 随机一个数字
+    static randomNumer(min, max) {
+        let a = Math.random();
+        return min  +  Math.round( a * (max - min));
+    }
 }

@@ -17,9 +17,7 @@ export default class ResidentModel extends Laya.Script {
         this.social = 100;  //社交
 
         // 隐藏数值
-        this.createBuildingIdea = 0;    //盖房的欲望值
-        this.cutDownTreeIdea = 0;       //砍树的欲望值
-        this.transportStoneIdea = 0;    //搬运石头的欲望值
+        this.positive = 0.7;               //积极性
         this.myHomeId = 0;              //我的家的ID
         this.loverId = 0;               //配偶ID
 
@@ -60,9 +58,6 @@ export default class ResidentModel extends Laya.Script {
             if (data.social) {
                 this.social = data.social;
             }
-            if (data.createBuildingIdea) {
-                this.createBuildingIdea = data.createBuildingIdea;
-            }
             if (data.myHomeId) {
                 this.myHomeId = data.myHomeId;
             }
@@ -95,6 +90,9 @@ export default class ResidentModel extends Laya.Script {
             }
             if (data.sick) {
                 this.sick = data.sick;
+            }
+            if (data.positive) {
+                this.positive = data.positive;
             }
         }
     }
@@ -282,6 +280,11 @@ export default class ResidentModel extends Laya.Script {
         } else if (this.water > 100) {
             this.water = 100;
         }
+    }
+
+    // 获得积极性
+    getPositive() {
+        return this.positive;
     }
 
     // 获得水源

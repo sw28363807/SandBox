@@ -33,10 +33,7 @@ export default class ResidentMgr extends Laya.Script {
     onMakeIdea() {
         for (let key in this.residents) {
             let resident = this.residents[key];
-            let script = resident.getComponent(ResidentLogic);
-            if (RandomMgr.randomYes(0.2)) {
-                script.makeIdea();
-            }
+            resident.residentLogicScript.makeIdea();
         }
     }
 
@@ -45,6 +42,7 @@ export default class ResidentMgr extends Laya.Script {
             let resident = prefabDef.create();
             config.parent.addChild(resident);
             let script = resident.getComponent(ResidentLogic);
+            resident.residentLogicScript = script;
             let model = GameModel.getInstance().newResidentModel(config);
             script.refreshByModel(model);
             script.setResidentMgrInstance(this);
