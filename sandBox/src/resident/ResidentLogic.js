@@ -726,6 +726,20 @@ export default class ResidentLogic extends Laya.Script {
         this.tweenObject = Laya.Tween.to(this.owner, { x: dstX, y: dstY }, time * 1000, null, handler);
     }
 
+    // 行走到某个位置
+    gotoDestExt(info, handler) {
+        // 目标点
+        let dstX = info.x;
+        let dstY = info.y;
+        // 当前点
+        let curX = this.owner.x;
+        let curY = this.owner.y;
+        let xDelta = dstX - curX;
+        let yDelta = dstY - curY;
+        let xDistance = Math.abs(xDelta);
+        let yDistance = Math.abs(yDelta);
+    }
+
     stopGoto() {
         if (this.tweenObject) {
             Laya.Tween.clear(this.tweenObject);
@@ -751,7 +765,6 @@ export default class ResidentLogic extends Laya.Script {
         }
 
         // 跑去上课
-        console.debug(this.model.getTeach());
         if (RandomMgr.randomYes() && this.model.getTeach() < 50) {
             let building = BuildingMgr.getInstance().getNearstBuilding(this.owner.x,
                 this.owner.y, BuildingMeta.BuildingType.SchoolType,
