@@ -40,7 +40,7 @@ ResidentMeta.ResidentAnim = {
     Idle: 1,    //待机动画
     Walk: 2,    //行走动画
     Enjoy: 3,   //喜悦动画
-    Anger: 4,   //愤怒动画
+    Work: 4,   //愤怒动画
     Die: 5,     //死亡动画
 };
 
