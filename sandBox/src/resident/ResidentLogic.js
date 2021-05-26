@@ -193,7 +193,7 @@ export default class ResidentLogic extends Laya.Script {
         } else if (anim == ResidentMeta.ResidentAnim.Work) {
             this.ani.play(0, true, "work");
         } else if (anim == ResidentMeta.ResidentAnim.Die) {
-            // this.ani.play(0, true, "die");
+            this.ani.play(0, false, "die");
         }
         this.curStateAnim = anim;
     }
