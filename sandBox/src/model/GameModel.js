@@ -90,7 +90,7 @@ export default class GameModel extends Laya.Script {
 
     // 移除动物
     removeAnimalModel(id) {
-        delete this,this.animalModes[String(id)];
+        delete this, this.animalModes[String(id)];
     }
 
     // 获取家信息
@@ -160,6 +160,21 @@ export default class GameModel extends Laya.Script {
         return model;
     }
 
+    // 添加发电厂Model
+    newPowerPlantModel(param) {
+        this.maxBuildingID++;
+        let model = new BuildingModel();
+        model.updateData({
+            x: param.x,
+            y: param.y,
+            buildingId: this.maxBuildingID,
+            buildingType: BuildingMeta.BuildingType.PowerPlantType,
+            buildingState: BuildingMeta.BuildingState.PreCreating,
+        });
+        this.buildingModels[String(this.maxBuildingID)] = model;
+        return model;
+    }
+
     // 添加学校Model
     newSchoolModel(param) {
         this.maxBuildingID++;
@@ -202,7 +217,7 @@ export default class GameModel extends Laya.Script {
         woman.setLoverId(man.getResidentId());
         woman.setMyHomeId(man.getMyHomeId());
     }
-    
+
     // 添加角色Model
     newResidentModel(param) {
         this.maxResidentID++;

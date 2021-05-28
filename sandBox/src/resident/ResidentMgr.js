@@ -107,12 +107,11 @@ export default class ResidentMgr extends Laya.Script {
     }
 
     // 获得一个可以结婚的女性
-    getCanMarryWoman() {
+    getCanMarryWoman(manModel) {
         for (const key in this.residents) {
             let item = this.residents[key];
-            let script = item.getComponent(ResidentLogic);
-            let model = script.getModel();
-            if (model.canMarry()) {
+            let model = item.residentLogicScript.getModel();
+            if (model.canMarry(manModel)) {
                 return item;
             }
         }

@@ -4,10 +4,10 @@ import GameContext from "../meta/GameContext";
 
 export default class CommandPanel extends Laya.Script {
 
-    constructor() { 
-        super(); 
+    constructor() {
+        super();
     }
-    
+
     onEnable() {
         new Laya.List().mouseEnabled
         this.touchLayer = this.owner.getChildByName("touch");
@@ -35,24 +35,24 @@ export default class CommandPanel extends Laya.Script {
         this.downBtn.on(Laya.Event.CLICK, this, function () {
             this.downBtn.visible = false;
             this.upBtn.visible = true;
-            Laya.Tween.to(this.listView, {scaleY: 0}, 200, Laya.Ease.backIn);
-            
+            Laya.Tween.to(this.listView, { scaleY: 0 }, 200, Laya.Ease.backIn);
+
         });
 
         this.upBtn.on(Laya.Event.CLICK, this, function () {
             this.downBtn.visible = true;
             this.upBtn.visible = false;
-            Laya.Tween.to(this.listView, {scaleY: 1}, 200, Laya.Ease.backOut);
+            Laya.Tween.to(this.listView, { scaleY: 1 }, 200, Laya.Ease.backOut);
         });
 
-       this.listView.renderHandler = Laya.Handler.create(this, this.onRenderCell, null, false);
-       this.listView.refresh();
+        this.listView.renderHandler = Laya.Handler.create(this, this.onRenderCell, null, false);
+        this.listView.refresh();
 
-       this.draging = false;
-       this.dragTimeStart = false;
-       this.dragStartPointY = null;
-       this.dragData = null;
-       this.dragRender = null;
+        this.draging = false;
+        this.dragTimeStart = false;
+        this.dragStartPointY = null;
+        this.dragData = null;
+        this.dragRender = null;
     }
 
     onRenderCell(cell, index) {
@@ -61,7 +61,7 @@ export default class CommandPanel extends Laya.Script {
             let image = item.getChildByName("image");
             let data = this.dataArray[index];
             image.loadImage(data.preview, Laya.Handler.create(this, function () {
-                
+
             }));
             // new Laya.Sprite().on
             image.on(Laya.Event.MOUSE_DOWN, this, this.onXMouseStart, [this.listView.array[index], image]);
@@ -71,7 +71,7 @@ export default class CommandPanel extends Laya.Script {
         }
     }
 
-     
+
     onXMouseStart(data, image) {
         let point = new Laya.Point(0, 0);
         image.localToGlobal(point);
@@ -93,7 +93,7 @@ export default class CommandPanel extends Laya.Script {
                 this.dragTimeStart = false;
                 this.draging = false;
                 Laya.timer.clear(this, this.onDragStart);
-            } 
+            }
         }
     }
 
@@ -136,9 +136,18 @@ export default class CommandPanel extends Laya.Script {
             spr.pos(data.adjustX, data.adjustY);
             this.touchLayer.width = this.touchLayerWidth;
             this.owner.width = this.touchLayerWidth;
+
+            let point = new Laya.Point(Laya.stage.mouseX, Laya.stage.mouseY);
+            this.touchLayer.globalToLocal(point);
+            let dpX = point.x - this.dragRender.width / 2;
+            let dpY = point.y - this.dragRender.height / 2;
+            this.dragRender.pos(dpX, dpY);
+            this.listView.visible = false;
+            this.downBtn.visible = false;
+
         } else {
             this.dragTimeStart = false;
-            this.draging = false;  
+            this.draging = false;
         }
         Laya.timer.clear(this, this.onDragStart);
     }
@@ -147,14 +156,14 @@ export default class CommandPanel extends Laya.Script {
         if (this.draging && this.dragRender) {
             let point = new Laya.Point(e.stageX, e.stageY);
             this.touchLayer.globalToLocal(point);
-            let dpX = point.x - this.dragRender.width/2;
-            let dpY = point.y - this.dragRender.height/2;
+            let dpX = point.x - this.dragRender.width / 2;
+            let dpY = point.y - this.dragRender.height / 2;
             this.dragRender.pos(dpX, dpY);
             if (GameContext.mapContainer) {
                 point = new Laya.Point(e.stageX, e.stageY);
                 GameContext.mapContainer.globalToLocal(point);
-                dpX = point.x - this.dragRender.width/2;
-                dpY = point.y - this.dragRender.height/2;
+                dpX = point.x - this.dragRender.width / 2;
+                dpY = point.y - this.dragRender.height / 2;
                 if (BuildingMgr.getInstance().intersectsBuilding(dpX, dpY, this.dragRender.width, this.dragRender.height)) {
                     this.dragRender.bgColor = "#ffffff";
                 } else {
@@ -173,23 +182,33 @@ export default class CommandPanel extends Laya.Script {
         }
         this.touchLayer.width = 0;
         this.owner.width = 0;
+        this.listView.visible = true;
+        this.downBtn.visible = true;
     }
 
     onTouchLayerUp(e) {
         if (GameContext.mapContainer) {
+            this.listView.visible = true;
+            this.downBtn.visible = true;
             let point = new Laya.Point(e.stageX, e.stageY);
             GameContext.mapContainer.globalToLocal(point);
-            let dpX = point.x - this.dragRender.width/2;
-            let dpY = point.y - this.dragRender.height/2;
+            let dpX = point.x - this.dragRender.width / 2;
+            let dpY = point.y - this.dragRender.height / 2;
             if (!BuildingMgr.getInstance().intersectsBuilding(dpX, dpY, this.dragRender.width, this.dragRender.height)) {
                 if (this.dragData.type == BuildingMeta.BuildingType.HospitalType) {
                     let buildingCell = BuildingMgr.getInstance().createHospitalByConfig({
                         parent: GameContext.mapContainer,
                         x: dpX,
                         y: dpY
-                    });  
+                    });
                 } else if (this.dragData.type == BuildingMeta.BuildingType.SchoolType) {
                     let buildingCell = BuildingMgr.getInstance().createSchoolByConfig({
+                        parent: GameContext.mapContainer,
+                        x: dpX,
+                        y: dpY
+                    });
+                } else if (this.dragData.type == BuildingMeta.BuildingType.PowerPlantType) {
+                    let buildingCell = BuildingMgr.getInstance().createPowerPlantByConfig({
                         parent: GameContext.mapContainer,
                         x: dpX,
                         y: dpY

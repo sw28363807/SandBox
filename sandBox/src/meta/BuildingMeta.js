@@ -5,6 +5,7 @@ export default class BuildingMeta {
 BuildingMeta.HomePrefabPath = "prefab/Home.prefab";       //家prefab路径
 BuildingMeta.HospitalPrefabPath = "prefab/Hospital.prefab";       //医院prefab路径
 BuildingMeta.SchoolPrefabPath = "prefab/School.prefab";       //医院prefab路径
+BuildingMeta.PowerPlantPrefabPath = "prefab/PowerPlant.prefab";       //发电厂prefab路径
 
 
 BuildingMeta.BuildingType = {
@@ -12,6 +13,7 @@ BuildingMeta.BuildingType = {
     HomeType: 1,    //居民的家
     HospitalType: 2,    //医院
     SchoolType: 3,      //学校
+    PowerPlantType: 4,  //发电厂
 };
 
 BuildingMeta.BuildingState = {
@@ -34,13 +36,16 @@ BuildingMeta.HospitalHeight = 256;   //医院高度
 // 学校
 BuildingMeta.SchoolWidth = 256;   //学校宽度
 BuildingMeta.SchoolHeight = 256;   //学校高度
+// 发电厂高度
+BuildingMeta.PowerPlantWidth = 256;   //发电厂宽度
+BuildingMeta.PowerPlantHeight = 256;   //发电厂高度
 
 
 // 操作界面的数据源
 BuildingMeta.CommandPanelDataSource = {
     // 医院
-    [String(BuildingMeta.BuildingType.HospitalType)]:{
-        prefab:BuildingMeta.HospitalPrefabPath,
+    [String(BuildingMeta.BuildingType.HospitalType)]: {
+        prefab: BuildingMeta.HospitalPrefabPath,
         type: BuildingMeta.BuildingType.HospitalType,
         preview: "source/building/hospital1_1.png",
         width: BuildingMeta.HospitalWidth,
@@ -49,12 +54,22 @@ BuildingMeta.CommandPanelDataSource = {
         adjustY: 128,
     },
     // 学校
-    [String(BuildingMeta.BuildingType.SchoolType)]:{
-        prefab:BuildingMeta.SchoolPrefabPath,
+    [String(BuildingMeta.BuildingType.SchoolType)]: {
+        prefab: BuildingMeta.SchoolPrefabPath,
         type: BuildingMeta.BuildingType.SchoolType,
         preview: "source/building/school_1.png",
         width: BuildingMeta.SchoolWidth,
         height: BuildingMeta.SchoolHeight,
+        adjustX: 64,
+        adjustY: 128,
+    },
+    // 发电厂
+    [String(BuildingMeta.BuildingType.PowerPlantType)]: {
+        prefab: BuildingMeta.PowerPlantPrefabPath,
+        type: BuildingMeta.BuildingType.PowerPlantType,
+        preview: "source/building/power_plant.png",
+        width: BuildingMeta.PowerPlantWidth,
+        height: BuildingMeta.PowerPlantHeight,
         adjustX: 64,
         adjustY: 128,
     },

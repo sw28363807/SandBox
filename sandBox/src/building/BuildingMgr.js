@@ -3,6 +3,7 @@ import GameMeta from "../meta/GameMeta";
 import GameModel from "../model/GameModel";
 import HomeLogic from "./HomeLogic";
 import HospitalLogic from "./HospitalLogic";
+import PowerPlantLogic from "./PowerPlantLogic";
 import SchoolLogic from "./SchoolLogic";
 
 export default class BuildingMgr extends Laya.Script {
@@ -134,7 +135,42 @@ export default class BuildingMgr extends Laya.Script {
         return cell;
     }
 
-    // 是否可以建造建筑
+    ceatePowerPlantFunc(config, model, cell, callback) {
+        Laya.loader.create(BuildingMeta.PowerPlantPrefabPath, Laya.Handler.create(this, function (prefabDef) {
+            let powerPlant = prefabDef.create();
+            config.parent.addChild(powerPlant);
+            let script = powerPlant.getComponent(PowerPlantLogic);
+            cell.building = powerPlant;
+            script.refreshByModel(model);
+            if (callback) {
+                callback.runWith(cell);
+            }
+        }));
+    }
+    // 建造发电厂
+    createPowerPlantByConfig(config, callback) {
+        let model = GameModel.getInstance().newPowerPlantModel(config);
+        let cell = {
+            x: config.x,
+            y: config.y,
+            width: BuildingMeta.PowerPlantWidth,
+            height: BuildingMeta.PowerPlantHeight,
+            model: model,
+            building: "noBuilding",
+        };
+        this.buildings[String(model.getBuildingId())] = cell;
+        if (Laya.loader.getRes(GameMeta.BuildingAtlasPath)) {
+            this.ceatePowerPlantFunc(config, model, cell, callback);
+        } else {
+            Laya.loader.load(GameMeta.BuildingAtlasPath, Laya.Handler.create(this, function () {
+                this.ceatePowerPlantFunc(config, model, cell, callback);
+            }));
+        }
+        return cell;
+    }
+
+
+    // 是否有交集
     intersectsBuilding(x, y, w, h) {
         let cur = new Laya.Rectangle(x, y, w, h);
         for (let key in this.buildings) {
@@ -147,15 +183,19 @@ export default class BuildingMgr extends Laya.Script {
     }
 
     // 获得一个最近的范围内的还未建造完成的建筑
-    getNearstBuilding(x, y, buildingType, area, state) {
+    getNearstBuilding(x, y, buildingType, area, states) {
+        let sets = new Set(states);
         let ret = null;
         for (const key in this.buildings) {
             let building = this.buildings[key];
             let distance = 99999999;
             let curDistance = new Laya.Point(building.x, building.y).distance(x, y);
+            // console.debug(building.building);
+            // console.debug(building.model.getBuildingState());
+            // console.debug(building.model.getBuildingType());
             if (curDistance <= area &&
                 building.building != "noBuilding" &&
-                building.model.getBuildingState() == state &&
+                sets.has(building.model.getBuildingState()) &&
                 building.model.getBuildingType() == buildingType) {
                 distance = curDistance;
                 ret = building;

@@ -32,6 +32,8 @@ ResidentMeta.ResidentState = {
     CreateSchool: 26,     //建造学校
     GoToSchool: 27,         //去上学的路上
     Learning: 28,           //正在学习
+    GotoContinueCreatePowerPlant: 29, //跑去建造发电厂
+    CreatePowerPlant: 30,     //建造发电厂
 };
 
 // 动画枚举

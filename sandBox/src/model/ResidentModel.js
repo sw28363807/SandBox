@@ -153,6 +153,7 @@ export default class ResidentModel extends Laya.Script {
         // if (this.curFSMState == ResidentMeta.ResidentState.) {
 
         // }
+        this.addSocial(ResidentMeta.ResidentReduceSocialBaseValue);
         this.addWater(ResidentMeta.ResidentReduceWaterBaseValue);
         this.addFood(ResidentMeta.ResidentReduceFoodBaseValue);
         if (this.getSick() == 1) {
@@ -172,10 +173,9 @@ export default class ResidentModel extends Laya.Script {
 
     // 能够要求结婚（主动）
     canAskMarry() {
-        if (this.getMarried() == 1 &&
-            this.getAge() >= ResidentMeta.ResidentMarryAge &&
+        if (this.getAge() >= ResidentMeta.ResidentMarryAge &&
             this.getSex() == 1 &&
-            this.getMyHomeId() != 0 && 
+            this.getMyHomeId() != 0 &&
             this.getFSMState() == ResidentMeta.ResidentState.IdleState) {
             return true;
         }
@@ -183,12 +183,18 @@ export default class ResidentModel extends Laya.Script {
     }
 
     // 能够结婚（被动）
-    canMarry() {
+    canMarry(manModel) {
         if (this.getAge() > ResidentMeta.ResidentMarryAge &&
-         this.getMarried() == 1 &&
-          this.getFSMState() == ResidentMeta.ResidentState.IdleState &&
-           this.getSex() == 2) {
-            return true;
+            this.getFSMState() == ResidentMeta.ResidentState.IdleState &&
+            this.getSex() == 2) {
+            if (this.loverId == 0) {
+                return true; 
+            } else {
+                if (manModel.getLoverId() == this.residentId) {
+                    return true;
+                }
+                return false;
+            }
         }
         return false;
     }

@@ -17,6 +17,7 @@ NameMeta.FirstName = [
     "赵",
     "司马",
     "诸葛",
+    "周",
 ];
 
 // 名字集合
@@ -33,6 +34,7 @@ NameMeta.LastName = [
     "Season",
     "Jack",
     "大壮",
+    "钢弹"
 
 ];
 

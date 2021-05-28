@@ -22,6 +22,18 @@ export default class TreeMgr extends Laya.Script {
         this.trees.push(tree);
     }
 
+    // 是否有交集
+    intersectsTree(x, y, w, h) {
+        let cur = new Laya.Rectangle(x, y, w, h);
+        for (let key in this.trees) {
+            let item = this.trees[key];
+            if (cur.intersects(new Laya.Rectangle(item.x, item.y, item.width, item.height))) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     // 寻找最近的一颗树
     getNearstTree(x, y) {
         let distance = 99999999;

@@ -19,6 +19,7 @@ import AnimalLogic from "../animal/AnimalLogic";
 import HospitalLogic from "../building/HospitalLogic";
 import SchoolLogic from "../building/SchoolLogic";
 import Utils from "../helper/Utils";
+import PowerPlantLogic from "../building/PowerPlantLogic";
 
 export default class ResidentLogic extends Laya.Script {
 
@@ -53,6 +54,7 @@ export default class ResidentLogic extends Laya.Script {
         EventMgr.getInstance().registEvent(GameEvent.CREATE_HOME_FINISH, this, this.onDoWorkFinish);
         EventMgr.getInstance().registEvent(GameEvent.CREATE_HOSPITAL_FINISH, this, this.onDoWorkFinish);
         EventMgr.getInstance().registEvent(GameEvent.CREATE_SCHOOL_FINISH, this, this.onDoWorkFinish);
+        EventMgr.getInstance().registEvent(GameEvent.CREATE_POWERPLANT_FINISH, this, this.onDoWorkFinish);
         EventMgr.getInstance().registEvent(GameEvent.HUNT_FINISH, this, this.onDoWorkFinish);
         EventMgr.getInstance().registEvent(GameEvent.RESIDENT_SICK, this, this.onSick);
         EventMgr.getInstance().registEvent(GameEvent.RESIDENT_DIE, this, this.onDie);
@@ -62,6 +64,7 @@ export default class ResidentLogic extends Laya.Script {
         EventMgr.getInstance().removeEvent(GameEvent.CREATE_HOME_FINISH, this, this.onDoWorkFinish);
         EventMgr.getInstance().removeEvent(GameEvent.CREATE_HOSPITAL_FINISH, this, this.onDoWorkFinish);
         EventMgr.getInstance().removeEvent(GameEvent.CREATE_SCHOOL_FINISH, this, this.onDoWorkFinish);
+        EventMgr.getInstance().removeEvent(GameEvent.CREATE_POWERPLANT_FINISH, this, this.onDoWorkFinish);
         EventMgr.getInstance().removeEvent(GameEvent.HUNT_FINISH, this, this.onDoWorkFinish);
         EventMgr.getInstance().removeEvent(GameEvent.RESIDENT_SICK, this, this.onSick);
         EventMgr.getInstance().removeEvent(GameEvent.RESIDENT_DIE, this, this.onDie);
@@ -365,6 +368,22 @@ export default class ResidentLogic extends Laya.Script {
                 script.startCreate();
             }
         }
+        // 跑去建造医院
+        else if (state == ResidentMeta.ResidentState.GotoContinueCreatePowerPlant) {
+            this.willCreatePowerPlant = param;
+            this.setAnim(ResidentMeta.ResidentAnim.Walk);
+            this.startGoToContinueCreatePowerPlant(this.willCreatePowerPlant);
+        }
+        // 建造医院
+        else if (state == ResidentMeta.ResidentState.CreatePowerPlant) {
+            if (this.willCreatePowerPlant) {
+                this.setAnim(ResidentMeta.ResidentAnim.Work);
+                this.setStateAniVisible(true);
+                this.setStateAni("ani2");
+                let script = this.willCreatePowerPlant.building.getComponent(PowerPlantLogic);
+                script.startCreate();
+            }
+        }
         // 去治疗
         else if (state == ResidentMeta.ResidentState.GotoTreat) {
             let hospital = param;
@@ -478,6 +497,14 @@ export default class ResidentLogic extends Laya.Script {
             }
             this.willCreateSchool = null;
         }
+        else if (state == ResidentMeta.ResidentState.CreatePowerPlant) {
+            // todo 此处要判断是不是我自己在建造的完成了，不能所有人都建造完
+            let script = this.willCreatePowerPlant.building.getComponent(PowerPlantLogic);
+            if (!script || script.getModel() != param.model) {
+                return;
+            }
+            this.willCreatePowerPlant = null;
+        }
         else if (state == ResidentMeta.ResidentState.CreateHome) {
             // todo 此处要判断是不是我自己在建造的完成了，不能所有人都建造完
         }
@@ -534,6 +561,18 @@ export default class ResidentLogic extends Laya.Script {
             this.refreshFSMState(ResidentMeta.ResidentState.CreateSchool, school);
         }));
     }
+
+    // 跑去未建成的学校周围
+    startGoToContinueCreatePowerPlant(powerPlant) {
+        this.gotoDestExt({
+            x: powerPlant.x + powerPlant.width / 2 - this.owner.width / 2,
+            y: powerPlant.y + powerPlant.height - this.owner.height,
+        }, Laya.Handler.create(this, function () {
+            this.refreshFSMState(ResidentMeta.ResidentState.CreatePowerPlant, powerPlant);
+        }));
+    }
+
+
 
     // 赶去打猎
     startJoinHunt() {
@@ -624,10 +663,15 @@ export default class ResidentLogic extends Laya.Script {
                     // 查看此处可不可以盖房
                     let toCreateHomeX = this.owner.x - BuildingMeta.HomeWidth / 2 + this.owner.width / 2;
                     let toCreateHomeY = this.owner.y - BuildingMeta.HomeHeight + this.owner.height;
-                    if (!BuildingMgr.getInstance().intersectsBuilding(toCreateHomeX,
+                    if (!BuildingMgr.getInstance().intersectsBuilding(
+                        toCreateHomeX,
                         toCreateHomeY,
                         BuildingMeta.HomeWidth,
-                        BuildingMeta.HomeHeight)) {
+                        BuildingMeta.HomeHeight) &&
+                        !TreeMgr.getInstance().intersectsTree(toCreateHomeX,
+                            toCreateHomeY,
+                            BuildingMeta.HomeWidth,
+                            BuildingMeta.HomeHeight)) {
                         let buildingCell = BuildingMgr.getInstance().createHomeByConfig({
                             parent: this.owner.parent,
                             x: toCreateHomeX,
@@ -651,7 +695,10 @@ export default class ResidentLogic extends Laya.Script {
         if (this.model.getFSMState() == ResidentMeta.ResidentState.FindTree) {
             let nearstTree = TreeMgr.getInstance().getNearstTree(this.owner.x, this.owner.y);
             if (nearstTree) {
-                this.gotoDestExt({ x: nearstTree.x, y: nearstTree.y }, Laya.Handler.create(this, function () {
+                this.gotoDestExt({
+                    x: nearstTree.x + nearstTree.width / 2 - this.owner.width / 2,
+                    y: nearstTree.y + nearstTree.height - this.owner.height
+                }, Laya.Handler.create(this, function () {
                     this.refreshFSMState(ResidentMeta.ResidentState.CutDownTree);
                 }));
             } else {
@@ -818,189 +865,202 @@ export default class ResidentLogic extends Laya.Script {
         this.level1Results = [];
         this.level2Results = [];
 
-        // 赶着去建造学校
-        let cell1 = {
+        // // 赶着去建造学校
+        // let cell1 = {
+        //     func: Laya.Handler.create(this, function (param) {
+        //         let building = BuildingMgr.getInstance().getNearstBuilding(this.owner.x,
+        //             this.owner.y, BuildingMeta.BuildingType.SchoolType,
+        //             500, [BuildingMeta.BuildingState.PreCreating, BuildingMeta.BuildingState.Creating]);
+        //         if (building) {
+        //             this.refreshFSMState(ResidentMeta.ResidentState.GotoContinueCreateSchool, building);
+        //             this.ideaResult = true;
+        //         }
+        //     }),
+        // };
+        // this.level2Results.push(cell1);
+
+        // // 跑去上课
+        // if (this.model.getTeach() < 100) {
+        //     let cell2 = {
+        //         func: Laya.Handler.create(this, function (param) {
+        //             let building = BuildingMgr.getInstance().getNearstBuilding(this.owner.x,
+        //                 this.owner.y, BuildingMeta.BuildingType.SchoolType,
+        //                 1000, BuildingMeta.BuildingState.Noraml);
+        //             if (building) {
+        //                 this.refreshFSMState(ResidentMeta.ResidentState.GoToSchool, building);
+        //                 this.ideaResult = true;
+        //             }
+        //         })
+        //     };
+        //     this.level2Results.push(cell2);
+        // }
+
+        // // 赶着去建造医院
+        // let cell3 = {
+        //     func: Laya.Handler.create(this, function (param) {
+        //         let building = BuildingMgr.getInstance().getNearstBuilding(this.owner.x,
+        //             this.owner.y, BuildingMeta.BuildingType.HospitalType,
+        //             500, [BuildingMeta.BuildingState.PreCreating, BuildingMeta.BuildingState.Creating]);
+        //         if (building) {
+        //             this.refreshFSMState(ResidentMeta.ResidentState.GotoContinueCreateHospital, building);
+        //             this.ideaResult = true;
+        //         }
+        //     })
+        // };
+        // this.level1Results.push(cell3);
+
+        // // 跑去治病
+        // if (this.model.getSick() == 2) {
+        //     let cell4 = {
+        //         func: Laya.Handler.create(this, function (param) {
+        //             let building = BuildingMgr.getInstance().getNearstBuilding(this.owner.x,
+        //                 this.owner.y, BuildingMeta.BuildingType.HospitalType,
+        //                 1000, BuildingMeta.BuildingState.Noraml);
+        //             if (building) {
+        //                 this.refreshFSMState(ResidentMeta.ResidentState.GotoTreat, building);
+        //                 this.ideaResult = true;
+        //             }
+        //         })
+        //     };
+        //     this.level1Results.push(cell4);
+        // }
+
+
+        // //喝水
+        // let cell5 = {
+        //     func: Laya.Handler.create(this, function (param) {
+        //         this.refreshFSMState(ResidentMeta.ResidentState.FindWater);
+        //         this.ideaResult = true;
+        //     })
+        // };
+        // let water = this.model.getWater();
+        // if (water < ResidentMeta.ResidentWaterNeedValue) {
+        //     this.level1Results.push(cell5);
+        // } else if (water < 100) {
+        //     this.level2Results.push(cell5);
+        // }
+
+
+        // //吃饭
+        // let cell6 = {
+        //     func: Laya.Handler.create(this, function (param) {
+        //         let canFood = FoodMgr.getInstance().canFindFood();
+        //         if (canFood) {
+        //             this.refreshFSMState(ResidentMeta.ResidentState.FindFood);
+        //             this.ideaResult = true;
+        //         }
+        //     })
+        // };
+        // let food = this.model.getFood();
+        // if (food < ResidentMeta.ResidentFoodNeedValue) {
+        //     this.level1Results.push(cell6);
+        // } else if (food < 100) {
+        //     this.level2Results.push(cell6);
+        // }
+
+
+        // // 社交
+        // let cell7 = {
+        //     func: Laya.Handler.create(this, function (param) {
+        //         let resident = this.residentMgrInstance.getACanSocialResident(this.owner.x, this.owner.y);
+        //         if (resident) {
+        //             let talkingModel = GameModel.getInstance().getOrCreateTalkingPoint(this.owner.x, this.owner.y, 100, 5);
+        //             if (talkingModel.getTalkingNum() == 0) {
+        //                 talkingModel.addTalkingNum(2);
+        //                 this.refreshFSMState(ResidentMeta.ResidentState.JoinTalking, talkingModel);
+        //                 resident.getComponent(ResidentLogic).refreshFSMState(ResidentMeta.ResidentState.JoinTalking, talkingModel);
+        //             } else {
+        //                 talkingModel.addTalkingNum(1);
+        //                 this.refreshFSMState(ResidentMeta.ResidentState.JoinTalking, talkingModel);
+        //             }
+        //             this.ideaResult = true;
+        //         }
+        //     })
+        // };
+        // let social = this.model.getSocial();
+        // if (social < ResidentMeta.ResidentSocialNeedValue) {
+        //     this.level1Results.push(cell7);
+        // } else if (social < 100) {
+        //     this.level2Results.push(cell7);
+        // }
+
+        // // 砍树
+        // let cell8 = {
+        //     func: Laya.Handler.create(this, function (param) {
+        //         this.refreshFSMState(ResidentMeta.ResidentState.FindTree);
+        //         this.ideaResult = true;
+        //     })
+        // };
+        // this.level2Results.push(cell8);
+
+
+        // // 收集石头
+        // let cell9 = {
+        //     func: Laya.Handler.create(this, function (param) {
+        //         this.refreshFSMState(ResidentMeta.ResidentState.FindStone);
+        //         this.ideaResult = true;
+        //     })
+        // };
+        // this.level2Results.push(cell9);
+
+
+        // // 跑去打猎
+        // let cell10 = {
+        //     func: Laya.Handler.create(this, function (param) {
+        //         let item = AnimalMgr.getInstance().getAnimalForAttack(this.owner.x, this.owner.y, 3000);
+        //         if (item) {
+        //             this.refreshFSMState(ResidentMeta.ResidentState.JoinHunt, item);
+        //             this.ideaResult = true;
+        //         }
+        //     })
+        // };
+        // this.level2Results.push(cell10);
+
+        // // 盖房子
+        // if (this.model.getMyHomeId() == 0 && this.model.getSex() == 1) {
+        //     let cell11 = {
+        //         func: Laya.Handler.create(this, function (param) {
+        //             this.refreshFSMState(ResidentMeta.ResidentState.FindBlockForCreateHome);
+        //             this.ideaResult = true;
+        //         })
+        //     };
+        //     this.level1Results.push(cell11);
+        // }
+
+        // // 找恋人
+        // if (this.model.canAskMarry()) {
+        //     let home = BuildingMgr.getInstance().getBuildingById(this.model.getMyHomeId());
+        //     if (home.model.getBuildingState() == BuildingMeta.BuildingState.Noraml) {
+        //         let cell12 = {
+        //             func: Laya.Handler.create(this, function (param) {
+        //                 let woman = this.residentMgrInstance.getCanMarryWoman(this.model);
+        //                 if (woman) {
+        //                     let womanScript = woman.getComponent(ResidentLogic);
+        //                     let womanModel = womanScript.getModel()
+        //                     GameModel.getInstance().setMarried(this.model, womanModel);
+        //                     this.refreshFSMState(ResidentMeta.ResidentState.LoverMan);
+        //                     womanScript.refreshFSMState(ResidentMeta.ResidentState.LoverWoman);
+        //                     this.ideaResult = true;
+        //                 }
+        //             })
+        //         };
+        //         this.level1Results.push(cell12);
+        //     }
+        // }
+
+        // 赶着去建造发电厂
+        let cell13 = {
             func: Laya.Handler.create(this, function (param) {
                 let building = BuildingMgr.getInstance().getNearstBuilding(this.owner.x,
-                    this.owner.y, BuildingMeta.BuildingType.SchoolType,
-                    500, BuildingMeta.BuildingState.PreCreating);
+                    this.owner.y, BuildingMeta.BuildingType.PowerPlantType,
+                    500, [BuildingMeta.BuildingState.PreCreating, BuildingMeta.BuildingState.Creating]);
                 if (building) {
-                    this.refreshFSMState(ResidentMeta.ResidentState.GotoContinueCreateSchool, building);
+                    this.refreshFSMState(ResidentMeta.ResidentState.GotoContinueCreatePowerPlant, building);
                     this.ideaResult = true;
                 }
             }),
         };
-        this.level2Results.push(cell1);
-
-        // 跑去上课
-        if (this.model.getTeach() < 100) {
-            let cell2 = {
-                func: Laya.Handler.create(this, function (param) {
-                    let building = BuildingMgr.getInstance().getNearstBuilding(this.owner.x,
-                        this.owner.y, BuildingMeta.BuildingType.SchoolType,
-                        1000, BuildingMeta.BuildingState.Noraml);
-                    if (building) {
-                        this.refreshFSMState(ResidentMeta.ResidentState.GoToSchool, building);
-                        this.ideaResult = true;
-                    }
-                })
-            };
-            this.level2Results.push(cell2);
-        }
-
-        // 赶着去建造医院
-        let cell3 = {
-            func: Laya.Handler.create(this, function (param) {
-                let building = BuildingMgr.getInstance().getNearstBuilding(this.owner.x,
-                    this.owner.y, BuildingMeta.BuildingType.HospitalType,
-                    500, BuildingMeta.BuildingState.PreCreating);
-                if (building) {
-                    this.refreshFSMState(ResidentMeta.ResidentState.GotoContinueCreateHospital, building);
-                    this.ideaResult = true;
-                }
-            })
-        };
-        this.level1Results.push(cell3);
-
-        // 跑去治病
-        if (this.model.getSick() == 2) {
-            let cell4 = {
-                func: Laya.Handler.create(this, function (param) {
-                    let building = BuildingMgr.getInstance().getNearstBuilding(this.owner.x,
-                        this.owner.y, BuildingMeta.BuildingType.HospitalType,
-                        1000, BuildingMeta.BuildingState.Noraml);
-                    if (building) {
-                        this.refreshFSMState(ResidentMeta.ResidentState.GotoTreat, building);
-                        this.ideaResult = true;
-                    }
-                })
-            };
-            this.level1Results.push(cell4);
-        }
-
-
-        //喝水
-        let cell5 = {
-            func: Laya.Handler.create(this, function (param) {
-                this.refreshFSMState(ResidentMeta.ResidentState.FindWater);
-                this.ideaResult = true;
-            })
-        };
-        let water = this.model.getWater();
-        if (water < ResidentMeta.ResidentWaterNeedValue) {
-            this.level1Results.push(cell5);
-        } else if (water < 100) {
-            this.level2Results.push(cell5);
-        }
-
-
-        //吃饭
-        let cell6 = {
-            func: Laya.Handler.create(this, function (param) {
-                let canFood = FoodMgr.getInstance().canFindFood();
-                if (canFood) {
-                    this.refreshFSMState(ResidentMeta.ResidentState.FindFood);
-                    this.ideaResult = true;
-                }
-            })
-        };
-        let food = this.model.getFood();
-        if (food < ResidentMeta.ResidentFoodNeedValue) {
-            this.level1Results.push(cell6);
-        } else if (food < 100) {
-            this.level2Results.push(cell6);
-        }
-
-
-        // 社交
-        let cell7 = {
-            func: Laya.Handler.create(this, function (param) {
-                let resident = this.residentMgrInstance.getACanSocialResident(this.owner.x, this.owner.y);
-                if (resident) {
-                    let talkingModel = GameModel.getInstance().getOrCreateTalkingPoint(this.owner.x, this.owner.y, 100, 5);
-                    if (talkingModel.getTalkingNum() == 0) {
-                        talkingModel.addTalkingNum(2);
-                        this.refreshFSMState(ResidentMeta.ResidentState.JoinTalking, talkingModel);
-                        resident.getComponent(ResidentLogic).refreshFSMState(ResidentMeta.ResidentState.JoinTalking, talkingModel);
-                    } else {
-                        talkingModel.addTalkingNum(1);
-                        this.refreshFSMState(ResidentMeta.ResidentState.JoinTalking, talkingModel);
-                    }
-                    this.ideaResult = true;
-                }
-            })
-        };
-        let social = this.model.getSocial();
-        if (social < ResidentMeta.ResidentSocialNeedValue) {
-            this.level1Results.push(cell7);
-        } else if (social < 100) {
-            this.level2Results.push(cell7);
-        }
-
-        // 砍树
-        let cell8 = {
-            func: Laya.Handler.create(this, function (param) {
-                this.refreshFSMState(ResidentMeta.ResidentState.FindTree);
-                this.ideaResult = true;
-            })
-        };
-        this.level2Results.push(cell8);
-
-
-        // 收集石头
-        let cell9 = {
-            func: Laya.Handler.create(this, function (param) {
-                this.refreshFSMState(ResidentMeta.ResidentState.FindStone);
-                this.ideaResult = true;
-            })
-        };
-        this.level2Results.push(cell9);
-
-
-        // 跑去打猎
-        let cell10 = {
-            func: Laya.Handler.create(this, function (param) {
-                let item = AnimalMgr.getInstance().getAnimalForAttack(this.owner.x, this.owner.y, 3000);
-                if (item) {
-                    this.refreshFSMState(ResidentMeta.ResidentState.JoinHunt, item);
-                    this.ideaResult = true;
-                }
-            })
-        };
-        this.level2Results.push(cell10);
-
-
-        // 盖房子
-        if (this.model.getMyHomeId() == 0 && this.model.getSex() == 1) {
-            let cell11 = {
-                func: Laya.Handler.create(this, function (param) {
-                    this.refreshFSMState(ResidentMeta.ResidentState.FindBlockForCreateHome);
-                    this.ideaResult = true;
-                })
-            };
-            this.level1Results.push(cell11);
-        }
-
-        // 找恋人
-        if (this.model.canAskMarry()) {
-            let home = BuildingMgr.getInstance().getBuildingById(this.model.getMyHomeId());
-            if (home.model.getBuildingState() == BuildingMeta.BuildingState.Noraml) {
-                let cell12 = {
-                    func: Laya.Handler.create(this, function (param) {
-                        let woman = this.residentMgrInstance.getCanMarryWoman();
-                        if (woman) {
-                            let womanScript = woman.getComponent(ResidentLogic);
-                            let womanModel = womanScript.getModel()
-                            GameModel.getInstance().setMarried(this.model, womanModel);
-                            this.refreshFSMState(ResidentMeta.ResidentState.LoverMan);
-                            womanScript.refreshFSMState(ResidentMeta.ResidentState.LoverWoman);
-                            this.ideaResult = true;
-                        }
-                    })
-                };
-                this.level1Results.push(cell12);
-            }
-        }
+        this.level2Results.push(cell13);
     }
 
     // 执行策略
