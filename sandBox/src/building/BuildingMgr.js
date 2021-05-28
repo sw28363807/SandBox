@@ -1,8 +1,10 @@
 import BuildingMeta from "../meta/BuildingMeta";
 import GameMeta from "../meta/GameMeta";
 import GameModel from "../model/GameModel";
+import FarmLandLogic from "./FarmLandLogic";
 import HomeLogic from "./HomeLogic";
 import HospitalLogic from "./HospitalLogic";
+import PastureLogic from "./PastureLogic";
 import PowerPlantLogic from "./PowerPlantLogic";
 import SchoolLogic from "./SchoolLogic";
 import ShopLogic from "./ShopLogic";
@@ -148,6 +150,7 @@ export default class BuildingMgr extends Laya.Script {
             }
         }));
     }
+
     // 建造发电厂
     createPowerPlantByConfig(config, callback) {
         let model = GameModel.getInstance().newPowerPlantModel(config);
@@ -206,6 +209,75 @@ export default class BuildingMgr extends Laya.Script {
         return cell;
     }
 
+    ceateFarmLandFunc(config, model, cell, callback) {
+        Laya.loader.create(BuildingMeta.FarmLandPrefabPath, Laya.Handler.create(this, function (prefabDef) {
+            let farmLand = prefabDef.create();
+            config.parent.addChild(farmLand);
+            let script = farmLand.getComponent(FarmLandLogic);
+            cell.building = farmLand;
+            script.refreshByModel(model);
+            if (callback) {
+                callback.runWith(cell);
+            }
+        }));
+    }
+
+    // 建造农田
+    createFarmLandByConfig(config, callback) {
+        let model = GameModel.getInstance().newFarmLandModel(config);
+        let cell = {
+            x: config.x,
+            y: config.y,
+            width: BuildingMeta.FarmLandWidth,
+            height: BuildingMeta.FarmLandHeight,
+            model: model,
+            building: "noBuilding",
+        };
+        this.buildings[String(model.getBuildingId())] = cell;
+        if (Laya.loader.getRes(GameMeta.BuildingAtlasPath)) {
+            this.ceateFarmLandFunc(config, model, cell, callback);
+        } else {
+            Laya.loader.load(GameMeta.BuildingAtlasPath, Laya.Handler.create(this, function () {
+                this.ceateFarmLandFunc(config, model, cell, callback);
+            }));
+        }
+        return cell;
+    }
+
+    ceatePastureFunc(config, model, cell, callback) {
+        Laya.loader.create(BuildingMeta.PasturePrefabPath, Laya.Handler.create(this, function (prefabDef) {
+            let pasture = prefabDef.create();
+            config.parent.addChild(pasture);
+            let script = pasture.getComponent(PastureLogic);
+            cell.building = pasture;
+            script.refreshByModel(model);
+            if (callback) {
+                callback.runWith(cell);
+            }
+        }));
+    }
+
+    // 建造牧场
+    createPastureByConfig(config, callback) {
+        let model = GameModel.getInstance().newPastureModel(config);
+        let cell = {
+            x: config.x,
+            y: config.y,
+            width: BuildingMeta.PastureWidth,
+            height: BuildingMeta.PastureHeight,
+            model: model,
+            building: "noBuilding",
+        };
+        this.buildings[String(model.getBuildingId())] = cell;
+        if (Laya.loader.getRes(GameMeta.BuildingAtlasPath)) {
+            this.ceatePastureFunc(config, model, cell, callback);
+        } else {
+            Laya.loader.load(GameMeta.BuildingAtlasPath, Laya.Handler.create(this, function () {
+                this.ceatePastureFunc(config, model, cell, callback);
+            }));
+        }
+        return cell;
+    }
 
     // 是否有交集
     intersectsBuilding(x, y, w, h) {

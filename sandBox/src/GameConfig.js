@@ -9,9 +9,11 @@ import MapScrollView from "./helper/MapScrollView"
 import ResourcePanel from "./panel/ResourcePanel"
 import CommandPanel from "./panel/CommandPanel"
 import AnimalLogic from "./animal/AnimalLogic"
+import FarmLandLogic from "./building/FarmLandLogic"
 import FoodLogic from "./source/FoodLogic"
 import HomeLogic from "./building/HomeLogic"
 import HospitalLogic from "./building/HospitalLogic"
+import PastureLogic from "./building/PastureLogic"
 import PowerPlantLogic from "./building/PowerPlantLogic"
 import ResidentLogic from "./resident/ResidentLogic"
 import ResidentDetailsPanel from "./panel/ResidentDetailsPanel"
@@ -32,9 +34,11 @@ export default class GameConfig {
 		reg("panel/ResourcePanel.js",ResourcePanel);
 		reg("panel/CommandPanel.js",CommandPanel);
 		reg("animal/AnimalLogic.js",AnimalLogic);
+		reg("building/FarmLandLogic.js",FarmLandLogic);
 		reg("source/FoodLogic.js",FoodLogic);
 		reg("building/HomeLogic.js",HomeLogic);
 		reg("building/HospitalLogic.js",HospitalLogic);
+		reg("building/PastureLogic.js",PastureLogic);
 		reg("building/PowerPlantLogic.js",PowerPlantLogic);
 		reg("resident/ResidentLogic.js",ResidentLogic);
 		reg("panel/ResidentDetailsPanel.js",ResidentDetailsPanel);

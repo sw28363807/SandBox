@@ -1,12 +1,12 @@
 {
     "x":0,
     "type":"Box",
-    "selectedBox":3,
-    "selecteID":12,
+    "selectedBox":15,
+    "selecteID":16,
     "searchKey":"Box,Resident",
     "props":{"width":64,"presetID":1,"preset":"laya/pages/prefab/Resident.prefab","name":"Resident","isPresetRoot":true,"height":64},
     "nodeParent":-1,
-    "maxID":15,
+    "maxID":17,
     "label":"Resident",
     "isOpen":true,
     "isDirectory":true,
@@ -101,6 +101,34 @@
             "compId":5,
             "child":[
                 ]
+        },
+        {
+            "x":15,
+            "type":"Sprite",
+            "searchKey":"Sprite,tipSpr",
+            "props":{"y":-5,"x":32,"width":100,"texture":"source/resident/dialog.png","presetID":11,"preset":"laya/pages/prefab/Resident.prefab","pivotY":80,"pivotX":50,"name":"tipSpr","height":80},
+            "nodeParent":3,
+            "label":"tipSpr",
+            "isOpen":true,
+            "isDirectory":true,
+            "isAniNode":true,
+            "hasChild":true,
+            "compId":15,
+            "child":[
+                {
+                    "x":30,
+                    "type":"Text",
+                    "searchKey":"Text,text",
+                    "props":{"y":2,"x":4,"wordWrap":true,"width":95,"valign":"middle","text":"想回家","rotation":4.5,"presetID":12,"preset":"laya/pages/prefab/Resident.prefab","name":"text","height":50,"fontSize":20,"font":"Microsoft YaHei","color":"#df1bf1","align":"center"},
+                    "nodeParent":15,
+                    "label":"text",
+                    "isDirectory":false,
+                    "isAniNode":true,
+                    "hasChild":false,
+                    "compId":16,
+                    "child":[
+                        ]
+                }]
         }],
     "animations":[
         {

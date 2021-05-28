@@ -1,5 +1,4 @@
 import EventMgr from "../helper/EventMgr";
-import RandomMgr from "../helper/RandomMgr";
 import GameEvent from "../meta/GameEvent";
 import NameMeta from "../meta/NameMeta";
 import ResidentMeta from "../meta/ResidentMeta";

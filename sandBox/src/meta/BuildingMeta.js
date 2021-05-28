@@ -7,6 +7,8 @@ BuildingMeta.HospitalPrefabPath = "prefab/Hospital.prefab";       //医院prefab
 BuildingMeta.SchoolPrefabPath = "prefab/School.prefab";       //医院prefab路径
 BuildingMeta.PowerPlantPrefabPath = "prefab/PowerPlant.prefab";       //发电厂prefab路径
 BuildingMeta.ShopPrefabPath = "prefab/Shop.prefab";       //商店prefab路径
+BuildingMeta.FarmLandPrefabPath = "prefab/FarmLand.prefab";       //农田prefab路径
+BuildingMeta.PasturePrefabPath = "prefab/Pasture.prefab";       //牧场prefab路径
 
 
 BuildingMeta.BuildingType = {
@@ -16,6 +18,8 @@ BuildingMeta.BuildingType = {
     SchoolType: 3,      //学校
     PowerPlantType: 4,  //发电厂
     ShopType: 5,       //商店
+    FarmLandType: 6,   //农田
+    PastureType: 7,    //牧场
 };
 
 BuildingMeta.BuildingState = {
@@ -42,8 +46,16 @@ BuildingMeta.SchoolHeight = 256;   //学校高度
 BuildingMeta.PowerPlantWidth = 256;   //发电厂宽度
 BuildingMeta.PowerPlantHeight = 256;   //发电厂高度
 // 商店
-BuildingMeta.ShopWidth = 256;   //发电厂宽度
-BuildingMeta.ShopHeight = 256;   //发电厂高度
+BuildingMeta.ShopWidth = 256;   //商店宽度
+BuildingMeta.ShopHeight = 256;   //商店高度
+
+// 农田
+BuildingMeta.FarmLandWidth = 256;   //农田宽度
+BuildingMeta.FarmLandHeight = 256;   //农田高度
+
+// 牧场
+BuildingMeta.PastureWidth = 256;   //牧场宽度
+BuildingMeta.PastureHeight = 256;   //牧场高度
 
 
 // 操作界面的数据源
@@ -85,6 +97,26 @@ BuildingMeta.CommandPanelDataSource = {
         preview: "source/building/shop_1.png",
         width: BuildingMeta.ShopWidth,
         height: BuildingMeta.ShopHeight,
+        adjustX: 64,
+        adjustY: 128,
+    },
+    // 农田
+    [String(BuildingMeta.BuildingType.FarmLandType)]: {
+        prefab: BuildingMeta.FarmLandPrefabPath,
+        type: BuildingMeta.BuildingType.FarmLandType,
+        preview: "source/building/farmland.png",
+        width: BuildingMeta.FarmLandWidth,
+        height: BuildingMeta.FarmLandHeight,
+        adjustX: 64,
+        adjustY: 128,
+    },
+    // 牧场
+    [String(BuildingMeta.BuildingType.PastureType)]: {
+        prefab: BuildingMeta.PasturePrefabPath,
+        type: BuildingMeta.BuildingType.PastureType,
+        preview: "source/building/pasture.png",
+        width: BuildingMeta.PastureWidth,
+        height: BuildingMeta.PastureHeight,
         adjustX: 64,
         adjustY: 128,
     },

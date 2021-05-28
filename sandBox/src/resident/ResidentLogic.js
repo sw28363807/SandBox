@@ -21,6 +21,9 @@ import SchoolLogic from "../building/SchoolLogic";
 import Utils from "../helper/Utils";
 import PowerPlantLogic from "../building/PowerPlantLogic";
 import ShopLogic from "../building/ShopLogic";
+import ResidentTipMeta from "../meta/ResidentTipMeta";
+import FarmLandLogic from "../building/FarmLandLogic";
+import PastureLogic from "../building/PastureLogic";
 
 export default class ResidentLogic extends Laya.Script {
 
@@ -48,6 +51,7 @@ export default class ResidentLogic extends Laya.Script {
         this.stopGoto();
         this.removeAllEvents();
         Laya.timer.clear(this, this.onDoWorkFinish);
+        Laya.timer.clear(this, this.hideTip);
     }
 
     // 注册消息
@@ -57,6 +61,8 @@ export default class ResidentLogic extends Laya.Script {
         EventMgr.getInstance().registEvent(GameEvent.CREATE_SCHOOL_FINISH, this, this.onDoWorkFinish);
         EventMgr.getInstance().registEvent(GameEvent.CREATE_POWERPLANT_FINISH, this, this.onDoWorkFinish);
         EventMgr.getInstance().registEvent(GameEvent.CREATE_SHOP_FINISH, this, this.onDoWorkFinish);
+        EventMgr.getInstance().registEvent(GameEvent.CREATE_FARMLAND_FINISH, this, this.onDoWorkFinish);
+        EventMgr.getInstance().registEvent(GameEvent.CREATE_PASTURE_FINISH, this, this.onDoWorkFinish);
         EventMgr.getInstance().registEvent(GameEvent.HUNT_FINISH, this, this.onDoWorkFinish);
         EventMgr.getInstance().registEvent(GameEvent.RESIDENT_SICK, this, this.onSick);
         EventMgr.getInstance().registEvent(GameEvent.RESIDENT_DIE, this, this.onDie);
@@ -68,6 +74,8 @@ export default class ResidentLogic extends Laya.Script {
         EventMgr.getInstance().removeEvent(GameEvent.CREATE_SCHOOL_FINISH, this, this.onDoWorkFinish);
         EventMgr.getInstance().removeEvent(GameEvent.CREATE_POWERPLANT_FINISH, this, this.onDoWorkFinish);
         EventMgr.getInstance().removeEvent(GameEvent.CREATE_SHOP_FINISH, this, this.onDoWorkFinish);
+        EventMgr.getInstance().removeEvent(GameEvent.CREATE_FARMLAND_FINISH, this, this.onDoWorkFinish);
+        EventMgr.getInstance().removeEvent(GameEvent.CREATE_PASTURE_FINISH, this, this.onDoWorkFinish);
         EventMgr.getInstance().removeEvent(GameEvent.HUNT_FINISH, this, this.onDoWorkFinish);
         EventMgr.getInstance().removeEvent(GameEvent.RESIDENT_SICK, this, this.onSick);
         EventMgr.getInstance().removeEvent(GameEvent.RESIDENT_DIE, this, this.onDie);
@@ -78,6 +86,9 @@ export default class ResidentLogic extends Laya.Script {
         this.initAnim();
         this.stateAni = this.owner.getChildByName("stateAni");
         this.buffAni = this.owner.getChildByName("buff");
+        this.tipSpr = this.owner.getChildByName("tipSpr");
+        this.boredTip = this.tipSpr.getChildByName("text");
+        this.hideTip();
         this.setStateAniVisible(false);
         this.setBuffAniVisible(false);
     }
@@ -115,6 +126,36 @@ export default class ResidentLogic extends Laya.Script {
             this.stopBuffAni();
             this.setBuffAniVisible(false);
         }
+    }
+
+    // 隐藏tip
+    hideTip() {
+        if (this.tipTweenObject) {
+            Laya.Tween.clear(this.tipTweenObject);
+            this.tipTweenObject = null;
+        }
+        Laya.timer.clear(this, this.hideTip);
+        this.tipSpr.scaleX = 0;
+        this.tipSpr.scaleY = 0;
+        this.tipSpr.visible = false;
+        this.boredTip.text = "";
+    }
+
+    // 显示Tip
+    showTip(text, forceShow) {
+        if (forceShow == null || forceShow == undefined) {
+            forceShow = false;
+        }
+        if (this.tipTweenObject && forceShow == false) {
+            return;
+        }
+        this.hideTip();
+        this.boredTip.text = text;
+        this.tipSpr.visible = true;
+        this.tipTweenObject = Laya.Tween.to(this.tipSpr, { scaleX: 1, scaleY: 1 }, 200,
+            Laya.Ease.backIn, Laya.Handler.create(this, function () {
+            }));
+        Laya.timer.once(3000, this, this.hideTip);
     }
 
     setBuffAni(aniName) {
@@ -404,7 +445,38 @@ export default class ResidentLogic extends Laya.Script {
                 script.startCreate();
             }
         }
-
+        // 跑去建造农田
+        else if (state == ResidentMeta.ResidentState.GotoContinueCreateFarmLand) {
+            this.willCreateFarmLand = param;
+            this.setAnim(ResidentMeta.ResidentAnim.Walk);
+            this.startGoToContinueCreateFarmLand(this.willCreateFarmLand);
+        }
+        // 建造农田
+        else if (state == ResidentMeta.ResidentState.CreateFarmLand) {
+            if (this.willCreateFarmLand) {
+                this.setAnim(ResidentMeta.ResidentAnim.Work);
+                this.setStateAniVisible(true);
+                this.setStateAni("ani2");
+                let script = this.willCreateFarmLand.building.getComponent(FarmLandLogic);
+                script.startCreate();
+            }
+        }
+        // 跑去建造牧场
+        else if (state == ResidentMeta.ResidentState.GotoContinueCreatePasture) {
+            this.willCreatePasture = param;
+            this.setAnim(ResidentMeta.ResidentAnim.Walk);
+            this.startGoToContinueCreatePasture(this.willCreatePasture);
+        }
+        // 建造牧场
+        else if (state == ResidentMeta.ResidentState.CreatePasture) {
+            if (this.willCreatePasture) {
+                this.setAnim(ResidentMeta.ResidentAnim.Work);
+                this.setStateAniVisible(true);
+                this.setStateAni("ani2");
+                let script = this.willCreatePasture.building.getComponent(PastureLogic);
+                script.startCreate();
+            }
+        }
         // 去治疗
         else if (state == ResidentMeta.ResidentState.GotoTreat) {
             let hospital = param;
@@ -534,6 +606,22 @@ export default class ResidentLogic extends Laya.Script {
             }
             this.willCreateShop = null;
         }
+        else if (state == ResidentMeta.ResidentState.CreateFarmLand) {
+            // todo 此处要判断是不是我自己在建造的完成了，不能所有人都建造完
+            let script = this.willCreateFarmLand.building.getComponent(FarmLandLogic);
+            if (!script || script.getModel() != param.model) {
+                return;
+            }
+            this.willCreateFarmLand = null;
+        }
+        else if (state == ResidentMeta.ResidentState.CreatePasture) {
+            // todo 此处要判断是不是我自己在建造的完成了，不能所有人都建造完
+            let script = this.willCreatePasture.building.getComponent(PastureLogic);
+            if (!script || script.getModel() != param.model) {
+                return;
+            }
+            this.willCreatePasture = null;
+        }
         else if (state == ResidentMeta.ResidentState.CreateHome) {
             // todo 此处要判断是不是我自己在建造的完成了，不能所有人都建造完
         }
@@ -611,7 +699,26 @@ export default class ResidentLogic extends Laya.Script {
         }));
     }
 
+    // 跑去未建成的农田周围
+    startGoToContinueCreateFarmLand(farmLand) {
+        this.gotoDestExt({
+            x: farmLand.x + farmLand.width / 2 - this.owner.width / 2,
+            y: farmLand.y + farmLand.height - this.owner.height,
+        }, Laya.Handler.create(this, function () {
+            this.refreshFSMState(ResidentMeta.ResidentState.CreateFarmLand, farmLand);
+        }));
+    }
 
+
+    // 跑去未建成的农田周围
+    startGoToContinueCreatePasture(pasture) {
+        this.gotoDestExt({
+            x: pasture.x + pasture.width / 2 - this.owner.width / 2,
+            y: pasture.y + pasture.height - this.owner.height,
+        }, Laya.Handler.create(this, function () {
+            this.refreshFSMState(ResidentMeta.ResidentState.CreatePasture, pasture);
+        }));
+    }
 
     // 赶去打猎
     startJoinHunt() {
@@ -1101,22 +1208,47 @@ export default class ResidentLogic extends Laya.Script {
         // };
         // this.level2Results.push(cell13);
 
-        // 赶着去建造商店
-        let cell14 = {
-            func: Laya.Handler.create(this, function (param) {
-                let building = BuildingMgr.getInstance().getNearstBuilding(this.owner.x,
-                    this.owner.y, BuildingMeta.BuildingType.ShopType,
-                    500, [BuildingMeta.BuildingState.PreCreating, BuildingMeta.BuildingState.Creating]);
-                if (building) {
-                    this.refreshFSMState(ResidentMeta.ResidentState.GotoContinueCreateShop, building);
-                    this.ideaResult = true;
-                }
-            }),
-        };
-        this.level2Results.push(cell14);
+        // // 赶着去建造商店
+        // let cell14 = {
+        //     func: Laya.Handler.create(this, function (param) {
+        //         let building = BuildingMgr.getInstance().getNearstBuilding(this.owner.x,
+        //             this.owner.y, BuildingMeta.BuildingType.ShopType,
+        //             500, [BuildingMeta.BuildingState.PreCreating, BuildingMeta.BuildingState.Creating]);
+        //         if (building) {
+        //             this.refreshFSMState(ResidentMeta.ResidentState.GotoContinueCreateShop, building);
+        //             this.ideaResult = true;
+        //         }
+        //     }),
+        // };
+        // this.level2Results.push(cell14);
 
+        // // 赶着去建造农田
+        // let cell15 = {
+        //     func: Laya.Handler.create(this, function (param) {
+        //         let building = BuildingMgr.getInstance().getNearstBuilding(this.owner.x,
+        //             this.owner.y, BuildingMeta.BuildingType.FarmLandType,
+        //             500, [BuildingMeta.BuildingState.PreCreating, BuildingMeta.BuildingState.Creating]);
+        //         if (building) {
+        //             this.refreshFSMState(ResidentMeta.ResidentState.GotoContinueCreateFarmLand, building);
+        //             this.ideaResult = true;
+        //         }
+        //     }),
+        // };
+        // this.level2Results.push(cell15);
 
-
+        // 赶着去建造牧场
+        // let cell16 = {
+        //     func: Laya.Handler.create(this, function (param) {
+        //         let building = BuildingMgr.getInstance().getNearstBuilding(this.owner.x,
+        //             this.owner.y, BuildingMeta.BuildingType.PastureType,
+        //             500, [BuildingMeta.BuildingState.PreCreating, BuildingMeta.BuildingState.Creating]);
+        //         if (building) {
+        //             this.refreshFSMState(ResidentMeta.ResidentState.GotoContinueCreatePasture, building);
+        //             this.ideaResult = true;
+        //         }
+        //     }),
+        // };
+        // this.level2Results.push(cell16);
     }
 
     // 执行策略
@@ -1148,6 +1280,9 @@ export default class ResidentLogic extends Laya.Script {
         }
         if (!RandomMgr.randomYes(this.model.getPositive())) {
             return;
+        }
+        if (RandomMgr.randomYes(ResidentTipMeta.BoredTipsProbability)) {
+            this.showTip(ResidentTipMeta.randomOneBoredTip());
         }
         // 处理可以做的事情
         this.processResult();

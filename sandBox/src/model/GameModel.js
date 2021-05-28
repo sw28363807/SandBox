@@ -188,7 +188,37 @@ export default class GameModel extends Laya.Script {
         });
         this.buildingModels[String(this.maxBuildingID)] = model;
         return model;
-    } 
+    }
+
+    // 添加农田Model
+    newFarmLandModel(param) {
+        this.maxBuildingID++;
+        let model = new BuildingModel();
+        model.updateData({
+            x: param.x,
+            y: param.y,
+            buildingId: this.maxBuildingID,
+            buildingType: BuildingMeta.BuildingType.FarmLandType,
+            buildingState: BuildingMeta.BuildingState.PreCreating,
+        });
+        this.buildingModels[String(this.maxBuildingID)] = model;
+        return model;
+    }
+
+    // 添加农田Model
+    newPastureModel(param) {
+        this.maxBuildingID++;
+        let model = new BuildingModel();
+        model.updateData({
+            x: param.x,
+            y: param.y,
+            buildingId: this.maxBuildingID,
+            buildingType: BuildingMeta.BuildingType.PastureType,
+            buildingState: BuildingMeta.BuildingState.PreCreating,
+        });
+        this.buildingModels[String(this.maxBuildingID)] = model;
+        return model;
+    }
 
     // 添加学校Model
     newSchoolModel(param) {

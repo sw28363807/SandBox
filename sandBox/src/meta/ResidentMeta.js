@@ -36,6 +36,10 @@ ResidentMeta.ResidentState = {
     CreatePowerPlant: 30,     //建造发电厂
     GotoContinueCreateShop: 31, //跑去建造商店
     CreateShop: 32,     //建造商店
+    GotoContinueCreateFarmLand: 33, //跑去建造农田
+    CreateFarmLand: 34,     //建造农田
+    GotoContinueCreatePasture: 35, //跑去建造牧场
+    CreatePasture: 36,     //建造牧场
 };
 
 // 动画枚举

@@ -9,12 +9,13 @@ export default class CommandPanel extends Laya.Script {
     }
 
     onEnable() {
-        new Laya.List().mouseEnabled
+        // new Laya.List().mouseEnabled
         this.touchLayer = this.owner.getChildByName("touch");
         this.touchLayer.mouseEnabled = false;
         this.touchLayerWidth = this.touchLayer.width;
+        this.oriOwerWidth = this.owner.width;
+        this.oriOwerHeight = this.owner.height;
         this.touchLayer.width = 0;
-        this.owner.width = 0;
 
         this.touchLayer.on(Laya.Event.MOUSE_MOVE, this, this.onTouchLayerMove);
         this.touchLayer.on(Laya.Event.MOUSE_OUT, this, this.onTouchLayerOut);
@@ -32,16 +33,24 @@ export default class CommandPanel extends Laya.Script {
         this.downBtn = this.owner.getChildByName("downBtn");
         this.downBtn.visible = false;
         this.listView.scaleY = 0;
+        this.owner.width = 100;
+        this.owner.height = 64;
         this.downBtn.on(Laya.Event.CLICK, this, function () {
             this.downBtn.visible = false;
             this.upBtn.visible = true;
-            Laya.Tween.to(this.listView, { scaleY: 0 }, 200, Laya.Ease.backIn);
+            this.owner.width = 100;
+            this.owner.height = 64;
+            Laya.Tween.to(this.listView, { scaleY: 0 }, 200, Laya.Ease.backIn, Laya.Handler.create(this, function () {
+
+            }));
 
         });
 
         this.upBtn.on(Laya.Event.CLICK, this, function () {
             this.downBtn.visible = true;
             this.upBtn.visible = false;
+            this.owner.width = this.oriOwerWidth;
+            this.owner.height = this.oriOwerHeight;
             Laya.Tween.to(this.listView, { scaleY: 1 }, 200, Laya.Ease.backOut);
         });
 
@@ -63,7 +72,12 @@ export default class CommandPanel extends Laya.Script {
             image.loadImage(data.preview, Laya.Handler.create(this, function () {
 
             }));
-            // new Laya.Sprite().on
+            // new Laya.Sprite().off();
+            image.off(Laya.Event.MOUSE_DOWN, this, this.onXMouseStart);
+            image.off(Laya.Event.MOUSE_MOVE, this, this.onXMouseMove);
+            image.off(Laya.Event.MOUSE_OUT, this, this.onXMouseOut);
+            image.off(Laya.Event.MOUSE_UP, this, this.onXMouseUp);
+
             image.on(Laya.Event.MOUSE_DOWN, this, this.onXMouseStart, [this.listView.array[index], image]);
             image.on(Laya.Event.MOUSE_MOVE, this, this.onXMouseMove, [this.listView.array[index], image]);
             image.on(Laya.Event.MOUSE_OUT, this, this.onXMouseOut, [this.listView.array[index], image]);
@@ -209,6 +223,18 @@ export default class CommandPanel extends Laya.Script {
                     });
                 } else if (this.dragData.type == BuildingMeta.BuildingType.ShopType) {
                     let buildingCell = BuildingMgr.getInstance().createShopByConfig({
+                        parent: GameContext.mapContainer,
+                        x: dpX,
+                        y: dpY
+                    });
+                } else if (this.dragData.type == BuildingMeta.BuildingType.FarmLandType) {
+                    let buildingCell = BuildingMgr.getInstance().createFarmLandByConfig({
+                        parent: GameContext.mapContainer,
+                        x: dpX,
+                        y: dpY
+                    });
+                } else if (this.dragData.type == BuildingMeta.BuildingType.PastureType) {
+                    let buildingCell = BuildingMgr.getInstance().createPastureByConfig({
                         parent: GameContext.mapContainer,
                         x: dpX,
                         y: dpY
