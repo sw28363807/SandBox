@@ -20,6 +20,7 @@ import HospitalLogic from "../building/HospitalLogic";
 import SchoolLogic from "../building/SchoolLogic";
 import Utils from "../helper/Utils";
 import PowerPlantLogic from "../building/PowerPlantLogic";
+import ShopLogic from "../building/ShopLogic";
 
 export default class ResidentLogic extends Laya.Script {
 
@@ -55,6 +56,7 @@ export default class ResidentLogic extends Laya.Script {
         EventMgr.getInstance().registEvent(GameEvent.CREATE_HOSPITAL_FINISH, this, this.onDoWorkFinish);
         EventMgr.getInstance().registEvent(GameEvent.CREATE_SCHOOL_FINISH, this, this.onDoWorkFinish);
         EventMgr.getInstance().registEvent(GameEvent.CREATE_POWERPLANT_FINISH, this, this.onDoWorkFinish);
+        EventMgr.getInstance().registEvent(GameEvent.CREATE_SHOP_FINISH, this, this.onDoWorkFinish);
         EventMgr.getInstance().registEvent(GameEvent.HUNT_FINISH, this, this.onDoWorkFinish);
         EventMgr.getInstance().registEvent(GameEvent.RESIDENT_SICK, this, this.onSick);
         EventMgr.getInstance().registEvent(GameEvent.RESIDENT_DIE, this, this.onDie);
@@ -65,6 +67,7 @@ export default class ResidentLogic extends Laya.Script {
         EventMgr.getInstance().removeEvent(GameEvent.CREATE_HOSPITAL_FINISH, this, this.onDoWorkFinish);
         EventMgr.getInstance().removeEvent(GameEvent.CREATE_SCHOOL_FINISH, this, this.onDoWorkFinish);
         EventMgr.getInstance().removeEvent(GameEvent.CREATE_POWERPLANT_FINISH, this, this.onDoWorkFinish);
+        EventMgr.getInstance().removeEvent(GameEvent.CREATE_SHOP_FINISH, this, this.onDoWorkFinish);
         EventMgr.getInstance().removeEvent(GameEvent.HUNT_FINISH, this, this.onDoWorkFinish);
         EventMgr.getInstance().removeEvent(GameEvent.RESIDENT_SICK, this, this.onSick);
         EventMgr.getInstance().removeEvent(GameEvent.RESIDENT_DIE, this, this.onDie);
@@ -368,13 +371,13 @@ export default class ResidentLogic extends Laya.Script {
                 script.startCreate();
             }
         }
-        // 跑去建造医院
+        // 跑去建造发电厂
         else if (state == ResidentMeta.ResidentState.GotoContinueCreatePowerPlant) {
             this.willCreatePowerPlant = param;
             this.setAnim(ResidentMeta.ResidentAnim.Walk);
             this.startGoToContinueCreatePowerPlant(this.willCreatePowerPlant);
         }
-        // 建造医院
+        // 建造发电厂
         else if (state == ResidentMeta.ResidentState.CreatePowerPlant) {
             if (this.willCreatePowerPlant) {
                 this.setAnim(ResidentMeta.ResidentAnim.Work);
@@ -384,6 +387,24 @@ export default class ResidentLogic extends Laya.Script {
                 script.startCreate();
             }
         }
+
+        // 跑去建造商店
+        else if (state == ResidentMeta.ResidentState.GotoContinueCreateShop) {
+            this.willCreateShop = param;
+            this.setAnim(ResidentMeta.ResidentAnim.Walk);
+            this.startGoToContinueCreateShop(this.willCreateShop);
+        }
+        // 建造商店
+        else if (state == ResidentMeta.ResidentState.CreateShop) {
+            if (this.willCreateShop) {
+                this.setAnim(ResidentMeta.ResidentAnim.Work);
+                this.setStateAniVisible(true);
+                this.setStateAni("ani2");
+                let script = this.willCreateShop.building.getComponent(ShopLogic);
+                script.startCreate();
+            }
+        }
+
         // 去治疗
         else if (state == ResidentMeta.ResidentState.GotoTreat) {
             let hospital = param;
@@ -505,6 +526,14 @@ export default class ResidentLogic extends Laya.Script {
             }
             this.willCreatePowerPlant = null;
         }
+        else if (state == ResidentMeta.ResidentState.CreateShop) {
+            // todo 此处要判断是不是我自己在建造的完成了，不能所有人都建造完
+            let script = this.willCreateShop.building.getComponent(ShopLogic);
+            if (!script || script.getModel() != param.model) {
+                return;
+            }
+            this.willCreateShop = null;
+        }
         else if (state == ResidentMeta.ResidentState.CreateHome) {
             // todo 此处要判断是不是我自己在建造的完成了，不能所有人都建造完
         }
@@ -562,13 +591,23 @@ export default class ResidentLogic extends Laya.Script {
         }));
     }
 
-    // 跑去未建成的学校周围
+    // 跑去未建成的发电厂周围
     startGoToContinueCreatePowerPlant(powerPlant) {
         this.gotoDestExt({
             x: powerPlant.x + powerPlant.width / 2 - this.owner.width / 2,
             y: powerPlant.y + powerPlant.height - this.owner.height,
         }, Laya.Handler.create(this, function () {
             this.refreshFSMState(ResidentMeta.ResidentState.CreatePowerPlant, powerPlant);
+        }));
+    }
+
+    // 跑去未建成的商店周围
+    startGoToContinueCreateShop(shop) {
+        this.gotoDestExt({
+            x: shop.x + shop.width / 2 - this.owner.width / 2,
+            y: shop.y + shop.height - this.owner.height,
+        }, Laya.Handler.create(this, function () {
+            this.refreshFSMState(ResidentMeta.ResidentState.CreateShop, shop);
         }));
     }
 
@@ -1048,19 +1087,36 @@ export default class ResidentLogic extends Laya.Script {
         //     }
         // }
 
-        // 赶着去建造发电厂
-        let cell13 = {
+        // // 赶着去建造发电厂
+        // let cell13 = {
+        //     func: Laya.Handler.create(this, function (param) {
+        //         let building = BuildingMgr.getInstance().getNearstBuilding(this.owner.x,
+        //             this.owner.y, BuildingMeta.BuildingType.PowerPlantType,
+        //             500, [BuildingMeta.BuildingState.PreCreating, BuildingMeta.BuildingState.Creating]);
+        //         if (building) {
+        //             this.refreshFSMState(ResidentMeta.ResidentState.GotoContinueCreatePowerPlant, building);
+        //             this.ideaResult = true;
+        //         }
+        //     }),
+        // };
+        // this.level2Results.push(cell13);
+
+        // 赶着去建造商店
+        let cell14 = {
             func: Laya.Handler.create(this, function (param) {
                 let building = BuildingMgr.getInstance().getNearstBuilding(this.owner.x,
-                    this.owner.y, BuildingMeta.BuildingType.PowerPlantType,
+                    this.owner.y, BuildingMeta.BuildingType.ShopType,
                     500, [BuildingMeta.BuildingState.PreCreating, BuildingMeta.BuildingState.Creating]);
                 if (building) {
-                    this.refreshFSMState(ResidentMeta.ResidentState.GotoContinueCreatePowerPlant, building);
+                    this.refreshFSMState(ResidentMeta.ResidentState.GotoContinueCreateShop, building);
                     this.ideaResult = true;
                 }
             }),
         };
-        this.level2Results.push(cell13);
+        this.level2Results.push(cell14);
+
+
+
     }
 
     // 执行策略

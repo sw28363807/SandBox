@@ -1,12 +1,12 @@
 {
     "x":0,
     "type":"Scene",
-    "selectedBox":10,
-    "selecteID":16,
+    "selectedBox":2,
+    "selecteID":141,
     "searchKey":"Scene",
     "props":{"width":1336,"sceneColor":"#000000","height":750},
     "nodeParent":-1,
-    "maxID":141,
+    "maxID":153,
     "label":"Scene",
     "isOpen":true,
     "isDirectory":true,
@@ -38,27 +38,25 @@
             "props":{"y":0,"x":0,"width":1336,"name":"ScrollView","height":750,"bgColor":"#f8f3f7"},
             "nodeParent":2,
             "label":"ScrollView",
-            "isOpen":true,
+            "isOpen":false,
             "isDirectory":true,
             "isAniNode":true,
             "hasChild":true,
             "compId":9,
             "child":[
                 {
-                    "x":30,
                     "type":"Box",
                     "searchKey":"Box,container",
                     "props":{"width":3000,"name":"container","height":3000},
                     "nodeParent":9,
                     "label":"container",
-                    "isOpen":true,
+                    "isOpen":false,
                     "isDirectory":true,
                     "isAniNode":true,
                     "hasChild":true,
                     "compId":10,
                     "child":[
                         {
-                            "x":45,
                             "type":"Box",
                             "searchKey":"Box",
                             "props":{"y":0,"x":0,"width":3000,"height":100,"bgColor":"#71db50"},
@@ -72,7 +70,6 @@
                                 ]
                         },
                         {
-                            "x":45,
                             "type":"Box",
                             "searchKey":"Box",
                             "props":{"y":2891,"x":0,"width":3000,"height":100,"bgColor":"#71db50"},
@@ -86,7 +83,6 @@
                                 ]
                         },
                         {
-                            "x":45,
                             "type":"Box",
                             "searchKey":"Box",
                             "props":{"y":0,"x":0,"width":100,"height":3000,"bgColor":"#71db50"},
@@ -101,7 +97,6 @@
                                 ]
                         },
                         {
-                            "x":45,
                             "type":"Box",
                             "searchKey":"Box",
                             "props":{"y":0,"x":2900,"width":100,"height":3000,"bgColor":"#71db50"},
@@ -115,7 +110,6 @@
                                 ]
                         },
                         {
-                            "x":45,
                             "type":"Box",
                             "searchKey":"Box,spring",
                             "props":{"width":3000,"name":"spring","height":3000,"bgColor":"#c8eea0"},
@@ -131,7 +125,6 @@
                             "$HIDDEN":false
                         },
                         {
-                            "x":45,
                             "type":"Box",
                             "searchKey":"Box",
                             "props":{"y":613,"x":715,"presetID":1,"preset":"laya/pages/prefab/Tree.prefab"},
@@ -174,7 +167,6 @@
                                 }]
                         },
                         {
-                            "x":45,
                             "type":"Box",
                             "selectedBox":35,
                             "selecteID":38,
@@ -216,7 +208,6 @@
                                 }]
                         },
                         {
-                            "x":45,
                             "type":"Box",
                             "selectedBox":90,
                             "selecteID":94,
@@ -272,7 +263,6 @@
                                 }]
                         },
                         {
-                            "x":45,
                             "type":"Box",
                             "selectedBox":99,
                             "selecteID":101,
@@ -353,7 +343,6 @@
                                 }]
                         },
                         {
-                            "x":45,
                             "type":"Box",
                             "searchKey":"Box",
                             "props":{"y":312,"x":856,"presetID":1,"preset":"laya/pages/prefab/AnimalTrigger.prefab"},
@@ -384,7 +373,6 @@
                         }]
                 },
                 {
-                    "x":30,
                     "type":"Script",
                     "switchAble":true,
                     "source":"src/helper/MapScrollView.js",

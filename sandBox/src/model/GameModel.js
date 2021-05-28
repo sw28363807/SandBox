@@ -175,6 +175,21 @@ export default class GameModel extends Laya.Script {
         return model;
     }
 
+    // 添加商店Model
+    newShopModel(param) {
+        this.maxBuildingID++;
+        let model = new BuildingModel();
+        model.updateData({
+            x: param.x,
+            y: param.y,
+            buildingId: this.maxBuildingID,
+            buildingType: BuildingMeta.BuildingType.ShopType,
+            buildingState: BuildingMeta.BuildingState.PreCreating,
+        });
+        this.buildingModels[String(this.maxBuildingID)] = model;
+        return model;
+    } 
+
     // 添加学校Model
     newSchoolModel(param) {
         this.maxBuildingID++;

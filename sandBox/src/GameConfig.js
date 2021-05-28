@@ -16,6 +16,7 @@ import PowerPlantLogic from "./building/PowerPlantLogic"
 import ResidentLogic from "./resident/ResidentLogic"
 import ResidentDetailsPanel from "./panel/ResidentDetailsPanel"
 import SchoolLogic from "./building/SchoolLogic"
+import ShopLogic from "./building/ShopLogic"
 
 export default class GameConfig {
     static init() {
@@ -38,6 +39,7 @@ export default class GameConfig {
 		reg("resident/ResidentLogic.js",ResidentLogic);
 		reg("panel/ResidentDetailsPanel.js",ResidentDetailsPanel);
 		reg("building/SchoolLogic.js",SchoolLogic);
+		reg("building/ShopLogic.js",ShopLogic);
     }
 }
 GameConfig.width = 1336;

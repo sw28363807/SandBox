@@ -5,6 +5,7 @@ import HomeLogic from "./HomeLogic";
 import HospitalLogic from "./HospitalLogic";
 import PowerPlantLogic from "./PowerPlantLogic";
 import SchoolLogic from "./SchoolLogic";
+import ShopLogic from "./ShopLogic";
 
 export default class BuildingMgr extends Laya.Script {
 
@@ -164,6 +165,42 @@ export default class BuildingMgr extends Laya.Script {
         } else {
             Laya.loader.load(GameMeta.BuildingAtlasPath, Laya.Handler.create(this, function () {
                 this.ceatePowerPlantFunc(config, model, cell, callback);
+            }));
+        }
+        return cell;
+    }
+
+
+    ceateShopFunc(config, model, cell, callback) {
+        Laya.loader.create(BuildingMeta.ShopPrefabPath, Laya.Handler.create(this, function (prefabDef) {
+            let shop = prefabDef.create();
+            config.parent.addChild(shop);
+            let script = shop.getComponent(ShopLogic);
+            cell.building = shop;
+            script.refreshByModel(model);
+            if (callback) {
+                callback.runWith(cell);
+            }
+        }));
+    }
+
+    // 建造商店
+    createShopByConfig(config, callback) {
+        let model = GameModel.getInstance().newShopModel(config);
+        let cell = {
+            x: config.x,
+            y: config.y,
+            width: BuildingMeta.ShopWidth,
+            height: BuildingMeta.ShopHeight,
+            model: model,
+            building: "noBuilding",
+        };
+        this.buildings[String(model.getBuildingId())] = cell;
+        if (Laya.loader.getRes(GameMeta.BuildingAtlasPath)) {
+            this.ceateShopFunc(config, model, cell, callback);
+        } else {
+            Laya.loader.load(GameMeta.BuildingAtlasPath, Laya.Handler.create(this, function () {
+                this.ceateShopFunc(config, model, cell, callback);
             }));
         }
         return cell;

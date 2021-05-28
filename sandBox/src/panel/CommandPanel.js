@@ -207,8 +207,8 @@ export default class CommandPanel extends Laya.Script {
                         x: dpX,
                         y: dpY
                     });
-                } else if (this.dragData.type == BuildingMeta.BuildingType.PowerPlantType) {
-                    let buildingCell = BuildingMgr.getInstance().createPowerPlantByConfig({
+                } else if (this.dragData.type == BuildingMeta.BuildingType.ShopType) {
+                    let buildingCell = BuildingMgr.getInstance().createShopByConfig({
                         parent: GameContext.mapContainer,
                         x: dpX,
                         y: dpY

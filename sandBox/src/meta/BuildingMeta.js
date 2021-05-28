@@ -6,6 +6,7 @@ BuildingMeta.HomePrefabPath = "prefab/Home.prefab";       //家prefab路径
 BuildingMeta.HospitalPrefabPath = "prefab/Hospital.prefab";       //医院prefab路径
 BuildingMeta.SchoolPrefabPath = "prefab/School.prefab";       //医院prefab路径
 BuildingMeta.PowerPlantPrefabPath = "prefab/PowerPlant.prefab";       //发电厂prefab路径
+BuildingMeta.ShopPrefabPath = "prefab/Shop.prefab";       //商店prefab路径
 
 
 BuildingMeta.BuildingType = {
@@ -14,6 +15,7 @@ BuildingMeta.BuildingType = {
     HospitalType: 2,    //医院
     SchoolType: 3,      //学校
     PowerPlantType: 4,  //发电厂
+    ShopType: 5,       //商店
 };
 
 BuildingMeta.BuildingState = {
@@ -36,9 +38,12 @@ BuildingMeta.HospitalHeight = 256;   //医院高度
 // 学校
 BuildingMeta.SchoolWidth = 256;   //学校宽度
 BuildingMeta.SchoolHeight = 256;   //学校高度
-// 发电厂高度
+// 发电厂
 BuildingMeta.PowerPlantWidth = 256;   //发电厂宽度
 BuildingMeta.PowerPlantHeight = 256;   //发电厂高度
+// 商店
+BuildingMeta.ShopWidth = 256;   //发电厂宽度
+BuildingMeta.ShopHeight = 256;   //发电厂高度
 
 
 // 操作界面的数据源
@@ -70,6 +75,16 @@ BuildingMeta.CommandPanelDataSource = {
         preview: "source/building/power_plant.png",
         width: BuildingMeta.PowerPlantWidth,
         height: BuildingMeta.PowerPlantHeight,
+        adjustX: 64,
+        adjustY: 128,
+    },
+    // 商店
+    [String(BuildingMeta.BuildingType.ShopType)]: {
+        prefab: BuildingMeta.ShopPrefabPath,
+        type: BuildingMeta.BuildingType.ShopType,
+        preview: "source/building/shop_1.png",
+        width: BuildingMeta.ShopWidth,
+        height: BuildingMeta.ShopHeight,
         adjustX: 64,
         adjustY: 128,
     },
