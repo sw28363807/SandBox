@@ -1273,7 +1273,7 @@ export default class ResidentLogic extends Laya.Script {
         // };
         // this.level2Results.push(cell15);
 
-        // 赶着去建造牧场
+        // // 赶着去建造牧场
         // let cell16 = {
         //     func: Laya.Handler.create(this, function (param) {
         //         let building = BuildingMgr.getInstance().getNearstBuilding(this.owner.x,
@@ -1288,18 +1288,18 @@ export default class ResidentLogic extends Laya.Script {
         // this.level2Results.push(cell16);
 
         //赶着去建造歌剧院
-        let cell17 = {
-            func: Laya.Handler.create(this, function (param) {
-                let building = BuildingMgr.getInstance().getNearstBuilding(this.owner.x,
-                    this.owner.y, BuildingMeta.BuildingType.OperaType,
-                    500, [BuildingMeta.BuildingState.PreCreating, BuildingMeta.BuildingState.Creating]);
-                if (building) {
-                    this.refreshFSMState(ResidentMeta.ResidentState.GotoContinueCreateOpera, building);
-                    this.ideaResult = true;
-                }
-            }),
-        };
-        this.level2Results.push(cell17);
+        // let cell17 = {
+        //     func: Laya.Handler.create(this, function (param) {
+        //         let building = BuildingMgr.getInstance().getNearstBuilding(this.owner.x,
+        //             this.owner.y, BuildingMeta.BuildingType.OperaType,
+        //             500, [BuildingMeta.BuildingState.PreCreating, BuildingMeta.BuildingState.Creating]);
+        //         if (building) {
+        //             this.refreshFSMState(ResidentMeta.ResidentState.GotoContinueCreateOpera, building);
+        //             this.ideaResult = true;
+        //         }
+        //     }),
+        // };
+        // this.level2Results.push(cell17);
     }
 
     // 执行策略
