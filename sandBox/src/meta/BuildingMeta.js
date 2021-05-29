@@ -9,6 +9,7 @@ BuildingMeta.PowerPlantPrefabPath = "prefab/PowerPlant.prefab";       //发电�
 BuildingMeta.ShopPrefabPath = "prefab/Shop.prefab";       //商店prefab路径
 BuildingMeta.FarmLandPrefabPath = "prefab/FarmLand.prefab";       //农田prefab路径
 BuildingMeta.PasturePrefabPath = "prefab/Pasture.prefab";       //牧场prefab路径
+BuildingMeta.OperaPrefabPath = "prefab/Opera.prefab";       //歌剧院prefab路径
 
 
 BuildingMeta.BuildingType = {
@@ -20,6 +21,7 @@ BuildingMeta.BuildingType = {
     ShopType: 5,       //商店
     FarmLandType: 6,   //农田
     PastureType: 7,    //牧场
+    OperaType: 8,    //歌剧院
 };
 
 BuildingMeta.BuildingState = {
@@ -57,6 +59,10 @@ BuildingMeta.FarmLandHeight = 256;   //农田高度
 BuildingMeta.PastureWidth = 256;   //牧场宽度
 BuildingMeta.PastureHeight = 256;   //牧场高度
 
+// 歌剧院
+BuildingMeta.OperaWidth = 256;   //宽度
+BuildingMeta.OperaHeight = 256;   //牧场高度
+
 
 // 操作界面的数据源
 BuildingMeta.CommandPanelDataSource = {
@@ -67,6 +73,8 @@ BuildingMeta.CommandPanelDataSource = {
         preview: "source/building/hospital1_1.png",
         width: BuildingMeta.HospitalWidth,
         height: BuildingMeta.HospitalHeight,
+        realWidth: 128,
+        realHeight: 128,
         adjustX: 64,
         adjustY: 128,
     },
@@ -77,6 +85,8 @@ BuildingMeta.CommandPanelDataSource = {
         preview: "source/building/school_1.png",
         width: BuildingMeta.SchoolWidth,
         height: BuildingMeta.SchoolHeight,
+        realWidth: 128,
+        realHeight: 128,
         adjustX: 64,
         adjustY: 128,
     },
@@ -87,6 +97,8 @@ BuildingMeta.CommandPanelDataSource = {
         preview: "source/building/power_plant.png",
         width: BuildingMeta.PowerPlantWidth,
         height: BuildingMeta.PowerPlantHeight,
+        realWidth: 128,
+        realHeight: 128,
         adjustX: 64,
         adjustY: 128,
     },
@@ -97,6 +109,8 @@ BuildingMeta.CommandPanelDataSource = {
         preview: "source/building/shop_1.png",
         width: BuildingMeta.ShopWidth,
         height: BuildingMeta.ShopHeight,
+        realWidth: 128,
+        realHeight: 128,
         adjustX: 64,
         adjustY: 128,
     },
@@ -107,6 +121,8 @@ BuildingMeta.CommandPanelDataSource = {
         preview: "source/building/farmland.png",
         width: BuildingMeta.FarmLandWidth,
         height: BuildingMeta.FarmLandHeight,
+        realWidth: 128,
+        realHeight: 128,
         adjustX: 64,
         adjustY: 128,
     },
@@ -117,7 +133,21 @@ BuildingMeta.CommandPanelDataSource = {
         preview: "source/building/pasture.png",
         width: BuildingMeta.PastureWidth,
         height: BuildingMeta.PastureHeight,
+        realWidth: 128,
+        realHeight: 128,
         adjustX: 64,
         adjustY: 128,
+    },
+    // 歌剧院
+    [String(BuildingMeta.BuildingType.OperaType)]: {
+        prefab: BuildingMeta.OperaPrefabPath,
+        type: BuildingMeta.BuildingType.OperaType,
+        preview: "source/building/center2.png",
+        width: BuildingMeta.OperaWidth,
+        height: BuildingMeta.OperaHeight,
+        realWidth: 256,
+        realHeight: 256,
+        adjustX: 0,
+        adjustY: 0,
     },
 };

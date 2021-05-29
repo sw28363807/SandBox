@@ -40,6 +40,8 @@ ResidentMeta.ResidentState = {
     CreateFarmLand: 34,     //建造农田
     GotoContinueCreatePasture: 35, //跑去建造牧场
     CreatePasture: 36,     //建造牧场
+    GotoContinueCreateOpera: 37, //跑去建造歌剧院
+    CreateOpera: 38,     //建造歌剧院
 };
 
 // 动画枚举
@@ -81,12 +83,14 @@ ResidentMeta.ResidentReduceFoodBaseValue = -1;  //食物减少值
 ResidentMeta.ResidentReduceSocialBaseValue = -1; //社交减少值
 ResidentMeta.ResidentAddSocialBaseValue = 60; //一次社交增加值
 ResidentMeta.ResidentReduceLifeBaseValue = -0.5; //生命减少值
+ResidentMeta.ResidentReduceEnjoyBaseValue = -0.5; //娱乐减少值
 ResidentMeta.ResidentSickProbability = 0.99; //生病的概率
 ResidentMeta.ResidentTreatTime = 5000; //治疗的时间
 ResidentMeta.ResidentLearnTime = 5000; //学习的时间
 ResidentMeta.ResidentSocialNeedValue = 30;  //需要社交的警戒线，低于这个值就是需要社交了
 ResidentMeta.ResidentWaterNeedValue = 30;  //需要喝水的警戒线，低于这个值就是需要喝水了
 ResidentMeta.ResidentFoodNeedValue = 30;  //需要吃饭的警戒线，低于这个值就是需要吃饭了
+ResidentMeta.ResidentEnjoyNeedValue = 30;  //需要娱乐的警戒线，低于这个值就是需要娱乐了
 ResidentMeta.ResidentSocialArea = 300;      //寻找可以社交的人的范围
 ResidentMeta.ResidentAddTreeBaseValue = 1;  //人物砍树增加的数值
 ResidentMeta.ResidentAddStoneBaseValue = 1;  //人物收集石头增加的数值

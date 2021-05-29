@@ -96,6 +96,9 @@ export default class ResidentModel extends Laya.Script {
         }
     }
 
+
+
+
     getSick() {
         return this.sick;
     }
@@ -152,6 +155,7 @@ export default class ResidentModel extends Laya.Script {
         // if (this.curFSMState == ResidentMeta.ResidentState.) {
 
         // }
+        this.addEnjoy(ResidentMeta.ResidentReduceEnjoyBaseValue);
         this.addSocial(ResidentMeta.ResidentReduceSocialBaseValue);
         this.addWater(ResidentMeta.ResidentReduceWaterBaseValue);
         this.addFood(ResidentMeta.ResidentReduceFoodBaseValue);
@@ -187,7 +191,7 @@ export default class ResidentModel extends Laya.Script {
             this.getFSMState() == ResidentMeta.ResidentState.IdleState &&
             this.getSex() == 2) {
             if (this.loverId == 0) {
-                return true; 
+                return true;
             } else {
                 if (manModel.getLoverId() == this.residentId) {
                     return true;
@@ -197,6 +201,25 @@ export default class ResidentModel extends Laya.Script {
         }
         return false;
     }
+
+
+    addEnjoy(delta) {
+        this.setEnjoy(this.getEnjoy() + delta);
+    }
+
+    setEnjoy(num) {
+        this.enjoy = num;
+        if (this.enjoy < 0) {
+            this.enjoy = 0;
+        } else if (this.enjoy > 100) {
+            this.enjoy = 100;
+        }
+    }
+
+    getEnjoy() {
+        return this.enjoy;
+    }
+
 
     addSocial(delta) {
         this.setSocial(this.getSocial() + delta);
@@ -209,6 +232,10 @@ export default class ResidentModel extends Laya.Script {
         } else if (this.social > 100) {
             this.social = 100;
         }
+    }
+
+    getSocial() {
+        return this.social;
     }
 
     getTeach() {
@@ -226,10 +253,6 @@ export default class ResidentModel extends Laya.Script {
         } else if (this.teach > 100) {
             this.teach = 100;
         }
-    }
-
-    getSocial() {
-        return this.social;
     }
 
 

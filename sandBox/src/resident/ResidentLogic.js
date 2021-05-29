@@ -24,6 +24,7 @@ import ShopLogic from "../building/ShopLogic";
 import ResidentTipMeta from "../meta/ResidentTipMeta";
 import FarmLandLogic from "../building/FarmLandLogic";
 import PastureLogic from "../building/PastureLogic";
+import OperaLogic from "../building/OperaLogic";
 
 export default class ResidentLogic extends Laya.Script {
 
@@ -63,6 +64,7 @@ export default class ResidentLogic extends Laya.Script {
         EventMgr.getInstance().registEvent(GameEvent.CREATE_SHOP_FINISH, this, this.onDoWorkFinish);
         EventMgr.getInstance().registEvent(GameEvent.CREATE_FARMLAND_FINISH, this, this.onDoWorkFinish);
         EventMgr.getInstance().registEvent(GameEvent.CREATE_PASTURE_FINISH, this, this.onDoWorkFinish);
+        EventMgr.getInstance().registEvent(GameEvent.CREATE_OPERA_FINISH, this, this.onDoWorkFinish);
         EventMgr.getInstance().registEvent(GameEvent.HUNT_FINISH, this, this.onDoWorkFinish);
         EventMgr.getInstance().registEvent(GameEvent.RESIDENT_SICK, this, this.onSick);
         EventMgr.getInstance().registEvent(GameEvent.RESIDENT_DIE, this, this.onDie);
@@ -76,6 +78,7 @@ export default class ResidentLogic extends Laya.Script {
         EventMgr.getInstance().removeEvent(GameEvent.CREATE_SHOP_FINISH, this, this.onDoWorkFinish);
         EventMgr.getInstance().removeEvent(GameEvent.CREATE_FARMLAND_FINISH, this, this.onDoWorkFinish);
         EventMgr.getInstance().removeEvent(GameEvent.CREATE_PASTURE_FINISH, this, this.onDoWorkFinish);
+        EventMgr.getInstance().removeEvent(GameEvent.CREATE_OPERA_FINISH, this, this.onDoWorkFinish);
         EventMgr.getInstance().removeEvent(GameEvent.HUNT_FINISH, this, this.onDoWorkFinish);
         EventMgr.getInstance().removeEvent(GameEvent.RESIDENT_SICK, this, this.onSick);
         EventMgr.getInstance().removeEvent(GameEvent.RESIDENT_DIE, this, this.onDie);
@@ -477,6 +480,22 @@ export default class ResidentLogic extends Laya.Script {
                 script.startCreate();
             }
         }
+        // 跑去建造歌剧院
+        else if (state == ResidentMeta.ResidentState.GotoContinueCreateOpera) {
+            this.willCreateOpera = param;
+            this.setAnim(ResidentMeta.ResidentAnim.Walk);
+            this.startGoToContinueCreateOpera(this.willCreateOpera);
+        }
+        // 建造歌剧院
+        else if (state == ResidentMeta.ResidentState.CreateOpera) {
+            if (this.willCreateOpera) {
+                this.setAnim(ResidentMeta.ResidentAnim.Work);
+                this.setStateAniVisible(true);
+                this.setStateAni("ani2");
+                let script = this.willCreateOpera.building.getComponent(OperaLogic);
+                script.startCreate();
+            }
+        }
         // 去治疗
         else if (state == ResidentMeta.ResidentState.GotoTreat) {
             let hospital = param;
@@ -622,6 +641,14 @@ export default class ResidentLogic extends Laya.Script {
             }
             this.willCreatePasture = null;
         }
+        else if (state == ResidentMeta.ResidentState.CreateOpera) {
+            // todo 此处要判断是不是我自己在建造的完成了，不能所有人都建造完
+            let script = this.willCreateOpera.building.getComponent(OperaLogic);
+            if (!script || script.getModel() != param.model) {
+                return;
+            }
+            this.willCreateOpera = null;
+        }
         else if (state == ResidentMeta.ResidentState.CreateHome) {
             // todo 此处要判断是不是我自己在建造的完成了，不能所有人都建造完
         }
@@ -710,13 +737,23 @@ export default class ResidentLogic extends Laya.Script {
     }
 
 
-    // 跑去未建成的农田周围
+    // 跑去未建成的牧场周围
     startGoToContinueCreatePasture(pasture) {
         this.gotoDestExt({
             x: pasture.x + pasture.width / 2 - this.owner.width / 2,
             y: pasture.y + pasture.height - this.owner.height,
         }, Laya.Handler.create(this, function () {
             this.refreshFSMState(ResidentMeta.ResidentState.CreatePasture, pasture);
+        }));
+    }
+
+    // 跑去未建成的歌剧院周围
+    startGoToContinueCreateOpera(opera) {
+        this.gotoDestExt({
+            x: opera.x + opera.width / 2 - this.owner.width / 2,
+            y: opera.y + opera.height - this.owner.height,
+        }, Laya.Handler.create(this, function () {
+            this.refreshFSMState(ResidentMeta.ResidentState.CreateOpera, opera);
         }));
     }
 
@@ -1249,6 +1286,20 @@ export default class ResidentLogic extends Laya.Script {
         //     }),
         // };
         // this.level2Results.push(cell16);
+
+        //赶着去建造歌剧院
+        let cell17 = {
+            func: Laya.Handler.create(this, function (param) {
+                let building = BuildingMgr.getInstance().getNearstBuilding(this.owner.x,
+                    this.owner.y, BuildingMeta.BuildingType.OperaType,
+                    500, [BuildingMeta.BuildingState.PreCreating, BuildingMeta.BuildingState.Creating]);
+                if (building) {
+                    this.refreshFSMState(ResidentMeta.ResidentState.GotoContinueCreateOpera, building);
+                    this.ideaResult = true;
+                }
+            }),
+        };
+        this.level2Results.push(cell17);
     }
 
     // 执行策略

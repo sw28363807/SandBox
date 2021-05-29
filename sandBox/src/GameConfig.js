@@ -13,6 +13,7 @@ import FarmLandLogic from "./building/FarmLandLogic"
 import FoodLogic from "./source/FoodLogic"
 import HomeLogic from "./building/HomeLogic"
 import HospitalLogic from "./building/HospitalLogic"
+import OperaLogic from "./building/OperaLogic"
 import PastureLogic from "./building/PastureLogic"
 import PowerPlantLogic from "./building/PowerPlantLogic"
 import ResidentLogic from "./resident/ResidentLogic"
@@ -38,6 +39,7 @@ export default class GameConfig {
 		reg("source/FoodLogic.js",FoodLogic);
 		reg("building/HomeLogic.js",HomeLogic);
 		reg("building/HospitalLogic.js",HospitalLogic);
+		reg("building/OperaLogic.js",OperaLogic);
 		reg("building/PastureLogic.js",PastureLogic);
 		reg("building/PowerPlantLogic.js",PowerPlantLogic);
 		reg("resident/ResidentLogic.js",ResidentLogic);

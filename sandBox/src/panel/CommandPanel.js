@@ -55,6 +55,7 @@ export default class CommandPanel extends Laya.Script {
         });
 
         this.listView.renderHandler = Laya.Handler.create(this, this.onRenderCell, null, false);
+        this.listView.mouseHandler = Laya.Handler.create(this, this.onMouseEvent, null, false);
         this.listView.refresh();
 
         this.draging = false;
@@ -62,6 +63,21 @@ export default class CommandPanel extends Laya.Script {
         this.dragStartPointY = null;
         this.dragData = null;
         this.dragRender = null;
+        this.images = {};
+    }
+
+    onMouseEvent(e, index) {
+        let data = this.dataArray[index];
+        let image = this.images[index];
+        if (e.type == Laya.Event.MOUSE_DOWN) {
+            this.onXMouseStart(data, image);
+        } else if (e.type == Laya.Event.MOUSE_MOVE) {
+            this.onXMouseMove(data, image);
+        } else if (e.type == Laya.Event.MOUSE_OUT) {
+            this.onXMouseOut(data, image);
+        } else if (e.type == Laya.Event.MOUSE_UP) {
+            this.onXMouseUp(data, image);
+        }
     }
 
     onRenderCell(cell, index) {
@@ -69,19 +85,10 @@ export default class CommandPanel extends Laya.Script {
             let item = cell.getChildByName("item");
             let image = item.getChildByName("image");
             let data = this.dataArray[index];
+            cell.myDataSource = data;
             image.loadImage(data.preview, Laya.Handler.create(this, function () {
-
             }));
-            // new Laya.Sprite().off();
-            image.off(Laya.Event.MOUSE_DOWN, this, this.onXMouseStart);
-            image.off(Laya.Event.MOUSE_MOVE, this, this.onXMouseMove);
-            image.off(Laya.Event.MOUSE_OUT, this, this.onXMouseOut);
-            image.off(Laya.Event.MOUSE_UP, this, this.onXMouseUp);
-
-            image.on(Laya.Event.MOUSE_DOWN, this, this.onXMouseStart, [this.listView.array[index], image]);
-            image.on(Laya.Event.MOUSE_MOVE, this, this.onXMouseMove, [this.listView.array[index], image]);
-            image.on(Laya.Event.MOUSE_OUT, this, this.onXMouseOut, [this.listView.array[index], image]);
-            image.on(Laya.Event.MOUSE_UP, this, this.onXMouseUp, [this.listView.array[index], image]);
+            this.images[index] = image;
         }
     }
 
@@ -235,6 +242,18 @@ export default class CommandPanel extends Laya.Script {
                     });
                 } else if (this.dragData.type == BuildingMeta.BuildingType.PastureType) {
                     let buildingCell = BuildingMgr.getInstance().createPastureByConfig({
+                        parent: GameContext.mapContainer,
+                        x: dpX,
+                        y: dpY
+                    });
+                } else if (this.dragData.type == BuildingMeta.BuildingType.PowerPlantType) {
+                    let buildingCell = BuildingMgr.getInstance().createPowerPlantByConfig({
+                        parent: GameContext.mapContainer,
+                        x: dpX,
+                        y: dpY
+                    });
+                } else if (this.dragData.type == BuildingMeta.BuildingType.OperaType) {
+                    let buildingCell = BuildingMgr.getInstance().createOperaByConfig({
                         parent: GameContext.mapContainer,
                         x: dpX,
                         y: dpY

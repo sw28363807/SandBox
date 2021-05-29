@@ -205,7 +205,7 @@ export default class GameModel extends Laya.Script {
         return model;
     }
 
-    // 添加农田Model
+    // 添加牧场Model
     newPastureModel(param) {
         this.maxBuildingID++;
         let model = new BuildingModel();
@@ -214,6 +214,21 @@ export default class GameModel extends Laya.Script {
             y: param.y,
             buildingId: this.maxBuildingID,
             buildingType: BuildingMeta.BuildingType.PastureType,
+            buildingState: BuildingMeta.BuildingState.PreCreating,
+        });
+        this.buildingModels[String(this.maxBuildingID)] = model;
+        return model;
+    }
+
+    // 添加歌剧院Model
+    newOperaModel(param) {
+        this.maxBuildingID++;
+        let model = new BuildingModel();
+        model.updateData({
+            x: param.x,
+            y: param.y,
+            buildingId: this.maxBuildingID,
+            buildingType: BuildingMeta.BuildingType.OperaType,
             buildingState: BuildingMeta.BuildingState.PreCreating,
         });
         this.buildingModels[String(this.maxBuildingID)] = model;
