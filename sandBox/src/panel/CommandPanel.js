@@ -9,138 +9,104 @@ export default class CommandPanel extends Laya.Script {
     }
 
     onEnable() {
-        // new Laya.List().mouseEnabled
-        this.touchLayer = this.owner.getChildByName("touch");
-        this.touchLayer.mouseEnabled = false;
-        this.touchLayerWidth = this.touchLayer.width;
-        this.oriOwerWidth = this.owner.width;
-        this.oriOwerHeight = this.owner.height;
-        this.touchLayer.width = 0;
+        this.switchState = 0;   //0 关闭 1 打开
+        this.initBg();
+        this.initTOuchLayer();
+        this.setTouchLayerEnabled(false);
+        this.initItems();
+        this.initScrollTouch();
+    }
 
-        this.touchLayer.on(Laya.Event.MOUSE_MOVE, this, this.onTouchLayerMove);
-        this.touchLayer.on(Laya.Event.MOUSE_OUT, this, this.onTouchLayerOut);
-        this.touchLayer.on(Laya.Event.MOUSE_UP, this, this.onTouchLayerUp);
-
-        this.listView = this.owner.getChildByName("_list");
+    initItems() {
         this.dataArray = [];
+        this.items = {};
         for (const key in BuildingMeta.CommandPanelDataSource) {
             let item = BuildingMeta.CommandPanelDataSource[key];
             this.dataArray.push(item);
         }
-        this.listView.array = this.dataArray;
+        this.prefabDef = null;
+        this.clip = this.under.getChildByName("clip");
+        this.content = this.clip.getChildByName("content");
+        let distance = 128;
 
-        this.upBtn = this.owner.getChildByName("upBtn");
-        this.downBtn = this.owner.getChildByName("downBtn");
-        this.downBtn.visible = false;
-        this.listView.scaleY = 0;
-        this.owner.width = 100;
-        this.owner.height = 64;
-        this.downBtn.on(Laya.Event.CLICK, this, function () {
-            this.downBtn.visible = false;
-            this.upBtn.visible = true;
-            this.owner.width = 100;
-            this.owner.height = 64;
-            Laya.Tween.to(this.listView, { scaleY: 0 }, 200, Laya.Ease.backIn, Laya.Handler.create(this, function () {
-
-            }));
-
-        });
-
-        this.upBtn.on(Laya.Event.CLICK, this, function () {
-            this.downBtn.visible = true;
-            this.upBtn.visible = false;
-            this.owner.width = this.oriOwerWidth;
-            this.owner.height = this.oriOwerHeight;
-            Laya.Tween.to(this.listView, { scaleY: 1 }, 200, Laya.Ease.backOut);
-        });
-
-        this.listView.renderHandler = Laya.Handler.create(this, this.onRenderCell, null, false);
-        this.listView.mouseHandler = Laya.Handler.create(this, this.onMouseEvent, null, false);
-        this.listView.refresh();
-
-        this.draging = false;
-        this.dragTimeStart = false;
-        this.dragStartPointY = null;
-        this.dragData = null;
-        this.dragRender = null;
-        this.images = {};
+        Laya.loader.create("prefab/CommonItem.prefab", Laya.Handler.create(this, function (prefabDef) {
+            prefabDef = prefabDef;
+            for (let index = 0; index < this.dataArray.length; index++) {
+                let data = this.dataArray[index];
+                let control = prefabDef.create();
+                let spr = control.getChildByName("spr");
+                spr.loadImage(data.preview);
+                spr.width = distance;
+                spr.height = distance;
+                this.content.addChild(control);
+                control.y = index * distance;
+                control.showIndex = index;
+                control.showData = data;
+                this.items[String(index)] = control;
+            }
+        }));
+        this.content.height += distance * this.dataArray.length;
     }
 
-    onMouseEvent(e, index) {
-        let data = this.dataArray[index];
-        let image = this.images[index];
-        if (e.type == Laya.Event.MOUSE_DOWN) {
-            this.onXMouseStart(data, image);
-        } else if (e.type == Laya.Event.MOUSE_MOVE) {
-            this.onXMouseMove(data, image);
-        } else if (e.type == Laya.Event.MOUSE_OUT) {
-            this.onXMouseOut(data, image);
-        } else if (e.type == Laya.Event.MOUSE_UP) {
-            this.onXMouseUp(data, image);
-        }
-    }
-
-    onRenderCell(cell, index) {
-        if (cell) {
-            let item = cell.getChildByName("item");
-            let image = item.getChildByName("image");
-            let data = this.dataArray[index];
-            cell.myDataSource = data;
-            image.loadImage(data.preview, Laya.Handler.create(this, function () {
-            }));
-            this.images[index] = image;
-        }
-    }
-
-
-    onXMouseStart(data, image) {
-        let point = new Laya.Point(0, 0);
-        image.localToGlobal(point);
-        this.dragStartPointY = point.y;
-        this.dragTimeStart = true;
-        this.dragData = null;
-        if (this.dragRender) {
-            this.dragRender.destroy(true);
-            this.dragRender = null;
-        }
-        Laya.timer.once(1000, this, this.onDragStart, [data, image]);
-    }
-
-    onXMouseMove(data, image) {
-        if (this.dragTimeStart) {
-            let point = new Laya.Point(0, 0);
-            image.localToGlobal(point);
-            if (Math.abs(this.dragStartPointY - point.y) > 5) {
-                this.dragTimeStart = false;
-                this.draging = false;
-                Laya.timer.clear(this, this.onDragStart);
+    getItem(stageX, stageY) {
+        for (const key in this.items) {
+            let item = this.items[key];
+            if (item.hitTestPoint(stageX, stageY)) {
+                return item;
             }
         }
+        return null;
     }
 
-    onXMouseOut(data, image) {
-        if (this.dragTimeStart) {
-            this.dragTimeStart = false;
-            this.draging = false;
-        }
+    initScrollTouch() {
+        this.touchScroll = this.clip.getChildByName("touchScroll");
+        this.touchDownPoint = null;
+        this.touchScroll.on(Laya.Event.MOUSE_DOWN, this, function (e) {
+            this.dragItem = null;
+            this.touchDownStartPoint = new Laya.Point(e.stageX, e.stageY);
+            this.touchDownPoint = new Laya.Point(e.stageX, e.stageY);
+            let item = this.getItem(e.stageX, e.stageY);
+            if (item) {
+                Laya.timer.once(1000, this, this.onDragStart, [item]);
+            }
+        });
+
+        this.touchScroll.on(Laya.Event.MOUSE_MOVE, this, function (e) {
+            if (this.touchDownPoint && (this.dragItem == undefined || this.dragItem == null)) {
+                if (Math.abs(this.touchDownStartPoint.y - e.stageY) >= 5) {
+                    Laya.timer.clear(this, this.onDragStart);
+                }
+                let offY = e.stageY - this.touchDownPoint.y;
+                this.content.y = this.content.y + offY;
+                let distance = this.clip.height - this.content.height;
+                if (this.content.y < distance) {
+                    this.content.y = distance;
+                } else if (this.content.y > 0) {
+                    this.content.y = 0;
+                }
+                this.touchDownPoint.setTo(e.stageX, e.stageY);
+            }
+        });
+
+        this.touchScroll.on(Laya.Event.MOUSE_OUT, this, function (e) {
+            this.touchDownPoint = null;
+            Laya.timer.clear(this, this.onDragStart);
+            this.touchDownStartPoint = null;
+        });
+
+        this.touchScroll.on(Laya.Event.MOUSE_UP, this, function (e) {
+            this.touchDownPoint = null;
+            this.touchDownStartPoint = null;
+            Laya.timer.clear(this, this.onDragStart);
+        });
+    }
+
+    onDragStart(item) {
         Laya.timer.clear(this, this.onDragStart);
-    }
-
-    onXMouseUp(data, image) {
-        if (this.dragTimeStart) {
-            this.dragTimeStart = false;
-            this.draging = false;
-        }
-        Laya.timer.clear(this, this.onDragStart);
-    }
-
-    onDragStart(data) {
-        if (this.dragTimeStart) {
-            this.dragTimeStart = false;
-            this.draging = true;
-            this.touchLayer.mouseEnabled = true;
-            this.dragData = data;
-
+        this.dragItem = item;
+        this.setTouchLayerEnabled(true);
+        if (this.dragItem) {
+            let data = this.dragItem.showData;
             if (this.dragRender) {
                 this.dragRender.destroy(true);
                 this.dragRender = null;
@@ -155,26 +121,23 @@ export default class CommandPanel extends Laya.Script {
             spr.loadImage(data.preview);
             this.dragRender.addChild(spr);
             spr.pos(data.adjustX, data.adjustY);
-            this.touchLayer.width = this.touchLayerWidth;
-            this.owner.width = this.touchLayerWidth;
 
             let point = new Laya.Point(Laya.stage.mouseX, Laya.stage.mouseY);
             this.touchLayer.globalToLocal(point);
             let dpX = point.x - this.dragRender.width / 2;
             let dpY = point.y - this.dragRender.height / 2;
             this.dragRender.pos(dpX, dpY);
-            this.listView.visible = false;
-            this.downBtn.visible = false;
-
-        } else {
-            this.dragTimeStart = false;
-            this.draging = false;
+            this.under.visible = false;
         }
-        Laya.timer.clear(this, this.onDragStart);
     }
 
-    onTouchLayerMove(e) {
-        if (this.draging && this.dragRender) {
+    initTOuchLayer() {
+        this.touchLayer = this.owner.getChildByName("touch");
+        this.touchLayerOriWidth = this.touchLayer.width;
+    }
+
+    onTouchLayerMouseMove(e) {
+        if (this.dragRender) {
             let point = new Laya.Point(e.stageX, e.stageY);
             this.touchLayer.globalToLocal(point);
             let dpX = point.x - this.dragRender.width / 2;
@@ -194,83 +157,130 @@ export default class CommandPanel extends Laya.Script {
         }
     }
 
-    onTouchLayerOut() {
-        this.touchLayer.mouseEnabled = false;
-        if (this.dragRender) {
-            this.dragRender.destroy(true);
-            this.dragRender = null;
-            this.dragData = null;
-        }
-        this.touchLayer.width = 0;
-        this.owner.width = 0;
-        this.listView.visible = true;
-        this.downBtn.visible = true;
-    }
-
-    onTouchLayerUp(e) {
+    onTouchLayerMouseUp(e) {
         if (GameContext.mapContainer) {
-            this.listView.visible = true;
-            this.downBtn.visible = true;
             let point = new Laya.Point(e.stageX, e.stageY);
             GameContext.mapContainer.globalToLocal(point);
             let dpX = point.x - this.dragRender.width / 2;
             let dpY = point.y - this.dragRender.height / 2;
+            let data = this.dragItem.showData;
             if (!BuildingMgr.getInstance().intersectsBuilding(dpX, dpY, this.dragRender.width, this.dragRender.height)) {
-                if (this.dragData.type == BuildingMeta.BuildingType.HospitalType) {
-                    let buildingCell = BuildingMgr.getInstance().createHospitalByConfig({
-                        parent: GameContext.mapContainer,
-                        x: dpX,
-                        y: dpY
-                    });
-                } else if (this.dragData.type == BuildingMeta.BuildingType.SchoolType) {
-                    let buildingCell = BuildingMgr.getInstance().createSchoolByConfig({
-                        parent: GameContext.mapContainer,
-                        x: dpX,
-                        y: dpY
-                    });
-                } else if (this.dragData.type == BuildingMeta.BuildingType.ShopType) {
-                    let buildingCell = BuildingMgr.getInstance().createShopByConfig({
-                        parent: GameContext.mapContainer,
-                        x: dpX,
-                        y: dpY
-                    });
-                } else if (this.dragData.type == BuildingMeta.BuildingType.FarmLandType) {
-                    let buildingCell = BuildingMgr.getInstance().createFarmLandByConfig({
-                        parent: GameContext.mapContainer,
-                        x: dpX,
-                        y: dpY
-                    });
-                } else if (this.dragData.type == BuildingMeta.BuildingType.PastureType) {
-                    let buildingCell = BuildingMgr.getInstance().createPastureByConfig({
-                        parent: GameContext.mapContainer,
-                        x: dpX,
-                        y: dpY
-                    });
-                } else if (this.dragData.type == BuildingMeta.BuildingType.PowerPlantType) {
-                    let buildingCell = BuildingMgr.getInstance().createPowerPlantByConfig({
-                        parent: GameContext.mapContainer,
-                        x: dpX,
-                        y: dpY
-                    });
-                } else if (this.dragData.type == BuildingMeta.BuildingType.OperaType) {
-                    let buildingCell = BuildingMgr.getInstance().createOperaByConfig({
-                        parent: GameContext.mapContainer,
-                        x: dpX,
-                        y: dpY
-                    });
-                }
-
+                this.onBuild(data, dpX, dpY);
             }
         }
 
-        this.touchLayer.mouseEnabled = false;
+        if (this.dragItem) {
+            this.dragItem = null;
+        }
         if (this.dragRender) {
             this.dragRender.destroy(true);
-            this.dragRender = null;
         }
-        this.touchLayer.width = 0;
+        this.setTouchLayerEnabled(false);
+        this.under.visible = true;
+    }
+
+    onTouchLayerMouseOut(e) {
+        if (this.dragItem) {
+            this.dragItem = null;
+        }
+        if (this.dragRender) {
+            this.dragRender.destroy(true);
+        }
+        this.setTouchLayerEnabled(false);
+        this.under.visible = true;
+    }
+
+    setTouchLayerEnabled(enabled) {
+        if (enabled) {
+            this.touchLayer.width = this.touchLayerOriWidth;
+            this.touchLayer.on(Laya.Event.MOUSE_MOVE, this, this.onTouchLayerMouseMove);
+            this.touchLayer.on(Laya.Event.MOUSE_UP, this, this.onTouchLayerMouseUp);
+            this.touchLayer.on(Laya.Event.MOUSE_OUT, this, this.onTouchLayerMouseOut);
+        } else {
+            this.touchLayer.width = 0;
+            this.touchLayer.off(Laya.Event.MOUSE_MOVE, this, this.onTouchLayerMouseMove);
+            this.touchLayer.off(Laya.Event.MOUSE_UP, this, this.onTouchLayerMouseUp);
+            this.touchLayer.off(Laya.Event.MOUSE_OUT, this, this.onTouchLayerMouseOut);
+        }
+
+    }
+
+    setUnderState(state) {
+        if (this.switchState == state) {
+            return;
+        }
+        this.switchState = state;
+        if (this.switchState == 0) {
+            Laya.Tween.to(this.under, { x: -this.under.width }, 200, Laya.Ease.backOut);
+            this.switchBtn.scaleX = 1;
+        } else {
+            Laya.Tween.to(this.under, { x: 0 }, 200, Laya.Ease.backIn);
+            this.switchBtn.scaleX = -1;
+        }
+    }
+
+    initBg() {
+        this.under = this.owner.getChildByName("under");
+        this.under.x = -this.under.width;
+        this.oriOwerWidth = this.owner.width;
         this.owner.width = 0;
-        this.dragData = null;
+        this.switchBtn = this.under.getChildByName("btn");
+        this.switchBtn.on(Laya.Event.CLICK, this, function () {
+            if (this.switchState == 1) {
+                this.setUnderState(0);
+                this.owner.width = 0;
+            } else {
+                this.setUnderState(1);
+                this.owner.width = this.oriOwerWidth;
+            }
+
+        });
+    }
+
+    onBuild(data, dpX, dpY) {
+        if (data.type == BuildingMeta.BuildingType.HospitalType) {
+            let buildingCell = BuildingMgr.getInstance().createHospitalByConfig({
+                parent: GameContext.mapContainer,
+                x: dpX,
+                y: dpY
+            });
+        } else if (data.type == BuildingMeta.BuildingType.SchoolType) {
+            let buildingCell = BuildingMgr.getInstance().createSchoolByConfig({
+                parent: GameContext.mapContainer,
+                x: dpX,
+                y: dpY
+            });
+        } else if (data.type == BuildingMeta.BuildingType.ShopType) {
+            let buildingCell = BuildingMgr.getInstance().createShopByConfig({
+                parent: GameContext.mapContainer,
+                x: dpX,
+                y: dpY
+            });
+        } else if (data.type == BuildingMeta.BuildingType.FarmLandType) {
+            let buildingCell = BuildingMgr.getInstance().createFarmLandByConfig({
+                parent: GameContext.mapContainer,
+                x: dpX,
+                y: dpY
+            });
+        } else if (data.type == BuildingMeta.BuildingType.PastureType) {
+            let buildingCell = BuildingMgr.getInstance().createPastureByConfig({
+                parent: GameContext.mapContainer,
+                x: dpX,
+                y: dpY
+            });
+        } else if (data.type == BuildingMeta.BuildingType.PowerPlantType) {
+            let buildingCell = BuildingMgr.getInstance().createPowerPlantByConfig({
+                parent: GameContext.mapContainer,
+                x: dpX,
+                y: dpY
+            });
+        } else if (data.type == BuildingMeta.BuildingType.OperaType) {
+            let buildingCell = BuildingMgr.getInstance().createOperaByConfig({
+                parent: GameContext.mapContainer,
+                x: dpX,
+                y: dpY
+            });
+        }
     }
 
     onDisable() {

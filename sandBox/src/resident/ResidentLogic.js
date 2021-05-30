@@ -1287,7 +1287,7 @@ export default class ResidentLogic extends Laya.Script {
         // };
         // this.level2Results.push(cell16);
 
-        //赶着去建造歌剧院
+        // //赶着去建造歌剧院
         // let cell17 = {
         //     func: Laya.Handler.create(this, function (param) {
         //         let building = BuildingMgr.getInstance().getNearstBuilding(this.owner.x,

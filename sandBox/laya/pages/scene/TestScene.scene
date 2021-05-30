@@ -2,11 +2,11 @@
     "x":0,
     "type":"Scene",
     "selectedBox":2,
-    "selecteID":141,
+    "selecteID":16,
     "searchKey":"Scene",
     "props":{"width":1336,"sceneColor":"#000000","height":750},
     "nodeParent":-1,
-    "maxID":153,
+    "maxID":160,
     "label":"Scene",
     "isOpen":true,
     "isDirectory":true,
@@ -38,25 +38,27 @@
             "props":{"y":0,"x":0,"width":1336,"name":"ScrollView","height":750,"bgColor":"#f8f3f7"},
             "nodeParent":2,
             "label":"ScrollView",
-            "isOpen":false,
+            "isOpen":true,
             "isDirectory":true,
             "isAniNode":true,
             "hasChild":true,
             "compId":9,
             "child":[
                 {
+                    "x":30,
                     "type":"Box",
                     "searchKey":"Box,container",
                     "props":{"width":3000,"name":"container","height":3000},
                     "nodeParent":9,
                     "label":"container",
-                    "isOpen":false,
+                    "isOpen":true,
                     "isDirectory":true,
                     "isAniNode":true,
                     "hasChild":true,
                     "compId":10,
                     "child":[
                         {
+                            "x":45,
                             "type":"Box",
                             "searchKey":"Box",
                             "props":{"y":0,"x":0,"width":3000,"height":100,"bgColor":"#71db50"},
@@ -70,6 +72,7 @@
                                 ]
                         },
                         {
+                            "x":45,
                             "type":"Box",
                             "searchKey":"Box",
                             "props":{"y":2891,"x":0,"width":3000,"height":100,"bgColor":"#71db50"},
@@ -83,6 +86,7 @@
                                 ]
                         },
                         {
+                            "x":45,
                             "type":"Box",
                             "searchKey":"Box",
                             "props":{"y":0,"x":0,"width":100,"height":3000,"bgColor":"#71db50"},
@@ -97,6 +101,7 @@
                                 ]
                         },
                         {
+                            "x":45,
                             "type":"Box",
                             "searchKey":"Box",
                             "props":{"y":0,"x":2900,"width":100,"height":3000,"bgColor":"#71db50"},
@@ -110,21 +115,64 @@
                                 ]
                         },
                         {
+                            "x":45,
                             "type":"Box",
-                            "searchKey":"Box,spring",
-                            "props":{"width":3000,"name":"spring","height":3000,"bgColor":"#c8eea0"},
+                            "searchKey":"Box",
+                            "props":{"presetID":1,"preset":"laya/pages/prefab/Season.prefab"},
                             "nodeParent":10,
-                            "label":"spring",
+                            "label":"Season",
                             "isOpen":false,
-                            "isDirectory":false,
+                            "isDirectory":true,
                             "isAniNode":true,
-                            "hasChild":false,
+                            "hasChild":true,
                             "compId":16,
                             "child":[
-                                ],
+                                {
+                                    "type":"Script",
+                                    "switchAble":true,
+                                    "source":"src/game/SeasonLogic.js",
+                                    "searchKey":"Script,SeasonLogic",
+                                    "removeAble":true,
+                                    "props":{"presetID":2,"preset":"laya/pages/prefab/Season.prefab"},
+                                    "nodeParent":16,
+                                    "label":"SeasonLogic",
+                                    "isDirectory":false,
+                                    "isAniNode":true,
+                                    "hasChild":false,
+                                    "compId":157,
+                                    "child":[
+                                        ]
+                                },
+                                {
+                                    "type":"Box",
+                                    "searchKey":"Box",
+                                    "props":{"presetID":3,"preset":"laya/pages/prefab/Season.prefab"},
+                                    "nodeParent":16,
+                                    "label":"curBg",
+                                    "isDirectory":false,
+                                    "isAniNode":true,
+                                    "hasChild":false,
+                                    "compId":158,
+                                    "child":[
+                                        ]
+                                },
+                                {
+                                    "type":"Box",
+                                    "searchKey":"Box",
+                                    "props":{"presetID":4,"preset":"laya/pages/prefab/Season.prefab"},
+                                    "nodeParent":16,
+                                    "label":"toBg",
+                                    "isDirectory":false,
+                                    "isAniNode":true,
+                                    "hasChild":false,
+                                    "compId":159,
+                                    "child":[
+                                        ]
+                                }],
                             "$HIDDEN":false
                         },
                         {
+                            "x":45,
                             "type":"Box",
                             "searchKey":"Box",
                             "props":{"y":613,"x":715,"presetID":1,"preset":"laya/pages/prefab/Tree.prefab"},
@@ -167,6 +215,7 @@
                                 }]
                         },
                         {
+                            "x":45,
                             "type":"Box",
                             "selectedBox":35,
                             "selecteID":38,
@@ -208,6 +257,7 @@
                                 }]
                         },
                         {
+                            "x":45,
                             "type":"Box",
                             "selectedBox":90,
                             "selecteID":94,
@@ -263,6 +313,7 @@
                                 }]
                         },
                         {
+                            "x":45,
                             "type":"Box",
                             "selectedBox":99,
                             "selecteID":101,
@@ -343,6 +394,7 @@
                                 }]
                         },
                         {
+                            "x":45,
                             "type":"Box",
                             "searchKey":"Box",
                             "props":{"y":312,"x":856,"presetID":1,"preset":"laya/pages/prefab/AnimalTrigger.prefab"},
@@ -373,6 +425,7 @@
                         }]
                 },
                 {
+                    "x":30,
                     "type":"Script",
                     "switchAble":true,
                     "source":"src/helper/MapScrollView.js",
@@ -475,78 +528,94 @@
         {
             "x":15,
             "type":"View",
+            "selectedBox":126,
+            "selecteID":140,
             "searchKey":"View",
             "props":{"presetID":1,"preset":"laya/pages/prefab/CommandPanel.prefab"},
             "nodeParent":2,
+            "maxID":143,
             "label":"CommandPanel",
             "isOpen":false,
             "isDirectory":true,
             "isAniNode":true,
             "hasChild":true,
-            "compId":131,
+            "compId":153,
             "child":[
                 {
-                    "type":"List",
-                    "searchKey":"List",
-                    "props":{"presetID":2,"preset":"laya/pages/prefab/CommandPanel.prefab"},
-                    "nodeParent":131,
-                    "label":"_list",
+                    "type":"Box",
+                    "searchKey":"Box",
+                    "props":{"presetID":12,"preset":"laya/pages/prefab/CommandPanel.prefab"},
+                    "nodeParent":153,
+                    "label":"under",
                     "isOpen":true,
                     "isDirectory":true,
                     "isAniNode":true,
                     "hasChild":true,
-                    "compId":118,
+                    "compId":140,
                     "child":[
                         {
-                            "type":"View",
-                            "searchKey":"View",
-                            "props":{"presetID":3,"preset":"laya/pages/prefab/CommandPanel.prefab"},
-                            "nodeParent":118,
-                            "label":"View(CommandPanel)",
-                            "isOpen":true,
-                            "isDirectory":true,
-                            "isAniNode":false,
-                            "hasChild":true,
-                            "compId":127,
+                            "type":"Image",
+                            "searchKey":"Image",
+                            "props":{"presetID":13,"preset":"laya/pages/prefab/CommandPanel.prefab"},
+                            "nodeParent":140,
+                            "label":"Image(CommandPanel)",
+                            "isDirectory":false,
+                            "isAniNode":true,
+                            "hasChild":false,
+                            "compId":141,
                             "child":[
+                                ]
+                        },
+                        {
+                            "type":"Sprite",
+                            "searchKey":"Sprite",
+                            "props":{"presetID":14,"preset":"laya/pages/prefab/CommandPanel.prefab"},
+                            "nodeParent":140,
+                            "label":"btn",
+                            "isDirectory":false,
+                            "isAniNode":true,
+                            "hasChild":false,
+                            "compId":142,
+                            "child":[
+                                ]
+                        },
+                        {
+                            "type":"Panel",
+                            "searchKey":"Panel",
+                            "props":{"presetID":15,"preset":"laya/pages/prefab/CommandPanel.prefab"},
+                            "nodeParent":140,
+                            "label":"clip",
+                            "isDirectory":true,
+                            "isAniNode":true,
+                            "hasChild":true,
+                            "compId":154,
+                            "child":[
+                                {
+                                    "type":"Panel",
+                                    "searchKey":"Panel",
+                                    "props":{"presetID":16,"preset":"laya/pages/prefab/CommandPanel.prefab"},
+                                    "nodeParent":154,
+                                    "label":"content",
+                                    "isDirectory":false,
+                                    "isAniNode":true,
+                                    "hasChild":false,
+                                    "compId":155,
+                                    "child":[
+                                        ]
+                                },
                                 {
                                     "type":"Box",
                                     "searchKey":"Box",
-                                    "props":{"presetID":7,"preset":"laya/pages/prefab/CommandPanel.prefab"},
-                                    "nodeParent":127,
-                                    "label":"item",
-                                    "isDirectory":true,
-                                    "isAniNode":false,
-                                    "hasChild":true,
-                                    "compId":132,
+                                    "props":{"presetID":17,"preset":"laya/pages/prefab/CommandPanel.prefab"},
+                                    "nodeParent":154,
+                                    "label":"touchScroll",
+                                    "isDirectory":false,
+                                    "isAniNode":true,
+                                    "hasChild":false,
+                                    "compId":156,
                                     "child":[
-                                        {
-                                            "type":"Sprite",
-                                            "searchKey":"Sprite",
-                                            "props":{"presetID":10,"preset":"laya/pages/prefab/CommandPanel.prefab"},
-                                            "nodeParent":132,
-                                            "label":"image",
-                                            "isDirectory":false,
-                                            "isAniNode":false,
-                                            "hasChild":false,
-                                            "compId":139,
-                                            "child":[
-                                                ]
-                                        }]
+                                        ]
                                 }]
-                        },
-                        {
-                            "type":"VScrollBar",
-                            "searchKey":"VScrollBar",
-                            "props":{"presetID":5,"preset":"laya/pages/prefab/CommandPanel.prefab"},
-                            "nodeParent":118,
-                            "label":"scrollBar",
-                            "isDirectory":false,
-                            "isAniNode":false,
-                            "hasChild":false,
-                            "compId":130,
-                            "child":[
-                                ]
                         }]
                 },
                 {
@@ -556,7 +625,7 @@
                     "searchKey":"Script,CommandPanel",
                     "removeAble":true,
                     "props":{"presetID":6,"preset":"laya/pages/prefab/CommandPanel.prefab"},
-                    "nodeParent":131,
+                    "nodeParent":153,
                     "label":"CommandPanel",
                     "isDirectory":false,
                     "isAniNode":true,
@@ -566,43 +635,28 @@
                         ]
                 },
                 {
-                    "type":"Sprite",
-                    "searchKey":"Sprite",
-                    "props":{"presetID":8,"preset":"laya/pages/prefab/CommandPanel.prefab"},
-                    "nodeParent":131,
-                    "label":"upBtn",
-                    "isDirectory":false,
-                    "isAniNode":true,
-                    "hasChild":false,
-                    "compId":133,
-                    "child":[
-                        ]
-                },
-                {
-                    "type":"Sprite",
-                    "searchKey":"Sprite",
-                    "props":{"presetID":9,"preset":"laya/pages/prefab/CommandPanel.prefab"},
-                    "nodeParent":131,
-                    "label":"downBtn",
-                    "isDirectory":false,
-                    "isAniNode":true,
-                    "hasChild":false,
-                    "compId":134,
-                    "child":[
-                        ]
-                },
-                {
-                    "type":"Panel",
-                    "searchKey":"Panel",
+                    "type":"Box",
+                    "searchKey":"Box",
                     "props":{"presetID":11,"preset":"laya/pages/prefab/CommandPanel.prefab"},
-                    "nodeParent":131,
+                    "nodeParent":153,
                     "label":"touch",
+                    "isOpen":true,
                     "isDirectory":false,
                     "isAniNode":true,
                     "hasChild":false,
-                    "compId":140,
+                    "compId":136,
                     "child":[
-                        ]
+                        ],
+                    "$LOCKED":true
+                }],
+            "animations":[
+                {
+                    "nodes":[
+                        ],
+                    "name":"ani1",
+                    "id":1,
+                    "frameRate":24,
+                    "action":0
                 }]
         }],
     "animations":[

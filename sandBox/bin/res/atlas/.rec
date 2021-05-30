@@ -140,11 +140,9 @@ P 3B4D5A9B woman_work2.png
 P BD8A8BA9 woman_work3.png
 D source/scene
 D source/ui
-P 47B95C29 arrow.png
-P 6522F42A btndown.png
-P B797954B btnup.png
+P F4F08B52 btn1.png
 P 9BE5D38F slider.png
 P A508BEED slider2.png
 P 41CAA2E4 sliderBg.png
 P 76F0627B sliderBg2.png
-P 9DE7041A under.png
+P FCE69C7E under2.png

@@ -1,4 +1,5 @@
 import BuildingMeta from "../meta/BuildingMeta";
+import GameMeta from "../meta/GameMeta";
 import ResidentMeta from "../meta/ResidentMeta";
 import AnimalModel from "./AnimalModel";
 import BuildingModel from "./BuildingModel";
@@ -27,6 +28,10 @@ export default class GameModel extends Laya.Script {
         // 通用数值
         this.treeNum = 0;
         this.stoneNum = 0;
+        this.gameYear = 0;
+        this.gameDay = 0;
+        this.gameSeason = 0;
+        this.gameHour = 0;    //时间小时
     }
 
     onEnable() {
@@ -44,6 +49,9 @@ export default class GameModel extends Laya.Script {
         return GameModel.instance;
     }
 
+    getGameHour() {
+        return this.gameHour;
+    }
 
     getTreeNum() {
         return this.treeNum;
@@ -307,8 +315,26 @@ export default class GameModel extends Laya.Script {
         }
     }
 
+    // 时间流逝
+    onGameTimeStep() {
+        this.gameHour += 1;
+        if (this.gameHour >= 24) {
+            this.gameDay += 1;
+            this.gameHour = 0;
+        }
+        if (this.gameDay >= 30) {
+            this.gameDay = 0;
+            this.gameSeason += 1;
+        }
+        if (this.gameSeason >= 4) {
+            this.gameYear += 1;
+            this.gameSeason = 0;
+        }
+    }
+
     //初始化自己 
     initSelf() {
         Laya.timer.loop(ResidentMeta.ResidentValueStep, this, this.onUpdateResidentValue);
+        Laya.timer.loop(GameMeta.GameTimeStep, this, this.onGameTimeStep);
     }
 }

@@ -1,0 +1,1 @@
+{"type":"Box","props":{"y":0,"x":0,"width":240,"presetID":1,"name":"CommonItem","isPresetRoot":true,"height":128},"compId":154,"child":[{"type":"Sprite","props":{"y":0,"x":0,"width":128,"presetID":2,"name":"spr","height":128},"compId":155}],"loadList":[],"loadList3D":[]}
