@@ -77,6 +77,7 @@ BuildingMeta.CommandPanelDataSource = {
         realHeight: 128,
         adjustX: 64,
         adjustY: 128,
+        buildingName: "医院",
     },
     // 学校
     [String(BuildingMeta.BuildingType.SchoolType)]: {
@@ -89,6 +90,7 @@ BuildingMeta.CommandPanelDataSource = {
         realHeight: 128,
         adjustX: 64,
         adjustY: 128,
+        buildingName: "学校",
     },
     // 发电厂
     [String(BuildingMeta.BuildingType.PowerPlantType)]: {
@@ -101,6 +103,7 @@ BuildingMeta.CommandPanelDataSource = {
         realHeight: 128,
         adjustX: 64,
         adjustY: 128,
+        buildingName: "发电厂",
     },
     // 商店
     [String(BuildingMeta.BuildingType.ShopType)]: {
@@ -113,6 +116,7 @@ BuildingMeta.CommandPanelDataSource = {
         realHeight: 128,
         adjustX: 64,
         adjustY: 128,
+        buildingName: "商店",
     },
     // 农田
     [String(BuildingMeta.BuildingType.FarmLandType)]: {
@@ -125,6 +129,7 @@ BuildingMeta.CommandPanelDataSource = {
         realHeight: 128,
         adjustX: 64,
         adjustY: 128,
+        buildingName: "农田",
     },
     // 牧场
     [String(BuildingMeta.BuildingType.PastureType)]: {
@@ -137,6 +142,7 @@ BuildingMeta.CommandPanelDataSource = {
         realHeight: 128,
         adjustX: 64,
         adjustY: 128,
+        buildingName: "牧场",
     },
     // 歌剧院
     [String(BuildingMeta.BuildingType.OperaType)]: {
@@ -149,5 +155,6 @@ BuildingMeta.CommandPanelDataSource = {
         realHeight: 256,
         adjustX: 0,
         adjustY: 0,
+        buildingName: "歌剧院",
     },
 };

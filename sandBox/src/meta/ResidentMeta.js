@@ -42,6 +42,8 @@ ResidentMeta.ResidentState = {
     CreatePasture: 36,     //建造牧场
     GotoContinueCreateOpera: 37, //跑去建造歌剧院
     CreateOpera: 38,     //建造歌剧院
+    JoinFight: 39,         //加入打群架
+    Fighting: 40,             //打架
 };
 
 // 动画枚举
@@ -84,9 +86,10 @@ ResidentMeta.ResidentReduceSocialBaseValue = -1; //社交减少值
 ResidentMeta.ResidentAddSocialBaseValue = 60; //一次社交增加值
 ResidentMeta.ResidentReduceLifeBaseValue = -0.5; //生命减少值
 ResidentMeta.ResidentReduceEnjoyBaseValue = -0.5; //娱乐减少值
-ResidentMeta.ResidentSickProbability = 0.99; //生病的概率
+ResidentMeta.ResidentSickProbability = 0.999; //生病的概率
 ResidentMeta.ResidentTreatTime = 5000; //治疗的时间
 ResidentMeta.ResidentLearnTime = 5000; //学习的时间
+ResidentMeta.ResidentSocialLowToFight = 50;  //需要社交的警戒线，低于这个值就是要打架了
 ResidentMeta.ResidentSocialNeedValue = 30;  //需要社交的警戒线，低于这个值就是需要社交了
 ResidentMeta.ResidentWaterNeedValue = 30;  //需要喝水的警戒线，低于这个值就是需要喝水了
 ResidentMeta.ResidentFoodNeedValue = 30;  //需要吃饭的警戒线，低于这个值就是需要吃饭了

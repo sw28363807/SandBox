@@ -10,11 +10,9 @@ export default class SeasonLogic extends Laya.Script {
     onEnable() {
         this.curBg = this.owner.getChildByName("curBg");
         this.toBg = this.owner.getChildByName("toBg");
-
+        this.curSeason = GameModel.getInstance().getGameSeason();
+        this.switchSeason(this.curSeason, true);
         Laya.timer.loop(1000, this, this.onTimeTick);
-        // let tick = GameModel.getInstance().getGameTimeTick();
-        this.switchSeason(1, true);
-        this.switchSeason(3);
     }
 
     onDisable() {
@@ -22,7 +20,10 @@ export default class SeasonLogic extends Laya.Script {
     }
 
     onTimeTick() {
-
+        if (this.curSeason != GameModel.getInstance().getGameSeason()) {
+            this.curSeason = GameModel.getInstance().getGameSeason();
+            this.switchSeason(this.curSeason);
+        }
     }
 
     switchSeason(toSeasonIndex, noAnimation) {

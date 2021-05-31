@@ -15,12 +15,14 @@ export default class GameModel extends Laya.Script {
         this.maxFoodID = 0;             //食物最大ID
         this.maxBuildingID = 0;         //建筑最大ID
         this.maxTalkingID = 0;          //聊天区域最大ID
+        this.maxFightID = 0;            //打架区域的最大ID
         this.maxAnimalID = 0;           //动物最大ID
 
         this.residentModels = {};       //角色数据
         this.foodModels = {};           //食物数据
         this.buildingModels = {};       //建筑物数据
         this.talkingPoints = {};        //聊天区域数据
+        this.fightPoints = {};          //打架区域数据
         this.animalModes = {};          //动物数据
 
 
@@ -47,6 +49,14 @@ export default class GameModel extends Laya.Script {
         GameModel.instance = new GameModel();
         GameModel.instance.initSelf();
         return GameModel.instance;
+    }
+
+    getGameSeason() {
+        return this.gameSeason;
+    }
+
+    getGameDay() {
+        return this.gameDay;
     }
 
     getGameHour() {

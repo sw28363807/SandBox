@@ -36,6 +36,7 @@ P A2663D43 water.png
 P F00114D0 waterIcon.png
 D source/resident
 P D4606BA7 attack.png
+P C9247F2B baby_anger.png
 P D65EB557 baby_enjoy1.png
 P 5FD9464E baby_enjoy2.png
 P 5DC90A4D baby_enjoy3.png
@@ -74,6 +75,7 @@ P 8841576C die.png
 P A6A5C082 drinkwater.png
 P 88341B4D eat.png
 P 55920CF2 heart.png
+P A8E062E6 man_anger.png
 P B58E08CF man_enjoy1.png
 P C3581EB4 man_enjoy2.png
 P B13E1FFA man_enjoy3.png
@@ -107,6 +109,7 @@ P BD8C9CFB man_work2.png
 P 48818065 man_work3.png
 P BFCF22A1 sick.png
 P 098A99ED talk.png
+P 966E7CCC woman_anger.png
 P C0DD56B7 woman_enjoy1.png
 P C2F35169 woman_enjoy2.png
 P 71930FB0 woman_enjoy3.png

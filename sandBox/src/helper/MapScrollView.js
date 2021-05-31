@@ -5,6 +5,7 @@ import StoneLogic from "../source/StoneLogic";
 import StoneMgr from "../source/StoneMgr";
 import Waterlogic from "../source/Waterlogic";
 import WaterMgr from "../source/WaterMgr";
+import GameMeta from "../meta/GameMeta";
 
 export default class MapScrollView extends Laya.Script {
 
@@ -39,6 +40,7 @@ export default class MapScrollView extends Laya.Script {
                 WaterMgr.getInstance().pushWater(child);
             }
         }
+        this.processPos(0, 0);
     }
 
     onMouseDown(e) {
@@ -65,17 +67,17 @@ export default class MapScrollView extends Laya.Script {
 
     processPos(toX, toY) {
         if (toX != null && toY != null) {
-            if (toX > 0) {
-                toX = 0;
+            if (toX > -GameMeta.MapSideOff) {
+                toX = -GameMeta.MapSideOff;
             }
-            if (toY > 0) {
-                toY = 0;
+            if (toY > -GameMeta.MapSideOff) {
+                toY = -GameMeta.MapSideOff;
             }
-            if (toX < this.owner.width - GameContext.mapWidth) {
-                toX = this.owner.width - GameContext.mapWidth;
+            if (toX < this.owner.width - GameContext.mapWidth + GameMeta.MapSideOff) {
+                toX = this.owner.width - GameContext.mapWidth + GameMeta.MapSideOff;
             }
-            if (toY < this.owner.height - GameContext.mapHeight) {
-                toY = this.owner.height - GameContext.mapHeight;
+            if (toY < this.owner.height - GameContext.mapHeight + GameMeta.MapSideOff) {
+                toY = this.owner.height - GameContext.mapHeight + GameMeta.MapSideOff;
             }
             this.container.x = toX;
             this.container.y = toY;

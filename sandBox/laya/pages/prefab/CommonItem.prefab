@@ -2,11 +2,11 @@
     "x":0,
     "type":"Box",
     "selectedBox":154,
-    "selecteID":155,
+    "selecteID":156,
     "searchKey":"Box,CommonItem",
     "props":{"y":0,"x":0,"width":240,"presetID":1,"preset":"laya/pages/prefab/CommonItem.prefab","name":"CommonItem","isPresetRoot":true,"height":128},
     "nodeParent":-1,
-    "maxID":156,
+    "maxID":158,
     "label":"CommonItem",
     "isOpen":true,
     "isDirectory":true,
@@ -25,6 +25,20 @@
             "isAniNode":true,
             "hasChild":false,
             "compId":155,
+            "child":[
+                ]
+        },
+        {
+            "x":15,
+            "type":"Text",
+            "searchKey":"Text,textName",
+            "props":{"y":12,"x":146,"text":"text","presetID":3,"preset":"laya/pages/prefab/CommonItem.prefab","name":"textName","height":22,"fontSize":22,"font":"Microsoft YaHei","color":"#f3e9e9"},
+            "nodeParent":154,
+            "label":"textName",
+            "isDirectory":false,
+            "isAniNode":true,
+            "hasChild":false,
+            "compId":156,
             "child":[
                 ]
         }],

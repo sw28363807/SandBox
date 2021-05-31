@@ -557,12 +557,10 @@ export default class ResidentLogic extends Laya.Script {
         // 砍树完成
         else if (state == ResidentMeta.ResidentState.CutDownTree) {
             GameModel.getInstance().addTreeNum(ResidentMeta.ResidentAddTreeBaseValue);
-            EventMgr.getInstance().postEvent(GameEvent.REFRESH_RESOURCE_PANEL);
         }
         // 收集石头完成
         else if (state == ResidentMeta.ResidentState.CollectStone) {
             GameModel.getInstance().addStoneNum(ResidentMeta.ResidentAddStoneBaseValue);
-            EventMgr.getInstance().postEvent(GameEvent.REFRESH_RESOURCE_PANEL);
         }
         // 聊天结束
         else if (state == ResidentMeta.ResidentState.TalkingAbout) {
