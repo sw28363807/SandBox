@@ -14,8 +14,10 @@ import FarmLandLogic from "./building/FarmLandLogic"
 import FoodLogic from "./source/FoodLogic"
 import HomeLogic from "./building/HomeLogic"
 import HospitalLogic from "./building/HospitalLogic"
+import LabLogic from "./building/LabLogic"
 import OperaLogic from "./building/OperaLogic"
 import PastureLogic from "./building/PastureLogic"
+import PoliceStationLogic from "./building/PoliceStationLogic"
 import PowerPlantLogic from "./building/PowerPlantLogic"
 import ResidentLogic from "./resident/ResidentLogic"
 import ResidentDetailsPanel from "./panel/ResidentDetailsPanel"
@@ -41,8 +43,10 @@ export default class GameConfig {
 		reg("source/FoodLogic.js",FoodLogic);
 		reg("building/HomeLogic.js",HomeLogic);
 		reg("building/HospitalLogic.js",HospitalLogic);
+		reg("building/LabLogic.js",LabLogic);
 		reg("building/OperaLogic.js",OperaLogic);
 		reg("building/PastureLogic.js",PastureLogic);
+		reg("building/PoliceStationLogic.js",PoliceStationLogic);
 		reg("building/PowerPlantLogic.js",PowerPlantLogic);
 		reg("resident/ResidentLogic.js",ResidentLogic);
 		reg("panel/ResidentDetailsPanel.js",ResidentDetailsPanel);

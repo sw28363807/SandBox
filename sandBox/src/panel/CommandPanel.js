@@ -28,7 +28,7 @@ export default class CommandPanel extends Laya.Script {
         this.clip = this.under.getChildByName("clip");
         this.content = this.clip.getChildByName("content");
         let distance = 128;
-
+        let ySpace = 10;
         Laya.loader.create("prefab/CommonItem.prefab", Laya.Handler.create(this, function (prefabDef) {
             prefabDef = prefabDef;
             for (let index = 0; index < this.dataArray.length; index++) {
@@ -36,16 +36,18 @@ export default class CommandPanel extends Laya.Script {
                 let control = prefabDef.create();
                 let spr = control.getChildByName("spr");
                 spr.loadImage(data.preview);
+                let nameLabel = control.getChildByName("textName");
+                nameLabel.text = data.buildingName;
                 spr.width = distance;
                 spr.height = distance;
                 this.content.addChild(control);
-                control.y = index * distance;
+                control.y = index * distance + index * ySpace;
                 control.showIndex = index;
                 control.showData = data;
                 this.items[String(index)] = control;
             }
         }));
-        this.content.height += distance * this.dataArray.length;
+        this.content.height += distance * this.dataArray.length + ySpace * this.dataArray.length;
     }
 
     getItem(stageX, stageY) {
@@ -280,7 +282,19 @@ export default class CommandPanel extends Laya.Script {
                 x: dpX,
                 y: dpY
             });
-        }
+        } else if (data.type == BuildingMeta.BuildingType.PoliceStationType) {
+            let buildingCell = BuildingMgr.getInstance().createPoliceStationByConfig({
+                parent: GameContext.mapContainer,
+                x: dpX,
+                y: dpY
+            });
+        } else if (data.type == BuildingMeta.BuildingType.LabType) {
+            let buildingCell = BuildingMgr.getInstance().createLabByConfig({
+                parent: GameContext.mapContainer,
+                x: dpX,
+                y: dpY
+            });
+        }        
     }
 
     onDisable() {

@@ -7,17 +7,17 @@ export default class FightPointModel extends Laya.Script {
         this.x = 0;
         this.y = 0;
         this.area = 0;
-        this.fightingPointId = 0;
-        this.fightingNum = 0;
-        this.fightingMaxNum = 0;
+        this.fightPointId = 0;
+        this.fightNum = 0;
+        this.fightMaxNum = 0;
     }
     
-    getFightingPointId() {
-        return this.fightingPointId;
+    getFightPointId() {
+        return this.fightPointId;
     }
 
     // 获取到一个可以打架的点(一个随机点)
-    getFightingPosInArea() {
+    getFightPosInArea() {
         return RandomMgr.randomByArea(this.x, this.y, this.area);
     }
 
@@ -29,20 +29,20 @@ export default class FightPointModel extends Laya.Script {
         return this.y;
     }
 
-    addFightingNum(num) {
-        this.setFightingNum(this.getFightingNum() + num);
+    addFightNum(num) {
+        this.setFightNum(this.getFightNum() + num);
     }
 
-    setFightingNum(num) {
-        this.fightingNum = num;
+    setFightNum(num) {
+        this.fightNum = num;
     }
 
-    getFightingNum() {
-        return this.fightingNum;
+    getFightNum() {
+        return this.fightNum;
     }
 
-    getFightingMaxNum() {
-        return this.fightingMaxNum;
+    getFightMaxNum() {
+        return this.fightMaxNum;
     }
 
     updateData(data) {
@@ -56,11 +56,11 @@ export default class FightPointModel extends Laya.Script {
             if (data.area) {
                 this.area = data.area;
             }
-            if (data.fightingPointId) {
-                this.fightingPointId = data.fightingPointId;
+            if (data.fightPointId) {
+                this.fightPointId = data.fightPointId;
             }
-            if (data.fightingMaxNum) {
-                this.fightingMaxNum = data.fightingMaxNum;
+            if (data.fightMaxNum) {
+                this.fightMaxNum = data.fightMaxNum;
             }
         }
     }

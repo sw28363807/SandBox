@@ -10,6 +10,8 @@ BuildingMeta.ShopPrefabPath = "prefab/Shop.prefab";       //商店prefab路径
 BuildingMeta.FarmLandPrefabPath = "prefab/FarmLand.prefab";       //农田prefab路径
 BuildingMeta.PasturePrefabPath = "prefab/Pasture.prefab";       //牧场prefab路径
 BuildingMeta.OperaPrefabPath = "prefab/Opera.prefab";       //歌剧院prefab路径
+BuildingMeta.PoliceStationPrefabPath = "prefab/PoliceStation.prefab";    //警察局prefab路径
+BuildingMeta.LabPrefabPath = "prefab/Lab.prefab";    //实验室prefab路径
 
 
 BuildingMeta.BuildingType = {
@@ -22,6 +24,8 @@ BuildingMeta.BuildingType = {
     FarmLandType: 6,   //农田
     PastureType: 7,    //牧场
     OperaType: 8,    //歌剧院
+    PoliceStationType: 9,   //警察局
+    LabType: 10,            //科学实验室
 };
 
 BuildingMeta.BuildingState = {
@@ -60,8 +64,16 @@ BuildingMeta.PastureWidth = 256;   //牧场宽度
 BuildingMeta.PastureHeight = 256;   //牧场高度
 
 // 歌剧院
-BuildingMeta.OperaWidth = 256;   //宽度
-BuildingMeta.OperaHeight = 256;   //牧场高度
+BuildingMeta.OperaWidth = 256;   //歌剧院宽度
+BuildingMeta.OperaHeight = 256;   //歌剧院高度
+
+// 警察局
+BuildingMeta.PoliceStationWidth = 256;   //警察局宽度
+BuildingMeta.PoliceStationHeight = 256;   //警察局高度
+
+// 实验室
+BuildingMeta.LabWidth = 256;   //实验室宽度
+BuildingMeta.LabHeight = 256;   //实验室高度
 
 
 // 操作界面的数据源
@@ -156,5 +168,31 @@ BuildingMeta.CommandPanelDataSource = {
         adjustX: 0,
         adjustY: 0,
         buildingName: "歌剧院",
+    },
+    // 警察局
+    [String(BuildingMeta.BuildingType.PoliceStationType)]: {
+        prefab: BuildingMeta.PoliceStationPrefabPath,
+        type: BuildingMeta.BuildingType.PoliceStationType,
+        preview: "source/building/police.png",
+        width: BuildingMeta.PoliceStationWidth,
+        height: BuildingMeta.PoliceStationHeight,
+        realWidth: 256,
+        realHeight: 256,
+        adjustX: 64,
+        adjustY: 128,
+        buildingName: "警察局",
+    },
+    // 实验室
+    [String(BuildingMeta.BuildingType.LabType)]: {
+        prefab: BuildingMeta.LabPrefabPath,
+        type: BuildingMeta.BuildingType.LabType,
+        preview: "source/building/scienceLab.png",
+        width: BuildingMeta.LabWidth,
+        height: BuildingMeta.LabHeight,
+        realWidth: 256,
+        realHeight: 256,
+        adjustX: 64,
+        adjustY: 128,
+        buildingName: "科学实验室",
     },
 };

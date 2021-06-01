@@ -3,6 +3,7 @@ import GameMeta from "../meta/GameMeta";
 import ResidentMeta from "../meta/ResidentMeta";
 import AnimalModel from "./AnimalModel";
 import BuildingModel from "./BuildingModel";
+import FightPointModel from "./FightPointModel";
 import FoodModel from "./FoodModel";
 import ResidentModel from "./ResidentModel";
 import TalkingPointModel from "./TalkingPointModel";
@@ -130,6 +131,8 @@ export default class GameModel extends Laya.Script {
 
     // 移除聊天点
     removeTalkingPoint(id) {
+        let cell = this.talkingPoints[String(id)];
+        cell.destroy(true);
         delete this.talkingPoints[String(id)];
     }
 
@@ -147,6 +150,45 @@ export default class GameModel extends Laya.Script {
         this.talkingPoints[String(this.maxTalkingID)] = model;
         return model;
     }
+
+
+
+    // 获得一个打架区域如果没有或者人数已经满了新建一个
+    getOrCreateFightPoint(x, y, area, maxNum) {
+        for (const key in this.fightPoints) {
+            let item = this.fightPoints[key];
+            let distance = new Laya.Point(x, y).distance(item.getX(), item.getY());
+            if (item.getFightNum() < item.getFightMaxNum() && distance <= ResidentMeta.ResidentFightArea) {
+                return item;
+            }
+        }
+        return this.newFightPoint(x, y, area, maxNum);
+    }
+
+    // 移除打架点
+    removeFightPoint(id) {
+        let cell = this.fightPoints[String(id)];
+        cell.destroy(true);
+        delete this.fightPoints[String(id)];
+    }
+
+    // 新建一个打架区域
+    newFightPoint(x, y, area, maxNum) {
+        this.maxFightID++;
+        let model = new FightPointModel();
+        model.updateData({
+            x: x,
+            y: y,
+            area: area,
+            fightPointId: this.maxFightID,
+            fightMaxNum: maxNum,
+        });
+        this.fightPoints[String(this.maxFightID)] = model;
+        return model;
+    }
+
+
+
 
     // 添加住房Model
     newHomeModel(param) {
@@ -247,6 +289,36 @@ export default class GameModel extends Laya.Script {
             y: param.y,
             buildingId: this.maxBuildingID,
             buildingType: BuildingMeta.BuildingType.OperaType,
+            buildingState: BuildingMeta.BuildingState.PreCreating,
+        });
+        this.buildingModels[String(this.maxBuildingID)] = model;
+        return model;
+    }
+
+    // 添加警察局Model
+    newPoliceStationModel(param) {
+        this.maxBuildingID++;
+        let model = new BuildingModel();
+        model.updateData({
+            x: param.x,
+            y: param.y,
+            buildingId: this.maxBuildingID,
+            buildingType: BuildingMeta.BuildingType.PoliceStationType,
+            buildingState: BuildingMeta.BuildingState.PreCreating,
+        });
+        this.buildingModels[String(this.maxBuildingID)] = model;
+        return model;
+    }
+
+    // 添加科学实验室Model
+    newLabModel(param) {
+        this.maxBuildingID++;
+        let model = new BuildingModel();
+        model.updateData({
+            x: param.x,
+            y: param.y,
+            buildingId: this.maxBuildingID,
+            buildingType: BuildingMeta.BuildingType.LabType,
             buildingState: BuildingMeta.BuildingState.PreCreating,
         });
         this.buildingModels[String(this.maxBuildingID)] = model;

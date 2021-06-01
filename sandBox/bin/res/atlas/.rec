@@ -8,8 +8,10 @@ P 8E7B9A93 center2.png
 P DD63CC70 farmland.png
 P 9287B9E8 hospital1_1.png
 P F7BE8EE6 pasture.png
+P 11566018 police.png
 P DEABDC81 power_plant.png
 P 3C194AED school_1.png
+P DA2AE6C5 scienceLab.png
 P DC986EBC shop_1.png
 D source/landscape
 P AB35A39B b12.png
@@ -68,12 +70,15 @@ P 9BC7CC1C baby_walk_up5.png
 P D78DFCCA baby_work1.png
 P 08E977D1 baby_work2.png
 P FB01C09D baby_work3.png
+P 87408C7D car12.png
+P A1B06C08 car22.png
 P DCAB066A collect.png
 P 0CC498BA cutdown.png
 P 9B2D9708 dialog.png
 P 8841576C die.png
 P A6A5C082 drinkwater.png
 P 88341B4D eat.png
+P 305D5048 fight.png
 P 55920CF2 heart.png
 P A8E062E6 man_anger.png
 P B58E08CF man_enjoy1.png

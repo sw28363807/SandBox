@@ -25,6 +25,8 @@ import ResidentTipMeta from "../meta/ResidentTipMeta";
 import FarmLandLogic from "../building/FarmLandLogic";
 import PastureLogic from "../building/PastureLogic";
 import OperaLogic from "../building/OperaLogic";
+import PoliceStationLogic from "../building/PoliceStationLogic";
+import LabLogic from "../building/LabLogic";
 
 export default class ResidentLogic extends Laya.Script {
 
@@ -65,6 +67,8 @@ export default class ResidentLogic extends Laya.Script {
         EventMgr.getInstance().registEvent(GameEvent.CREATE_FARMLAND_FINISH, this, this.onDoWorkFinish);
         EventMgr.getInstance().registEvent(GameEvent.CREATE_PASTURE_FINISH, this, this.onDoWorkFinish);
         EventMgr.getInstance().registEvent(GameEvent.CREATE_OPERA_FINISH, this, this.onDoWorkFinish);
+        EventMgr.getInstance().registEvent(GameEvent.CREATE_POLICESTATION_FINISH, this, this.onDoWorkFinish);
+        EventMgr.getInstance().registEvent(GameEvent.CREATE_LAB_FINISH, this, this.onDoWorkFinish);
         EventMgr.getInstance().registEvent(GameEvent.HUNT_FINISH, this, this.onDoWorkFinish);
         EventMgr.getInstance().registEvent(GameEvent.RESIDENT_SICK, this, this.onSick);
         EventMgr.getInstance().registEvent(GameEvent.RESIDENT_DIE, this, this.onDie);
@@ -79,6 +83,8 @@ export default class ResidentLogic extends Laya.Script {
         EventMgr.getInstance().removeEvent(GameEvent.CREATE_FARMLAND_FINISH, this, this.onDoWorkFinish);
         EventMgr.getInstance().removeEvent(GameEvent.CREATE_PASTURE_FINISH, this, this.onDoWorkFinish);
         EventMgr.getInstance().removeEvent(GameEvent.CREATE_OPERA_FINISH, this, this.onDoWorkFinish);
+        EventMgr.getInstance().removeEvent(GameEvent.CREATE_POLICESTATION_FINISH, this, this.onDoWorkFinish);
+        EventMgr.getInstance().removeEvent(GameEvent.CREATE_LAB_FINISH, this, this.onDoWorkFinish);
         EventMgr.getInstance().removeEvent(GameEvent.HUNT_FINISH, this, this.onDoWorkFinish);
         EventMgr.getInstance().removeEvent(GameEvent.RESIDENT_SICK, this, this.onSick);
         EventMgr.getInstance().removeEvent(GameEvent.RESIDENT_DIE, this, this.onDie);
@@ -230,20 +236,29 @@ export default class ResidentLogic extends Laya.Script {
     }
 
     // 设置动画
-    setAnim(anim) {
+    setAnim(anim, loop, param) {
         if (this.curStateAnim == anim) {
             return;
         }
+        if (loop == undefined || loop == null) {
+            loop = true;
+        }
         if (anim == ResidentMeta.ResidentAnim.Idle) {
-            this.ani.play(0, true, "idle");
+            this.ani.play(0, loop, "idle");
         } else if (anim == ResidentMeta.ResidentAnim.Walk) {
 
         } else if (anim == ResidentMeta.ResidentAnim.Enjoy) {
-            this.ani.play(0, true, "enjoy");
+            this.ani.play(0, loop, "enjoy");
         } else if (anim == ResidentMeta.ResidentAnim.Work) {
-            this.ani.play(0, true, "work");
+            this.ani.play(0, loop, "work");
         } else if (anim == ResidentMeta.ResidentAnim.Die) {
-            this.ani.play(0, false, "die");
+            this.ani.play(0, loop, "die");
+        } else if (anim == ResidentMeta.ResidentAnim.Anger) {
+            if (param == "right") {
+                this.ani.play(0, loop, "anger_right");
+            } else {
+                this.ani.play(0, loop, "anger_left");
+            }
         }
         this.curStateAnim = anim;
     }
@@ -374,6 +389,18 @@ export default class ResidentLogic extends Laya.Script {
             this.setStateAni("ani6");
             Laya.timer.once(ResidentMeta.SocialTimeStep * 10, this, this.onDoWorkFinish, [param]);
         }
+        // 加入到打架中
+        else if (state == ResidentMeta.ResidentState.JoinFight) {
+            this.setAnim(ResidentMeta.ResidentAnim.Walk);
+            this.startJoinFightPoint(param);
+        }
+        // 打架
+        else if (state == ResidentMeta.ResidentState.Fighting) {
+            this.setAnim(ResidentMeta.ResidentAnim.Anger, null, RandomMgr.randomYes() ? "left" : "right");
+            this.setStateAniVisible(true);
+            this.setStateAni("ani8");
+            Laya.timer.once(ResidentMeta.SocialFightStep * 10, this, this.onDoWorkFinish, [param]);
+        }
         // 赶去打猎
         else if (state == ResidentMeta.ResidentState.JoinHunt) {
             this.hurtAnimal = param;
@@ -396,7 +423,7 @@ export default class ResidentLogic extends Laya.Script {
         else if (state == ResidentMeta.ResidentState.Die) {
             this.setBuffAniVisible(false);
             this.setStateAniVisible(false);
-            this.setAnim(ResidentMeta.ResidentAnim.Die);
+            this.setAnim(ResidentMeta.ResidentAnim.Die, false);
             Laya.timer.once(ResidentMeta.DieTime, this, this.onDoWorkFinish);
         }
         // 跑去建造医院
@@ -496,6 +523,38 @@ export default class ResidentLogic extends Laya.Script {
                 script.startCreate();
             }
         }
+        // 跑去建造警察局
+        else if (state == ResidentMeta.ResidentState.GotoContinueCreatePoliceStation) {
+            this.willCreatePoliceStation = param;
+            this.setAnim(ResidentMeta.ResidentAnim.Walk);
+            this.startGoToContinueCreatePoliceStation(this.willCreatePoliceStation);
+        }
+        // 建造警察局
+        else if (state == ResidentMeta.ResidentState.CreatePoliceStation) {
+            if (this.willCreatePoliceStation) {
+                this.setAnim(ResidentMeta.ResidentAnim.Work);
+                this.setStateAniVisible(true);
+                this.setStateAni("ani2");
+                let script = this.willCreatePoliceStation.building.getComponent(PoliceStationLogic);
+                script.startCreate();
+            }
+        }
+        // 跑去建造科学实验室
+        else if (state == ResidentMeta.ResidentState.GotoContinueCreateLab) {
+            this.willCreateLab = param;
+            this.setAnim(ResidentMeta.ResidentAnim.Walk);
+            this.startGoToContinueCreateLab(this.willCreateLab);
+        }
+        // 建造科学实验室
+        else if (state == ResidentMeta.ResidentState.CreateLab) {
+            if (this.willCreateLab) {
+                this.setAnim(ResidentMeta.ResidentAnim.Work);
+                this.setStateAniVisible(true);
+                this.setStateAni("ani2");
+                let script = this.willCreateLab.building.getComponent(LabLogic);
+                script.startCreate();
+            }
+        }
         // 去治疗
         else if (state == ResidentMeta.ResidentState.GotoTreat) {
             let hospital = param;
@@ -569,6 +628,15 @@ export default class ResidentLogic extends Laya.Script {
             this.model.addSocial(ResidentMeta.ResidentAddSocialBaseValue);
             if (talkingModel.getTalkingNum() == 0) {
                 GameModel.getInstance().removeTalkingPoint(talkingModel.getTalkingPointId());
+            }
+        }
+        // 打架结束结束
+        else if (state == ResidentMeta.ResidentState.Fighting) {
+            let fightModel = param;
+            fightModel.addFightNum(-1);
+            this.model.addLife(-100);
+            if (fightModel.getFightNum() == 0) {
+                GameModel.getInstance().removeFightPoint(fightModel.getFightPointId());
             }
         }
         // 正在赶去打猎
@@ -646,6 +714,22 @@ export default class ResidentLogic extends Laya.Script {
                 return;
             }
             this.willCreateOpera = null;
+        }
+        else if (state == ResidentMeta.ResidentState.CreatePoliceStation) {
+            // todo 此处要判断是不是我自己在建造的完成了，不能所有人都建造完
+            let script = this.willCreatePoliceStation.building.getComponent(PoliceStationLogic);
+            if (!script || script.getModel() != param.model) {
+                return;
+            }
+            this.willCreatePoliceStation = null;
+        }
+        else if (state == ResidentMeta.ResidentState.CreateLab) {
+            // todo 此处要判断是不是我自己在建造的完成了，不能所有人都建造完
+            let script = this.willCreateLab.building.getComponent(LabLogic);
+            if (!script || script.getModel() != param.model) {
+                return;
+            }
+            this.willCreateLab = null;
         }
         else if (state == ResidentMeta.ResidentState.CreateHome) {
             // todo 此处要判断是不是我自己在建造的完成了，不能所有人都建造完
@@ -755,6 +839,27 @@ export default class ResidentLogic extends Laya.Script {
         }));
     }
 
+    // 跑去未建成的警察局周围
+    startGoToContinueCreatePoliceStation(policeStation) {
+        this.gotoDestExt({
+            x: policeStation.x + policeStation.width / 2 - this.owner.width / 2,
+            y: policeStation.y + policeStation.height - this.owner.height,
+        }, Laya.Handler.create(this, function () {
+            this.refreshFSMState(ResidentMeta.ResidentState.CreatePoliceStation, policeStation);
+        }));
+    }
+
+    // 跑去未建成的科学实验室周围
+    startGoToContinueCreateLab(lab) {
+        this.gotoDestExt({
+            x: lab.x + lab.width / 2 - this.owner.width / 2,
+            y: lab.y + lab.height - this.owner.height,
+        }, Laya.Handler.create(this, function () {
+            this.refreshFSMState(ResidentMeta.ResidentState.CreateLab, lab);
+        }));
+    }
+
+
     // 赶去打猎
     startJoinHunt() {
         let script = this.hurtAnimal.getComponent(AnimalLogic);
@@ -776,6 +881,17 @@ export default class ResidentLogic extends Laya.Script {
             y: pos.y,
         }, Laya.Handler.create(this, function () {
             this.refreshFSMState(ResidentMeta.ResidentState.TalkingAbout, talkingModel);
+        }));
+    }
+
+    // 走到聊天点
+    startJoinFightPoint(fightModel) {
+        let pos = fightModel.getFightPosInArea();
+        this.gotoDestExt({
+            x: pos.x,
+            y: pos.y,
+        }, Laya.Handler.create(this, function () {
+            this.refreshFSMState(ResidentMeta.ResidentState.Fighting, fightModel);
         }));
     }
 
@@ -1298,6 +1414,58 @@ export default class ResidentLogic extends Laya.Script {
         //     }),
         // };
         // this.level2Results.push(cell17);
+
+
+        // // 打架
+        // let cell18 = {
+        //     func: Laya.Handler.create(this, function (param) {
+        //         let resident = this.residentMgrInstance.getACanFightResident(this.owner.x, this.owner.y);
+        //         if (resident) {
+        //             let fightModel = GameModel.getInstance().getOrCreateFightPoint(this.owner.x, this.owner.y, 30, 5);
+        //             if (fightModel.getFightNum() == 0) {
+        //                 fightModel.addFightNum(2);
+        //                 this.refreshFSMState(ResidentMeta.ResidentState.JoinFight, fightModel);
+        //                 resident.residentLogicScript.refreshFSMState(ResidentMeta.ResidentState.JoinFight, fightModel);
+        //             } else {
+        //                 fightModel.addFightNum(1);
+        //                 this.refreshFSMState(ResidentMeta.ResidentState.JoinFight, fightModel);
+        //             }
+        //             this.ideaResult = true;
+        //         }
+        //     })
+        // };
+        // let social = this.model.getSocial();
+        // if (social < ResidentMeta.ResidentSocialLowToFight) {
+        //     this.level2Results.push(cell18);
+        // }
+
+        // //赶着去建造警察局
+        // let cell19 = {
+        //     func: Laya.Handler.create(this, function (param) {
+        //         let building = BuildingMgr.getInstance().getNearstBuilding(this.owner.x,
+        //             this.owner.y, BuildingMeta.BuildingType.PoliceStationType,
+        //             500, [BuildingMeta.BuildingState.PreCreating, BuildingMeta.BuildingState.Creating]);
+        //         if (building) {
+        //             this.refreshFSMState(ResidentMeta.ResidentState.GotoContinueCreatePoliceStation, building);
+        //             this.ideaResult = true;
+        //         }
+        //     }),
+        // };
+        // this.level2Results.push(cell19);
+
+        //赶着去建造科学实验室
+        let cell20 = {
+            func: Laya.Handler.create(this, function (param) {
+                let building = BuildingMgr.getInstance().getNearstBuilding(this.owner.x,
+                    this.owner.y, BuildingMeta.BuildingType.LabType,
+                    500, [BuildingMeta.BuildingState.PreCreating, BuildingMeta.BuildingState.Creating]);
+                if (building) {
+                    this.refreshFSMState(ResidentMeta.ResidentState.GotoContinueCreateLab, building);
+                    this.ideaResult = true;
+                }
+            }),
+        };
+        this.level2Results.push(cell20);
     }
 
     // 执行策略

@@ -34,7 +34,8 @@ NameMeta.LastName = [
     "Season",
     "Jack",
     "大壮",
-    "钢弹"
+    "钢弹",
+    "见章",
 
 ];
 

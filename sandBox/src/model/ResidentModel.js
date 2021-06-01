@@ -168,9 +168,10 @@ export default class ResidentModel extends Laya.Script {
 
         if (this.getSick() == 2) {
             this.addLife(ResidentMeta.ResidentReduceLifeBaseValue);
-            if (this.getLife() <= 0) {
-                EventMgr.getInstance().postEvent(GameEvent.RESIDENT_DIE, this);
-            }
+        }
+        
+        if (this.getLife() <= 0) {
+            EventMgr.getInstance().postEvent(GameEvent.RESIDENT_DIE, this);
         }
     }
 

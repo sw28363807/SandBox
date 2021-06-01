@@ -4,8 +4,10 @@ import GameModel from "../model/GameModel";
 import FarmLandLogic from "./FarmLandLogic";
 import HomeLogic from "./HomeLogic";
 import HospitalLogic from "./HospitalLogic";
+import LabLogic from "./LabLogic";
 import OperaLogic from "./OperaLogic";
 import PastureLogic from "./PastureLogic";
+import PoliceStationLogic from "./PoliceStationLogic";
 import PowerPlantLogic from "./PowerPlantLogic";
 import SchoolLogic from "./SchoolLogic";
 import ShopLogic from "./ShopLogic";
@@ -314,6 +316,78 @@ export default class BuildingMgr extends Laya.Script {
         }
         return cell;
     }
+
+
+    ceatePoliceStationFunc(config, model, cell, callback) {
+        Laya.loader.create(BuildingMeta.PoliceStationPrefabPath, Laya.Handler.create(this, function (prefabDef) {
+            let police = prefabDef.create();
+            config.parent.addChild(police);
+            let script = police.getComponent(PoliceStationLogic);
+            cell.building = police;
+            script.refreshByModel(model);
+            if (callback) {
+                callback.runWith(cell);
+            }
+        }));
+    }
+
+    // 建造警察局
+    createPoliceStationByConfig(config, callback) {
+        let model = GameModel.getInstance().newPoliceStationModel(config);
+        let cell = {
+            x: config.x,
+            y: config.y,
+            width: BuildingMeta.PoliceStationWidth,
+            height: BuildingMeta.PoliceStationHeight,
+            model: model,
+            building: "noBuilding",
+        };
+        this.buildings[String(model.getBuildingId())] = cell;
+        if (Laya.loader.getRes(GameMeta.BuildingAtlasPath)) {
+            this.ceatePoliceStationFunc(config, model, cell, callback);
+        } else {
+            Laya.loader.load(GameMeta.BuildingAtlasPath, Laya.Handler.create(this, function () {
+                this.ceatePoliceStationFunc(config, model, cell, callback);
+            }));
+        }
+        return cell;
+    }
+
+    ceateLabFunc(config, model, cell, callback) {
+        Laya.loader.create(BuildingMeta.LabPrefabPath, Laya.Handler.create(this, function (prefabDef) {
+            let lab = prefabDef.create();
+            config.parent.addChild(lab);
+            let script = lab.getComponent(LabLogic);
+            cell.building = lab;
+            script.refreshByModel(model);
+            if (callback) {
+                callback.runWith(cell);
+            }
+        }));
+    }
+
+    // 建造警察局
+    createLabByConfig(config, callback) {
+        let model = GameModel.getInstance().newLabModel(config);
+        let cell = {
+            x: config.x,
+            y: config.y,
+            width: BuildingMeta.LabWidth,
+            height: BuildingMeta.LabHeight,
+            model: model,
+            building: "noBuilding",
+        };
+        this.buildings[String(model.getBuildingId())] = cell;
+        if (Laya.loader.getRes(GameMeta.BuildingAtlasPath)) {
+            this.ceateLabFunc(config, model, cell, callback);
+        } else {
+            Laya.loader.load(GameMeta.BuildingAtlasPath, Laya.Handler.create(this, function () {
+                this.ceateLabFunc(config, model, cell, callback);
+            }));
+        }
+        return cell;
+    }
+
 
     // 是否有交集
     intersectsBuilding(x, y, w, h) {

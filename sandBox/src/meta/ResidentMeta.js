@@ -44,6 +44,10 @@ ResidentMeta.ResidentState = {
     CreateOpera: 38,     //建造歌剧院
     JoinFight: 39,         //加入打群架
     Fighting: 40,             //打架
+    GotoContinueCreatePoliceStation: 41, //跑去建造警察局
+    CreatePoliceStation: 42,     //建造警察局
+    GotoContinueCreateLab: 43, //跑去建造科学实验室
+    CreateLab: 44,     //建造科学实验室
 };
 
 // 动画枚举
@@ -54,6 +58,7 @@ ResidentMeta.ResidentAnim = {
     Enjoy: 3,   //喜悦动画
     Work: 4,   //愤怒动画
     Die: 5,     //死亡动画
+    Anger: 6,   //生气动画
 };
 
 // 层级
@@ -74,6 +79,9 @@ ResidentMeta.ResidentMoveSpeed = 150;
 // 聊天的时间步长
 ResidentMeta.SocialTimeStep = 1000;
 
+// 打架的时间步长
+ResidentMeta.SocialFightStep = 1000;
+
 // 死亡需要的时间
 ResidentMeta.DieTime = 2000;
 
@@ -89,12 +97,13 @@ ResidentMeta.ResidentReduceEnjoyBaseValue = -0.5; //娱乐减少值
 ResidentMeta.ResidentSickProbability = 0.999; //生病的概率
 ResidentMeta.ResidentTreatTime = 5000; //治疗的时间
 ResidentMeta.ResidentLearnTime = 5000; //学习的时间
-ResidentMeta.ResidentSocialLowToFight = 50;  //需要社交的警戒线，低于这个值就是要打架了
+ResidentMeta.ResidentSocialLowToFight = 100;  //需要社交的警戒线，低于这个值就是要打架了
 ResidentMeta.ResidentSocialNeedValue = 30;  //需要社交的警戒线，低于这个值就是需要社交了
 ResidentMeta.ResidentWaterNeedValue = 30;  //需要喝水的警戒线，低于这个值就是需要喝水了
 ResidentMeta.ResidentFoodNeedValue = 30;  //需要吃饭的警戒线，低于这个值就是需要吃饭了
 ResidentMeta.ResidentEnjoyNeedValue = 30;  //需要娱乐的警戒线，低于这个值就是需要娱乐了
 ResidentMeta.ResidentSocialArea = 300;      //寻找可以社交的人的范围
+ResidentMeta.ResidentFightArea = 1000;      //寻找可以打架的人的范围
 ResidentMeta.ResidentAddTreeBaseValue = 1;  //人物砍树增加的数值
 ResidentMeta.ResidentAddStoneBaseValue = 1;  //人物收集石头增加的数值
 ResidentMeta.ResidentFindPathTimes = 5;      //人物寻路的次数
