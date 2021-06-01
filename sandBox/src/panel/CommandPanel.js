@@ -28,7 +28,7 @@ export default class CommandPanel extends Laya.Script {
         this.clip = this.under.getChildByName("clip");
         this.content = this.clip.getChildByName("content");
         let distance = 128;
-        let ySpace = 10;
+        let ySpace = 20;
         Laya.loader.create("prefab/CommonItem.prefab", Laya.Handler.create(this, function (prefabDef) {
             prefabDef = prefabDef;
             for (let index = 0; index < this.dataArray.length; index++) {

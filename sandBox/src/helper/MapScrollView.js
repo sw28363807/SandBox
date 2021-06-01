@@ -9,10 +9,10 @@ import GameMeta from "../meta/GameMeta";
 
 export default class MapScrollView extends Laya.Script {
 
-    constructor() { 
+    constructor() {
         super();
     }
-    
+
     onEnable() {
         this.startPos = null;
         this.container = this.owner.getChildByName("container");
@@ -40,18 +40,18 @@ export default class MapScrollView extends Laya.Script {
                 WaterMgr.getInstance().pushWater(child);
             }
         }
-        this.processPos(0, 0);
+        this.lookAt(GameContext.mapWidth/2, GameContext.mapHeight/2);
     }
 
     onMouseDown(e) {
-        this.startPos = {x: e.stageX, y: e.stageY};
+        this.startPos = { x: e.stageX, y: e.stageY };
     }
 
     onMouseMove(e) {
         if (this.startPos) {
             let dx = e.stageX - this.startPos.x;
             let dy = e.stageY - this.startPos.y;
-            this.processPos(this.container.x + dx, this.container.y + dy);  
+            this.processMapPos(this.container.x + dx, this.container.y + dy);
             this.startPos.x = e.stageX;
             this.startPos.y = e.stageY;
         }
@@ -65,23 +65,60 @@ export default class MapScrollView extends Laya.Script {
         this.startPos = null;
     }
 
-    processPos(toX, toY) {
-        if (toX != null && toY != null) {
-            if (toX > -GameMeta.MapSideOff) {
-                toX = -GameMeta.MapSideOff;
-            }
-            if (toY > -GameMeta.MapSideOff) {
-                toY = -GameMeta.MapSideOff;
-            }
-            if (toX < this.owner.width - GameContext.mapWidth + GameMeta.MapSideOff) {
-                toX = this.owner.width - GameContext.mapWidth + GameMeta.MapSideOff;
-            }
-            if (toY < this.owner.height - GameContext.mapHeight + GameMeta.MapSideOff) {
-                toY = this.owner.height - GameContext.mapHeight + GameMeta.MapSideOff;
-            }
-            this.container.x = toX;
-            this.container.y = toY;
+    processMapPos(toX, toY) {
+        let p = this.getMapPos(toX, toY);
+        this.container.x = p.x;
+        this.container.y = p.y;
+    }
+
+    getMapPos(toX, toY) {
+        if (toX > -GameMeta.MapSideOff) {
+            toX = -GameMeta.MapSideOff;
         }
+        if (toY > -GameMeta.MapSideOff) {
+            toY = -GameMeta.MapSideOff;
+        }
+        if (toX < this.owner.width - GameContext.mapWidth + GameMeta.MapSideOff) {
+            toX = this.owner.width - GameContext.mapWidth + GameMeta.MapSideOff;
+        }
+        if (toY < this.owner.height - GameContext.mapHeight + GameMeta.MapSideOff) {
+            toY = this.owner.height - GameContext.mapHeight + GameMeta.MapSideOff;
+        }
+        return { x: toX, y: toY };
+    }
+
+    // 设置地图位置
+    lookAt(mapX, mapY, anim) {
+        if (anim == undefined || anim == null) {
+            anim = false;
+        }
+
+        if (this.tweenObject) {
+            Laya.Tween.clear(this.tweenObject);
+            this.tweenObject = null;
+        }
+
+        let point = new Laya.Point(mapX, mapY);
+        this.container.localToGlobal(point);
+        let globalEyeX = Laya.stage.width / 2;
+        let globalEyeY = Laya.stage.height / 2;
+        let offX = globalEyeX - point.x;
+        let offY = globalEyeY - point.y;
+        let toX = this.container.x + offX;
+        let toY = this.container.y + offY;
+        if (anim) {
+            let p = this.getMapPos(toX, toY);
+            this.tweenObject = Laya.Tween.to(this.container, { x: p.x, y: p.y }, 1000,
+                Laya.Ease.sineOut, Laya.Handler.create(this, function () {
+                    if (this.tweenObject) {
+                        Laya.Tween.clear(this.tweenObject);
+                        this.tweenObject = null;
+                    }
+                }));
+        } else {
+            this.processMapPos(toX, toY);
+        }
+
     }
 
 }
