@@ -4,12 +4,13 @@ export default class BuildingMeta {
 
 BuildingMeta.HomePrefabPath = "prefab/Home.prefab";       //家prefab路径
 BuildingMeta.HospitalPrefabPath = "prefab/Hospital.prefab";       //医院prefab路径
-BuildingMeta.SchoolPrefabPath = "prefab/School.prefab";       //医院prefab路径
+BuildingMeta.SchoolPrefabPath = "prefab/School.prefab";       //学校prefab路径
 BuildingMeta.PowerPlantPrefabPath = "prefab/PowerPlant.prefab";       //发电厂prefab路径
 BuildingMeta.ShopPrefabPath = "prefab/Shop.prefab";       //商店prefab路径
 BuildingMeta.FarmLandPrefabPath = "prefab/FarmLand.prefab";       //农田prefab路径
 BuildingMeta.PasturePrefabPath = "prefab/Pasture.prefab";       //牧场prefab路径
 BuildingMeta.OperaPrefabPath = "prefab/Opera.prefab";       //歌剧院prefab路径
+BuildingMeta.OfficePrefabPath = "prefab/Office.prefab";       //写字楼prefab路径
 BuildingMeta.PoliceStationPrefabPath = "prefab/PoliceStation.prefab";    //警察局prefab路径
 BuildingMeta.LabPrefabPath = "prefab/Lab.prefab";    //实验室prefab路径
 
@@ -26,6 +27,7 @@ BuildingMeta.BuildingType = {
     OperaType: 8,    //歌剧院
     PoliceStationType: 9,   //警察局
     LabType: 10,            //科学实验室
+    OfficeType: 11,         //鞋子楼
 };
 
 BuildingMeta.BuildingState = {
@@ -66,6 +68,10 @@ BuildingMeta.PastureHeight = 256;   //牧场高度
 // 歌剧院
 BuildingMeta.OperaWidth = 256;   //歌剧院宽度
 BuildingMeta.OperaHeight = 256;   //歌剧院高度
+
+// 写字楼
+BuildingMeta.OfficeWidth = 256;   //写字楼宽度
+BuildingMeta.OfficeHeight = 256;   //写字楼高度
 
 // 警察局
 BuildingMeta.PoliceStationWidth = 256;   //警察局宽度
@@ -194,5 +200,18 @@ BuildingMeta.CommandPanelDataSource = {
         adjustX: 64,
         adjustY: 128,
         buildingName: "科学实验室",
+    },
+    // 写字楼
+    [String(BuildingMeta.BuildingType.OfficeType)]: {
+        prefab: BuildingMeta.OfficePrefabPath,
+        type: BuildingMeta.BuildingType.OfficeType,
+        preview: "source/building/office.png",
+        width: BuildingMeta.OfficeWidth,
+        height: BuildingMeta.OfficeHeight,
+        realWidth: 256,
+        realHeight: 256,
+        adjustX: 0,
+        adjustY: 0,
+        buildingName: "写字楼",
     },
 };

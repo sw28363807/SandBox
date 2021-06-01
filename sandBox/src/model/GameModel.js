@@ -295,6 +295,21 @@ export default class GameModel extends Laya.Script {
         return model;
     }
 
+    // 添加歌剧院Model
+    newOfficeModel(param) {
+        this.maxBuildingID++;
+        let model = new BuildingModel();
+        model.updateData({
+            x: param.x,
+            y: param.y,
+            buildingId: this.maxBuildingID,
+            buildingType: BuildingMeta.BuildingType.OfficeType,
+            buildingState: BuildingMeta.BuildingState.PreCreating,
+        });
+        this.buildingModels[String(this.maxBuildingID)] = model;
+        return model;
+    }
+
     // 添加警察局Model
     newPoliceStationModel(param) {
         this.maxBuildingID++;

@@ -294,7 +294,13 @@ export default class CommandPanel extends Laya.Script {
                 x: dpX,
                 y: dpY
             });
-        }        
+        } else if (data.type == BuildingMeta.BuildingType.OfficeType) {
+            let buildingCell = BuildingMgr.getInstance().createOfficeByConfig({
+                parent: GameContext.mapContainer,
+                x: dpX,
+                y: dpY
+            });
+        }
     }
 
     onDisable() {

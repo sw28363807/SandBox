@@ -48,6 +48,8 @@ ResidentMeta.ResidentState = {
     CreatePoliceStation: 42,     //建造警察局
     GotoContinueCreateLab: 43, //跑去建造科学实验室
     CreateLab: 44,     //建造科学实验室
+    GotoContinueCreateOffice: 45, //跑去建造写字楼
+    CreateOffice: 46,     //建造写字楼
 };
 
 // 动画枚举

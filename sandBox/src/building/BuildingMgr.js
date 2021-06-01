@@ -5,6 +5,7 @@ import FarmLandLogic from "./FarmLandLogic";
 import HomeLogic from "./HomeLogic";
 import HospitalLogic from "./HospitalLogic";
 import LabLogic from "./LabLogic";
+import OfficeLogic from "./OfficeLogic";
 import OperaLogic from "./OperaLogic";
 import PastureLogic from "./PastureLogic";
 import PoliceStationLogic from "./PoliceStationLogic";
@@ -312,6 +313,41 @@ export default class BuildingMgr extends Laya.Script {
         } else {
             Laya.loader.load(GameMeta.BuildingAtlasPath, Laya.Handler.create(this, function () {
                 this.ceateOperaFunc(config, model, cell, callback);
+            }));
+        }
+        return cell;
+    }
+
+    ceateOfficeFunc(config, model, cell, callback) {
+        Laya.loader.create(BuildingMeta.OfficePrefabPath, Laya.Handler.create(this, function (prefabDef) {
+            let office = prefabDef.create();
+            config.parent.addChild(office);
+            let script = office.getComponent(OfficeLogic);
+            cell.building = office;
+            script.refreshByModel(model);
+            if (callback) {
+                callback.runWith(cell);
+            }
+        }));
+    }
+
+    // 建造写字楼
+    createOfficeByConfig(config, callback) {
+        let model = GameModel.getInstance().newOfficeModel(config);
+        let cell = {
+            x: config.x,
+            y: config.y,
+            width: BuildingMeta.OfficeWidth,
+            height: BuildingMeta.OfficeHeight,
+            model: model,
+            building: "noBuilding",
+        };
+        this.buildings[String(model.getBuildingId())] = cell;
+        if (Laya.loader.getRes(GameMeta.BuildingAtlasPath)) {
+            this.ceateOfficeFunc(config, model, cell, callback);
+        } else {
+            Laya.loader.load(GameMeta.BuildingAtlasPath, Laya.Handler.create(this, function () {
+                this.ceateOfficeFunc(config, model, cell, callback);
             }));
         }
         return cell;
