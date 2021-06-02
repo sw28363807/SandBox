@@ -19,6 +19,10 @@ FoodMeta.FoodAddValue = {
         deltayTime: 5000,       //吃食物所用的时间
         addValue: 30,           //吃食物所增加的值
     },
+    [FoodMeta.FoodTypes.MeatType]: {
+        deltayTime: 5000,       //吃食物所用的时间
+        addValue: 30,           //吃食物所增加的值
+    },
 }
 
 FoodMeta.FoodState = {

@@ -144,4 +144,7 @@ export default class ResidentMgr extends Laya.Script {
         }
         return null;
     }
+
+    // 是否能够建立房子
+    
 }

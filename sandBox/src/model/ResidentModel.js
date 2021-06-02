@@ -153,8 +153,8 @@ export default class ResidentModel extends Laya.Script {
     // 下降需求和上升满足
     onStep() {
         // this.addEnjoy(ResidentMeta.ResidentReduceEnjoyBaseValue);
-        // this.addSocial(ResidentMeta.ResidentReduceSocialBaseValue);
-        // this.addWater(ResidentMeta.ResidentReduceWaterBaseValue);
+        this.addSocial(ResidentMeta.ResidentReduceSocialBaseValue);
+        this.addWater(ResidentMeta.ResidentReduceWaterBaseValue);
         this.addFood(ResidentMeta.ResidentReduceFoodBaseValue);
         // if (this.getSick() == 1) {
         //     if (Math.random() > ResidentMeta.ResidentSickProbability) {

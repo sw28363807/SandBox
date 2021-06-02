@@ -8,7 +8,7 @@ export default class ResidentTipMeta {
     }
 }
 
-ResidentTipMeta.BoredTipsProbability = 0.995;
+ResidentTipMeta.BoredTipsProbability = 0.90;
 
 // 小人无聊时说的话
 ResidentTipMeta.BoredTips = [

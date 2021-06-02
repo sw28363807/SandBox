@@ -372,7 +372,7 @@
                     "keyframes":{
                         "y":[
                             {
-                                "value":40,
+                                "value":49,
                                 "tweenMethod":"linearNone",
                                 "tween":true,
                                 "target":5,
@@ -1091,7 +1091,7 @@
                                 "index":0
                             },
                             {
-                                "value":"source/resident/sick.png",
+                                "value":"source/resident/attack.png",
                                 "tweenMethod":"linearNone",
                                 "tween":false,
                                 "target":9,

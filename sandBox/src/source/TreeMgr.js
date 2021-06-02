@@ -4,7 +4,7 @@ export default class TreeMgr extends Laya.Script {
 
     constructor() { 
         super();
-        this.trees = [];
+        this.trees = {};
         this.maxID = 0;
     }
     
@@ -19,7 +19,7 @@ export default class TreeMgr extends Laya.Script {
         if (script) {
             script.setTreeID(this.maxID);
         }
-        this.trees.push(tree);
+        this.trees[String(this.maxID)] = tree;
     }
 
     // 是否有交集
@@ -38,8 +38,8 @@ export default class TreeMgr extends Laya.Script {
     getNearstTree(x, y) {
         let distance = 99999999;
         let ret = null;
-        for (let index = 0; index < this.trees.length; index++) {
-            let tree = this.trees[index];
+        for (let key in this.trees) {
+            let tree = this.trees[key];
             let curDistance = new Laya.Point(tree.x, tree.y).distance(x, y);
             if (curDistance < distance) {
                 distance = curDistance;

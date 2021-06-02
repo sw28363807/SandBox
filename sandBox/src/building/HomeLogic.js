@@ -1,6 +1,7 @@
 import EventMgr from "../helper/EventMgr";
 import BuildingMeta from "../meta/BuildingMeta";
 import GameEvent from "../meta/GameEvent";
+import GameModel from "../model/GameModel";
 export default class HomeLogic extends Laya.Script {
 
     constructor() { 
@@ -26,6 +27,10 @@ export default class HomeLogic extends Laya.Script {
         this.owner.x = model.getX();
         this.owner.y = model.getY();
         this.startCreate();
+    }
+
+    getModel() {
+        return this.model;
     }
 
     // 开始生孩子
@@ -65,6 +70,8 @@ export default class HomeLogic extends Laya.Script {
         this.sliderControl.visible = false;
         Laya.timer.clear(this, this.onCreateProgress);
         this.model.setBuildingState(BuildingMeta.BuildingState.Noraml);
+        GameModel.getInstance().addTreeNum(-BuildingMeta.CreateHomeNeedValues.tree);
+        GameModel.getInstance().addStoneNum(-BuildingMeta.CreateHomeNeedValues.stone);
         EventMgr.getInstance().postEvent(GameEvent.CREATE_HOME_FINISH, {model: this.model});
     }
 }

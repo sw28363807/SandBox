@@ -1,5 +1,4 @@
 export default class RandomMgr {
-
     // 随机一个矩形区域内的点
     static randomPointInRect(x, y, w, h) {
         let addX = Math.random() * w;
@@ -66,6 +65,18 @@ export default class RandomMgr {
     // 随机一个数字
     static randomNumer(min, max) {
         let a = Math.random();
-        return min  +  Math.round( a * (max - min));
+        return min + Math.round(a * (max - min));
+    }
+
+    // 随机一个点x平行线上的点
+    static randomPointForXWithSign(x, y, distanceX) {
+        let retX = x + RandomMgr.randomSign() * Math.round(Math.random() * distanceX);
+        return { x: retX, y: y };
+    }
+
+    // 随机一个点x平行线上的点
+    static randomPointForX(x, y, distanceX) {
+        let retX = x + Math.round(Math.random() * distanceX);
+        return { x: retX, y: y };
     }
 }

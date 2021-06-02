@@ -81,6 +81,11 @@ BuildingMeta.PoliceStationHeight = 256;   //警察局高度
 BuildingMeta.LabWidth = 256;   //实验室宽度
 BuildingMeta.LabHeight = 256;   //实验室高度
 
+// 盖房子需要的钱
+BuildingMeta.CreateHomeNeedValues = {
+    tree: 1,
+    stone: 1,
+};
 
 // 操作界面的数据源
 BuildingMeta.CommandPanelDataSource = {
