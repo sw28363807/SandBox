@@ -5,11 +5,12 @@
     "searchKey":"View",
     "props":{"sceneWidth":500,"sceneHeight":500,"sceneColor":"#000000"},
     "nodeParent":-1,
-    "maxID":3,
+    "maxID":5,
     "label":"View",
-    "isDirectory":false,
+    "isOpen":null,
+    "isDirectory":true,
     "isAniNode":true,
-    "hasChild":false,
+    "hasChild":true,
     "compId":2,
     "child":[
         {
@@ -33,7 +34,7 @@
                     "keyframes":{
                         "y":[
                             {
-                                "value":74,
+                                "value":-33,
                                 "tweenMethod":"linearNone",
                                 "tween":true,
                                 "target":4,
@@ -42,7 +43,7 @@
                             }],
                         "x":[
                             {
-                                "value":64,
+                                "value":-34,
                                 "tweenMethod":"linearNone",
                                 "tween":true,
                                 "target":4,
@@ -51,7 +52,7 @@
                             }],
                         "skin":[
                             {
-                                "value":"source/landscape/stone2.png",
+                                "value":"source/landscape/stone1.png",
                                 "tweenMethod":"linearNone",
                                 "tween":false,
                                 "target":4,
@@ -60,7 +61,7 @@
                             }],
                         "pivotY":[
                             {
-                                "value":74,
+                                "value":0,
                                 "tweenMethod":"linearNone",
                                 "tween":true,
                                 "target":4,
@@ -69,7 +70,7 @@
                             }],
                         "pivotX":[
                             {
-                                "value":64,
+                                "value":0,
                                 "tweenMethod":"linearNone",
                                 "tween":true,
                                 "target":4,

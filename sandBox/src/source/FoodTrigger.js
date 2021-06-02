@@ -14,25 +14,30 @@ export default class FoodTrigger extends Laya.Script {
     }
 
     onDisable() {
+        Laya.timer.clear(this, this.onCreateFood);
     }
 
     onStart() {
-        this.owner.timer.loop(FoodMeta.FoodUpdateTime, this, function() {
-            if (this.curNum >= FoodMeta.FoodMaxNumPerTrigger) {
-                return;
-            }
-            let pos = RandomMgr.randomByArea(this.owner.x, this.owner.y, FoodMeta.FoodTriggerArea);
-            FoodMgr.getInstance().createFoodByConfig({
-                parent:GameContext.mapContainer,
-                x: pos.x,
-                y: pos.y,
-                trigger: this,
-                foodType: 1
-            }, Laya.Handler.create(this, function(obj) {
-                
-            }));
-            this.addNum(1);
-        });
+        Laya.timer.loop(FoodMeta.FoodUpdateTime, this, this.onCreateFood);
+        this.onCreateFood();
+    }
+
+    onCreateFood() {
+        if (this.curNum >= FoodMeta.FoodMaxNumPerTrigger) {
+            return;
+        }
+        let dstX = this.owner.x + RandomMgr.randomNumer(0, this.owner.width);
+        let dstY = this.owner.y + this.owner.height - RandomMgr.randomNumer(50, this.owner.height);
+        FoodMgr.getInstance().createFoodByConfig({
+            parent:GameContext.mapContainer,
+            x: dstX,
+            y: dstY,
+            trigger: this,
+            foodType: FoodMeta.FoodTypes.FruitType
+        }, Laya.Handler.create(this, function(obj) {
+            
+        }));
+        this.addNum(1);
     }
 
     // 增加一个计数

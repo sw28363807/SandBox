@@ -4,12 +4,13 @@ export default class FoodModel extends Laya.Script {
 
     constructor() { 
         super();
-        this.food = FoodMeta.FoodBaseValue;
+        this.food = 0;
         this.foodId = 0;
         this.x;
         this.y;
-        this.foodType = 1;
+        this.foodType = FoodMeta.FoodTypes.NullType;
         this.state = FoodMeta.FoodState.CanEat;
+        this.eatFinishTime = 0;
     }
 
     // 获取食物类型
@@ -38,7 +39,7 @@ export default class FoodModel extends Laya.Script {
     }
 
     // 获得当前食物状态
-    getState() {
+    getFoodState() {
         return this.state;
     }
 
@@ -48,8 +49,13 @@ export default class FoodModel extends Laya.Script {
     }
 
     // 设置当前食物的状态
-    setState(state) {
+    setFoodState(state) {
         this.state = state;
+    }
+
+    // 获得吃东西的cd时间
+    getEatCDTime() {
+        return FoodMeta.FoodAddValue[this.foodType].deltayTime;
     }
 
     updateData(data) {
@@ -68,6 +74,7 @@ export default class FoodModel extends Laya.Script {
             }
             if (data.foodType) {
                 this.foodType = data.foodType;
+                this.food = FoodMeta.FoodAddValue[this.foodType].addValue;
             }
         }
     }

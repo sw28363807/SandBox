@@ -72,9 +72,6 @@ ResidentMeta.CutDownTreeTimeStep = 1000;
 // 收集石头的时间
 ResidentMeta.CollectStoneTimeStep = 1000;
 
-//吃东西消耗的时间步长
-ResidentMeta.EatFoodTimeStep = 1000;
-
 // 人物移动速度
 ResidentMeta.ResidentMoveSpeed = 150;
 
@@ -88,10 +85,10 @@ ResidentMeta.SocialFightStep = 1000;
 ResidentMeta.DieTime = 2000;
 
 // 属性掉落基础值
-ResidentMeta.ResidentValueStep = 2000;  //人物数值消耗Step
+ResidentMeta.ResidentValueStep = 1000;  //人物数值消耗Step
 ResidentMeta.ResidentMakeIdeaStep = 1000;  //人物做决策Step
 ResidentMeta.ResidentReduceWaterBaseValue = -1; //水源减少值
-ResidentMeta.ResidentReduceFoodBaseValue = -1;  //食物减少值
+ResidentMeta.ResidentReduceFoodBaseValue = -0.5;  //食物减少值
 ResidentMeta.ResidentReduceSocialBaseValue = -1; //社交减少值
 ResidentMeta.ResidentAddSocialBaseValue = 60; //一次社交增加值
 ResidentMeta.ResidentReduceLifeBaseValue = -0.5; //生命减少值
@@ -102,7 +99,7 @@ ResidentMeta.ResidentLearnTime = 5000; //学习的时间
 ResidentMeta.ResidentSocialLowToFight = 100;  //需要社交的警戒线，低于这个值就是要打架了
 ResidentMeta.ResidentSocialNeedValue = 30;  //需要社交的警戒线，低于这个值就是需要社交了
 ResidentMeta.ResidentWaterNeedValue = 30;  //需要喝水的警戒线，低于这个值就是需要喝水了
-ResidentMeta.ResidentFoodNeedValue = 30;  //需要吃饭的警戒线，低于这个值就是需要吃饭了
+ResidentMeta.ResidentFoodNeedValue = 20;  //需要吃饭的警戒线，低于这个值就是需要吃饭了
 ResidentMeta.ResidentEnjoyNeedValue = 30;  //需要娱乐的警戒线，低于这个值就是需要娱乐了
 ResidentMeta.ResidentSocialArea = 300;      //寻找可以社交的人的范围
 ResidentMeta.ResidentFightArea = 1000;      //寻找可以打架的人的范围

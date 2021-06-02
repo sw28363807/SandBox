@@ -19,11 +19,11 @@ export default class FoodLogic extends Laya.Script {
 
     onStart() {
         Laya.timer.once(1000, this, this.fadeOutFinish);
-        this.ani.play(0, false, "fadeOut" + String(this.model.getFoodType()));
+        this.ani.play(0, false, "fadeOut" + String(this.foodAnimIndex));
     }
 
     fadeOutFinish() {
-        this.ani.play(0, true, "idle" + String(this.model.getFoodType()));
+        this.ani.play(0, true, "idle" + String(this.foodAnimIndex));
         Laya.timer.clear(this, this.fadeOutFinish);
     }
 
@@ -45,6 +45,13 @@ export default class FoodLogic extends Laya.Script {
         this.model = model;
         this.owner.x = model.getX();
         this.owner.y = model.getY();
+        this.foodType = this.model.getFoodType();
+        if (this.foodType == FoodMeta.FoodTypes.FruitType) {
+            this.foodAnimIndex = Math.ceil(Math.random() * 5);
+        } else {
+            this.foodAnimIndex = 6;
+        }
+        
     }
 
     getModel() {

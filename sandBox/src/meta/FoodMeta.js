@@ -1,11 +1,25 @@
 export default class FoodMeta {
 }
 
-FoodMeta.FoodMaxNumPerTrigger = 1;  //每个食物触发器的最大生成食物数量
-FoodMeta.FoodTriggerArea = 50;      //食物出现的范围
-FoodMeta.FoodUpdateTime = 5000;        //更新食物出现的时间
+FoodMeta.FoodMaxNumPerTrigger = 2;  //每个食物触发器的最大生成食物数量
+FoodMeta.FoodUpdateTime = 20000;        //更新食物出现的时间
 FoodMeta.FoodZOrder = 99;           //食物层级
-FoodMeta.FoodBaseValue = 30;        //食物吃掉所要加的值
+FoodMeta.DrinkWaterTime = 5000;     //喝水时间
+
+// 食物类型
+FoodMeta.FoodTypes = {
+    NullType: 0,    //没有类型
+    FruitType: 1,   //水果
+    MeatType: 2,    //肉类
+};
+
+// 食物吃完以后的增加值
+FoodMeta.FoodAddValue = {
+    [FoodMeta.FoodTypes.FruitType]: {
+        deltayTime: 5000,       //吃食物所用的时间
+        addValue: 30,           //吃食物所增加的值
+    },
+}
 
 FoodMeta.FoodState = {
     CanEat: 1,      //能够吃

@@ -372,7 +372,7 @@
                     "keyframes":{
                         "y":[
                             {
-                                "value":129,
+                                "value":40,
                                 "tweenMethod":"linearNone",
                                 "tween":true,
                                 "target":5,
@@ -647,6 +647,24 @@
                                 "key":"pivotX",
                                 "index":0
                             }]
+                    }
+                },
+                {
+                    "target":7,
+                    "keyframes":{
+
+                    }
+                },
+                {
+                    "target":8,
+                    "keyframes":{
+
+                    }
+                },
+                {
+                    "target":9,
+                    "keyframes":{
+
                     }
                 }],
             "name":"ani4",

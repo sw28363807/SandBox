@@ -27,7 +27,6 @@ export default class GameModel extends Laya.Script {
         this.animalModes = {};          //动物数据
 
 
-
         // 通用数值
         this.treeNum = 0;
         this.stoneNum = 0;

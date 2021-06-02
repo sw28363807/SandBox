@@ -49,7 +49,7 @@ export default class FoodMgr extends Laya.Script {
             let food = this.foods[key];
             let script = food.getComponent(FoodLogic);
             if (param.state != null && 
-                script.getModel().getState() != param.state) {
+                script.getModel().getFoodState() != param.state) {
                     continue;
             }
             let curDistance = new Laya.Point(food.x, food.y).distance(param.x, param.y);
@@ -66,11 +66,16 @@ export default class FoodMgr extends Laya.Script {
         for (const key in this.foods) {
             let food = this.foods[key];
             let script = food.getComponent(FoodLogic);
-            if (script.getModel().getState() == FoodMeta.FoodState.CanEat) {
+            if (script.getModel().getFoodState() == FoodMeta.FoodState.CanEat) {
                 return true;
             }
         }
         return false;
+    }
+
+    // 获得一个食物
+    getFoodById(id) {
+        return this.foods[String(id)];
     }
 
     // 删除一个食物

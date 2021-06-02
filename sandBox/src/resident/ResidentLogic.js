@@ -338,10 +338,14 @@ export default class ResidentLogic extends Laya.Script {
         }
         // 吃食物
         else if (state == ResidentMeta.ResidentState.EatFood) {
+            this.curEatingFood = param;
+            let script = this.curEatingFood.getComponent(FoodLogic);
+            let model =  script.getModel();
+            model.setFoodState(FoodMeta.FoodState.Eating);
             this.setStateAniVisible(true);
-            this.setAnim(ResidentMeta.ResidentAnim.Enjoy);
+            this.setAnim(ResidentMeta.ResidentAnim.Work);
             this.setStateAni("ani3");
-            Laya.timer.once(ResidentMeta.EatFoodTimeStep * 3, this, this.onDoWorkFinish);
+            Laya.timer.once(model.getEatCDTime(), this, this.onDoWorkFinish);
         }
         // 寻找水源
         else if (state == ResidentMeta.ResidentState.FindWater) {
@@ -353,7 +357,7 @@ export default class ResidentLogic extends Laya.Script {
             this.setAnim(ResidentMeta.ResidentAnim.Work);
             this.setStateAniVisible(true);
             this.setStateAni("ani4");
-            Laya.timer.once(ResidentMeta.EatFoodTimeStep * 3, this, this.onDoWorkFinish);
+            Laya.timer.once(FoodMeta.DrinkWaterTime, this, this.onDoWorkFinish);
         }
         // 恋爱男方
         else if (state == ResidentMeta.ResidentState.LoverMan) {
@@ -624,7 +628,7 @@ export default class ResidentLogic extends Laya.Script {
             let script = this.curEatingFood.getComponent(FoodLogic);
             let foodModel = script.getModel();
             this.model.addFood(foodModel.getFood());
-            foodModel.setState(FoodMeta.FoodState.EatFinish);
+            foodModel.setFoodState(FoodMeta.FoodState.EatFinish);
             FoodMgr.getInstance().removeFoodById(foodModel.getFoodId());
             this.curEatingFood = null;
         }
@@ -1074,12 +1078,9 @@ export default class ResidentLogic extends Laya.Script {
             });
             if (nearstFood) {
                 let script = nearstFood.getComponent(FoodLogic);
-                script.getModel().setState(FoodMeta.FoodState.Occupy);
+                script.getModel().setFoodState(FoodMeta.FoodState.Occupy);
                 this.gotoDestExt({ x: nearstFood.x, y: nearstFood.y }, Laya.Handler.create(this, function () {
-                    let script = nearstFood.getComponent(FoodLogic);
-                    script.getModel().setState(FoodMeta.FoodState.Eating);
-                    this.curEatingFood = nearstFood;
-                    this.refreshFSMState(ResidentMeta.ResidentState.EatFood);
+                    this.refreshFSMState(ResidentMeta.ResidentState.EatFood, nearstFood);
                 }));
             } else {
                 this.refreshFSMState(ResidentMeta.ResidentState.IdleState);
@@ -1275,22 +1276,22 @@ export default class ResidentLogic extends Laya.Script {
         // }
 
 
-        // //吃饭
-        // let cell6 = {
-        //     func: Laya.Handler.create(this, function (param) {
-        //         let canFood = FoodMgr.getInstance().canFindFood();
-        //         if (canFood) {
-        //             this.refreshFSMState(ResidentMeta.ResidentState.FindFood);
-        //             this.ideaResult = true;
-        //         }
-        //     })
-        // };
-        // let food = this.model.getFood();
-        // if (food < ResidentMeta.ResidentFoodNeedValue) {
-        //     this.level1Results.push(cell6);
-        // } else if (food < 100) {
-        //     this.level2Results.push(cell6);
-        // }
+        //吃饭
+        let cell6 = {
+            func: Laya.Handler.create(this, function (param) {
+                let canFood = FoodMgr.getInstance().canFindFood();
+                if (canFood) {
+                    this.refreshFSMState(ResidentMeta.ResidentState.FindFood);
+                    this.ideaResult = true;
+                }
+            })
+        };
+        let food = this.model.getFood();
+        if (food < ResidentMeta.ResidentFoodNeedValue) {
+            this.level1Results.push(cell6);
+        } else if (food < 100) {
+            this.level2Results.push(cell6);
+        }
 
 
         // // 社交

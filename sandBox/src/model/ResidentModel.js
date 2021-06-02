@@ -152,27 +152,24 @@ export default class ResidentModel extends Laya.Script {
 
     // 下降需求和上升满足
     onStep() {
-        // if (this.curFSMState == ResidentMeta.ResidentState.) {
-
-        // }
-        this.addEnjoy(ResidentMeta.ResidentReduceEnjoyBaseValue);
-        this.addSocial(ResidentMeta.ResidentReduceSocialBaseValue);
-        this.addWater(ResidentMeta.ResidentReduceWaterBaseValue);
+        // this.addEnjoy(ResidentMeta.ResidentReduceEnjoyBaseValue);
+        // this.addSocial(ResidentMeta.ResidentReduceSocialBaseValue);
+        // this.addWater(ResidentMeta.ResidentReduceWaterBaseValue);
         this.addFood(ResidentMeta.ResidentReduceFoodBaseValue);
-        if (this.getSick() == 1) {
-            if (Math.random() > ResidentMeta.ResidentSickProbability) {
-                this.setSick(2);
-                EventMgr.getInstance().postEvent(GameEvent.RESIDENT_SICK, this);
-            }
-        }
+        // if (this.getSick() == 1) {
+        //     if (Math.random() > ResidentMeta.ResidentSickProbability) {
+        //         this.setSick(2);
+        //         EventMgr.getInstance().postEvent(GameEvent.RESIDENT_SICK, this);
+        //     }
+        // }
 
-        if (this.getSick() == 2) {
-            this.addLife(ResidentMeta.ResidentReduceLifeBaseValue);
-        }
+        // if (this.getSick() == 2) {
+        //     this.addLife(ResidentMeta.ResidentReduceLifeBaseValue);
+        // }
         
-        if (this.getLife() <= 0) {
-            EventMgr.getInstance().postEvent(GameEvent.RESIDENT_DIE, this);
-        }
+        // if (this.getLife() <= 0) {
+        //     EventMgr.getInstance().postEvent(GameEvent.RESIDENT_DIE, this);
+        // }
     }
 
     // 能够要求结婚（主动）

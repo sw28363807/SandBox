@@ -9,7 +9,7 @@ export default class ResourcePanel extends Laya.Script {
     }
 
     onEnable() {
-        this.waterLabel = this.owner.getChildByName("water");
+        this.treeLabel = this.owner.getChildByName("tree");
         this.stoneLabel = this.owner.getChildByName("stone");
         this.timeLabel = this.owner.getChildByName("time");
         this.seasonTextTable = [
@@ -27,7 +27,7 @@ export default class ResourcePanel extends Laya.Script {
     }
 
     refreshLabel() {
-        this.waterLabel.text = String(GameModel.getInstance().getTreeNum());
+        this.treeLabel.text = String(GameModel.getInstance().getTreeNum());
         this.stoneLabel.text = String(GameModel.getInstance().getStoneNum());
         let season = GameModel.getInstance().getGameSeason();
         let day = GameModel.getInstance().getGameDay();

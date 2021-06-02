@@ -18,7 +18,7 @@
             "x":15,
             "type":"Animation",
             "searchKey":"Animation,ani",
-            "props":{"y":53,"x":0,"width":0,"source":"anim/Stone.ani","presetID":4,"preset":"laya/pages/prefab/Stone.prefab","name":"ani","height":0},
+            "props":{"y":0,"x":0,"width":0,"source":"anim/Stone.ani","presetID":4,"preset":"laya/pages/prefab/Stone.prefab","name":"ani","height":0},
             "nodeParent":90,
             "label":"ani",
             "isOpen":true,
