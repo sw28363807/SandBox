@@ -32,7 +32,6 @@ export default class ResidentDetailsPanel extends Laya.Script {
         this.setSlider("sliderFood", config.food);
         this.setSlider("sliderEnjoy", config.enjoy);
         this.setSlider("sliderTeach", config.teach);
-        this.setSlider("sliderHealth", config.health);
         this.setSlider("sliderSocial", config.social);
     }
 

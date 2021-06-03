@@ -1,7 +1,7 @@
 D .
 D source
 D source/building
-P 6A2CE112 building1_1.png
+P F8495EAF building1_1.png
 P A40CE787 building1_2.png
 P 233A6581 building1_3.png
 P 8E7B9A93 center2.png
@@ -37,12 +37,10 @@ P 9372BA67 food6.png
 P E5E912EF hua.png
 P A3C098AC stone1.png
 P FD508433 stoneicon.png
-P 234DABC8 Take 2 Heaven-驯鹿逃跑1(Reindeer_R_爱给网_aigei_com.png
 P C11BF038 tree1.png
 P 920C3CF0 treeicon.png
 P A2663D43 water.png
 P F00114D0 waterIcon.png
-P 5C7CA317 超萌动物农场模拟经营游戏素材-LINE布朗农场-猪肉图标_2_爱给网_aigei_com.png
 D source/resident
 P BD6BC384 attack.png
 P C9247F2B baby_anger.png
@@ -86,7 +84,7 @@ P 8841576C die.png
 P 4E592413 drinkwater.png
 P 2A4C782C eat.png
 P 305D5048 fight.png
-P 55920CF2 heart.png
+P 6F763E80 heart.png
 P A8E062E6 man_anger.png
 P B58E08CF man_enjoy1.png
 P C3581EB4 man_enjoy2.png
@@ -119,7 +117,7 @@ P 0480C022 man_walk_up5.png
 P C8F5B93A man_work1.png
 P BD8C9CFB man_work2.png
 P 48818065 man_work3.png
-P BFCF22A1 sick.png
+P D6C57F4B sick.png
 P 098A99ED talk.png
 P 966E7CCC woman_anger.png
 P C0DD56B7 woman_enjoy1.png
@@ -150,9 +148,9 @@ P 1D6A8A25 woman_walk_up2.png
 P 909673DF woman_walk_up3.png
 P 84244E9A woman_walk_up4.png
 P B1905647 woman_walk_up5.png
-P 1DDCEBF0 woman_work1.png
-P 3B4D5A9B woman_work2.png
-P BD8A8BA9 woman_work3.png
+P A1F6B101 woman_work1.png
+P 577414D9 woman_work2.png
+P 73DBBABA woman_work3.png
 D source/scene
 D source/ui
 P F4F08B52 btn1.png

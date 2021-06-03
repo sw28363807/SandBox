@@ -13,7 +13,7 @@ GameMeta.FoodAtlasPath = "res/atlas/source/food.atlas";         //食物所引�
 
 
 GameMeta.MapSideOff = 0;
-GameMeta.GameTimeStep = 1000;
+GameMeta.GameTimeStep = 500;
 GameMeta.Seasons = [
     "#c8eea0",  // 春
     "#8ef325",  // 夏

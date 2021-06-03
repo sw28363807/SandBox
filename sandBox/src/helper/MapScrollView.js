@@ -6,6 +6,8 @@ import StoneMgr from "../source/StoneMgr";
 import Waterlogic from "../source/Waterlogic";
 import WaterMgr from "../source/WaterMgr";
 import GameMeta from "../meta/GameMeta";
+import FoodTrigger from "../source/FoodTrigger";
+import FoodTriggerMgr from "../source/FoodTriggerMgr";
 
 export default class MapScrollView extends Laya.Script {
 
@@ -38,6 +40,10 @@ export default class MapScrollView extends Laya.Script {
             let waterScript = child.getComponent(Waterlogic);
             if (waterScript) {
                 WaterMgr.getInstance().pushWater(child);
+            }
+            let foodTriggerScript = child.getComponent(FoodTrigger);
+            if (foodTriggerScript) {
+                FoodTriggerMgr.getInstance().pushFoodTrigger(child);
             }
         }
         this.lookAt(GameContext.mapWidth/2, GameContext.mapHeight/2);

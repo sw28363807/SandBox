@@ -1,3 +1,4 @@
+import Utils from "../helper/Utils";
 import GameMeta from "../meta/GameMeta";
 
 export default class StoneLogic extends Laya.Script {
@@ -9,6 +10,7 @@ export default class StoneLogic extends Laya.Script {
     
     onEnable() {
         this.ani = this.owner.getChildByName("ani");
+        Utils.setMapZOrder(this.owner);
     }
 
     onDisable() {

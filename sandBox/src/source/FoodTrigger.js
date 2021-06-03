@@ -5,10 +5,12 @@ import FoodMgr from "./FoodMgr";
 
 export default class FoodTrigger extends Laya.Script {
 
-    constructor() { 
+    constructor() {
         super();
+        /** @prop {name:foodTriggerKey, tips:"食物触发器key", type:String, default:""}*/
+        let foodTriggerKey = "";
     }
-    
+
     onEnable() {
         this.curNum = 0;
     }
@@ -29,13 +31,13 @@ export default class FoodTrigger extends Laya.Script {
         let dstX = this.owner.x + RandomMgr.randomNumer(0, this.owner.width);
         let dstY = this.owner.y + this.owner.height - RandomMgr.randomNumer(50, this.owner.height);
         FoodMgr.getInstance().createFoodByConfig({
-            parent:GameContext.mapContainer,
+            parent: GameContext.mapContainer,
             x: dstX,
             y: dstY,
             trigger: this,
             foodType: FoodMeta.FoodTypes.FruitType
-        }, Laya.Handler.create(this, function(obj) {
-            
+        }, Laya.Handler.create(this, function (obj) {
+
         }));
         this.addNum(1);
     }

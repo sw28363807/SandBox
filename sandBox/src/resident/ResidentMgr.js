@@ -1,4 +1,5 @@
 import RandomMgr from "../helper/RandomMgr";
+import Utils from "../helper/Utils";
 import GameMeta from "../meta/GameMeta";
 import ResidentMeta from "../meta/ResidentMeta";
 import GameModel from "../model/GameModel";
@@ -33,6 +34,7 @@ export default class ResidentMgr extends Laya.Script {
     onMakeIdea() {
         for (let key in this.residents) {
             let resident = this.residents[key];
+            Utils.setMapZOrder(resident);
             resident.residentLogicScript.makeIdea();
         }
     }
@@ -80,20 +82,22 @@ export default class ResidentMgr extends Laya.Script {
     }
 
     // 获得一个适合社交的人
-    getACanSocialResident(x, y) {
+    getACanSocialResident(owner) {
+        let x = owner.x;
+        let y = owner.y;
         let idles = [];
         let needs = [];
         for (const key in this.residents) {
             let item = this.residents[key];
             let model = item.residentLogicScript.getModel();
             let distance = new Laya.Point(x, y).distance(item.x, item.y);
-            if (distance <= ResidentMeta.ResidentSocialArea) {
+            if (owner != item && distance <= ResidentMeta.ResidentSocialArea) {
                 if (model.getFSMState() == ResidentMeta.ResidentState.IdleState) {
                     idles.push(item);
                     if (model.getSocial() < ResidentMeta.ResidentSocialNeedValue) {
                         needs.push(item);
                     }
-                }   
+                }
             }
         }
         if (needs.length != 0) {
@@ -119,7 +123,7 @@ export default class ResidentMgr extends Laya.Script {
                     if (model.getSocial() < ResidentMeta.ResidentSocialLowToFight) {
                         needs.push(item);
                     }
-                }   
+                }
             }
         }
         if (needs.length != 0) {
@@ -146,5 +150,5 @@ export default class ResidentMgr extends Laya.Script {
     }
 
     // 是否能够建立房子
-    
+
 }

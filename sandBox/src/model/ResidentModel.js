@@ -12,7 +12,6 @@ export default class ResidentModel extends Laya.Script {
         this.enjoy = 100;   //快乐
         this.food = 100;    //食物
         this.teach = 0;     //教育
-        this.health = 100;  //健康
         this.social = 100;  //社交
 
         // 隐藏数值
@@ -50,9 +49,6 @@ export default class ResidentModel extends Laya.Script {
             }
             if (data.teach) {
                 this.teach = data.teach;
-            }
-            if (data.health) {
-                this.health = data.health;
             }
             if (data.social) {
                 this.social = data.social;
@@ -152,24 +148,29 @@ export default class ResidentModel extends Laya.Script {
 
     // 下降需求和上升满足
     onStep() {
-        // this.addEnjoy(ResidentMeta.ResidentReduceEnjoyBaseValue);
+        if (this.getLife() <= 0) {
+            EventMgr.getInstance().postEvent(GameEvent.RESIDENT_DIE, this);
+            return;
+        }
+        this.addEnjoy(ResidentMeta.ResidentReduceEnjoyBaseValue);
         this.addSocial(ResidentMeta.ResidentReduceSocialBaseValue);
         this.addWater(ResidentMeta.ResidentReduceWaterBaseValue);
         this.addFood(ResidentMeta.ResidentReduceFoodBaseValue);
-        // if (this.getSick() == 1) {
-        //     if (Math.random() > ResidentMeta.ResidentSickProbability) {
-        //         this.setSick(2);
-        //         EventMgr.getInstance().postEvent(GameEvent.RESIDENT_SICK, this);
-        //     }
-        // }
-
-        // if (this.getSick() == 2) {
-        //     this.addLife(ResidentMeta.ResidentReduceLifeBaseValue);
-        // }
-        
-        // if (this.getLife() <= 0) {
-        //     EventMgr.getInstance().postEvent(GameEvent.RESIDENT_DIE, this);
-        // }
+        if (this.getSick() == 1) {
+            if (Math.random() > ResidentMeta.ResidentSickProbability) {
+                this.setSick(2);
+                EventMgr.getInstance().postEvent(GameEvent.RESIDENT_SICK, this);
+            }
+        }
+        // 处在饥饿状态和缺水减少生命值
+        if (this.food <= 0 || this.water <= 0 || this.getSick() == 2) {
+            if (this.getSick() == 2) {
+                this.addLife(ResidentMeta.ResidentReduceLifeBaseValue * 1.5);
+            } else {
+                this.addLife(ResidentMeta.ResidentReduceLifeBaseValue);
+            }
+            
+        }
     }
 
     // 能够要求结婚（主动）
@@ -177,6 +178,7 @@ export default class ResidentModel extends Laya.Script {
         if (this.getAge() >= ResidentMeta.ResidentMarryAge &&
             this.getSex() == 1 &&
             this.getMyHomeId() != 0 &&
+            this.getSocial() >= 20 &&
             this.getFSMState() == ResidentMeta.ResidentState.IdleState) {
             return true;
         }

@@ -1,3 +1,4 @@
+import Utils from "../helper/Utils";
 import GameMeta from "../meta/GameMeta";
 import GameModel from "../model/GameModel";
 import AnimalLogic from "./AnimalLogic";
@@ -14,6 +15,7 @@ export default class AnimalMgr extends Laya.Script {
     }
 
     onDisable() {
+        Laya.timer.clear(this, this.onUpdateFunc);
     }
 
     static getInstance() {
@@ -26,7 +28,14 @@ export default class AnimalMgr extends Laya.Script {
     }
 
     initSelf() {
+        Laya.timer.loop(1000, this, this.onUpdateFunc);
+    }
 
+    onUpdateFunc() {
+        for (let key in this.animals) {
+            let animal = this.animals[key];
+            Utils.setMapZOrder(animal);
+        }
     }
 
     // 移除一个动物

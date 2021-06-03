@@ -1,3 +1,5 @@
+import Utils from "../helper/Utils";
+import GameContext from "../meta/GameContext";
 import GameMeta from "../meta/GameMeta";
 
 export default class Waterlogic extends Laya.Script {
@@ -13,6 +15,7 @@ export default class Waterlogic extends Laya.Script {
     }
     
     onEnable() {
+        Utils.setMapZOrder(this.owner, -GameContext.mapHeight);
     }
 
     onDisable() {

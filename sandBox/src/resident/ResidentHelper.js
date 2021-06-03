@@ -1,38 +1,45 @@
 import BuildingMgr from "../building/BuildingMgr";
-import BuildingMeta from "../meta/BuildingMeta";
+import FoodTriggerMgr from "../source/FoodTriggerMgr";
 import StoneMgr from "../source/StoneMgr";
 import TreeMgr from "../source/TreeMgr";
 import WaterMgr from "../source/WaterMgr";
 
 export default class ResidentHelper {
     // 建房子时是否被占用
-    static isOccupySpaceToCreateHome(toCreateHomeX, toCreateHomeY) {
+    static isOccupySpace(toX, toY, width, height) {
         if (TreeMgr.getInstance().intersectsTree(
-            toCreateHomeX,
-            toCreateHomeY,
-            BuildingMeta.HomeWidth,
-            BuildingMeta.HomeHeight)) {
+            toX,
+            toY,
+            width,
+            height)) {
             return false;
         }
         if (StoneMgr.getInstance().intersectsStone(
-            toCreateHomeX,
-            toCreateHomeY,
-            BuildingMeta.HomeWidth,
-            BuildingMeta.HomeHeight)) {
+            toX,
+            toY,
+            width,
+            height)) {
             return false;
         }
         if (BuildingMgr.getInstance().intersectsBuilding(
-            toCreateHomeX,
-            toCreateHomeY,
-            BuildingMeta.HomeWidth,
-            BuildingMeta.HomeHeight)) {
+            toX,
+            toY,
+            width,
+            height)) {
             return false;
         }
         if (WaterMgr.getInstance().intersectsWater(
-            toCreateHomeX,
-            toCreateHomeY,
-            BuildingMeta.HomeWidth,
-            BuildingMeta.HomeHeight)) {
+            toX,
+            toY,
+            width,
+            height)) {
+            return false;
+        }
+        if (FoodTriggerMgr.getInstance().intersectsFoodTrigger(
+            toX,
+            toY,
+            width,
+            height)) {
             return false;
         }
         return true;

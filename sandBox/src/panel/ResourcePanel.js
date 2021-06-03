@@ -1,5 +1,6 @@
 import EventMgr from "../helper/EventMgr";
 import GameEvent from "../meta/GameEvent";
+import GameMeta from "../meta/GameMeta";
 import GameModel from "../model/GameModel";
 
 export default class ResourcePanel extends Laya.Script {
@@ -19,7 +20,7 @@ export default class ResourcePanel extends Laya.Script {
             "冬",
         ];
         this.refreshLabel();
-        Laya.timer.loop(1000, this, this.onTick);
+        Laya.timer.loop(GameMeta.GameTimeStep, this, this.onTick);
     }
 
     onDisable() {

@@ -817,16 +817,24 @@
                     "keyframes":{
                         "y":[
                             {
-                                "value":-86,
+                                "value":-78,
                                 "tweenMethod":"linearNone",
                                 "tween":true,
                                 "target":3,
                                 "key":"y",
                                 "index":0
+                            },
+                            {
+                                "value":-76,
+                                "tweenMethod":"linearNone",
+                                "tween":true,
+                                "target":3,
+                                "key":"y",
+                                "index":20
                             }],
                         "x":[
                             {
-                                "value":-50,
+                                "value":-40,
                                 "tweenMethod":"linearNone",
                                 "tween":true,
                                 "target":3,
@@ -835,7 +843,7 @@
                             }],
                         "width":[
                             {
-                                "value":100,
+                                "value":80,
                                 "tweenMethod":"linearNone",
                                 "tween":true,
                                 "target":3,
@@ -885,7 +893,7 @@
                             }],
                         "height":[
                             {
-                                "value":100,
+                                "value":80,
                                 "tweenMethod":"linearNone",
                                 "tween":true,
                                 "target":3,

@@ -50,7 +50,7 @@ ResidentMeta.ResidentState = {
     CreateLab: 44,     //建造科学实验室
     GotoContinueCreateOffice: 45, //跑去建造写字楼
     CreateOffice: 46,     //建造写字楼
-    
+    RandomWalk: 47,     //随机走一个位置
 };
 
 // 动画枚举
@@ -63,9 +63,6 @@ ResidentMeta.ResidentAnim = {
     Die: 5,     //死亡动画
     Anger: 6,   //生气动画
 };
-
-// 层级
-ResidentMeta.ResidentZOrder = 100;  //居民层级
 
 // 砍树消耗单位时间
 ResidentMeta.CutDownTreeTime = 10000;
@@ -88,13 +85,13 @@ ResidentMeta.DieTime = 2000;
 // 属性掉落基础值
 ResidentMeta.ResidentValueStep = 1000;  //人物数值消耗Step
 ResidentMeta.ResidentMakeIdeaStep = 1000;  //人物做决策Step
-ResidentMeta.ResidentReduceWaterBaseValue = -0.6; //水源减少值
-ResidentMeta.ResidentReduceFoodBaseValue = -0.5;  //食物减少值
-ResidentMeta.ResidentReduceSocialBaseValue = -0.8; //社交减少值
+ResidentMeta.ResidentReduceWaterBaseValue = -0.3; //水源减少值
+ResidentMeta.ResidentReduceFoodBaseValue = -0.25;  //食物减少值
+ResidentMeta.ResidentReduceSocialBaseValue = -0.4; //社交减少值
 ResidentMeta.ResidentAddSocialBaseValue = 60; //一次社交增加值
 ResidentMeta.ResidentReduceLifeBaseValue = -0.5; //生命减少值
-ResidentMeta.ResidentReduceEnjoyBaseValue = -0.5; //娱乐减少值
-ResidentMeta.ResidentSickProbability = 0.999; //生病的概率
+ResidentMeta.ResidentReduceEnjoyBaseValue = -0.25; //娱乐减少值
+ResidentMeta.ResidentSickProbability = 0.995; //生病的概率
 ResidentMeta.ResidentTreatTime = 5000; //治疗的时间
 ResidentMeta.ResidentLearnTime = 5000; //学习的时间
 ResidentMeta.ResidentSocialLowToFight = 100;  //需要社交的警戒线，低于这个值就是要打架了
@@ -102,7 +99,7 @@ ResidentMeta.ResidentSocialNeedValue = 30;  //需要社交的警戒线，低于�
 ResidentMeta.ResidentWaterNeedValue = 20;  //需要喝水的警戒线，低于这个值就是需要喝水了
 ResidentMeta.ResidentFoodNeedValue = 20;  //需要吃饭的警戒线，低于这个值就是需要吃饭了
 ResidentMeta.ResidentEnjoyNeedValue = 30;  //需要娱乐的警戒线，低于这个值就是需要娱乐了
-ResidentMeta.ResidentSocialArea = 300;      //寻找可以社交的人的范围
+ResidentMeta.ResidentSocialArea = 2000;      //寻找可以社交的人的范围
 ResidentMeta.ResidentFightArea = 1000;      //寻找可以打架的人的范围
 ResidentMeta.ResidentAddTreeBaseValue = 1;  //人物砍树增加的数值
 ResidentMeta.ResidentAddStoneBaseValue = 1;  //人物收集石头增加的数值

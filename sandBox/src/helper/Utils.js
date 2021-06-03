@@ -16,4 +16,13 @@ export default class Utils {
         }
         return -1;
     }
+
+    // 设置全局层级
+    static setMapZOrder(owner, custom) {
+        if (custom) {
+            owner.zOrder = custom;
+        } else {
+            owner.zOrder = Math.round(owner.y + owner.height);
+        }
+    }
 };

@@ -1,3 +1,5 @@
+import Utils from "../helper/Utils";
+import GameContext from "../meta/GameContext";
 import GameMeta from "../meta/GameMeta";
 import GameModel from "../model/GameModel";
 
@@ -8,6 +10,7 @@ export default class SeasonLogic extends Laya.Script {
     }
 
     onEnable() {
+        Utils.setMapZOrder(this.owner, -GameContext.mapHeight);
         this.curBg = this.owner.getChildByName("curBg");
         this.toBg = this.owner.getChildByName("toBg");
         this.curSeason = GameModel.getInstance().getGameSeason();
