@@ -51,6 +51,8 @@ ResidentMeta.ResidentState = {
     GotoContinueCreateOffice: 45, //跑去建造写字楼
     CreateOffice: 46,     //建造写字楼
     RandomWalk: 47,     //随机走一个位置
+    GotoContinueCreateChildSchool: 48, //跑去建造幼儿园
+    CreateChildSchool: 49,     //建造幼儿园
 };
 
 // 动画枚举

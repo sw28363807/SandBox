@@ -150,8 +150,6 @@ export default class GameModel extends Laya.Script {
         return model;
     }
 
-
-
     // 获得一个打架区域如果没有或者人数已经满了新建一个
     getOrCreateFightPoint(x, y, area, maxNum) {
         for (const key in this.fightPoints) {
@@ -186,168 +184,15 @@ export default class GameModel extends Laya.Script {
         return model;
     }
 
-
-
-
-    // 添加住房Model
-    newHomeModel(param) {
+    // 添加建筑Model
+    newBuildingModel(param) {
         this.maxBuildingID++;
         let model = new BuildingModel();
         model.updateData({
             x: param.x,
             y: param.y,
             buildingId: this.maxBuildingID,
-            buildingType: BuildingMeta.BuildingType.HomeType,
-            buildingState: BuildingMeta.BuildingState.Creating,
-        });
-        this.buildingModels[String(this.maxBuildingID)] = model;
-        return model;
-    }
-
-    // 添加医院Model
-    newHospitalModel(param) {
-        this.maxBuildingID++;
-        let model = new BuildingModel();
-        model.updateData({
-            x: param.x,
-            y: param.y,
-            buildingId: this.maxBuildingID,
-            buildingType: BuildingMeta.BuildingType.HospitalType,
-            buildingState: BuildingMeta.BuildingState.PreCreating,
-        });
-        this.buildingModels[String(this.maxBuildingID)] = model;
-        return model;
-    }
-
-    // 添加发电厂Model
-    newPowerPlantModel(param) {
-        this.maxBuildingID++;
-        let model = new BuildingModel();
-        model.updateData({
-            x: param.x,
-            y: param.y,
-            buildingId: this.maxBuildingID,
-            buildingType: BuildingMeta.BuildingType.PowerPlantType,
-            buildingState: BuildingMeta.BuildingState.PreCreating,
-        });
-        this.buildingModels[String(this.maxBuildingID)] = model;
-        return model;
-    }
-
-    // 添加商店Model
-    newShopModel(param) {
-        this.maxBuildingID++;
-        let model = new BuildingModel();
-        model.updateData({
-            x: param.x,
-            y: param.y,
-            buildingId: this.maxBuildingID,
-            buildingType: BuildingMeta.BuildingType.ShopType,
-            buildingState: BuildingMeta.BuildingState.PreCreating,
-        });
-        this.buildingModels[String(this.maxBuildingID)] = model;
-        return model;
-    }
-
-    // 添加农田Model
-    newFarmLandModel(param) {
-        this.maxBuildingID++;
-        let model = new BuildingModel();
-        model.updateData({
-            x: param.x,
-            y: param.y,
-            buildingId: this.maxBuildingID,
-            buildingType: BuildingMeta.BuildingType.FarmLandType,
-            buildingState: BuildingMeta.BuildingState.PreCreating,
-        });
-        this.buildingModels[String(this.maxBuildingID)] = model;
-        return model;
-    }
-
-    // 添加牧场Model
-    newPastureModel(param) {
-        this.maxBuildingID++;
-        let model = new BuildingModel();
-        model.updateData({
-            x: param.x,
-            y: param.y,
-            buildingId: this.maxBuildingID,
-            buildingType: BuildingMeta.BuildingType.PastureType,
-            buildingState: BuildingMeta.BuildingState.PreCreating,
-        });
-        this.buildingModels[String(this.maxBuildingID)] = model;
-        return model;
-    }
-
-    // 添加歌剧院Model
-    newOperaModel(param) {
-        this.maxBuildingID++;
-        let model = new BuildingModel();
-        model.updateData({
-            x: param.x,
-            y: param.y,
-            buildingId: this.maxBuildingID,
-            buildingType: BuildingMeta.BuildingType.OperaType,
-            buildingState: BuildingMeta.BuildingState.PreCreating,
-        });
-        this.buildingModels[String(this.maxBuildingID)] = model;
-        return model;
-    }
-
-    // 添加歌剧院Model
-    newOfficeModel(param) {
-        this.maxBuildingID++;
-        let model = new BuildingModel();
-        model.updateData({
-            x: param.x,
-            y: param.y,
-            buildingId: this.maxBuildingID,
-            buildingType: BuildingMeta.BuildingType.OfficeType,
-            buildingState: BuildingMeta.BuildingState.PreCreating,
-        });
-        this.buildingModels[String(this.maxBuildingID)] = model;
-        return model;
-    }
-
-    // 添加警察局Model
-    newPoliceStationModel(param) {
-        this.maxBuildingID++;
-        let model = new BuildingModel();
-        model.updateData({
-            x: param.x,
-            y: param.y,
-            buildingId: this.maxBuildingID,
-            buildingType: BuildingMeta.BuildingType.PoliceStationType,
-            buildingState: BuildingMeta.BuildingState.PreCreating,
-        });
-        this.buildingModels[String(this.maxBuildingID)] = model;
-        return model;
-    }
-
-    // 添加科学实验室Model
-    newLabModel(param) {
-        this.maxBuildingID++;
-        let model = new BuildingModel();
-        model.updateData({
-            x: param.x,
-            y: param.y,
-            buildingId: this.maxBuildingID,
-            buildingType: BuildingMeta.BuildingType.LabType,
-            buildingState: BuildingMeta.BuildingState.PreCreating,
-        });
-        this.buildingModels[String(this.maxBuildingID)] = model;
-        return model;
-    }
-
-    // 添加学校Model
-    newSchoolModel(param) {
-        this.maxBuildingID++;
-        let model = new BuildingModel();
-        model.updateData({
-            x: param.x,
-            y: param.y,
-            buildingId: this.maxBuildingID,
-            buildingType: BuildingMeta.BuildingType.SchoolType,
+            buildingType: param.buildingType,
             buildingState: BuildingMeta.BuildingState.PreCreating,
         });
         this.buildingModels[String(this.maxBuildingID)] = model;

@@ -44,11 +44,15 @@ export default class AnimalLogic extends Laya.Script {
         this.setWalk();
     }
 
+    joinHunt(residentId) {
+        this.model.addHuntResidentIds(residentId);
+    }
+
     setIdle() {
         if (this.model.getState() == AnimalMeta.AnimalState.Idle) {
             return;
         }
-        if (this.tweenObject) {
+    if (this.tweenObject) {
             Laya.Tween.clear(this.tweenObject);
             this.tweenObject = null;
         }
@@ -80,9 +84,17 @@ export default class AnimalLogic extends Laya.Script {
         this.ani.play(0, true, "hurt1");
     }
 
+    makeParam(extraParam) {
+        let ret = {};
+        ret.residentIds = this.model.getHuntResidentIds();
+        ret.extraParam = extraParam;
+        return ret;
+    }
+
     onHurtFinish() {
         Laya.timer.clear(this, this.onHurtFinish);
-        EventMgr.getInstance().postEvent(GameEvent.HUNT_FINISH, this.owner);
+        EventMgr.getInstance().postEvent(GameEvent.HUNT_FINISH, this.makeParam(this.owner));
+        this.model.clearHuntResidentIds();
     }
 
     onWalkFinish() {

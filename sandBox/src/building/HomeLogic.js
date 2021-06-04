@@ -2,35 +2,28 @@ import EventMgr from "../helper/EventMgr";
 import BuildingMeta from "../meta/BuildingMeta";
 import GameEvent from "../meta/GameEvent";
 import GameModel from "../model/GameModel";
-export default class HomeLogic extends Laya.Script {
+import BuildingBaseLogic from "./BuildingBaseLogic";
+export default class HomeLogic extends BuildingBaseLogic {
 
     constructor() { 
         super();
     }
     
-    onEnable() {
-        this.ani = this.owner.getChildByName("ani"); 
-        this.sliderControl = this.owner.getChildByName("sliderControl");
-        this.slider = this.sliderControl.getChildByName("slider");
-        this.sliderControl.visible = false;
-        this.sliderMax = 194;
-        this.addValue = BuildingMeta.HomeCreatingStepValue/this.sliderMax;
+    // 建筑初始化
+    onInitBuilding() {
+
     }
 
+    // 建筑建造完成
+    onCreateBuildingFinish() {
+        GameModel.getInstance().addTreeNum(-BuildingMeta.CreateHomeNeedValues.tree);
+        GameModel.getInstance().addStoneNum(-BuildingMeta.CreateHomeNeedValues.stone);
+        EventMgr.getInstance().postEvent(GameEvent.CREATE_HOME_FINISH, this.makeParam(this.model));
+    }
+    
     onDisable() {
         Laya.timer.clear(this, this.onMakeLove);
         Laya.timer.clear(this, this.onCreateProgress);
-    }
-
-    refreshByModel(model) {
-        this.model = model;
-        this.owner.x = model.getX();
-        this.owner.y = model.getY();
-        this.startCreate();
-    }
-
-    getModel() {
-        return this.model;
     }
 
     // 开始生孩子
@@ -47,31 +40,5 @@ export default class HomeLogic extends Laya.Script {
             this.ani.play(0, true, "idle");
             Laya.timer.clear(this, this.onMakeLove);
         }
-    }
-
-    // 开始建造
-    startCreate() {
-        this.ani.play(0, true, "creating");
-        this.sliderControl.visible = true;
-        this.slider.width = 1;
-        Laya.timer.loop(BuildingMeta.HomeCreatingStep, this, this.onCreateProgress);
-    }
-
-    onCreateProgress() {
-        this.slider.width = this.slider.width + this.addValue;
-        if (this.slider.width > this.sliderMax) {
-            this.slider.width = this.sliderMax;
-            this.onCreateFinish();
-        }
-    }
-
-    onCreateFinish() {
-        this.ani.play(0, true, "idle");
-        this.sliderControl.visible = false;
-        Laya.timer.clear(this, this.onCreateProgress);
-        this.model.setBuildingState(BuildingMeta.BuildingState.Noraml);
-        GameModel.getInstance().addTreeNum(-BuildingMeta.CreateHomeNeedValues.tree);
-        GameModel.getInstance().addStoneNum(-BuildingMeta.CreateHomeNeedValues.stone);
-        EventMgr.getInstance().postEvent(GameEvent.CREATE_HOME_FINISH, {model: this.model});
     }
 }

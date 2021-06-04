@@ -10,6 +10,7 @@ import MapScrollView from "./helper/MapScrollView"
 import ResourcePanel from "./panel/ResourcePanel"
 import CommandPanel from "./panel/CommandPanel"
 import AnimalLogic from "./animal/AnimalLogic"
+import ChildSchoolLogic from "./building/ChildSchoolLogic"
 import FarmLandLogic from "./building/FarmLandLogic"
 import FoodLogic from "./source/FoodLogic"
 import HomeLogic from "./building/HomeLogic"
@@ -40,6 +41,7 @@ export default class GameConfig {
 		reg("panel/ResourcePanel.js",ResourcePanel);
 		reg("panel/CommandPanel.js",CommandPanel);
 		reg("animal/AnimalLogic.js",AnimalLogic);
+		reg("building/ChildSchoolLogic.js",ChildSchoolLogic);
 		reg("building/FarmLandLogic.js",FarmLandLogic);
 		reg("source/FoodLogic.js",FoodLogic);
 		reg("building/HomeLogic.js",HomeLogic);

@@ -11,6 +11,19 @@ export default class AnimalModel extends Laya.Script {
         this.curAttackNum = 0; 
         this.life = AnimalMeta.AnimalLife;
         this.state = AnimalMeta.AnimalState.NullState;
+        this.huntResidentIds = new Set([]);
+    }
+
+    addHuntResidentIds(id) {
+        this.huntResidentIds.add(id);
+    }
+
+    getHuntResidentIds() {
+        return this.huntResidentIds;
+    }
+
+    clearHuntResidentIds() {
+        this.huntResidentIds.clear();
     }
 
     updateData(data) {

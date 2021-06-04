@@ -5,6 +5,7 @@ export default class BuildingMeta {
 BuildingMeta.HomePrefabPath = "prefab/Home.prefab";       //家prefab路径
 BuildingMeta.HospitalPrefabPath = "prefab/Hospital.prefab";       //医院prefab路径
 BuildingMeta.SchoolPrefabPath = "prefab/School.prefab";       //学校prefab路径
+BuildingMeta.ChildSchoolPrefabPath = "prefab/ChildSchool.prefab";       //幼儿园prefab路径
 BuildingMeta.PowerPlantPrefabPath = "prefab/PowerPlant.prefab";       //发电厂prefab路径
 BuildingMeta.ShopPrefabPath = "prefab/Shop.prefab";       //商店prefab路径
 BuildingMeta.FarmLandPrefabPath = "prefab/FarmLand.prefab";       //农田prefab路径
@@ -28,6 +29,7 @@ BuildingMeta.BuildingType = {
     PoliceStationType: 9,   //警察局
     LabType: 10,            //科学实验室
     OfficeType: 11,         //鞋子楼
+    ChildSchoolType: 12,        //幼儿园
 };
 
 BuildingMeta.BuildingState = {
@@ -50,6 +52,11 @@ BuildingMeta.HospitalHeight = 256;   //医院高度
 // 学校
 BuildingMeta.SchoolWidth = 256;   //学校宽度
 BuildingMeta.SchoolHeight = 256;   //学校高度
+
+// 幼儿园
+BuildingMeta.ChildSchoolWidth = 256;   //幼儿园宽度
+BuildingMeta.ChildSchoolHeight = 256;   //幼儿园高度
+
 // 发电厂
 BuildingMeta.PowerPlantWidth = 256;   //发电厂宽度
 BuildingMeta.PowerPlantHeight = 256;   //发电厂高度
@@ -83,8 +90,8 @@ BuildingMeta.LabHeight = 256;   //实验室高度
 
 // 盖房子需要的钱
 BuildingMeta.CreateHomeNeedValues = {
-    tree: 2,
-    stone: 2,
+    tree: 0,
+    stone: 0,
 };
 
 // 操作界面的数据源
@@ -114,6 +121,19 @@ BuildingMeta.CommandPanelDataSource = {
         adjustX: 64,
         adjustY: 128,
         buildingName: "学校",
+    },
+    // 幼儿园
+    [String(BuildingMeta.BuildingType.ChildSchoolType)]: {
+        prefab: BuildingMeta.ChildSchoolPrefabPath,
+        type: BuildingMeta.BuildingType.ChildSchoolType,
+        preview: "source/building/child_school.png",
+        width: BuildingMeta.ChildSchoolWidth,
+        height: BuildingMeta.ChildSchoolHeight,
+        realWidth: 128,
+        realHeight: 128,
+        adjustX: 64,
+        adjustY: 128,
+        buildingName: "幼儿园",
     },
     // 发电厂
     [String(BuildingMeta.BuildingType.PowerPlantType)]: {

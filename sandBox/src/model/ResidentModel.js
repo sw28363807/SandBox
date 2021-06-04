@@ -15,9 +15,10 @@ export default class ResidentModel extends Laya.Script {
         this.social = 100;  //社交
 
         // 隐藏数值
-        this.positive = 0.7;               //积极性
+        this.positive = 0.7;            //积极性
         this.myHomeId = 0;              //我的家的ID
         this.loverId = 0;               //配偶ID
+        this.isInChildSchool = false;   //当前是不是处在幼儿园中
 
         this.temperature = 36;  //体温
         this.age = 1;       //年龄

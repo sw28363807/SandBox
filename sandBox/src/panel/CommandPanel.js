@@ -240,67 +240,15 @@ export default class CommandPanel extends Laya.Script {
     }
 
     onBuild(data, dpX, dpY) {
-        if (data.type == BuildingMeta.BuildingType.HospitalType) {
-            let buildingCell = BuildingMgr.getInstance().createHospitalByConfig({
-                parent: GameContext.mapContainer,
-                x: dpX,
-                y: dpY
-            });
-        } else if (data.type == BuildingMeta.BuildingType.SchoolType) {
-            let buildingCell = BuildingMgr.getInstance().createSchoolByConfig({
-                parent: GameContext.mapContainer,
-                x: dpX,
-                y: dpY
-            });
-        } else if (data.type == BuildingMeta.BuildingType.ShopType) {
-            let buildingCell = BuildingMgr.getInstance().createShopByConfig({
-                parent: GameContext.mapContainer,
-                x: dpX,
-                y: dpY
-            });
-        } else if (data.type == BuildingMeta.BuildingType.FarmLandType) {
-            let buildingCell = BuildingMgr.getInstance().createFarmLandByConfig({
-                parent: GameContext.mapContainer,
-                x: dpX,
-                y: dpY
-            });
-        } else if (data.type == BuildingMeta.BuildingType.PastureType) {
-            let buildingCell = BuildingMgr.getInstance().createPastureByConfig({
-                parent: GameContext.mapContainer,
-                x: dpX,
-                y: dpY
-            });
-        } else if (data.type == BuildingMeta.BuildingType.PowerPlantType) {
-            let buildingCell = BuildingMgr.getInstance().createPowerPlantByConfig({
-                parent: GameContext.mapContainer,
-                x: dpX,
-                y: dpY
-            });
-        } else if (data.type == BuildingMeta.BuildingType.OperaType) {
-            let buildingCell = BuildingMgr.getInstance().createOperaByConfig({
-                parent: GameContext.mapContainer,
-                x: dpX,
-                y: dpY
-            });
-        } else if (data.type == BuildingMeta.BuildingType.PoliceStationType) {
-            let buildingCell = BuildingMgr.getInstance().createPoliceStationByConfig({
-                parent: GameContext.mapContainer,
-                x: dpX,
-                y: dpY
-            });
-        } else if (data.type == BuildingMeta.BuildingType.LabType) {
-            let buildingCell = BuildingMgr.getInstance().createLabByConfig({
-                parent: GameContext.mapContainer,
-                x: dpX,
-                y: dpY
-            });
-        } else if (data.type == BuildingMeta.BuildingType.OfficeType) {
-            let buildingCell = BuildingMgr.getInstance().createOfficeByConfig({
-                parent: GameContext.mapContainer,
-                x: dpX,
-                y: dpY
-            });
-        }
+        let buildingCell = BuildingMgr.getInstance().createBuildingByConfig({
+            parent: GameContext.mapContainer,
+            x: dpX,
+            y: dpY,
+            width: data.width,
+            height: data.height,
+            prefab: data.prefab,
+            buildingType: data.type,
+        });
     }
 
     onDisable() {
