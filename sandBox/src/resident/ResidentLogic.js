@@ -1353,7 +1353,7 @@ export default class ResidentLogic extends Laya.Script {
         let social = this.model.getSocial();
         if (social < ResidentMeta.ResidentSocialNeedValue) {
             this.level1Results.push(cell7);
-        } else if (social < 100) {
+        } else if (social < 90) {
             this.level2Results.push(cell7);
         }
 
