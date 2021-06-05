@@ -1,20 +1,7 @@
+import ResourceMeta from "./ResourceMeta";
+
 export default class BuildingMeta {
 }
-
-
-BuildingMeta.HomePrefabPath = "prefab/Home.prefab";       //家prefab路径
-BuildingMeta.HospitalPrefabPath = "prefab/Hospital.prefab";       //医院prefab路径
-BuildingMeta.SchoolPrefabPath = "prefab/School.prefab";       //学校prefab路径
-BuildingMeta.ChildSchoolPrefabPath = "prefab/ChildSchool.prefab";       //幼儿园prefab路径
-BuildingMeta.PowerPlantPrefabPath = "prefab/PowerPlant.prefab";       //发电厂prefab路径
-BuildingMeta.ShopPrefabPath = "prefab/Shop.prefab";       //商店prefab路径
-BuildingMeta.FarmLandPrefabPath = "prefab/FarmLand.prefab";       //农田prefab路径
-BuildingMeta.PasturePrefabPath = "prefab/Pasture.prefab";       //牧场prefab路径
-BuildingMeta.OperaPrefabPath = "prefab/Opera.prefab";       //歌剧院prefab路径
-BuildingMeta.OfficePrefabPath = "prefab/Office.prefab";       //写字楼prefab路径
-BuildingMeta.PoliceStationPrefabPath = "prefab/PoliceStation.prefab";    //警察局prefab路径
-BuildingMeta.LabPrefabPath = "prefab/Lab.prefab";    //实验室prefab路径
-
 
 BuildingMeta.BuildingType = {
     NullTyupe: 0,   //无类型
@@ -98,7 +85,7 @@ BuildingMeta.CreateHomeNeedValues = {
 BuildingMeta.CommandPanelDataSource = {
     // 医院
     [String(BuildingMeta.BuildingType.HospitalType)]: {
-        prefab: BuildingMeta.HospitalPrefabPath,
+        prefab: ResourceMeta.HospitalPrefabPath,
         type: BuildingMeta.BuildingType.HospitalType,
         preview: "source/building/hospital1_1.png",
         width: BuildingMeta.HospitalWidth,
@@ -111,7 +98,7 @@ BuildingMeta.CommandPanelDataSource = {
     },
     // 学校
     [String(BuildingMeta.BuildingType.SchoolType)]: {
-        prefab: BuildingMeta.SchoolPrefabPath,
+        prefab: ResourceMeta.SchoolPrefabPath,
         type: BuildingMeta.BuildingType.SchoolType,
         preview: "source/building/school_1.png",
         width: BuildingMeta.SchoolWidth,
@@ -124,7 +111,7 @@ BuildingMeta.CommandPanelDataSource = {
     },
     // 幼儿园
     [String(BuildingMeta.BuildingType.ChildSchoolType)]: {
-        prefab: BuildingMeta.ChildSchoolPrefabPath,
+        prefab: ResourceMeta.ChildSchoolPrefabPath,
         type: BuildingMeta.BuildingType.ChildSchoolType,
         preview: "source/building/child_school.png",
         width: BuildingMeta.ChildSchoolWidth,
@@ -137,7 +124,7 @@ BuildingMeta.CommandPanelDataSource = {
     },
     // 发电厂
     [String(BuildingMeta.BuildingType.PowerPlantType)]: {
-        prefab: BuildingMeta.PowerPlantPrefabPath,
+        prefab: ResourceMeta.PowerPlantPrefabPath,
         type: BuildingMeta.BuildingType.PowerPlantType,
         preview: "source/building/power_plant.png",
         width: BuildingMeta.PowerPlantWidth,
@@ -150,7 +137,7 @@ BuildingMeta.CommandPanelDataSource = {
     },
     // 商店
     [String(BuildingMeta.BuildingType.ShopType)]: {
-        prefab: BuildingMeta.ShopPrefabPath,
+        prefab: ResourceMeta.ShopPrefabPath,
         type: BuildingMeta.BuildingType.ShopType,
         preview: "source/building/shop_1.png",
         width: BuildingMeta.ShopWidth,
@@ -163,7 +150,7 @@ BuildingMeta.CommandPanelDataSource = {
     },
     // 农田
     [String(BuildingMeta.BuildingType.FarmLandType)]: {
-        prefab: BuildingMeta.FarmLandPrefabPath,
+        prefab: ResourceMeta.FarmLandPrefabPath,
         type: BuildingMeta.BuildingType.FarmLandType,
         preview: "source/building/farmland.png",
         width: BuildingMeta.FarmLandWidth,
@@ -176,7 +163,7 @@ BuildingMeta.CommandPanelDataSource = {
     },
     // 牧场
     [String(BuildingMeta.BuildingType.PastureType)]: {
-        prefab: BuildingMeta.PasturePrefabPath,
+        prefab: ResourceMeta.PasturePrefabPath,
         type: BuildingMeta.BuildingType.PastureType,
         preview: "source/building/pasture.png",
         width: BuildingMeta.PastureWidth,
@@ -189,7 +176,7 @@ BuildingMeta.CommandPanelDataSource = {
     },
     // 歌剧院
     [String(BuildingMeta.BuildingType.OperaType)]: {
-        prefab: BuildingMeta.OperaPrefabPath,
+        prefab: ResourceMeta.OperaPrefabPath,
         type: BuildingMeta.BuildingType.OperaType,
         preview: "source/building/center2.png",
         width: BuildingMeta.OperaWidth,
@@ -202,7 +189,7 @@ BuildingMeta.CommandPanelDataSource = {
     },
     // 警察局
     [String(BuildingMeta.BuildingType.PoliceStationType)]: {
-        prefab: BuildingMeta.PoliceStationPrefabPath,
+        prefab: ResourceMeta.PoliceStationPrefabPath,
         type: BuildingMeta.BuildingType.PoliceStationType,
         preview: "source/building/police.png",
         width: BuildingMeta.PoliceStationWidth,
@@ -215,7 +202,7 @@ BuildingMeta.CommandPanelDataSource = {
     },
     // 实验室
     [String(BuildingMeta.BuildingType.LabType)]: {
-        prefab: BuildingMeta.LabPrefabPath,
+        prefab: ResourceMeta.LabPrefabPath,
         type: BuildingMeta.BuildingType.LabType,
         preview: "source/building/scienceLab.png",
         width: BuildingMeta.LabWidth,
@@ -228,7 +215,7 @@ BuildingMeta.CommandPanelDataSource = {
     },
     // 写字楼
     [String(BuildingMeta.BuildingType.OfficeType)]: {
-        prefab: BuildingMeta.OfficePrefabPath,
+        prefab: ResourceMeta.OfficePrefabPath,
         type: BuildingMeta.BuildingType.OfficeType,
         preview: "source/building/office.png",
         width: BuildingMeta.OfficeWidth,

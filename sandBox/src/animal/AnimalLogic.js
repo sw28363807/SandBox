@@ -1,6 +1,7 @@
 import EventMgr from "../helper/EventMgr";
 import RandomMgr from "../helper/RandomMgr";
 import Utils from "../helper/Utils";
+import FoodMeta from "../meta/FoodMeta";
 import GameContext from "../meta/GameContext";
 import GameEvent from "../meta/GameEvent";
 import FoodMgr from "../source/FoodMgr";
@@ -20,10 +21,8 @@ export default class AnimalLogic extends Laya.Script {
             parent: GameContext.mapContainer,
             x: this.owner.x + this.owner.width / 2,
             y: this.owner.y + this.owner.height / 2,
-            foodType: 2
-        }, Laya.Handler.create(this, function (obj) {
-
-        }));
+            foodType: FoodMeta.FoodTypes.MeatType,
+        });
     }
 
     onEnable() {

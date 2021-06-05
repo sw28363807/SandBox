@@ -240,7 +240,7 @@ export default class CommandPanel extends Laya.Script {
     }
 
     onBuild(data, dpX, dpY) {
-        let buildingCell = BuildingMgr.getInstance().createBuildingByConfig({
+        let building = BuildingMgr.getInstance().createBuildingByConfig({
             parent: GameContext.mapContainer,
             x: Math.round(dpX),
             y: Math.round(dpY),

@@ -1,4 +1,5 @@
-﻿import GameConfig from "./GameConfig";
+﻿import ResourceMgr from "./game/ResourceMgr";
+import GameConfig from "./GameConfig";
 import GameModel from "./model/GameModel";
 class Main {
 	constructor() {
@@ -31,8 +32,11 @@ class Main {
 
 	onConfigLoaded() {
 		GameModel.getInstance();
-		//加载IDE指定的场景
-		GameConfig.startScene && Laya.Scene.open(GameConfig.startScene);
+		ResourceMgr.getInstance().loadAllRes(Laya.Handler.create(this, function () {
+			//加载IDE指定的场景
+			GameConfig.startScene && Laya.Scene.open(GameConfig.startScene);
+		}));
+
 	}
 }
 //激活启动类

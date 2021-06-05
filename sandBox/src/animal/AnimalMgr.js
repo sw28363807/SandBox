@@ -1,5 +1,6 @@
 import Utils from "../helper/Utils";
 import GameMeta from "../meta/GameMeta";
+import ResourceMeta from "../meta/ResourceMeta";
 import GameModel from "../model/GameModel";
 import AnimalLogic from "./AnimalLogic";
 import AnimalMeta from "./AnimalMeta";
@@ -49,19 +50,15 @@ export default class AnimalMgr extends Laya.Script {
     }
 
     // 创建动物
-    createAnimalByConfig(config, callback) {
-        Laya.loader.create(GameMeta.AnimalPrefabPath, Laya.Handler.create(this, function (prefabDef) {
-            let animal = prefabDef.create();
-            config.parent.addChild(animal);
-            let script = animal.getComponent(AnimalLogic);
-            script.setTrigger(config.trigger);
-            let model = GameModel.getInstance().newAnimalModel(config);
-            script.refreshByModel(model);
-            this.animals[String(model.getAnimalId())] = animal;
-            if (callback) {
-                callback.runWith(animal);
-            }
-        }));
+    createAnimalByConfig(config) {
+        let prefabDef = Laya.loader.getRes(ResourceMeta.AnimalPrefabPath);
+        let animal = prefabDef.create();
+        config.parent.addChild(animal);
+        let script = animal.getComponent(AnimalLogic);
+        script.setTrigger(config.trigger);
+        let model = GameModel.getInstance().newAnimalModel(config);
+        script.refreshByModel(model);
+        this.animals[String(model.getAnimalId())] = animal;
     }
 
     // 获得一个动物可以杀死的

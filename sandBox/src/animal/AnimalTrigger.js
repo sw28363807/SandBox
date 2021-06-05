@@ -27,9 +27,7 @@ export default class AnimalTrigger extends Laya.Script {
                 x: pos.x,
                 y: pos.y,
                 trigger: this
-            }, Laya.Handler.create(this, function(obj) {
-                
-            }));
+            });
             this.addNum(1);
         });
     }

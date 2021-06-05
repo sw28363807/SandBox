@@ -1,4 +1,5 @@
 import GameMeta from "../meta/GameMeta";
+import ResourceMeta from "../meta/ResourceMeta";
 import ResidentDetailsPanel from "./ResidentDetailsPanel";
 
 export default class ResidentDetailsPanelMgr extends Laya.Script {
@@ -22,17 +23,16 @@ export default class ResidentDetailsPanelMgr extends Laya.Script {
     // 显示界面
     showPanel(config) {
         this.removePanel();
-        Laya.loader.create(GameMeta.ResdientDetailsPanelPath, Laya.Handler.create(this, function (prefabDef) {
-            this.curPanel = prefabDef.create();
-            this.curPanel.x = 65;
-            this.curPanel.y = -this.curPanel.height + 15;
-            config.parent.addChild(this.curPanel);
-            let script = this.curPanel.getComponent(ResidentDetailsPanel);
-            script.refreshInfo(config.data);
-            this.curPanel.alpha = 0;
-            Laya.Tween.to(this.curPanel, { alpha: 1 }, 200);
-            Laya.timer.once(3000, this, this.fadeOutFunc);
-        }));
+        let prefabDef = Laya.loader.getRes(ResourceMeta.ResdientDetailsPanelPath);
+        this.curPanel = prefabDef.create();
+        this.curPanel.x = 65;
+        this.curPanel.y = -this.curPanel.height + 15;
+        config.parent.addChild(this.curPanel);
+        let script = this.curPanel.getComponent(ResidentDetailsPanel);
+        script.refreshInfo(config.data);
+        this.curPanel.alpha = 0;
+        Laya.Tween.to(this.curPanel, { alpha: 1 }, 200);
+        Laya.timer.once(3000, this, this.fadeOutFunc);
     }
 
     fadeOutFunc() {

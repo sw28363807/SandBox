@@ -36,9 +36,7 @@ export default class FoodTrigger extends Laya.Script {
             y: dstY,
             trigger: this,
             foodType: FoodMeta.FoodTypes.FruitType
-        }, Laya.Handler.create(this, function (obj) {
-
-        }));
+        });
         this.addNum(1);
     }
 

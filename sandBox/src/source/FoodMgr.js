@@ -1,5 +1,6 @@
 import FoodMeta from "../meta/FoodMeta";
 import GameMeta from "../meta/GameMeta";
+import ResourceMeta from "../meta/ResourceMeta";
 import GameModel from "../model/GameModel";
 import FoodLogic from "./FoodLogic";
 
@@ -14,31 +15,17 @@ export default class FoodMgr extends Laya.Script {
         return FoodMgr.instance = FoodMgr.instance || new FoodMgr();
     }
 
-
-    createFoodFunc(config, callback) {
-        Laya.loader.create(GameMeta.FoodPrefabPath, Laya.Handler.create(this, function (prefabDef) {
-            let food = prefabDef.create();
-            config.parent.addChild(food);
-            let script = food.getComponent(FoodLogic);
-            script.setTrigger(config.trigger);
-            let model = GameModel.getInstance().newFoodModel(config);
-            script.refreshByModel(model);
-            this.foods[String(model.getFoodId())] = food;
-            if (callback) {
-                callback.runWith(food);
-            }
-        }));
-    }
-
     // 创建食物
-    createFoodByConfig(config, callback) {
-        if (Laya.loader.getRes(GameMeta.FoodAtlasPath)) {
-            this.createFoodFunc(config, callback);
-        } else {
-            Laya.loader.load(GameMeta.FoodAtlasPath, Laya.Handler.create(this, function() {
-                this.createFoodFunc(config, callback);
-            }));
-        }
+    createFoodByConfig(config) {
+        let prefabDef = Laya.loader.getRes(ResourceMeta.FoodPrefabPath);
+        let food = prefabDef.create();
+        config.parent.addChild(food);
+        let script = food.getComponent(FoodLogic);
+        script.setTrigger(config.trigger);
+        let model = GameModel.getInstance().newFoodModel(config);
+        script.refreshByModel(model);
+        this.foods[String(model.getFoodId())] = food;
+        return food;
     }
 
     // 获得距离最近的一个食物

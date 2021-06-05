@@ -1,19 +1,5 @@
-import BuildingMeta from "../meta/BuildingMeta";
-import GameMeta from "../meta/GameMeta";
 import GameModel from "../model/GameModel";
 import BuildingBaseLogic from "./BuildingBaseLogic";
-import ChildSchoolLogic from "./ChildSchoolLogic";
-import FarmLandLogic from "./FarmLandLogic";
-import HomeLogic from "./HomeLogic";
-import HospitalLogic from "./HospitalLogic";
-import LabLogic from "./LabLogic";
-import OfficeLogic from "./OfficeLogic";
-import OperaLogic from "./OperaLogic";
-import PastureLogic from "./PastureLogic";
-import PoliceStationLogic from "./PoliceStationLogic";
-import PowerPlantLogic from "./PowerPlantLogic";
-import SchoolLogic from "./SchoolLogic";
-import ShopLogic from "./ShopLogic";
 
 export default class BuildingMgr extends Laya.Script {
 
@@ -37,40 +23,17 @@ export default class BuildingMgr extends Laya.Script {
         return this.buildings[String(id)];
     }
 
-    ceateBuildingFunc(config, model, cell, callback) {
-        Laya.loader.create(config.prefab, Laya.Handler.create(this, function (prefabDef) {
-            let building = prefabDef.create();
-            config.parent.addChild(building);
-            let script = building.getComponent(BuildingBaseLogic);
-            cell.building = building;
-            cell.buildingScript = script;
-            script.refreshByModel(model);
-            if (callback) {
-                callback.runWith(cell);
-            }
-        }));
-    }
-
     // 建造建筑物
-    createBuildingByConfig(config, callback) {
+    createBuildingByConfig(config) {
         let model = GameModel.getInstance().newBuildingModel(config);
-        let cell = {
-            x: config.x,
-            y: config.y,
-            width: config.width,
-            height: config.height,
-            model: model,
-            building: "noBuilding",
-        };
-        this.buildings[String(model.getBuildingId())] = cell;
-        if (Laya.loader.getRes(GameMeta.BuildingAtlasPath)) {
-            this.ceateBuildingFunc(config, model, cell, callback);
-        } else {
-            Laya.loader.load(GameMeta.BuildingAtlasPath, Laya.Handler.create(this, function () {
-                this.ceateBuildingFunc(config, model, cell, callback);
-            }));
-        }
-        return cell;
+        let prefabDef = Laya.loader.getRes(config.prefab);
+        let building = prefabDef.create();
+        config.parent.addChild(building);
+        let script = building.getComponent(BuildingBaseLogic);
+        building.buildingScript = script;
+        script.refreshByModel(model);
+        this.buildings[String(model.getBuildingId())] = building;
+        return building;
     }
 
 
@@ -97,10 +60,10 @@ export default class BuildingMgr extends Laya.Script {
             // console.debug(building.building);
             // console.debug(building.model.getBuildingState());
             // console.debug(building.model.getBuildingType());
+            let model = building.buildingScript.getModel();
             if (curDistance <= area &&
-                building.building != "noBuilding" &&
-                sets.has(building.model.getBuildingState()) &&
-                building.model.getBuildingType() == buildingType) {
+                sets.has(model.getBuildingState()) &&
+                model.getBuildingType() == buildingType) {
                 distance = curDistance;
                 ret = building;
             }
