@@ -29,12 +29,23 @@ export default class ResidentMgr extends Laya.Script {
 
     initSelf() {
         Laya.timer.loop(ResidentMeta.ResidentMakeIdeaStep, this, this.onMakeIdea);
+        Laya.timer.loop(300, this, this.onUpdateZorder);
+    }
+
+    onUpdateZorder() {
+        for (let key in this.residents) {
+            let resident = this.residents[key];
+            Utils.setMapZOrder(resident);
+        }
     }
 
     onMakeIdea() {
         for (let key in this.residents) {
             let resident = this.residents[key];
             Utils.setMapZOrder(resident);
+            if (resident.residentLogicScript.getModel().addAgeExp(ResidentMeta.ResidentMakeIdeaStep)) {
+                resident.residentLogicScript.growup();
+            }
             resident.residentLogicScript.makeIdea();
         }
     }

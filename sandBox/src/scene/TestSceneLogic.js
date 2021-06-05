@@ -21,6 +21,36 @@ export default class TestSceneLogic extends Laya.Script {
             x: this.container.width/2 - 200, y: this.container.height/2, sex: 1, age: 28
         }, Laya.Handler.create(this, function (obj) {
         }));
+
+        ResidentMgr.getInstance().createResidentByConfig({
+            parent: this.container,
+            x: this.container.width/2 - 400, y: this.container.height/2, sex: 1, age: 1
+        }, Laya.Handler.create(this, function (obj) {
+        }));
+
+        ResidentMgr.getInstance().createResidentByConfig({
+            parent: this.container,
+            x: this.container.width/2 - 200, y: this.container.height/2, sex: 1, age: 28
+        }, Laya.Handler.create(this, function (obj) {
+        }));
+
+        ResidentMgr.getInstance().createResidentByConfig({
+            parent: this.container,
+            x: this.container.width/2 - 400, y: this.container.height/2, sex: 1, age: 1
+        }, Laya.Handler.create(this, function (obj) {
+        }));
+
+        ResidentMgr.getInstance().createResidentByConfig({
+            parent: this.container,
+            x: this.container.width/2 - 200, y: this.container.height/2, sex: 1, age: 28
+        }, Laya.Handler.create(this, function (obj) {
+        }));
+
+        ResidentMgr.getInstance().createResidentByConfig({
+            parent: this.container,
+            x: this.container.width/2 - 400, y: this.container.height/2, sex: 1, age: 1
+        }, Laya.Handler.create(this, function (obj) {
+        }));
     }
 
     onDisable() {

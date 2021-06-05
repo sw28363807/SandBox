@@ -23,7 +23,8 @@ export default class ResidentDetailsPanel extends Laya.Script {
         if (config.married == 2) {
             marriedString = "已婚";
         }
-        this.owner.getChildByName("married").text = marriedString;
+        this.owner.getChildByName("married").text = marriedString; //+ String(config.stopGotoAAA) + "_"+ String(config.stopGotoBBB) + "_" + String(config.XXX) + "&" +
+        // String(config.Cur) + "_" + String(config.Dst); 
         this.owner.getChildByName("temperature").text = "体温: "+String(config.temperature);
         this.owner.getChildByName("age").text = "年龄: "+String(config.age);
 

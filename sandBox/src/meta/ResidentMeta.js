@@ -53,6 +53,7 @@ ResidentMeta.ResidentState = {
     RandomWalk: 47,     //随机走一个位置
     GotoContinueCreateChildSchool: 48, //跑去建造幼儿园
     CreateChildSchool: 49,     //建造幼儿园
+
 };
 
 // 动画枚举
@@ -93,7 +94,7 @@ ResidentMeta.ResidentReduceSocialBaseValue = -0.4; //社交减少值
 ResidentMeta.ResidentAddSocialBaseValue = 60; //一次社交增加值
 ResidentMeta.ResidentReduceLifeBaseValue = -0.5; //生命减少值
 ResidentMeta.ResidentReduceEnjoyBaseValue = -0.25; //娱乐减少值
-ResidentMeta.ResidentSickProbability = 0.995; //生病的概率
+ResidentMeta.ResidentSickProbability = 0.998; //生病的概率
 ResidentMeta.ResidentTreatTime = 5000; //治疗的时间
 ResidentMeta.ResidentLearnTime = 5000; //学习的时间
 ResidentMeta.ResidentSocialLowToFight = 100;  //需要社交的警戒线，低于这个值就是要打架了
@@ -108,4 +109,5 @@ ResidentMeta.ResidentAddStoneBaseValue = 1;  //人物收集石头增加的数值
 ResidentMeta.ResidentFindPathTimes = 5;      //人物寻路的次数
 ResidentMeta.ResidentAdultAge = 15;         //成年的年纪
 ResidentMeta.ResidentMarryAge = 0;         //结婚的法定年纪
+ResidentMeta.ResidentAgePeriod = 500 * 100;         //年龄的增长周期
 

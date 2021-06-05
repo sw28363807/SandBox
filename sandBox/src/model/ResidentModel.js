@@ -19,6 +19,7 @@ export default class ResidentModel extends Laya.Script {
         this.myHomeId = 0;              //我的家的ID
         this.loverId = 0;               //配偶ID
         this.isInChildSchool = false;   //当前是不是处在幼儿园中
+        this.ageExp = 0;
 
         this.temperature = 36;  //体温
         this.age = 1;       //年龄
@@ -90,11 +91,35 @@ export default class ResidentModel extends Laya.Script {
             if (data.positive) {
                 this.positive = data.positive;
             }
+            if (data.ageExp) {
+                this.ageExp = data.ageExp;
+            }
         }
     }
 
 
+    addAgeExp(num) {
+        this.setAgeExp(this.getAgeExp() + num);
+        if (this.ageExp >= ResidentMeta.ResidentAgePeriod) {
+            let lastAge = this.age;
+            let remainExp = this.ageExp % ResidentMeta.ResidentAgePeriod;
+            this.addAge(Math.floor(this.ageExp / ResidentMeta.ResidentAgePeriod));
+            this.ageExp = remainExp;
+            if (lastAge < ResidentMeta.ResidentAdultAge &&
+                this.age >= ResidentMeta.ResidentAdultAge) {
+                return true;
+            }
+        }
+        return false;
+    }
 
+    setAgeExp(num) {
+        this.ageExp = num;
+    }
+
+    getAgeExp() {
+        return this.ageExp;
+    }
 
     getSick() {
         return this.sick;
@@ -134,9 +159,19 @@ export default class ResidentModel extends Laya.Script {
         this.married = married;
     }
 
+
+    // 设置年龄
+    setAge(num) {
+        this.age = num;
+    }
     // 获得年龄
     getAge() {
         return this.age;
+    }
+
+    // 增加年龄
+    addAge(num) {
+        this.setAge(this.getAge() + num);
     }
 
     setMyHomeId(buildingId) {
@@ -170,7 +205,7 @@ export default class ResidentModel extends Laya.Script {
             } else {
                 this.addLife(ResidentMeta.ResidentReduceLifeBaseValue);
             }
-            
+
         }
     }
 

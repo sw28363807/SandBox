@@ -90,8 +90,8 @@ BuildingMeta.LabHeight = 256;   //实验室高度
 
 // 盖房子需要的钱
 BuildingMeta.CreateHomeNeedValues = {
-    tree: 3,
-    stone: 3,
+    tree: 0,
+    stone: 0,
 };
 
 // 操作界面的数据源

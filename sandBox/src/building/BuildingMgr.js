@@ -43,6 +43,7 @@ export default class BuildingMgr extends Laya.Script {
             config.parent.addChild(building);
             let script = building.getComponent(BuildingBaseLogic);
             cell.building = building;
+            cell.buildingScript = script;
             script.refreshByModel(model);
             if (callback) {
                 callback.runWith(cell);
