@@ -53,6 +53,8 @@ ResidentMeta.ResidentState = {
     RandomWalk: 47,     //随机走一个位置
     GotoContinueCreateChildSchool: 48, //跑去建造幼儿园
     CreateChildSchool: 49,     //建造幼儿园
+    GotoChildSchoolForLearn: 50,     //赶去幼儿园学习
+    ChildLearn: 51,                 //去幼儿园学习
 
 };
 
@@ -74,7 +76,7 @@ ResidentMeta.CutDownTreeTime = 10000;
 ResidentMeta.CollectStoneTime = 10000;
 
 // 人物移动速度
-ResidentMeta.ResidentMoveSpeed = 90;
+ResidentMeta.ResidentMoveSpeed = 150;
 
 // 聊天的时间步长
 ResidentMeta.SocialTimeStep = 1000;
@@ -84,6 +86,12 @@ ResidentMeta.SocialFightStep = 1000;
 
 // 死亡需要的时间
 ResidentMeta.DieTime = 2000;
+
+// 生孩子需要的间隔
+ResidentMeta.MakeLoveMaxDeltay = 10 * 1000;
+
+// 每个房子的人数
+ResidentMeta.ResidentNumPerHome = 3;
 
 // 属性掉落基础值
 ResidentMeta.ResidentValueStep = 1000;  //人物数值消耗Step
@@ -97,17 +105,20 @@ ResidentMeta.ResidentReduceEnjoyBaseValue = -0.25; //娱乐减少值
 ResidentMeta.ResidentSickProbability = 1; //生病的概率
 ResidentMeta.ResidentTreatTime = 5000; //治疗的时间
 ResidentMeta.ResidentLearnTime = 5000; //学习的时间
-ResidentMeta.ResidentSocialLowToFight = 100;  //需要社交的警戒线，低于这个值就是要打架了
+ResidentMeta.ResidentLearnTimeForChildLearn = 10000; //幼儿园学习的时间
+ResidentMeta.ResidentSocialLowToFight = 70;  //需要社交的警戒线，低于这个值就是要打架了
 ResidentMeta.ResidentSocialNeedValue = 30;  //需要社交的警戒线，低于这个值就是需要社交了
 ResidentMeta.ResidentWaterNeedValue = 20;  //需要喝水的警戒线，低于这个值就是需要喝水了
 ResidentMeta.ResidentFoodNeedValue = 20;  //需要吃饭的警戒线，低于这个值就是需要吃饭了
 ResidentMeta.ResidentEnjoyNeedValue = 30;  //需要娱乐的警戒线，低于这个值就是需要娱乐了
 ResidentMeta.ResidentSocialArea = 2000;      //寻找可以社交的人的范围
-ResidentMeta.ResidentFightArea = 1000;      //寻找可以打架的人的范围
+ResidentMeta.ResidentFightArea = 200;      //寻找可以打架的人的范围
+ResidentMeta.ResidentFightNum = 10;         //打架的人数要求，少于这个值不能触发打架
 ResidentMeta.ResidentAddTreeBaseValue = 1;  //人物砍树增加的数值
 ResidentMeta.ResidentAddStoneBaseValue = 1;  //人物收集石头增加的数值
 ResidentMeta.ResidentFindPathTimes = 5;      //人物寻路的次数
-ResidentMeta.ResidentAdultAge = 15;         //成年的年纪
-ResidentMeta.ResidentMarryAge = 0;         //结婚的法定年纪
+ResidentMeta.ResidentAdultAge = 5;         //成年的年纪
+ResidentMeta.ResidentMarryAge = ResidentMeta.ResidentAdultAge + 2;         //结婚的法定年纪
 ResidentMeta.ResidentAgePeriod = 500 * 100;         //年龄的增长周期
-
+ResidentMeta.ResidentGotoYOff = 10;         //走向某个建筑物的y轴off
+ResidentMeta.ResidentChildSchoolSearchArea = 1000;         //寻找幼儿园的搜索范围

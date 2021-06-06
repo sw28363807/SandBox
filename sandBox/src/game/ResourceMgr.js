@@ -19,7 +19,6 @@ export default class ResourceMgr extends Laya.Script {
     _loadRes(finishHandler) {
         if (this.loadIndex >= ResourceMeta.ResourceMap.length) {
             if (finishHandler) {
-                console.debug(this.prefabDefs);
                 finishHandler.run();
                 return;
             }

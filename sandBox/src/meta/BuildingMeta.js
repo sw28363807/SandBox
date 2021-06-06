@@ -32,6 +32,7 @@ BuildingMeta.HomeWidth = 256;   //家宽度
 BuildingMeta.HomeHeight = 256;   //家高度
 BuildingMeta.HomeCreatingStep = 100; //家建造时间间隔
 BuildingMeta.HomeCreatingStepValue = 500; //家建造时间间隔
+BuildingMeta.HomeResidentMaxNum = 3;    //每个家庭最多多少人
 
 // 医院
 BuildingMeta.HospitalWidth = 256;   //医院宽度

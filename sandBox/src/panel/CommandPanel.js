@@ -1,6 +1,7 @@
 import BuildingMgr from "../building/BuildingMgr";
 import BuildingMeta from "../meta/BuildingMeta";
 import GameContext from "../meta/GameContext";
+import ResidentHelper from "../resident/ResidentHelper";
 
 export default class CommandPanel extends Laya.Script {
 
@@ -150,7 +151,7 @@ export default class CommandPanel extends Laya.Script {
                 GameContext.mapContainer.globalToLocal(point);
                 dpX = point.x - this.dragRender.width / 2;
                 dpY = point.y - this.dragRender.height / 2;
-                if (BuildingMgr.getInstance().intersectsBuilding(dpX, dpY, this.dragRender.width, this.dragRender.height)) {
+                if (ResidentHelper.isOccupySpace(dpX, dpY, this.dragRender.width, this.dragRender.height)) {
                     this.dragRender.bgColor = "#ffffff";
                 } else {
                     this.dragRender.bgColor = "#5ddb36";

@@ -1,3 +1,4 @@
+import Utils from "../helper/Utils";
 import BuildingMeta from "../meta/BuildingMeta";
 
 export default class BuildingBaseLogic extends Laya.Script {
@@ -62,6 +63,7 @@ export default class BuildingBaseLogic extends Laya.Script {
         this.sliderControl.visible = false;
         Laya.timer.clear(this, this.onCreateProgress);
         this.model.setBuildingState(BuildingMeta.BuildingState.Noraml);
+        Utils.setMapZOrder(this.owner);
         this.onCreateBuildingFinish();
         this.model.clearCreateResidentIds();
     }

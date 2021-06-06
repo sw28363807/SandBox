@@ -19,6 +19,11 @@ export default class TestSceneLogic extends Laya.Script {
             parent: this.container,
             x: this.container.width/2 - 200, y: this.container.height/2, sex: 1, age: 28
         });
+
+        // ResidentMgr.getInstance().createResidentByConfig({
+        //     parent: this.container,
+        //     x: this.container.width/2 - 200, y: this.container.height/2, sex: 1, age: 1
+        // });
     }
 
     onDisable() {

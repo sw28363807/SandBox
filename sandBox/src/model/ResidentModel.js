@@ -1,4 +1,5 @@
 import EventMgr from "../helper/EventMgr";
+import TimeUtils from "../helper/TimeUtils";
 import GameEvent from "../meta/GameEvent";
 import NameMeta from "../meta/NameMeta";
 import ResidentMeta from "../meta/ResidentMeta";
@@ -15,11 +16,12 @@ export default class ResidentModel extends Laya.Script {
         this.social = 100;  //社交
 
         // 隐藏数值
-        this.positive = 0.7;            //积极性
+        this.positive = 0.6;            //积极性
         this.myHomeId = 0;              //我的家的ID
         this.loverId = 0;               //配偶ID
         this.isInChildSchool = false;   //当前是不是处在幼儿园中
         this.ageExp = 0;
+        this.makeLoveSystemTime = 0;
 
         this.temperature = 36;  //体温
         this.age = 1;       //年龄
@@ -97,8 +99,17 @@ export default class ResidentModel extends Laya.Script {
         }
     }
 
+    recordMakeLoveSystemTime() {
+        if (this.makeLoveSystemTime == 0) {
+            this.makeLoveSystemTime = TimeUtils.getSystemTime();
+        }
+    }
 
-    addAgeExp(num) {
+    getMakeLoveSystemTime() {
+        return this.makeLoveSystemTime;
+    }
+
+    addAgeExp(num, isSendEvent) {
         this.setAgeExp(this.getAgeExp() + num);
         if (this.ageExp >= ResidentMeta.ResidentAgePeriod) {
             let lastAge = this.age;
@@ -107,6 +118,9 @@ export default class ResidentModel extends Laya.Script {
             this.ageExp = remainExp;
             if (lastAge < ResidentMeta.ResidentAdultAge &&
                 this.age >= ResidentMeta.ResidentAdultAge) {
+                if (isSendEvent) {
+                    EventMgr.getInstance().postEvent(GameEvent.RESIDENT_GROWUP, this);
+                }
                 return true;
             }
         }
@@ -184,7 +198,11 @@ export default class ResidentModel extends Laya.Script {
 
     // 下降需求和上升满足
     onStep() {
-        if (this.getLife() <= 0) {
+        if (TimeUtils.getSystemTime() >= this.getMakeLoveSystemTime() + ResidentMeta.MakeLoveMaxDeltay) {
+            this.makeLoveSystemTime = 0;
+        }
+        this.addAgeExp(ResidentMeta.ResidentMakeIdeaStep, true);
+        if (this.getLife() <= 0 && this.getFSMState() == ResidentMeta.ResidentState.IdleState) {
             EventMgr.getInstance().postEvent(GameEvent.RESIDENT_DIE, this);
             return;
         }
@@ -211,7 +229,16 @@ export default class ResidentModel extends Laya.Script {
 
     // 能够要求结婚（主动）
     canAskMarry() {
-        if (this.getAge() >= ResidentMeta.ResidentMarryAge &&
+        // console.debug("+++++++++++++++++++++++++++++++++++++");
+        // console.debug("this.getMakeLoveSystemTime():" + String(this.getMakeLoveSystemTime()));
+        // console.debug("this.getAge():" + String(this.getAge()));
+        // console.debug("this.getSex():" + String(this.getSex()));
+        // console.debug("this.getMyHomeId():" + String(this.getMyHomeId()));
+        // console.debug("this.getSocial():" + String(this.getSocial()));
+        // console.debug("this.getFSMState():" + String(this.getFSMState()));
+        // console.debug("------------------------------------");
+        if (this.getMakeLoveSystemTime() == 0 &&
+            this.getAge() >= ResidentMeta.ResidentMarryAge &&
             this.getSex() == 1 &&
             this.getMyHomeId() != 0 &&
             this.getSocial() >= 20 &&
@@ -223,7 +250,8 @@ export default class ResidentModel extends Laya.Script {
 
     // 能够结婚（被动）
     canMarry(manModel) {
-        if (this.getAge() > ResidentMeta.ResidentMarryAge &&
+        if (this.getMakeLoveSystemTime() == 0 &&
+            this.getAge() > ResidentMeta.ResidentMarryAge &&
             this.getFSMState() == ResidentMeta.ResidentState.IdleState &&
             this.getSex() == 2) {
             if (this.loverId == 0) {

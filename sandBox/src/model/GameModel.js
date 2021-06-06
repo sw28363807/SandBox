@@ -51,6 +51,32 @@ export default class GameModel extends Laya.Script {
         return GameModel.instance;
     }
 
+    getAllChildResidentNum() {
+        let childNum = 0;
+        for (let key in this.residentModels) {
+            let item = this.residentModels[key];
+            if (item.getAge() < ResidentMeta.ResidentAdultAge) {
+                childNum++;
+            }
+        }
+        return childNum;
+    }
+
+    getHomeNum() {
+        let homeNum = 0;
+        for (const key in this.buildingModels) {
+            let model = this.buildingModels[key];
+            if (model.getBuildingType() == BuildingMeta.BuildingType.HomeType) {
+                homeNum++;
+            }
+        }
+        return homeNum;
+    }
+
+    getAllResidentNum() {
+        return Object.keys(this.residentModels).length;
+    }
+
     getGameSeason() {
         return this.gameSeason;
     }
@@ -231,13 +257,8 @@ export default class GameModel extends Laya.Script {
     newResidentModel(param) {
         this.maxResidentID++;
         let model = new ResidentModel();
-        model.updateData({
-            x: param.x,
-            y: param.y,
-            sex: param.sex,
-            age: param.age,
-            residentId: this.maxResidentID,
-        });
+        param.residentId = this.maxResidentID;
+        model.updateData(param);
         this.residentModels[String(this.maxResidentID)] = model;
         return model;
     }

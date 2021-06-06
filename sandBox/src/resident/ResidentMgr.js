@@ -1,6 +1,4 @@
-import RandomMgr from "../helper/RandomMgr";
 import Utils from "../helper/Utils";
-import GameMeta from "../meta/GameMeta";
 import ResidentMeta from "../meta/ResidentMeta";
 import ResourceMeta from "../meta/ResourceMeta";
 import GameModel from "../model/GameModel";
@@ -44,9 +42,6 @@ export default class ResidentMgr extends Laya.Script {
         for (let key in this.residents) {
             let resident = this.residents[key];
             Utils.setMapZOrder(resident);
-            if (resident.residentLogicScript.getModel().addAgeExp(ResidentMeta.ResidentMakeIdeaStep)) {
-                resident.residentLogicScript.growup();
-            }
             resident.residentLogicScript.makeIdea();
         }
     }
@@ -109,14 +104,15 @@ export default class ResidentMgr extends Laya.Script {
     }
 
     // 找一个可以打架的人
-    getACanFightResident(x, y) {
+    getACanFightResident(residentModel, x, y) {
         let idles = [];
         let needs = [];
         for (const key in this.residents) {
             let item = this.residents[key];
             let model = item.residentLogicScript.getModel();
             let distance = new Laya.Point(x, y).distance(item.x, item.y);
-            if (distance <= ResidentMeta.ResidentFightArea) {
+            if (residentModel.getResidentId() != model.getResidentId()
+                && distance <= ResidentMeta.ResidentFightArea) {
                 if (model.getFSMState() == ResidentMeta.ResidentState.IdleState) {
                     idles.push(item);
                     if (model.getSocial() < ResidentMeta.ResidentSocialLowToFight) {

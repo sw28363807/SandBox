@@ -79,4 +79,12 @@ export default class RandomMgr {
         let retX = x + Math.round(Math.random() * distanceX);
         return { x: retX, y: y };
     }
+
+    // 随机一个性别
+    static randomSex() {
+        if (Math.random() > 0.5) {
+            return 1;
+        }
+        return 2;
+    }
 }
