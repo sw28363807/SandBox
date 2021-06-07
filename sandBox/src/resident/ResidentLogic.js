@@ -1457,7 +1457,6 @@ export default class ResidentLogic extends Laya.Script {
             this.level2Results.push(cell10);
         }
 
-
         // 盖房子
         if (RandomMgr.randomYes() && this.model.getMyHomeId() == 0 && this.model.getSex() == 1 &&
             this.model.getAge() >= ResidentMeta.ResidentAdultAge
@@ -1493,7 +1492,7 @@ export default class ResidentLogic extends Laya.Script {
                         }
                     })
                 };
-                this.level1Results.push(cell12);
+                this.level2Results.push(cell12);
             }
         }
 

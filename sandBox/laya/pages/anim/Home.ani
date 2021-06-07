@@ -55,21 +55,37 @@
                     "keyframes":{
                         "y":[
                             {
-                                "value":128,
+                                "value":200,
                                 "tweenMethod":"linearNone",
                                 "tween":true,
                                 "target":3,
                                 "key":"y",
                                 "index":0
+                            },
+                            {
+                                "value":200,
+                                "tweenMethod":"linearNone",
+                                "tween":true,
+                                "target":3,
+                                "key":"y",
+                                "index":20
                             }],
                         "x":[
                             {
-                                "value":64,
+                                "value":100,
                                 "tweenMethod":"linearNone",
                                 "tween":true,
                                 "target":3,
                                 "key":"x",
                                 "index":0
+                            },
+                            {
+                                "value":100,
+                                "tweenMethod":"linearNone",
+                                "tween":true,
+                                "target":3,
+                                "key":"x",
+                                "index":20
                             }],
                         "skin":[
                             {
@@ -164,21 +180,37 @@
                             }],
                         "pivotY":[
                             {
-                                "value":128,
+                                "value":200,
                                 "tweenMethod":"linearNone",
                                 "tween":true,
                                 "target":3,
                                 "key":"pivotY",
                                 "index":0
+                            },
+                            {
+                                "value":200,
+                                "tweenMethod":"linearNone",
+                                "tween":true,
+                                "target":3,
+                                "key":"pivotY",
+                                "index":20
                             }],
                         "pivotX":[
                             {
-                                "value":64,
+                                "value":100,
                                 "tweenMethod":"linearNone",
                                 "tween":true,
                                 "target":3,
                                 "key":"pivotX",
                                 "index":0
+                            },
+                            {
+                                "value":100,
+                                "tweenMethod":"linearNone",
+                                "tween":true,
+                                "target":3,
+                                "key":"pivotX",
+                                "index":20
                             }],
                         "alpha":[
                             {
@@ -203,21 +235,37 @@
                     "keyframes":{
                         "y":[
                             {
-                                "value":128,
+                                "value":200,
                                 "tweenMethod":"linearNone",
                                 "tween":true,
                                 "target":3,
                                 "key":"y",
                                 "index":0
+                            },
+                            {
+                                "value":200,
+                                "tweenMethod":"linearNone",
+                                "tween":true,
+                                "target":3,
+                                "key":"y",
+                                "index":20
                             }],
                         "x":[
                             {
-                                "value":64,
+                                "value":100,
                                 "tweenMethod":"linearNone",
                                 "tween":true,
                                 "target":3,
                                 "key":"x",
                                 "index":0
+                            },
+                            {
+                                "value":100,
+                                "tweenMethod":"linearNone",
+                                "tween":true,
+                                "target":3,
+                                "key":"x",
+                                "index":20
                             }],
                         "skin":[
                             {
@@ -312,21 +360,37 @@
                             }],
                         "pivotY":[
                             {
-                                "value":128,
+                                "value":200,
                                 "tweenMethod":"linearNone",
                                 "tween":true,
                                 "target":3,
                                 "key":"pivotY",
                                 "index":0
+                            },
+                            {
+                                "value":200,
+                                "tweenMethod":"linearNone",
+                                "tween":true,
+                                "target":3,
+                                "key":"pivotY",
+                                "index":20
                             }],
                         "pivotX":[
                             {
-                                "value":64,
+                                "value":100,
                                 "tweenMethod":"linearNone",
                                 "tween":true,
                                 "target":3,
                                 "key":"pivotX",
                                 "index":0
+                            },
+                            {
+                                "value":100,
+                                "tweenMethod":"linearNone",
+                                "tween":true,
+                                "target":3,
+                                "key":"pivotX",
+                                "index":20
                             }],
                         "alpha":[
                             {

@@ -3,6 +3,11 @@ import ResourceMeta from "./ResourceMeta";
 export default class BuildingMeta {
 }
 
+BuildingMeta.BuildingCreateStateColor = {
+    enabled: "#5ddb36",
+    disabled: "#ffffff",
+};
+
 BuildingMeta.BuildingType = {
     NullTyupe: 0,   //无类型
     HomeType: 1,    //居民的家
@@ -17,6 +22,7 @@ BuildingMeta.BuildingType = {
     LabType: 10,            //科学实验室
     OfficeType: 11,         //鞋子楼
     ChildSchoolType: 12,        //幼儿园
+    RestaurantType: 13,         //餐厅
 };
 
 BuildingMeta.BuildingState = {
@@ -76,10 +82,14 @@ BuildingMeta.PoliceStationHeight = 256;   //警察局高度
 BuildingMeta.LabWidth = 256;   //实验室宽度
 BuildingMeta.LabHeight = 256;   //实验室高度
 
+// 餐厅
+BuildingMeta.RestaurantWidth = 256;   //餐厅宽度
+BuildingMeta.RestaurantHeight = 256;   //餐厅高度
+
 // 盖房子需要的钱
 BuildingMeta.CreateHomeNeedValues = {
-    tree: 0,
-    stone: 0,
+    tree: 6,
+    stone: 6,
 };
 
 // 操作界面的数据源
@@ -226,5 +236,18 @@ BuildingMeta.CommandPanelDataSource = {
         adjustX: 0,
         adjustY: 0,
         buildingName: "写字楼",
+    },
+    // 写字楼
+    [String(BuildingMeta.BuildingType.RestaurantType)]: {
+        prefab: ResourceMeta.RestaurantPrefabPath,
+        type: BuildingMeta.BuildingType.RestaurantType,
+        preview: "source/building/restaurant.png",
+        width: BuildingMeta.RestaurantWidth,
+        height: BuildingMeta.RestaurantHeight,
+        realWidth: 200,
+        realHeight: 200,
+        adjustX: 28,
+        adjustY: 56,
+        buildingName: "餐厅",
     },
 };

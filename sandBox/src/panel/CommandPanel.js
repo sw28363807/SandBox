@@ -117,7 +117,7 @@ export default class CommandPanel extends Laya.Script {
             this.dragRender = new Laya.Box();
             this.dragRender.width = data.width;
             this.dragRender.height = data.height;
-            this.dragRender.bgColor = "#5ddb36";
+            this.setBuildingCreateEnabled(true);
             this.touchLayer.addChild(this.dragRender);
 
             let spr = new Laya.Sprite();
@@ -152,9 +152,9 @@ export default class CommandPanel extends Laya.Script {
                 dpX = point.x - this.dragRender.width / 2;
                 dpY = point.y - this.dragRender.height / 2;
                 if (ResidentHelper.isOccupySpace(dpX, dpY, this.dragRender.width, this.dragRender.height)) {
-                    this.dragRender.bgColor = "#ffffff";
+                    this.setBuildingCreateEnabled(false);
                 } else {
-                    this.dragRender.bgColor = "#5ddb36";
+                    this.setBuildingCreateEnabled(true);
                 }
             }
         }
@@ -206,6 +206,16 @@ export default class CommandPanel extends Laya.Script {
             this.touchLayer.off(Laya.Event.MOUSE_OUT, this, this.onTouchLayerMouseOut);
         }
 
+    }
+
+    setBuildingCreateEnabled(enabled) {
+        if (this.dragRender) {
+            if (enabled) {
+                this.dragRender.bgColor =  BuildingMeta.BuildingCreateStateColor.enabled;
+            } else {
+                this.dragRender.bgColor =  BuildingMeta.BuildingCreateStateColor.disabled;
+            }
+        }
     }
 
     setUnderState(state) {
