@@ -325,8 +325,16 @@ export default class ResidentLogic extends Laya.Script {
         this.stopAni();
         this.stopGoto();
         Laya.timer.clear(this, this.onDoWorkFinish);
+        let nextState = this.isInContinueCreateMap(state);
+        // 是否要继续建造
+        if (nextState) {
+            this.startGotoContinueCreateBuilding({
+                building: param,
+                nextState: nextState
+            });
+        }
         // 待机
-        if (state == ResidentMeta.ResidentState.IdleState) {
+        else if (state == ResidentMeta.ResidentState.IdleState) {
             this.setAnim(ResidentMeta.ResidentAnim.Idle);
         }
         // 寻找可以盖房子的地方
@@ -470,149 +478,49 @@ export default class ResidentLogic extends Laya.Script {
             this.setAnim(ResidentMeta.ResidentAnim.Die, false);
             Laya.timer.once(ResidentMeta.DieTime, this, this.onDoWorkFinish, [this.makeParam(null)]);
         }
-        // 跑去建造医院
-        else if (state == ResidentMeta.ResidentState.GotoContinueCreateHospital) {
-            this.willCreateHospital = param;
-            this.setAnim(ResidentMeta.ResidentAnim.Walk);
-            param.buildingScript.joinCreateBuilding(this.model.getResidentId());
-            this.startGoToContinueCreateHospital(this.willCreateHospital);
-        }
         // 建造医院
         else if (state == ResidentMeta.ResidentState.CreateHospital) {
-            if (this.willCreateHospital) {
-                this.setAnim(ResidentMeta.ResidentAnim.Work);
-                this.setStateAniVisible(true);
-                this.setStateAni("ani2");
-                this.willCreateHospital.buildingScript.startCreate();
-            }
-        }
-        // 跑去建造发电厂
-        else if (state == ResidentMeta.ResidentState.GotoContinueCreatePowerPlant) {
-            this.willCreatePowerPlant = param;
-            param.buildingScript.joinCreateBuilding(this.model.getResidentId());
-            this.setAnim(ResidentMeta.ResidentAnim.Walk);
-            this.startGoToContinueCreatePowerPlant(this.willCreatePowerPlant);
+            this.startCreateBuilding();
         }
         // 建造发电厂
         else if (state == ResidentMeta.ResidentState.CreatePowerPlant) {
-            if (this.willCreatePowerPlant) {
-                this.setAnim(ResidentMeta.ResidentAnim.Work);
-                this.setStateAniVisible(true);
-                this.setStateAni("ani2");
-                this.willCreatePowerPlant.buildingScript.startCreate();
-            }
-        }
-        // 跑去建造商店
-        else if (state == ResidentMeta.ResidentState.GotoContinueCreateShop) {
-            this.willCreateShop = param;
-            this.willCreateShop.buildingScript.joinCreateBuilding(this.model.getResidentId());
-            this.setAnim(ResidentMeta.ResidentAnim.Walk);
-            this.startGoToContinueCreateShop(this.willCreateShop);
+            this.startCreateBuilding();
         }
         // 建造商店
         else if (state == ResidentMeta.ResidentState.CreateShop) {
-            if (this.willCreateShop) {
-                this.setAnim(ResidentMeta.ResidentAnim.Work);
-                this.setStateAniVisible(true);
-                this.setStateAni("ani2");
-                this.willCreateShop.buildingScript.startCreate();
-            }
-        }
-        // 跑去建造农田
-        else if (state == ResidentMeta.ResidentState.GotoContinueCreateFarmLand) {
-            this.willCreateFarmLand = param;
-            param.buildingScript.joinCreateBuilding(this.model.getResidentId());
-            this.setAnim(ResidentMeta.ResidentAnim.Walk);
-            this.startGoToContinueCreateFarmLand(this.willCreateFarmLand);
+            this.startCreateBuilding();
         }
         // 建造农田
         else if (state == ResidentMeta.ResidentState.CreateFarmLand) {
-            if (this.willCreateFarmLand) {
-                this.setAnim(ResidentMeta.ResidentAnim.Work);
-                this.setStateAniVisible(true);
-                this.setStateAni("ani2");
-                this.willCreateFarmLand.buildingScript.startCreate();
-            }
-        }
-        // 跑去建造牧场
-        else if (state == ResidentMeta.ResidentState.GotoContinueCreatePasture) {
-            this.willCreatePasture = param;
-            param.buildingScript.joinCreateBuilding(this.model.getResidentId());
-            this.setAnim(ResidentMeta.ResidentAnim.Walk);
-            this.startGoToContinueCreatePasture(this.willCreatePasture);
+            this.startCreateBuilding();
         }
         // 建造牧场
         else if (state == ResidentMeta.ResidentState.CreatePasture) {
-            if (this.willCreatePasture) {
-                this.setAnim(ResidentMeta.ResidentAnim.Work);
-                this.setStateAniVisible(true);
-                this.setStateAni("ani2");
-                this.willCreatePasture.buildingScript.startCreate();
-            }
-        }
-        // 跑去建造歌剧院
-        else if (state == ResidentMeta.ResidentState.GotoContinueCreateOpera) {
-            this.willCreateOpera = param;
-            param.buildingScript.joinCreateBuilding(this.model.getResidentId());
-            this.setAnim(ResidentMeta.ResidentAnim.Walk);
-            this.startGoToContinueCreateOpera(this.willCreateOpera);
+            this.startCreateBuilding();
         }
         // 建造歌剧院
         else if (state == ResidentMeta.ResidentState.CreateOpera) {
-            if (this.willCreateOpera) {
-                this.setAnim(ResidentMeta.ResidentAnim.Work);
-                this.setStateAniVisible(true);
-                this.setStateAni("ani2");
-                this.willCreateOpera.buildingScript.startCreate();
-            }
-        }
-        // 跑去建造写字楼
-        else if (state == ResidentMeta.ResidentState.GotoContinueCreateOffice) {
-            this.willCreateOffice = param;
-            param.buildingScript.joinCreateBuilding(this.model.getResidentId());
-            this.setAnim(ResidentMeta.ResidentAnim.Walk);
-            this.startGoToContinueCreateOffice(this.willCreateOffice);
+            this.startCreateBuilding();
         }
         // 建造写字楼
         else if (state == ResidentMeta.ResidentState.CreateOffice) {
-            if (this.willCreateOffice) {
-                this.setAnim(ResidentMeta.ResidentAnim.Work);
-                this.setStateAniVisible(true);
-                this.setStateAni("ani2");
-                this.willCreateOffice.buildingScript.startCreate();
-            }
-        }
-        // 跑去建造警察局
-        else if (state == ResidentMeta.ResidentState.GotoContinueCreatePoliceStation) {
-            this.willCreatePoliceStation = param;
-            param.buildingScript.joinCreateBuilding(this.model.getResidentId());
-            this.setAnim(ResidentMeta.ResidentAnim.Walk);
-            this.startGoToContinueCreatePoliceStation(this.willCreatePoliceStation);
+            this.startCreateBuilding();
         }
         // 建造警察局
         else if (state == ResidentMeta.ResidentState.CreatePoliceStation) {
-            if (this.willCreatePoliceStation) {
-                this.setAnim(ResidentMeta.ResidentAnim.Work);
-                this.setStateAniVisible(true);
-                this.setStateAni("ani2");
-                this.willCreatePoliceStation.buildingScript.startCreate();
-            }
-        }
-        // 跑去建造科学实验室
-        else if (state == ResidentMeta.ResidentState.GotoContinueCreateLab) {
-            this.willCreateLab = param;
-            param.buildingScript.joinCreateBuilding(this.model.getResidentId());
-            this.setAnim(ResidentMeta.ResidentAnim.Walk);
-            this.startGoToContinueCreateLab(this.willCreateLab);
+            this.startCreateBuilding();
         }
         // 建造科学实验室
         else if (state == ResidentMeta.ResidentState.CreateLab) {
-            if (this.willCreateLab) {
-                this.setAnim(ResidentMeta.ResidentAnim.Work);
-                this.setStateAniVisible(true);
-                this.setStateAni("ani2");
-                this.willCreateLab.buildingScript.startCreate();
-            }
+            this.startCreateBuilding();
+        }
+        // 建造学校
+        else if (state == ResidentMeta.ResidentState.CreateSchool) {
+            this.startCreateBuilding();
+        }
+        // 建造幼儿园
+        else if (state == ResidentMeta.ResidentState.CreateChildSchool) {
+            this.startCreateBuilding();
         }
         // 去治疗
         else if (state == ResidentMeta.ResidentState.GotoTreat) {
@@ -625,38 +533,6 @@ export default class ResidentLogic extends Laya.Script {
         else if (state == ResidentMeta.ResidentState.Treating) {
             this.setVisible(false);
             Laya.timer.once(ResidentMeta.ResidentTreatTime, this, this.onDoWorkFinish, [this.makeParam(null)]);
-        }
-        // 跑去建造学校
-        else if (state == ResidentMeta.ResidentState.GotoContinueCreateSchool) {
-            this.willCreateSchool = param;
-            param.buildingScript.joinCreateBuilding(this.model.getResidentId());
-            this.setAnim(ResidentMeta.ResidentAnim.Walk);
-            this.startGoToContinueCreateSchool(this.willCreateSchool);
-        }
-        // 建造学校
-        else if (state == ResidentMeta.ResidentState.CreateSchool) {
-            if (this.willCreateSchool) {
-                this.setAnim(ResidentMeta.ResidentAnim.Work);
-                this.setStateAniVisible(true);
-                this.setStateAni("ani2");
-                this.willCreateSchool.buildingScript.startCreate();
-            }
-        }
-        // 跑去建造幼儿园
-        else if (state == ResidentMeta.ResidentState.GotoContinueCreateChildSchool) {
-            this.willCreateChildSchool = param;
-            param.buildingScript.joinCreateBuilding(this.model.getResidentId());
-            this.setAnim(ResidentMeta.ResidentAnim.Walk);
-            this.startGoToContinueCreateChildSchool(this.willCreateChildSchool);
-        }
-        // 建造幼儿园
-        else if (state == ResidentMeta.ResidentState.CreateChildSchool) {
-            if (this.willCreateChildSchool) {
-                this.setAnim(ResidentMeta.ResidentAnim.Work);
-                this.setStateAniVisible(true);
-                this.setStateAni("ani2");
-                this.willCreateChildSchool.buildingScript.startCreate();
-            }
         }
         // 跑去学校
         else if (state == ResidentMeta.ResidentState.GoToSchool) {
@@ -757,40 +633,40 @@ export default class ResidentLogic extends Laya.Script {
             return;
         }
         else if (state == ResidentMeta.ResidentState.CreateHospital) {
-            this.willCreateHospital = null;
+            this.clearContinueCreateBuilding();
         }
         else if (state == ResidentMeta.ResidentState.CreateSchool) {
-            this.willCreateSchool = null;
+            this.clearContinueCreateBuilding();
         }
         else if (state == ResidentMeta.ResidentState.CreatePowerPlant) {
-            this.willCreatePowerPlant = null;
+            this.clearContinueCreateBuilding();
         }
         else if (state == ResidentMeta.ResidentState.CreateShop) {
-            this.willCreateShop = null;
+            this.clearContinueCreateBuilding();
         }
         else if (state == ResidentMeta.ResidentState.CreateFarmLand) {
-            this.willCreateFarmLand = null;
+            this.clearContinueCreateBuilding();
         }
         else if (state == ResidentMeta.ResidentState.CreatePasture) {
-            this.willCreatePasture = null;
+            this.clearContinueCreateBuilding();
         }
         else if (state == ResidentMeta.ResidentState.CreateOpera) {
-            this.willCreateOpera = null;
+            this.clearContinueCreateBuilding();
         }
         else if (state == ResidentMeta.ResidentState.CreateOffice) {
-            this.willCreateOffice = null;
+            this.clearContinueCreateBuilding();
         }
         else if (state == ResidentMeta.ResidentState.CreatePoliceStation) {
-            this.willCreatePoliceStation = null;
+            this.clearContinueCreateBuilding();
         }
         else if (state == ResidentMeta.ResidentState.CreateLab) {
-            this.willCreateLab = null;
+            this.clearContinueCreateBuilding();
         }
         else if (state == ResidentMeta.ResidentState.CreateHome) {
-            this.willCreateHome = null;
+            this.clearContinueCreateBuilding();
         }
         else if (state == ResidentMeta.ResidentState.CreateChildSchool) {
-            this.willCreateChildSchool = null;
+            this.clearContinueCreateBuilding();
         }
         // 治疗完成
         else if (state == ResidentMeta.ResidentState.Treating) {
@@ -849,115 +725,45 @@ export default class ResidentLogic extends Laya.Script {
         }));
     }
 
-    // 跑去未建成的医院周围
-    startGoToContinueCreateHospital(hospital) {
-        this.gotoDestExt({
-            x: hospital.x + hospital.width / 2 - this.owner.width / 2,
-            y: hospital.y + hospital.height - this.owner.height + ResidentMeta.ResidentGotoYOff,
-        }, Laya.Handler.create(this, function () {
-            this.refreshFSMState(ResidentMeta.ResidentState.CreateHospital, hospital);
-        }));
+
+
+    // 是否存在于继续建造列表中
+    isInContinueCreateMap(fsmState) {
+        let value = ResidentMeta.ResidentContinueCreateMap[String(fsmState)];
+        return value;
     }
 
-    // 跑去未建成的学校周围
-    startGoToContinueCreateSchool(school) {
-        this.gotoDestExt({
-            x: school.x + school.width / 2 - this.owner.width / 2,
-            y: school.y + school.height - this.owner.height + ResidentMeta.ResidentGotoYOff,
-        }, Laya.Handler.create(this, function () {
-            this.refreshFSMState(ResidentMeta.ResidentState.CreateSchool, school);
-        }));
-    }
-
-    // 跑去未建成的幼儿园周围
-    startGoToContinueCreateChildSchool(childSchool) {
-        this.gotoDestExt({
-            x: childSchool.x + childSchool.width / 2 - this.owner.width / 2,
-            y: childSchool.y + childSchool.height - this.owner.height + ResidentMeta.ResidentGotoYOff,
-        }, Laya.Handler.create(this, function () {
-            this.refreshFSMState(ResidentMeta.ResidentState.CreateChildSchool, childSchool);
-        }));
-    }
-
-    // 跑去未建成的发电厂周围
-    startGoToContinueCreatePowerPlant(powerPlant) {
-        this.gotoDestExt({
-            x: powerPlant.x + powerPlant.width / 2 - this.owner.width / 2,
-            y: powerPlant.y + powerPlant.height - this.owner.height + ResidentMeta.ResidentGotoYOff,
-        }, Laya.Handler.create(this, function () {
-            this.refreshFSMState(ResidentMeta.ResidentState.CreatePowerPlant, powerPlant);
-        }));
-    }
-
-    // 跑去未建成的商店周围
-    startGoToContinueCreateShop(shop) {
-        this.gotoDestExt({
-            x: shop.x + shop.width / 2 - this.owner.width / 2,
-            y: shop.y + shop.height - this.owner.height + ResidentMeta.ResidentGotoYOff,
-        }, Laya.Handler.create(this, function () {
-            this.refreshFSMState(ResidentMeta.ResidentState.CreateShop, shop);
-        }));
-    }
-
-    // 跑去未建成的农田周围
-    startGoToContinueCreateFarmLand(farmLand) {
-        this.gotoDestExt({
-            x: farmLand.x + farmLand.width / 2 - this.owner.width / 2,
-            y: farmLand.y + farmLand.height - this.owner.height + ResidentMeta.ResidentGotoYOff,
-        }, Laya.Handler.create(this, function () {
-            this.refreshFSMState(ResidentMeta.ResidentState.CreateFarmLand, farmLand);
-        }));
+    isInContinueCreateFinishMap(fsmState) {
+        // TODO
     }
 
 
-    // 跑去未建成的牧场周围
-    startGoToContinueCreatePasture(pasture) {
+    // 继续去建造建筑___
+    startGotoContinueCreateBuilding(config) {
+        this.setAnim(ResidentMeta.ResidentAnim.Walk);
+        this.continueCreateBuilding = config.building;
+        let nextState = config.nextState;
+        this.continueCreateBuilding.buildingScript.joinCreateBuilding(this.model.getResidentId());
         this.gotoDestExt({
-            x: pasture.x + pasture.width / 2 - this.owner.width / 2,
-            y: pasture.y + pasture.height - this.owner.height + ResidentMeta.ResidentGotoYOff,
+            x: this.continueCreateBuilding.x + this.continueCreateBuilding.width / 2 - this.owner.width / 2,
+            y: this.continueCreateBuilding.y + this.continueCreateBuilding.height - this.owner.height + ResidentMeta.ResidentGotoYOff,
         }, Laya.Handler.create(this, function () {
-            this.refreshFSMState(ResidentMeta.ResidentState.CreatePasture, pasture);
+            this.refreshFSMState(nextState, this.continueCreateBuilding);
         }));
     }
 
-    // 跑去未建成的歌剧院周围
-    startGoToContinueCreateOpera(opera) {
-        this.gotoDestExt({
-            x: opera.x + opera.width / 2 - this.owner.width / 2,
-            y: opera.y + opera.height - this.owner.height + ResidentMeta.ResidentGotoYOff,
-        }, Laya.Handler.create(this, function () {
-            this.refreshFSMState(ResidentMeta.ResidentState.CreateOpera, opera);
-        }));
+    // 建造建筑
+    startCreateBuilding() {
+        if (this.continueCreateBuilding) {
+            this.setAnim(ResidentMeta.ResidentAnim.Work);
+            this.setStateAniVisible(true);
+            this.setStateAni("ani2");
+            this.continueCreateBuilding.buildingScript.startCreate();
+        }
     }
 
-    // 跑去未建成的写字楼周围
-    startGoToContinueCreateOffice(office) {
-        this.gotoDestExt({
-            x: office.x + office.width / 2 - this.owner.width / 2,
-            y: office.y + office.height - this.owner.height + ResidentMeta.ResidentGotoYOff,
-        }, Laya.Handler.create(this, function () {
-            this.refreshFSMState(ResidentMeta.ResidentState.CreateOffice, office);
-        }));
-    }
-
-    // 跑去未建成的警察局周围
-    startGoToContinueCreatePoliceStation(policeStation) {
-        this.gotoDestExt({
-            x: policeStation.x + policeStation.width / 2 - this.owner.width / 2,
-            y: policeStation.y + policeStation.height - this.owner.height + ResidentMeta.ResidentGotoYOff,
-        }, Laya.Handler.create(this, function () {
-            this.refreshFSMState(ResidentMeta.ResidentState.CreatePoliceStation, policeStation);
-        }));
-    }
-
-    // 跑去未建成的科学实验室周围
-    startGoToContinueCreateLab(lab) {
-        this.gotoDestExt({
-            x: lab.x + lab.width / 2 - this.owner.width / 2,
-            y: lab.y + lab.height - this.owner.height + ResidentMeta.ResidentGotoYOff,
-        }, Laya.Handler.create(this, function () {
-            this.refreshFSMState(ResidentMeta.ResidentState.CreateLab, lab);
-        }));
+    clearContinueCreateBuilding() {
+        this.continueCreateBuilding = null;
     }
 
 
@@ -1044,8 +850,8 @@ export default class ResidentLogic extends Laya.Script {
         let myHome = BuildingMgr.getInstance().getBuildingById(this.model.getMyHomeId());
         if (myHome) {
             this.gotoDestExt({
-                x: myHome.x + BuildingMeta.HomeWidth / 2 - this.owner.width / 2,
-                y: myHome.y + BuildingMeta.HomeHeight - this.owner.height + ResidentMeta.ResidentGotoYOff,
+                x: myHome.x + myHome.width / 2 - this.owner.width / 2,
+                y: myHome.y + myHome.height - this.owner.height + ResidentMeta.ResidentGotoYOff,
                 forceFirstY: true,
             }, Laya.Handler.create(this, function () {
                 this.refreshFSMState(ResidentMeta.ResidentState.LoverMakeLove);
@@ -1066,10 +872,11 @@ export default class ResidentLogic extends Laya.Script {
                 this.gotoDestExt({ x: dstP.x, y: dstP.y }, Laya.Handler.create(this, function () {
                     this.findCreateHomeTimes++;
                     // 查看此处可不可以盖房
-                    let toCreateHomeX = this.owner.x - BuildingMeta.HomeWidth / 2 + this.owner.width / 2;
-                    let toCreateHomeY = this.owner.y - BuildingMeta.HomeHeight + this.owner.height;
+                    let data = BuildingMeta.BuildingDatas[String(BuildingMeta.BuildingType.HomeType)];
+                    let toCreateHomeX = this.owner.x - data.width / 2 + this.owner.width / 2;
+                    let toCreateHomeY = this.owner.y - data.height + this.owner.height;
                     if (ResidentHelper.isOccupySpace(toCreateHomeX, toCreateHomeY,
-                        BuildingMeta.HomeWidth, BuildingMeta.HomeHeight)) {
+                        data.width, data.height)) {
                         let building = BuildingMgr.getInstance().createBuildingByConfig({
                             parent: GameContext.mapContainer,
                             x: toCreateHomeX,
@@ -1331,39 +1138,6 @@ export default class ResidentLogic extends Laya.Script {
         //     this.level2Results.push(cell2);
         // }
 
-        // // 赶着去建造医院
-        // let cell3 = {
-        //     func: Laya.Handler.create(this, function (param) {
-        //         let building = BuildingMgr.getInstance().getNearstBuilding(this.owner.x,
-        //             this.owner.y, BuildingMeta.BuildingType.HospitalType,
-        //             500, [BuildingMeta.BuildingState.PreCreating, BuildingMeta.BuildingState.Creating]);
-        //         if (building) {
-        //             this.refreshFSMState(ResidentMeta.ResidentState.GotoContinueCreateHospital, building);
-        //             this.ideaResult = true;
-        //         }
-        //     })
-        // };
-        // this.level1Results.push(cell3);
-
-        // // 跑去治病
-        // if (this.model.getSick() == 2) {
-        //     let cell4 = {
-        //         func: Laya.Handler.create(this, function (param) {
-        //             let building = BuildingMgr.getInstance().getNearstBuilding(this.owner.x,
-        //                 this.owner.y, BuildingMeta.BuildingType.HospitalType,
-        //                 1000, BuildingMeta.BuildingState.Noraml);
-        //             if (building) {
-        //                 this.refreshFSMState(ResidentMeta.ResidentState.GotoTreat, building);
-        //                 this.ideaResult = true;
-        //             }
-        //         })
-        //     };
-        //     this.level1Results.push(cell4);
-        // }
-
-
-
-
         // =================================正式================start
 
         // 喝水
@@ -1569,6 +1343,38 @@ export default class ResidentLogic extends Laya.Script {
         if (RandomMgr.randomYes()) {
             this.level2Results.push(cell21);
         }
+
+        // 赶着去建造医院
+        let cell3 = {
+            func: Laya.Handler.create(this, function () {
+                let building = BuildingMgr.getInstance().getNearstBuilding(this.owner.x,
+                    this.owner.y, BuildingMeta.BuildingType.HospitalType,
+                    1000, [BuildingMeta.BuildingState.PreCreating, BuildingMeta.BuildingState.Creating]);
+                if (building) {
+                    this.refreshFSMState(ResidentMeta.ResidentState.GotoContinueCreateHospital, building);
+                    this.ideaResult = true;
+                }
+            })
+        };
+        this.level1Results.push(cell3);
+
+        // 跑去治病
+        if (this.model.getSick() == 2) {
+            let cell4 = {
+                func: Laya.Handler.create(this, function (param) {
+                    let building = BuildingMgr.getInstance().getNearstBuilding(this.owner.x,
+                        this.owner.y, BuildingMeta.BuildingType.HospitalType,
+                        1000, [BuildingMeta.BuildingState.Noraml]);
+                    if (building) {
+                        this.refreshFSMState(ResidentMeta.ResidentState.GotoTreat, building);
+                        this.ideaResult = true;
+                    }
+                })
+            };
+            this.level1Results.push(cell4);
+        }
+
+
         // =================================正式================end
 
 

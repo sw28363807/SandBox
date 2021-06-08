@@ -21,9 +21,11 @@ export default class CommandPanel extends Laya.Script {
     initItems() {
         this.dataArray = [];
         this.items = {};
-        for (const key in BuildingMeta.CommandPanelDataSource) {
-            let item = BuildingMeta.CommandPanelDataSource[key];
-            this.dataArray.push(item);
+        for (const key in BuildingMeta.BuildingDatas) {
+            let item = BuildingMeta.BuildingDatas[key];
+            if (item.type != BuildingMeta.BuildingType.HomeType) {
+                this.dataArray.push(item);
+            }
         }
         this.prefabDef = null;
         this.clip = this.under.getChildByName("clip");
@@ -211,9 +213,9 @@ export default class CommandPanel extends Laya.Script {
     setBuildingCreateEnabled(enabled) {
         if (this.dragRender) {
             if (enabled) {
-                this.dragRender.bgColor =  BuildingMeta.BuildingCreateStateColor.enabled;
+                this.dragRender.bgColor = BuildingMeta.BuildingCreateStateColor.enabled;
             } else {
-                this.dragRender.bgColor =  BuildingMeta.BuildingCreateStateColor.disabled;
+                this.dragRender.bgColor = BuildingMeta.BuildingCreateStateColor.disabled;
             }
         }
     }

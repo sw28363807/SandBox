@@ -1,5 +1,6 @@
 ﻿import ResourceMgr from "./game/ResourceMgr";
 import GameConfig from "./GameConfig";
+import BuildingMeta from "./meta/BuildingMeta";
 import GameModel from "./model/GameModel";
 class Main {
 	constructor() {
@@ -33,10 +34,26 @@ class Main {
 	onConfigLoaded() {
 		GameModel.getInstance();
 		ResourceMgr.getInstance().loadAllRes(Laya.Handler.create(this, function () {
+			this.initBuildDatas();
 			//加载IDE指定的场景
 			GameConfig.startScene && Laya.Scene.open(GameConfig.startScene);
 		}));
+	}
 
+	initBuildDatas() {
+		for (const key in BuildingMeta.BuildingDatas) {
+			let item = BuildingMeta.BuildingDatas[key];
+			let buildingInfo = ResourceMgr.getInstance().getPrefabInfo(item.prefab);
+			item.width = buildingInfo.json.props.width;
+			item.height = buildingInfo.json.props.height;
+			item.adjustX = (item.width - item.realWidth)/2;
+			item.adjustY = item.height - item.realHeight;
+			item.type = Number(key);
+			// if (item.isResidentContinueCreate) {
+			// 	BuildingMeta.ContinueCreateBuildingSet.add(Number(key));
+			// }
+		}
+		
 	}
 }
 //激活启动类

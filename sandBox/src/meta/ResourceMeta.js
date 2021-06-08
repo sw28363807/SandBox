@@ -107,4 +107,8 @@ ResourceMeta.ResourceMap = [
         type: Laya.Loader.PREFAB,
         url: ResourceMeta.RestaurantPrefabPath
     },
+    {
+        type: Laya.Loader.PREFAB,
+        url: ResourceMeta.ShopPrefabPath
+    },
 ];

@@ -1,3 +1,4 @@
+import BuildingMeta from "../meta/BuildingMeta";
 import GameModel from "../model/GameModel";
 import BuildingBaseLogic from "./BuildingBaseLogic";
 
