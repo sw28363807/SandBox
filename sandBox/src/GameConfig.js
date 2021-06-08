@@ -23,6 +23,7 @@ import PoliceStationLogic from "./building/PoliceStationLogic"
 import PowerPlantLogic from "./building/PowerPlantLogic"
 import ResidentLogic from "./resident/ResidentLogic"
 import ResidentDetailsPanel from "./panel/ResidentDetailsPanel"
+import RestaurantLogic from "./building/RestaurantLogic"
 import SchoolLogic from "./building/SchoolLogic"
 import ShopLogic from "./building/ShopLogic"
 
@@ -54,6 +55,7 @@ export default class GameConfig {
 		reg("building/PowerPlantLogic.js",PowerPlantLogic);
 		reg("resident/ResidentLogic.js",ResidentLogic);
 		reg("panel/ResidentDetailsPanel.js",ResidentDetailsPanel);
+		reg("building/RestaurantLogic.js",RestaurantLogic);
 		reg("building/SchoolLogic.js",SchoolLogic);
 		reg("building/ShopLogic.js",ShopLogic);
     }
