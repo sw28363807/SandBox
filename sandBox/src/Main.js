@@ -49,9 +49,7 @@ class Main {
 			item.adjustX = (item.width - item.realWidth)/2;
 			item.adjustY = item.height - item.realHeight;
 			item.type = Number(key);
-			// if (item.isResidentContinueCreate) {
-			// 	BuildingMeta.ContinueCreateBuildingSet.add(Number(key));
-			// }
+			console.debug(buildingInfo);
 		}
 		
 	}

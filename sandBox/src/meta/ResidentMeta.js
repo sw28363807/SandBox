@@ -58,7 +58,7 @@ ResidentMeta.ResidentState = {
     ChildLearn: 52,                 //去幼儿园学习
 };
 
-// 小人可以自动建造的列表
+// 小人可以自动建造的列表(建造行为)
 ResidentMeta.ResidentContinueCreateMap = {
     [String(ResidentMeta.ResidentState.GotoContinueCreateHome)]: ResidentMeta.ResidentState.CreateHome,
     [String(ResidentMeta.ResidentState.GotoContinueCreateHospital)]: ResidentMeta.ResidentState.CreateHospital,
@@ -73,6 +73,13 @@ ResidentMeta.ResidentContinueCreateMap = {
     [String(ResidentMeta.ResidentState.GotoContinueCreateOffice)]: ResidentMeta.ResidentState.CreateOffice,
     [String(ResidentMeta.ResidentState.GotoContinueCreateChildSchool)]: ResidentMeta.ResidentState.CreateChildSchool,
 };
+
+// 小人的建筑的使用行为
+ResidentMeta.ResidentUseBuildingMap = {
+    [String(ResidentMeta.ResidentState.GotoTreat)]:ResidentMeta.ResidentState.Treating,
+    [String(ResidentMeta.ResidentState.GoToSchool)]:ResidentMeta.ResidentState.Learning,
+    [String(ResidentMeta.ResidentState.GotoChildSchoolForLearn)]:ResidentMeta.ResidentState.ChildLearn,
+}
 
 // 动画枚举
 ResidentMeta.ResidentAnim = {
@@ -118,7 +125,7 @@ ResidentMeta.ResidentReduceSocialBaseValue = -0.4; //社交减少值
 ResidentMeta.ResidentAddSocialBaseValue = 60; //一次社交增加值
 ResidentMeta.ResidentReduceLifeBaseValue = -0.5; //生命减少值
 ResidentMeta.ResidentReduceEnjoyBaseValue = -0.25; //娱乐减少值
-ResidentMeta.ResidentSickProbability = 0.998; //生病的概率
+ResidentMeta.ResidentSickProbability = 0.1; //生病的概率
 ResidentMeta.ResidentTreatTime = 10000; //治疗的时间
 ResidentMeta.ResidentLearnTime = 5000; //学习的时间
 ResidentMeta.ResidentLearnTimeForChildLearn = 10000; //幼儿园学习的时间

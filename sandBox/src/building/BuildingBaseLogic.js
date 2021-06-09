@@ -15,11 +15,13 @@ export default class BuildingBaseLogic extends Laya.Script {
         this.slider = this.sliderControl.getChildByName("slider");
         this.sliderControl.visible = false;
         this.sliderMax = 194;
-        this.addValue = BuildingMeta.HomeCreatingStepValue/this.sliderMax;
-        this.onInitBuilding();
     }
 
     onDisable() {
+        this.stopTimer();
+    }
+
+    stopTimer() {
         Laya.timer.clear(this, this.onCreateProgress);
     }
 
@@ -27,6 +29,10 @@ export default class BuildingBaseLogic extends Laya.Script {
         this.model = model;
         this.owner.x = model.getX();
         this.owner.y = model.getY();
+        let buildingType = this.model.getBuildingType();
+        let buildingMeta = BuildingMeta.BuildingDatas[String(buildingType)];
+        this.createAddValue = buildingMeta.createBuildingSpeed/this.sliderMax;
+        this.onInitBuilding();
         this.setPreCreate();
     }
 
@@ -37,8 +43,8 @@ export default class BuildingBaseLogic extends Laya.Script {
         this.slider.width = 1;
     }
 
-    joinCreateBuilding(residentId) {
-        this.model.addCreateResidentIds(residentId);
+    joinResidentIdToBuilding(residentId) {
+        this.model.addResidentId(residentId);
     }
 
     // 开始建造
@@ -48,14 +54,15 @@ export default class BuildingBaseLogic extends Laya.Script {
             this.ani.play(0, true, "creating");
             this.sliderControl.visible = true;
             this.slider.width = 1;
-            Laya.timer.loop(BuildingMeta.HomeCreatingStep, this, this.onCreateProgress);
+            Laya.timer.loop(BuildingMeta.BuildingCreatingStep, this, this.onCreateProgress);
         }
     }
 
     onCreateProgress() {
-        this.slider.width = this.slider.width + this.addValue;
+        this.slider.width = this.slider.width + this.createAddValue;
         if (this.slider.width > this.sliderMax) {
             this.slider.width = this.sliderMax;
+            this.stopTimer();
             this.onCreateFinish();
         }
     }
@@ -68,13 +75,12 @@ export default class BuildingBaseLogic extends Laya.Script {
         Utils.setMapZOrder(this.owner);
         this.onCreateBuildingFinish();
         EventMgr.getInstance().postEvent(GameEvent.CREATE_BUILDING_FINISH, this.makeParam(this.model));
-        this.model.clearCreateResidentIds();
+        this.model.clearResidentIds();
     }
-
 
     makeParam(extraParam) {
         let ret = {};
-        ret.residentIds = this.model.getCreateResidentIds();
+        ret.residentIds = this.model.getResidentIds();
         ret.extraParam = extraParam;
         return ret;
     }

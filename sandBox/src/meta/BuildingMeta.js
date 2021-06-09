@@ -3,8 +3,6 @@ import ResourceMeta from "./ResourceMeta";
 export default class BuildingMeta {
 }
 
-// 是否需要小人建造的set列表
-// BuildingMeta.ContinueCreateBuildingSet = new Set([]);
 
 BuildingMeta.BuildingCreateStateColor = {
     enabled: "#5ddb36",
@@ -37,8 +35,7 @@ BuildingMeta.BuildingState = {
 
 //参数
 // 家
-BuildingMeta.HomeCreatingStep = 100; //家建造时间间隔
-BuildingMeta.HomeCreatingStepValue = 2000; //家建造时间间隔
+BuildingMeta.BuildingCreatingStep = 100; //建筑建造时间间隔
 BuildingMeta.HomeResidentMaxNum = 3;    //每个家庭最多多少人
 
 // 盖房子需要的钱
@@ -56,7 +53,9 @@ BuildingMeta.BuildingDatas = {
         preview: "source/building/building1_1.png",
         realWidth: 200,
         realHeight: 200,
-        buildingName: "家"
+        createBuildingSpeed: 2000,
+        useBuildingTime: 5000,
+        buildingName: "家",
     },
     // 医院
     [String(BuildingMeta.BuildingType.HospitalType)]: {
@@ -64,6 +63,8 @@ BuildingMeta.BuildingDatas = {
         preview: "source/building/hospital1_1.png",
         realWidth: 200,
         realHeight: 200,
+        createBuildingSpeed: 2000,
+        useBuildingTime: 5000,
         buildingName: "医院",
     },
     // 学校
@@ -72,6 +73,8 @@ BuildingMeta.BuildingDatas = {
         preview: "source/building/school_1.png",
         realWidth: 300,
         realHeight: 300,
+        createBuildingSpeed: 2000,
+        useBuildingTime: 5000,
         buildingName: "学校",
     },
     // 幼儿园
@@ -80,6 +83,8 @@ BuildingMeta.BuildingDatas = {
         preview: "source/building/child_school.png",
         realWidth: 128,
         realHeight: 128,
+        createBuildingSpeed: 2000,
+        useBuildingTime: 5000,
         buildingName: "幼儿园",
     },
     // 发电厂
@@ -88,6 +93,8 @@ BuildingMeta.BuildingDatas = {
         preview: "source/building/power_plant.png",
         realWidth: 128,
         realHeight: 128,
+        createBuildingSpeed: 2000,
+        useBuildingTime: 5000,
         buildingName: "发电厂",
     },
     // 商店
@@ -96,6 +103,8 @@ BuildingMeta.BuildingDatas = {
         preview: "source/building/shop_1.png",
         realWidth: 128,
         realHeight: 128,
+        createBuildingSpeed: 2000,
+        useBuildingTime: 5000,
         buildingName: "商店",
     },
     // 农田
@@ -104,6 +113,8 @@ BuildingMeta.BuildingDatas = {
         preview: "source/building/farmland.png",
         realWidth: 128,
         realHeight: 128,
+        createBuildingSpeed: 2000,
+        useBuildingTime: 5000,
         buildingName: "农田",
     },
     // 牧场
@@ -112,6 +123,8 @@ BuildingMeta.BuildingDatas = {
         preview: "source/building/pasture.png",
         realWidth: 128,
         realHeight: 128,
+        createBuildingSpeed: 2000,
+        useBuildingTime: 5000,
         buildingName: "牧场",
     },
     // 歌剧院
@@ -120,6 +133,8 @@ BuildingMeta.BuildingDatas = {
         preview: "source/building/center2.png",
         realWidth: 256,
         realHeight: 256,
+        createBuildingSpeed: 2000,
+        useBuildingTime: 5000,
         buildingName: "歌剧院",
     },
     // 警察局
@@ -128,6 +143,8 @@ BuildingMeta.BuildingDatas = {
         preview: "source/building/police.png",
         realWidth: 256,
         realHeight: 256,
+        createBuildingSpeed: 2000,
+        useBuildingTime: 5000,
         buildingName: "警察局",
     },
     // 实验室
@@ -136,6 +153,8 @@ BuildingMeta.BuildingDatas = {
         preview: "source/building/scienceLab.png",
         realWidth: 256,
         realHeight: 256,
+        createBuildingSpeed: 2000,
+        useBuildingTime: 5000,
         buildingName: "科学实验室",
     },
     // 写字楼
@@ -144,6 +163,8 @@ BuildingMeta.BuildingDatas = {
         preview: "source/building/office.png",
         realWidth: 256,
         realHeight: 256,
+        createBuildingSpeed: 2000,
+        useBuildingTime: 5000,
         buildingName: "写字楼",
     },
     // 餐厅
@@ -152,6 +173,8 @@ BuildingMeta.BuildingDatas = {
         preview: "source/building/restaurant.png",
         realWidth: 200,
         realHeight: 200,
+        createBuildingSpeed: 2000,
+        useBuildingTime: 5000,
         buildingName: "餐厅",
     },
 };
