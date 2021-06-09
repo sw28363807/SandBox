@@ -60,6 +60,7 @@ ResidentMeta.ResidentState = {
 
 // 小人可以自动建造的列表
 ResidentMeta.ResidentContinueCreateMap = {
+    [String(ResidentMeta.ResidentState.GotoContinueCreateHome)]: ResidentMeta.ResidentState.CreateHome,
     [String(ResidentMeta.ResidentState.GotoContinueCreateHospital)]: ResidentMeta.ResidentState.CreateHospital,
     [String(ResidentMeta.ResidentState.GotoContinueCreateSchool)]: ResidentMeta.ResidentState.CreateSchool,
     [String(ResidentMeta.ResidentState.GotoContinueCreatePowerPlant)]: ResidentMeta.ResidentState.CreatePowerPlant,

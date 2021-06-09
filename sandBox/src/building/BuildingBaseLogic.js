@@ -1,5 +1,7 @@
+import EventMgr from "../helper/EventMgr";
 import Utils from "../helper/Utils";
 import BuildingMeta from "../meta/BuildingMeta";
+import GameEvent from "../meta/GameEvent";
 
 export default class BuildingBaseLogic extends Laya.Script {
 
@@ -65,6 +67,7 @@ export default class BuildingBaseLogic extends Laya.Script {
         this.model.setBuildingState(BuildingMeta.BuildingState.Noraml);
         Utils.setMapZOrder(this.owner);
         this.onCreateBuildingFinish();
+        EventMgr.getInstance().postEvent(GameEvent.CREATE_BUILDING_FINISH, this.makeParam(this.model));
         this.model.clearCreateResidentIds();
     }
 

@@ -1,5 +1,3 @@
-import EventMgr from "../helper/EventMgr";
-import GameEvent from "../meta/GameEvent";
 import BuildingBaseLogic from "./BuildingBaseLogic";
 
 export default class PastureLogic extends BuildingBaseLogic {
@@ -14,6 +12,5 @@ export default class PastureLogic extends BuildingBaseLogic {
 
     // 建筑建造完成
     onCreateBuildingFinish() {
-        EventMgr.getInstance().postEvent(GameEvent.CREATE_PASTURE_FINISH, this.makeParam(this.model));
     }
 }

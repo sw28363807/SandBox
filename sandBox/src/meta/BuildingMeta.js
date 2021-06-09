@@ -38,7 +38,7 @@ BuildingMeta.BuildingState = {
 //参数
 // 家
 BuildingMeta.HomeCreatingStep = 100; //家建造时间间隔
-BuildingMeta.HomeCreatingStepValue = 500; //家建造时间间隔
+BuildingMeta.HomeCreatingStepValue = 2000; //家建造时间间隔
 BuildingMeta.HomeResidentMaxNum = 3;    //每个家庭最多多少人
 
 // 盖房子需要的钱
@@ -70,8 +70,8 @@ BuildingMeta.BuildingDatas = {
     [String(BuildingMeta.BuildingType.SchoolType)]: {
         prefab: ResourceMeta.SchoolPrefabPath,
         preview: "source/building/school_1.png",
-        realWidth: 128,
-        realHeight: 128,
+        realWidth: 300,
+        realHeight: 300,
         buildingName: "学校",
     },
     // 幼儿园

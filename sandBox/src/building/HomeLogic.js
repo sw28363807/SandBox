@@ -1,6 +1,4 @@
-import EventMgr from "../helper/EventMgr";
 import BuildingMeta from "../meta/BuildingMeta";
-import GameEvent from "../meta/GameEvent";
 import GameModel from "../model/GameModel";
 import BuildingBaseLogic from "./BuildingBaseLogic";
 export default class HomeLogic extends BuildingBaseLogic {
@@ -18,7 +16,6 @@ export default class HomeLogic extends BuildingBaseLogic {
     onCreateBuildingFinish() {
         GameModel.getInstance().addTreeNum(-BuildingMeta.CreateHomeNeedValues.tree);
         GameModel.getInstance().addStoneNum(-BuildingMeta.CreateHomeNeedValues.stone);
-        EventMgr.getInstance().postEvent(GameEvent.CREATE_HOME_FINISH, this.makeParam(this.model));
     }
     
     onDisable() {
