@@ -1,3 +1,4 @@
+import RandomMgr from "../helper/RandomMgr";
 import BuildingMeta from "../meta/BuildingMeta";
 import GameModel from "../model/GameModel";
 import BuildingBaseLogic from "./BuildingBaseLogic";
@@ -22,6 +23,11 @@ export default class BuildingMgr extends Laya.Script {
     // 获取建筑物
     getBuildingById(id) {
         return this.buildings[String(id)];
+    }
+
+    // 获取所有的建筑
+    getBuildings() {
+        return this.buildings;
     }
 
     // 建造建筑物
@@ -71,4 +77,29 @@ export default class BuildingMgr extends Laya.Script {
         }
         return ret;
     }
+
+
+    // getRandomBuilding(x, y, buildingTypes, area, states) {
+    //     let statusSets = new Set(states);
+    //     let buildingTypeSets = new Set(buildingTypes);
+    //     let ret = [];
+    //     for (const key in this.buildings) {
+    //         let building = this.buildings[key];
+    //         let curDistance = new Laya.Point(building.x, building.y).distance(x, y);
+    //         let model = building.buildingScript.getModel();
+    //         if (curDistance <= area &&
+    //             statusSets.has(model.getBuildingState()) &&
+    //             buildingTypeSets.has(model.getBuildingType())) {
+    //             ret.push({
+    //                 building: building,
+    //                 state: 
+    //             });
+    //         }
+    //     }
+    //     if (ret.length == 0) {
+    //         return null;
+    //     }
+    //     let index = RandomMgr.randomNumer(0, ret.length - 1);
+    //     return {building: ret[index], state: };
+    // }
 }

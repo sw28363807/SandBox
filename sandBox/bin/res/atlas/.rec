@@ -2,20 +2,18 @@ D .
 D source
 D source/building
 P BA9CE607 building1_1.png
-P A40CE787 building1_2.png
-P 233A6581 building1_3.png
-P 8E7B9A93 center2.png
-P 065F3DEF child_school.png
+P 0B8E0B05 center2.png
+P 9920A0A0 child_school.png
 P DD63CC70 farmland.png
-P F5FADC6B hospital1_1.png
-P 76B6C33C office.png
+P 2973A9D8 hospital1_1.png
+P 30D6A7B3 office.png
 P F7BE8EE6 pasture.png
 P 535961C3 pet_shop.png
 P 11566018 police.png
-P DEABDC81 power_plant.png
+P 87E13359 power_plant.png
 P C36D5CB8 restaurant.png
 P FCAB52E0 school_1.png
-P DA2AE6C5 scienceLab.png
+P 61129CC1 scienceLab.png
 P DC986EBC shop_1.png
 D source/landscape
 P C54733E9 animal1.png

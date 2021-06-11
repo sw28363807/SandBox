@@ -1,3 +1,5 @@
+import BuildingMeta from "./BuildingMeta";
+
 export default class ResidentMeta {
 }
 
@@ -75,12 +77,27 @@ ResidentMeta.ResidentContinueCreateMap = {
 };
 
 // 小人的建筑的使用行为
+
 ResidentMeta.ResidentUseBuildingMap = {
     [String(ResidentMeta.ResidentState.GotoTreat)]:ResidentMeta.ResidentState.Treating,
     [String(ResidentMeta.ResidentState.GoToSchool)]:ResidentMeta.ResidentState.Learning,
     [String(ResidentMeta.ResidentState.GotoChildSchoolForLearn)]:ResidentMeta.ResidentState.ChildLearn,
 }
 
+// 小人去建造的AI列表
+ResidentMeta.ResidentCreateBuildingAIMap = {
+    [String(BuildingMeta.BuildingType.HospitalType)]: ResidentMeta.ResidentState.GotoContinueCreateHospital,
+    [String(BuildingMeta.BuildingType.SchoolType)]: ResidentMeta.ResidentState.GotoContinueCreateSchool,
+    [String(BuildingMeta.BuildingType.PowerPlantType)]: ResidentMeta.ResidentState.GotoContinueCreatePowerPlant,
+    [String(BuildingMeta.BuildingType.ShopType)]: ResidentMeta.ResidentState.GotoContinueCreateShop,
+    [String(BuildingMeta.BuildingType.FarmLandType)]: ResidentMeta.ResidentState.GotoContinueCreateFarmLand,
+    [String(BuildingMeta.BuildingType.PastureType)]: ResidentMeta.ResidentState.GotoContinueCreatePasture,
+    [String(BuildingMeta.BuildingType.OperaType)]: ResidentMeta.ResidentState.GotoContinueCreateOpera,
+    [String(BuildingMeta.BuildingType.PoliceStationType)]: ResidentMeta.ResidentState.GotoContinueCreatePoliceStation,
+    [String(BuildingMeta.BuildingType.LabType)]: ResidentMeta.ResidentState.GotoContinueCreateLab,
+    [String(BuildingMeta.BuildingType.OfficeType)]: ResidentMeta.ResidentState.GotoContinueCreateOffice,
+    [String(BuildingMeta.BuildingType.ChildSchoolType)]: ResidentMeta.ResidentState.GotoContinueCreateChildSchool
+};
 // 动画枚举
 ResidentMeta.ResidentAnim = {
     Null: 0,    // 无动画
@@ -125,7 +142,7 @@ ResidentMeta.ResidentReduceSocialBaseValue = -0.4; //社交减少值
 ResidentMeta.ResidentAddSocialBaseValue = 60; //一次社交增加值
 ResidentMeta.ResidentReduceLifeBaseValue = -0.5; //生命减少值
 ResidentMeta.ResidentReduceEnjoyBaseValue = -0.25; //娱乐减少值
-ResidentMeta.ResidentSickProbability = 0.1; //生病的概率
+ResidentMeta.ResidentSickProbability = 0.998; //生病的概率
 ResidentMeta.ResidentTreatTime = 10000; //治疗的时间
 ResidentMeta.ResidentLearnTime = 5000; //学习的时间
 ResidentMeta.ResidentLearnTimeForChildLearn = 10000; //幼儿园学习的时间
