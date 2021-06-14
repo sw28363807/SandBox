@@ -57,7 +57,8 @@ BuildingMeta.BuildingDatas = {
         useBuildingTime: 5000,
         createPriority: 1,
         buildingName: "家",
-        
+        costTree: 6,
+        CostStone: 6,
     },
     // 医院
     [String(BuildingMeta.BuildingType.HospitalType)]: {
@@ -69,6 +70,8 @@ BuildingMeta.BuildingDatas = {
         useBuildingTime: 5000,
         createPriority: 2,
         buildingName: "医院",
+        costTree: 6,
+        CostStone: 6,
     },
     // 学校
     [String(BuildingMeta.BuildingType.SchoolType)]: {
@@ -80,6 +83,8 @@ BuildingMeta.BuildingDatas = {
         useBuildingTime: 5000,
         createPriority: 2,
         buildingName: "学校",
+        costTree: 6,
+        CostStone: 6,
     },
     // 幼儿园
     [String(BuildingMeta.BuildingType.ChildSchoolType)]: {
@@ -91,6 +96,8 @@ BuildingMeta.BuildingDatas = {
         useBuildingTime: 5000,
         createPriority: 2,
         buildingName: "幼儿园",
+        costTree: 6,
+        CostStone: 6,
     },
     // 发电厂
     [String(BuildingMeta.BuildingType.PowerPlantType)]: {
@@ -102,6 +109,8 @@ BuildingMeta.BuildingDatas = {
         useBuildingTime: 5000,
         createPriority: 2,
         buildingName: "发电厂",
+        costTree: 6,
+        CostStone: 6,
     },
     // 商店
     [String(BuildingMeta.BuildingType.ShopType)]: {
@@ -113,6 +122,8 @@ BuildingMeta.BuildingDatas = {
         useBuildingTime: 5000,
         createPriority: 2,
         buildingName: "商店",
+        costTree: 6,
+        CostStone: 6,
     },
     // 农田
     [String(BuildingMeta.BuildingType.FarmLandType)]: {
@@ -124,6 +135,8 @@ BuildingMeta.BuildingDatas = {
         useBuildingTime: 5000,
         createPriority: 2,
         buildingName: "农田",
+        costTree: 6,
+        CostStone: 6,
     },
     // 牧场
     [String(BuildingMeta.BuildingType.PastureType)]: {
@@ -135,6 +148,8 @@ BuildingMeta.BuildingDatas = {
         useBuildingTime: 5000,
         createPriority: 2,
         buildingName: "牧场",
+        costTree: 6,
+        CostStone: 6,
     },
     // 歌剧院
     [String(BuildingMeta.BuildingType.OperaType)]: {
@@ -146,17 +161,21 @@ BuildingMeta.BuildingDatas = {
         useBuildingTime: 5000,
         createPriority: 2,
         buildingName: "歌剧院",
+        costTree: 6,
+        CostStone: 6,
     },
     // 警察局
     [String(BuildingMeta.BuildingType.PoliceStationType)]: {
         prefab: ResourceMeta.PoliceStationPrefabPath,
         preview: "source/building/police.png",
-        realWidth: 256,
-        realHeight: 256,
+        realWidth: 500,
+        realHeight: 500,
         createBuildingSpeed: 2000,
         useBuildingTime: 5000,
         createPriority: 2,
         buildingName: "警察局",
+        costTree: 6,
+        CostStone: 6,
     },
     // 实验室
     [String(BuildingMeta.BuildingType.LabType)]: {
@@ -168,17 +187,21 @@ BuildingMeta.BuildingDatas = {
         useBuildingTime: 5000,
         createPriority: 2,
         buildingName: "科学实验室",
+        costTree: 6,
+        CostStone: 6,
     },
     // 写字楼
     [String(BuildingMeta.BuildingType.OfficeType)]: {
         prefab: ResourceMeta.OfficePrefabPath,
         preview: "source/building/office.png",
-        realWidth: 400,
-        realHeight: 400,
+        realWidth: 500,
+        realHeight: 500,
         createBuildingSpeed: 2000,
         useBuildingTime: 5000,
         createPriority: 2,
         buildingName: "写字楼",
+        costTree: 6,
+        CostStone: 6,
     },
     // 餐厅
     [String(BuildingMeta.BuildingType.RestaurantType)]: {
@@ -190,5 +213,7 @@ BuildingMeta.BuildingDatas = {
         useBuildingTime: 5000,
         createPriority: 2,
         buildingName: "餐厅",
+        costTree: 6,
+        CostStone: 6,
     },
 };

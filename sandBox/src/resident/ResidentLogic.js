@@ -1035,194 +1035,28 @@ export default class ResidentLogic extends Laya.Script {
         this.level1Results = [];
         this.level2Results = [];
         // =================================正式================start
-
         // 喝水
-        let cell5 = {
-            func: Laya.Handler.create(this, function () {
-                this.refreshFSMState(ResidentMeta.ResidentState.FindWater);
-                this.ideaResult = true;
-            })
-        };
-        let water = this.model.getWater();
-        if (water < ResidentMeta.ResidentWaterNeedValue) {
-            this.level1Results.push(cell5);
-        } else if (water < 90) {
-            this.level2Results.push(cell5);
-        }
-
+        this.processDrinkWater();
         //吃饭
-        let cell6 = {
-            func: Laya.Handler.create(this, function (param) {
-                let canFood = FoodMgr.getInstance().canFindFood();
-                if (canFood) {
-                    this.refreshFSMState(ResidentMeta.ResidentState.FindFood);
-                    this.ideaResult = true;
-                }
-            })
-        };
-        let food = this.model.getFood();
-        if (food < ResidentMeta.ResidentFoodNeedValue) {
-            this.level1Results.push(cell6);
-        } else if (food < 90) {
-            this.level2Results.push(cell6);
-        }
-
+        this.processEatFood();
         // 社交
-        let cell7 = {
-            func: Laya.Handler.create(this, function (param) {
-                let resident = this.residentMgrInstance.getACanSocialResident(this.owner);
-                if (resident) {
-                    let talkingModel = GameModel.getInstance().getOrCreateTalkingPoint(this.owner.x, this.owner.y, 40, 5);
-                    if (talkingModel.getTalkingNum() == 0) {
-                        talkingModel.addTalkingNum(2);
-                        this.refreshFSMState(ResidentMeta.ResidentState.JoinTalking, talkingModel);
-                        resident.getComponent(ResidentLogic).refreshFSMState(ResidentMeta.ResidentState.JoinTalking, talkingModel);
-                    } else {
-                        talkingModel.addTalkingNum(1);
-                        this.refreshFSMState(ResidentMeta.ResidentState.JoinTalking, talkingModel);
-                    }
-                    this.ideaResult = true;
-                }
-            })
-        };
-        if (this.model.getSocial() < ResidentMeta.ResidentSocialNeedValue) {
-            this.level1Results.push(cell7);
-        } else if (this.model.getSocial() < 90) {
-            this.level2Results.push(cell7);
-        }
-
+        this.processSocial();
         // 砍树
-        let cell8 = {
-            func: Laya.Handler.create(this, function (param) {
-                this.refreshFSMState(ResidentMeta.ResidentState.FindTree);
-                this.ideaResult = true;
-            })
-        };
-        if (RandomMgr.randomYes() && this.model.getAge() >= ResidentMeta.ResidentAdultAge) {
-            this.level2Results.push(cell8);
-        }
-
+        this.processCutDownTree();
         // 收集石头
-        let cell9 = {
-            func: Laya.Handler.create(this, function (param) {
-                this.refreshFSMState(ResidentMeta.ResidentState.FindStone);
-                this.ideaResult = true;
-            })
-        };
-        if (RandomMgr.randomYes() && this.model.getAge() >= ResidentMeta.ResidentAdultAge) {
-            this.level2Results.push(cell9);
-        }
-
+        this.processCollectStone();
         // 跑去打猎
-        let cell10 = {
-            func: Laya.Handler.create(this, function (param) {
-                let animal = AnimalMgr.getInstance().getAnimalForAttack(this.owner.x, this.owner.y, 200);
-                if (animal) {
-                    this.refreshFSMState(ResidentMeta.ResidentState.JoinHunt, animal);
-                    this.ideaResult = true;
-                }
-            })
-        };
-        if (RandomMgr.randomYes() && this.model.getAge() >= ResidentMeta.ResidentAdultAge) {
-            this.level2Results.push(cell10);
-        }
-
+        this.processHunt();
         // 盖房子
-        if (RandomMgr.randomYes() && this.model.getMyHomeId() == 0 && this.model.getSex() == 1 &&
-            this.model.getAge() >= ResidentMeta.ResidentAdultAge
-            && GameModel.getInstance().getTreeNum() >= BuildingMeta.CreateHomeNeedValues.tree &&
-            GameModel.getInstance().getStoneNum() >= BuildingMeta.CreateHomeNeedValues.stone) {
-            let cell11 = {
-                func: Laya.Handler.create(this, function (param) {
-                    this.refreshFSMState(ResidentMeta.ResidentState.FindBlockForCreateHome);
-                    this.ideaResult = true;
-                })
-            };
-            this.level1Results.push(cell11);
-        }
-
+        this.processCreateHome();
         // 找恋人
-        if (this.model.canAskMarry()) {
-            let home = BuildingMgr.getInstance().getBuildingById(this.model.getMyHomeId());
-            let homeModel = home.buildingScript.getModel();
-            let curNum = GameModel.getInstance().getAllResidentNum();
-            let maxNum = GameModel.getInstance().getHomeNum() * ResidentMeta.ResidentNumPerHome;
-            if (homeModel.getBuildingState() == BuildingMeta.BuildingState.Noraml &&
-                curNum <= maxNum) {
-                let cell12 = {
-                    func: Laya.Handler.create(this, function (param) {
-                        let woman = this.residentMgrInstance.getCanMarryWoman(this.model);
-                        if (woman) {
-                            let womanScript = woman.residentLogicScript;
-                            let womanModel = womanScript.getModel();
-                            GameModel.getInstance().setMarried(this.model, womanModel);
-                            this.refreshFSMState(ResidentMeta.ResidentState.LoverMan);
-                            womanScript.refreshFSMState(ResidentMeta.ResidentState.LoverWoman);
-                            this.ideaResult = true;
-                        }
-                    })
-                };
-                this.level2Results.push(cell12);
-            }
-        }
-
-
+        this.processLookForLover();
         // 去幼儿园学习
-        let cell23 = {
-            func: Laya.Handler.create(this, function (param) {
-                let building = BuildingMgr.getInstance().getNearstBuilding(this.owner.x,
-                    this.owner.y, BuildingMeta.BuildingType.ChildSchoolType,
-                    500, [BuildingMeta.BuildingState.Noraml]);
-                if (building) {
-                    this.refreshFSMState(ResidentMeta.ResidentState.GotoChildSchoolForLearn, building);
-                    this.ideaResult = true;
-                }
-            }),
-        };
-        if (this.model.getAge() < ResidentMeta.ResidentAdultAge) {
-            this.level2Results.push(cell23);
-        }
-
+        this.processLearnForChildSchool();
         // 打架
-        let cell18 = {
-            func: Laya.Handler.create(this, function (param) {
-                let resident = this.residentMgrInstance.getACanFightResident(this.model, this.owner.x, this.owner.y);
-                if (resident) {
-                    let fightModel = GameModel.getInstance().getOrCreateFightPoint(this.owner.x, this.owner.y, 30, 5);
-                    if (fightModel.getFightNum() == 0) {
-                        fightModel.addFightNum(2);
-                        this.refreshFSMState(ResidentMeta.ResidentState.JoinFight, fightModel);
-                        resident.residentLogicScript.refreshFSMState(ResidentMeta.ResidentState.JoinFight, fightModel);
-                    } else {
-                        fightModel.addFightNum(1);
-                        this.refreshFSMState(ResidentMeta.ResidentState.JoinFight, fightModel);
-                    }
-                    this.ideaResult = true;
-                }
-            })
-        };
-        if (this.model.getSocial() < ResidentMeta.ResidentSocialLowToFight &&
-            GameModel.getInstance().getAllResidentNum() >= ResidentMeta.ResidentFightNum) {
-            this.level2Results.push(cell18);
-        }
-
+        this.processFight();
         // 赶着去溜达
-        let cell21 = {
-            func: Laya.Handler.create(this, function () {
-                let p = RandomMgr.randomByArea(this.owner.x, this.owner.y, 200);
-                if (ResidentHelper.isOccupySpace(this.owner.x,
-                    this.owner.y,
-                    this.owner.width,
-                    this.owner.height)) {
-                    this.refreshFSMState(ResidentMeta.ResidentState.RandomWalk, p);
-                    this.ideaResult = true;
-                }
-            }),
-        };
-        if (RandomMgr.randomYes()) {
-            this.level2Results.push(cell21);
-        }
-
+        this.processRandomWalk();
         // 跑去治病
         if (this.model.getSick() == 2) {
             let cell4 = {
@@ -1270,7 +1104,7 @@ export default class ResidentLogic extends Laya.Script {
         }
         // =================================正式================end
 
-        
+
     }
 
     // 执行策略
@@ -1315,4 +1149,200 @@ export default class ResidentLogic extends Laya.Script {
         this.doResult();
     }
 
+    processEatFood() {
+        let cell = {
+            func: Laya.Handler.create(this, function (param) {
+                let canFood = FoodMgr.getInstance().canFindFood();
+                if (canFood) {
+                    this.refreshFSMState(ResidentMeta.ResidentState.FindFood);
+                    this.ideaResult = true;
+                }
+            })
+        };
+        let food = this.model.getFood();
+        if (food < ResidentMeta.ResidentFoodNeedValue) {
+            this.level1Results.push(cell);
+        } else if (food < 90) {
+            this.level2Results.push(cell);
+        }
+    }
+
+    processDrinkWater() {
+        let cell = {
+            func: Laya.Handler.create(this, function () {
+                this.refreshFSMState(ResidentMeta.ResidentState.FindWater);
+                this.ideaResult = true;
+            })
+        };
+        let water = this.model.getWater();
+        if (water < ResidentMeta.ResidentWaterNeedValue) {
+            this.level1Results.push(cell);
+        } else if (water < 90) {
+            this.level2Results.push(cell);
+        }
+    }
+
+    processSocial() {
+        let cell = {
+            func: Laya.Handler.create(this, function (param) {
+                let resident = this.residentMgrInstance.getACanSocialResident(this.owner);
+                if (resident) {
+                    let talkingModel = GameModel.getInstance().getOrCreateTalkingPoint(this.owner.x, this.owner.y, 40, 5);
+                    if (talkingModel.getTalkingNum() == 0) {
+                        talkingModel.addTalkingNum(2);
+                        this.refreshFSMState(ResidentMeta.ResidentState.JoinTalking, talkingModel);
+                        resident.getComponent(ResidentLogic).refreshFSMState(ResidentMeta.ResidentState.JoinTalking, talkingModel);
+                    } else {
+                        talkingModel.addTalkingNum(1);
+                        this.refreshFSMState(ResidentMeta.ResidentState.JoinTalking, talkingModel);
+                    }
+                    this.ideaResult = true;
+                }
+            })
+        };
+        if (this.model.getSocial() < ResidentMeta.ResidentSocialNeedValue) {
+            this.level1Results.push(cell);
+        } else {
+            this.level2Results.push(cell);
+        }
+    }
+
+    processCutDownTree() {
+        let cell = {
+            func: Laya.Handler.create(this, function (param) {
+                this.refreshFSMState(ResidentMeta.ResidentState.FindTree);
+                this.ideaResult = true;
+            })
+        };
+        if (RandomMgr.randomYes() && this.model.getAge() >= ResidentMeta.ResidentAdultAge) {
+            this.level2Results.push(cell);
+        }
+    }
+
+    processCollectStone() {
+        let cell = {
+            func: Laya.Handler.create(this, function (param) {
+                this.refreshFSMState(ResidentMeta.ResidentState.FindStone);
+                this.ideaResult = true;
+            })
+        };
+        if (RandomMgr.randomYes() && this.model.getAge() >= ResidentMeta.ResidentAdultAge) {
+            this.level2Results.push(cell);
+        }
+    }
+
+    processHunt() {
+        let cell = {
+            func: Laya.Handler.create(this, function (param) {
+                let animal = AnimalMgr.getInstance().getAnimalForAttack(this.owner.x, this.owner.y, 200);
+                if (animal) {
+                    this.refreshFSMState(ResidentMeta.ResidentState.JoinHunt, animal);
+                    this.ideaResult = true;
+                }
+            })
+        };
+        if (RandomMgr.randomYes() && this.model.getAge() >= ResidentMeta.ResidentAdultAge) {
+            this.level2Results.push(cell);
+        }
+    }
+
+    processCreateHome() {
+        if (RandomMgr.randomYes() && this.model.getMyHomeId() == 0 && this.model.getSex() == 1 &&
+            this.model.getAge() >= ResidentMeta.ResidentAdultAge
+            && GameModel.getInstance().getTreeNum() >= BuildingMeta.CreateHomeNeedValues.tree &&
+            GameModel.getInstance().getStoneNum() >= BuildingMeta.CreateHomeNeedValues.stone) {
+            let cell = {
+                func: Laya.Handler.create(this, function (param) {
+                    this.refreshFSMState(ResidentMeta.ResidentState.FindBlockForCreateHome);
+                    this.ideaResult = true;
+                })
+            };
+            this.level1Results.push(cell);
+        }
+    }
+
+    processLookForLover() {
+        if (this.model.canAskMarry()) {
+            let home = BuildingMgr.getInstance().getBuildingById(this.model.getMyHomeId());
+            let homeModel = home.buildingScript.getModel();
+            let curNum = GameModel.getInstance().getAllResidentNum();
+            let maxNum = GameModel.getInstance().getHomeNum() * ResidentMeta.ResidentNumPerHome;
+            if (homeModel.getBuildingState() == BuildingMeta.BuildingState.Noraml &&
+                curNum <= maxNum) {
+                let cell = {
+                    func: Laya.Handler.create(this, function (param) {
+                        let woman = this.residentMgrInstance.getCanMarryWoman(this.model);
+                        if (woman) {
+                            let womanScript = woman.residentLogicScript;
+                            let womanModel = womanScript.getModel();
+                            GameModel.getInstance().setMarried(this.model, womanModel);
+                            this.refreshFSMState(ResidentMeta.ResidentState.LoverMan);
+                            womanScript.refreshFSMState(ResidentMeta.ResidentState.LoverWoman);
+                            this.ideaResult = true;
+                        }
+                    })
+                };
+                this.level2Results.push(cell);
+            }
+        }
+    }
+
+    processLearnForChildSchool() {
+        let cell = {
+            func: Laya.Handler.create(this, function (param) {
+                let building = BuildingMgr.getInstance().getNearstBuilding(this.owner.x,
+                    this.owner.y, BuildingMeta.BuildingType.ChildSchoolType,
+                    500, [BuildingMeta.BuildingState.Noraml]);
+                if (building) {
+                    this.refreshFSMState(ResidentMeta.ResidentState.GotoChildSchoolForLearn, building);
+                    this.ideaResult = true;
+                }
+            }),
+        };
+        if (this.model.getAge() < ResidentMeta.ResidentAdultAge) {
+            this.level2Results.push(cell);
+        }
+    }
+
+    processFight() {
+        let cell = {
+            func: Laya.Handler.create(this, function (param) {
+                let resident = this.residentMgrInstance.getACanFightResident(this.model, this.owner.x, this.owner.y);
+                if (resident) {
+                    let fightModel = GameModel.getInstance().getOrCreateFightPoint(this.owner.x, this.owner.y, 30, 5);
+                    if (fightModel.getFightNum() == 0) {
+                        fightModel.addFightNum(2);
+                        this.refreshFSMState(ResidentMeta.ResidentState.JoinFight, fightModel);
+                        resident.residentLogicScript.refreshFSMState(ResidentMeta.ResidentState.JoinFight, fightModel);
+                    } else {
+                        fightModel.addFightNum(1);
+                        this.refreshFSMState(ResidentMeta.ResidentState.JoinFight, fightModel);
+                    }
+                    this.ideaResult = true;
+                }
+            })
+        };
+        if (this.model.getSocial() < ResidentMeta.ResidentSocialLowToFight &&
+            GameModel.getInstance().getAllResidentNum() >= ResidentMeta.ResidentFightNum) {
+            this.level2Results.push(cell);
+        }
+    }
+
+    processRandomWalk() {
+        let cell = {
+            func: Laya.Handler.create(this, function () {
+                let p = RandomMgr.randomByArea(this.owner.x, this.owner.y, 200);
+                if (ResidentHelper.isOccupySpace(this.owner.x,
+                    this.owner.y,
+                    this.owner.width,
+                    this.owner.height)) {
+                    this.refreshFSMState(ResidentMeta.ResidentState.RandomWalk, p);
+                    this.ideaResult = true;
+                }
+            }),
+        };
+        if (RandomMgr.randomYes()) {
+            this.level2Results.push(cell);
+        }
+    }
 }
