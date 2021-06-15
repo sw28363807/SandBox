@@ -87,4 +87,14 @@ export default class RandomMgr {
         }
         return 2;
     }
+
+    // 随机数组中的一个元素
+    static randomACellInArray(array) {
+        if (array.length == 0) {
+            return null;
+        }
+        let index = RandomMgr.randomNumer(0, array.length - 1);
+        let cell = array[index];
+        return cell;
+    }
 }

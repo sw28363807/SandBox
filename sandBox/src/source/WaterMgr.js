@@ -1,3 +1,4 @@
+import RandomMgr from "../helper/RandomMgr";
 import Waterlogic from "./Waterlogic";
 
 export default class WaterMgr extends Laya.Script {
@@ -23,18 +24,16 @@ export default class WaterMgr extends Laya.Script {
     }
 
     // 寻找最近的水源
-    getNearstWater(x, y) {
-        let distance = 99999999;
-        let ret = null;
+    randomWater(x, y, distance) {
+        let array = [];
         for (let key in this.waters) {
             let water = this.waters[key];
             let curDistance = new Laya.Point(water.x, water.y).distance(x, y);
             if (curDistance < distance) {
-                distance = curDistance;
-                ret = water;
+                array.push(water);
             }
         }
-        return ret;
+        return RandomMgr.randomACellInArray(array);
     }
 
     intersectsWater(x, y, w, h) {

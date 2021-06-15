@@ -87,6 +87,20 @@
         },
         {
             "x":15,
+            "type":"Sprite",
+            "searchKey":"Sprite",
+            "props":{"y":150,"x":485,"texture":"source/landscape/water.png","rotation":190,"presetID":8,"preset":"laya/pages/prefab/Water2.prefab"},
+            "nodeParent":99,
+            "label":"Sprite(Water2)",
+            "isDirectory":false,
+            "isAniNode":true,
+            "hasChild":false,
+            "compId":108,
+            "child":[
+                ]
+        },
+        {
+            "x":15,
             "type":"Script",
             "switchAble":true,
             "source":"src/source/Waterlogic.js",
@@ -99,20 +113,6 @@
             "isAniNode":true,
             "hasChild":false,
             "compId":105,
-            "child":[
-                ]
-        },
-        {
-            "x":15,
-            "type":"Sprite",
-            "searchKey":"Sprite",
-            "props":{"y":150,"x":485,"texture":"source/landscape/water.png","rotation":190,"presetID":8,"preset":"laya/pages/prefab/Water2.prefab"},
-            "nodeParent":99,
-            "label":"Sprite(Water2)",
-            "isDirectory":false,
-            "isAniNode":true,
-            "hasChild":false,
-            "compId":108,
             "child":[
                 ]
         }],

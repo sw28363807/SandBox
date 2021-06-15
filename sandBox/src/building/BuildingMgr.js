@@ -43,6 +43,17 @@ export default class BuildingMgr extends Laya.Script {
         return building;
     }
 
+    // 资源是够足够去建造
+    canCreateBuildingForResource(buildingType) {
+        let curTreeNum = GameModel.getInstance().getTreeNum();
+        let curStoneNum = GameModel.getInstance().getStoneNum();
+        let buildingMetaData = BuildingMeta.BuildingDatas[String(buildingType)];
+        if (curTreeNum >= buildingMetaData.costTree &&
+            curStoneNum >= buildingMetaData.CostStone) {
+                return true;
+        }
+        return false;
+    }
 
     // 是否有交集
     intersectsBuilding(x, y, w, h) {
