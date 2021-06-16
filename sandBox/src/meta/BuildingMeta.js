@@ -85,6 +85,7 @@ BuildingMeta.BuildingDatas = {
         buildingName: "学校",
         costTree: 6,
         CostStone: 6,
+        addTeach: 20,
     },
     // 幼儿园
     [String(BuildingMeta.BuildingType.ChildSchoolType)]: {

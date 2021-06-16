@@ -1,5 +1,3 @@
-import BuildingMeta from "../meta/BuildingMeta";
-import GameModel from "../model/GameModel";
 import BuildingBaseLogic from "./BuildingBaseLogic";
 export default class HomeLogic extends BuildingBaseLogic {
 
@@ -14,8 +12,6 @@ export default class HomeLogic extends BuildingBaseLogic {
 
     // 建筑建造完成
     onCreateBuildingFinish() {
-        GameModel.getInstance().addTreeNum(-BuildingMeta.CreateHomeNeedValues.tree);
-        GameModel.getInstance().addStoneNum(-BuildingMeta.CreateHomeNeedValues.stone);
     }
     
     onDisable() {

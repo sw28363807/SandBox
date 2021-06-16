@@ -622,7 +622,7 @@ export default class ResidentLogic extends Laya.Script {
         }
         // 学习完成
         else if (state == ResidentMeta.ResidentState.Learning) {
-            this.model.addTeach(100);
+            this.model.addTeach(BuildingMeta.BuildingDatas[String(BuildingMeta.BuildingType.SchoolType)].addTeach);
         }
         // 在幼儿园学习完成
         else if (state == ResidentMeta.ResidentState.ChildLearn) {
@@ -1110,7 +1110,7 @@ export default class ResidentLogic extends Laya.Script {
 
     processEatFood() {
         let cell = {
-            func: Laya.Handler.create(this, function (param) {
+            func: Laya.Handler.create(this, function () {
                 let canFood = FoodMgr.getInstance().canFindFood();
                 if (canFood) {
                     this.refreshFSMState(ResidentMeta.ResidentState.FindFood);
@@ -1162,7 +1162,7 @@ export default class ResidentLogic extends Laya.Script {
         let scocial = this.model.getSocial();
         if (scocial < ResidentMeta.ResidentSocialNeedValue) {
             this.level1Results.push(cell);
-        } else if (RandomMgr.randomYes() && scocial < 90)  {
+        } else if (RandomMgr.randomYes() && scocial < 90) {
             this.level2Results.push(cell);
         }
     }
@@ -1194,7 +1194,7 @@ export default class ResidentLogic extends Laya.Script {
     processHunt() {
         let cell = {
             func: Laya.Handler.create(this, function (param) {
-                let animal = AnimalMgr.getInstance().getAnimalForAttack(this.owner.x, this.owner.y, 200);
+                let animal = AnimalMgr.getInstance().getAnimalForAttack(this.owner.x, this.owner.y, 2000);
                 if (animal) {
                     this.refreshFSMState(ResidentMeta.ResidentState.JoinHunt, animal);
                     this.ideaResult = true;
@@ -1221,27 +1221,29 @@ export default class ResidentLogic extends Laya.Script {
     }
 
     processLookForLover() {
-        if (this.model.canAskMarry()) {
-            let home = BuildingMgr.getInstance().getBuildingById(this.model.getMyHomeId());
-            let homeModel = home.buildingScript.getModel();
-            let curNum = GameModel.getInstance().getAllResidentNum();
-            let maxNum = GameModel.getInstance().getHomeNum() * ResidentMeta.ResidentNumPerHome;
-            if (homeModel.getBuildingState() == BuildingMeta.BuildingState.Noraml &&
-                curNum <= maxNum) {
-                let cell = {
-                    func: Laya.Handler.create(this, function (param) {
-                        let woman = this.residentMgrInstance.getCanMarryWoman(this.model);
-                        if (woman) {
-                            let womanScript = woman.residentLogicScript;
-                            let womanModel = womanScript.getModel();
-                            GameModel.getInstance().setMarried(this.model, womanModel);
-                            this.refreshFSMState(ResidentMeta.ResidentState.LoverMan);
-                            womanScript.refreshFSMState(ResidentMeta.ResidentState.LoverWoman);
-                            this.ideaResult = true;
-                        }
-                    })
-                };
-                this.level2Results.push(cell);
+        if (RandomMgr.randomYes(0.9)) {
+            if (this.model.canAskMarry()) {
+                let home = BuildingMgr.getInstance().getBuildingById(this.model.getMyHomeId());
+                let homeModel = home.buildingScript.getModel();
+                let curNum = GameModel.getInstance().getAllResidentNum();
+                let maxNum = GameModel.getInstance().getHomeNum() * ResidentMeta.ResidentNumPerHome;
+                if (homeModel.getBuildingState() == BuildingMeta.BuildingState.Noraml &&
+                    curNum <= maxNum) {
+                    let cell = {
+                        func: Laya.Handler.create(this, function (param) {
+                            let woman = this.residentMgrInstance.getCanMarryWoman(this.model);
+                            if (woman) {
+                                let womanScript = woman.residentLogicScript;
+                                let womanModel = womanScript.getModel();
+                                GameModel.getInstance().setMarried(this.model, womanModel);
+                                this.refreshFSMState(ResidentMeta.ResidentState.LoverMan);
+                                womanScript.refreshFSMState(ResidentMeta.ResidentState.LoverWoman);
+                                this.ideaResult = true;
+                            }
+                        })
+                    };
+                    this.level1Results.push(cell);
+                }
             }
         }
     }
@@ -1251,7 +1253,7 @@ export default class ResidentLogic extends Laya.Script {
             func: Laya.Handler.create(this, function (param) {
                 let building = BuildingMgr.getInstance().getNearstBuilding(this.owner.x,
                     this.owner.y, BuildingMeta.BuildingType.ChildSchoolType,
-                    500, [BuildingMeta.BuildingState.Noraml]);
+                    2000, [BuildingMeta.BuildingState.Noraml]);
                 if (building) {
                     this.refreshFSMState(ResidentMeta.ResidentState.GotoChildSchoolForLearn, building);
                     this.ideaResult = true;
@@ -1311,7 +1313,7 @@ export default class ResidentLogic extends Laya.Script {
                 func: Laya.Handler.create(this, function (param) {
                     let building = BuildingMgr.getInstance().getNearstBuilding(this.owner.x,
                         this.owner.y, BuildingMeta.BuildingType.HospitalType,
-                        1000, [BuildingMeta.BuildingState.Noraml]);
+                        2000, [BuildingMeta.BuildingState.Noraml]);
                     if (building) {
                         this.refreshFSMState(ResidentMeta.ResidentState.GotoTreat, building);
                         this.ideaResult = true;

@@ -2,7 +2,7 @@
     "x":0,
     "type":"Box",
     "selectedBox":49,
-    "selecteID":71,
+    "selecteID":50,
     "searchKey":"Box,ResidentDetailsPanel",
     "props":{"y":0,"x":0,"width":400,"presetID":1,"preset":"laya/pages/prefab/ResidentDetailsPanel.prefab","name":"ResidentDetailsPanel","isPresetRoot":true,"height":250},
     "nodeParent":-1,

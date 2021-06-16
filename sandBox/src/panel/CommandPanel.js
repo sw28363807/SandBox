@@ -41,8 +41,6 @@ export default class CommandPanel extends Laya.Script {
                 spr.loadImage(data.preview);
                 let nameLabel = control.getChildByName("textName");
                 nameLabel.text = data.buildingName;
-                spr.width = distance;
-                spr.height = distance;
                 this.content.addChild(control);
                 control.y = index * distance + index * ySpace;
                 control.showIndex = index;
