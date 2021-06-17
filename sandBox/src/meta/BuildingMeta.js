@@ -117,8 +117,8 @@ BuildingMeta.BuildingDatas = {
     [String(BuildingMeta.BuildingType.ShopType)]: {
         prefab: ResourceMeta.ShopPrefabPath,
         preview: "source/building/shop_1.png",
-        realWidth: 128,
-        realHeight: 128,
+        realWidth: 500,
+        realHeight: 500,
         createBuildingSpeed: 2000,
         useBuildingTime: 5000,
         createPriority: 2,
