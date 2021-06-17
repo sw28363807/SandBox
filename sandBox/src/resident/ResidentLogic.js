@@ -1136,7 +1136,7 @@ export default class ResidentLogic extends Laya.Script {
         let water = this.model.getWater();
         if (water < ResidentMeta.ResidentWaterNeedValue) {
             this.level1Results.push(cell);
-        } else if (water < 90) {
+        } else if (water < 100) {
             this.level2Results.push(cell);
         }
     }
@@ -1162,7 +1162,7 @@ export default class ResidentLogic extends Laya.Script {
         let scocial = this.model.getSocial();
         if (scocial < ResidentMeta.ResidentSocialNeedValue) {
             this.level1Results.push(cell);
-        } else if (RandomMgr.randomYes() && scocial < 90) {
+        } else if (RandomMgr.randomYes() && scocial < 100) {
             this.level2Results.push(cell);
         }
     }
@@ -1221,7 +1221,7 @@ export default class ResidentLogic extends Laya.Script {
     }
 
     processLookForLover() {
-        if (RandomMgr.randomYes(0.9)) {
+        if (RandomMgr.randomYes(0.4)) {
             if (this.model.canAskMarry()) {
                 let home = BuildingMgr.getInstance().getBuildingById(this.model.getMyHomeId());
                 let homeModel = home.buildingScript.getModel();
@@ -1302,9 +1302,7 @@ export default class ResidentLogic extends Laya.Script {
                 }
             }),
         };
-        if (RandomMgr.randomYes()) {
-            this.level2Results.push(cell);
-        }
+        this.level2Results.push(cell);
     }
 
     processHeal() {

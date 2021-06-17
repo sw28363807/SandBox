@@ -130,8 +130,8 @@ BuildingMeta.BuildingDatas = {
     [String(BuildingMeta.BuildingType.FarmLandType)]: {
         prefab: ResourceMeta.FarmLandPrefabPath,
         preview: "source/building/farmland.png",
-        realWidth: 128,
-        realHeight: 128,
+        realWidth: 250,
+        realHeight: 250,
         createBuildingSpeed: 2000,
         useBuildingTime: 5000,
         createPriority: 2,
