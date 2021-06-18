@@ -26,6 +26,7 @@ import ResidentDetailsPanel from "./panel/ResidentDetailsPanel"
 import RestaurantLogic from "./building/RestaurantLogic"
 import SchoolLogic from "./building/SchoolLogic"
 import ShopLogic from "./building/ShopLogic"
+import TipLogic from "./helper/TipLogic"
 
 export default class GameConfig {
     static init() {
@@ -58,6 +59,7 @@ export default class GameConfig {
 		reg("building/RestaurantLogic.js",RestaurantLogic);
 		reg("building/SchoolLogic.js",SchoolLogic);
 		reg("building/ShopLogic.js",ShopLogic);
+		reg("helper/TipLogic.js",TipLogic);
     }
 }
 GameConfig.width = 1336;

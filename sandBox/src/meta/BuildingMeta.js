@@ -59,6 +59,7 @@ BuildingMeta.BuildingDatas = {
         buildingName: "家",
         costTree: 6,
         CostStone: 6,
+        desc: "居住的地方",
     },
     // 医院
     [String(BuildingMeta.BuildingType.HospitalType)]: {
@@ -72,6 +73,7 @@ BuildingMeta.BuildingDatas = {
         buildingName: "医院",
         costTree: 6,
         CostStone: 6,
+        desc: "可以治疗疾病",
     },
     // 学校
     [String(BuildingMeta.BuildingType.SchoolType)]: {
@@ -86,6 +88,7 @@ BuildingMeta.BuildingDatas = {
         costTree: 6,
         CostStone: 6,
         addTeach: 20,
+        desc: "可以增长教育",
     },
     // 幼儿园
     [String(BuildingMeta.BuildingType.ChildSchoolType)]: {
@@ -99,6 +102,7 @@ BuildingMeta.BuildingDatas = {
         buildingName: "幼儿园",
         costTree: 6,
         CostStone: 6,
+        desc: "可以让孩子快速成长",
     },
     // 发电厂
     [String(BuildingMeta.BuildingType.PowerPlantType)]: {
@@ -112,6 +116,7 @@ BuildingMeta.BuildingDatas = {
         buildingName: "发电厂",
         costTree: 6,
         CostStone: 6,
+        desc: "可以为其他建筑发电",
     },
     // 商店
     [String(BuildingMeta.BuildingType.ShopType)]: {
@@ -125,6 +130,7 @@ BuildingMeta.BuildingDatas = {
         buildingName: "商店",
         costTree: 6,
         CostStone: 6,
+        desc: "可以购买神秘物品",
     },
     // 农田
     [String(BuildingMeta.BuildingType.FarmLandType)]: {
@@ -138,6 +144,7 @@ BuildingMeta.BuildingDatas = {
         buildingName: "农田",
         costTree: 6,
         CostStone: 6,
+        desc: "可以种植增加食物",
     },
     // 牧场
     [String(BuildingMeta.BuildingType.PastureType)]: {
@@ -151,6 +158,7 @@ BuildingMeta.BuildingDatas = {
         buildingName: "牧场",
         costTree: 6,
         CostStone: 6,
+        desc: "可以饲养动物增加食物来源",
     },
     // 歌剧院
     [String(BuildingMeta.BuildingType.OperaType)]: {
@@ -164,6 +172,7 @@ BuildingMeta.BuildingDatas = {
         buildingName: "歌剧院",
         costTree: 6,
         CostStone: 6,
+        desc: "可以让居民快乐的地方",
     },
     // 警察局
     [String(BuildingMeta.BuildingType.PoliceStationType)]: {
@@ -177,6 +186,7 @@ BuildingMeta.BuildingDatas = {
         buildingName: "警察局",
         costTree: 6,
         CostStone: 6,
+        desc: "可以平息冲突",
     },
     // 实验室
     [String(BuildingMeta.BuildingType.LabType)]: {
@@ -190,6 +200,7 @@ BuildingMeta.BuildingDatas = {
         buildingName: "科学实验室",
         costTree: 6,
         CostStone: 6,
+        desc: "快速增长科技研究",
     },
     // 写字楼
     [String(BuildingMeta.BuildingType.OfficeType)]: {
@@ -203,6 +214,7 @@ BuildingMeta.BuildingDatas = {
         buildingName: "写字楼",
         costTree: 6,
         CostStone: 6,
+        desc: "居民收入来源",
     },
     // 餐厅
     [String(BuildingMeta.BuildingType.RestaurantType)]: {
@@ -216,5 +228,6 @@ BuildingMeta.BuildingDatas = {
         buildingName: "餐厅",
         costTree: 6,
         CostStone: 6,
+        desc: "可以囤积食物，增加食物增长值",
     },
 };

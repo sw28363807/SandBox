@@ -802,7 +802,7 @@ export default class ResidentLogic extends Laya.Script {
                     let data = BuildingMeta.BuildingDatas[String(BuildingMeta.BuildingType.HomeType)];
                     let toCreateHomeX = this.owner.x - data.width / 2 + this.owner.width / 2;
                     let toCreateHomeY = this.owner.y - data.height + this.owner.height;
-                    if (ResidentHelper.isOccupySpace(toCreateHomeX, toCreateHomeY,
+                    if (!ResidentHelper.isOccupySpace(toCreateHomeX, toCreateHomeY,
                         data.width, data.height)) {
                         let building = BuildingMgr.getInstance().createBuildingByConfig({
                             parent: GameContext.mapContainer,
@@ -1221,7 +1221,7 @@ export default class ResidentLogic extends Laya.Script {
     }
 
     processLookForLover() {
-        if (RandomMgr.randomYes(0.4)) {
+        if (RandomMgr.randomYes(0.2)) {
             if (this.model.canAskMarry()) {
                 let home = BuildingMgr.getInstance().getBuildingById(this.model.getMyHomeId());
                 let homeModel = home.buildingScript.getModel();
@@ -1293,7 +1293,7 @@ export default class ResidentLogic extends Laya.Script {
         let cell = {
             func: Laya.Handler.create(this, function () {
                 let p = RandomMgr.randomByArea(this.owner.x, this.owner.y, 200);
-                if (ResidentHelper.isOccupySpace(this.owner.x,
+                if (!ResidentHelper.isOccupySpace(this.owner.x,
                     this.owner.y,
                     this.owner.width,
                     this.owner.height)) {

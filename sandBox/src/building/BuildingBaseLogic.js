@@ -51,9 +51,6 @@ export default class BuildingBaseLogic extends Laya.Script {
     // 开始建造
     startCreate() {
         if (this.model.getBuildingState() == BuildingMeta.BuildingState.PreCreating) {
-            let buildingType = this.model.getBuildingType();
-            GameModel.getInstance().addTreeNum(-BuildingMeta.BuildingDatas[String(buildingType)].costTree);
-            GameModel.getInstance().addStoneNum(-BuildingMeta.BuildingDatas[String(buildingType)].CostStone);
             this.model.setBuildingState(BuildingMeta.BuildingState.Creating);
             this.ani.play(0, true, "creating");
             this.sliderControl.visible = true;

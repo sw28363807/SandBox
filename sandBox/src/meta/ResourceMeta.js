@@ -6,6 +6,9 @@ ResourceMeta.ResidentPrefabPath = "prefab/Resident.prefab";   //居民prefab路�
 ResourceMeta.FoodPrefabPath = "prefab/Food.prefab";           //食物prefab路径
 ResourceMeta.ResdientDetailsPanelPath = "prefab/ResidentDetailsPanel.prefab";   //显示居民信息prfab路径
 ResourceMeta.AnimalPrefabPath = "prefab/Animal.prefab";   //动物的prefab路径
+ResourceMeta.DragRenderPrefabPath = "prefab/DragRender.prefab";   //拖拽物
+ResourceMeta.TipPrefabPath = "prefab/Tip.prefab";   //Tips路径
+ResourceMeta.CommonItemPrefabPath = "prefab/CommonItem.prefab";   //菜单选项
 
 ResourceMeta.BuildingAtlasPath = "res/atlas/source/building.atlas"; //建筑引用的图片
 ResourceMeta.FoodAtlasPath = "res/atlas/source/food.atlas";         //食物所引用的图片
@@ -50,6 +53,18 @@ ResourceMeta.ResourceMap = [
     {
         type: Laya.Loader.PREFAB,
         url: ResourceMeta.ResdientDetailsPanelPath
+    },
+    {
+        type: Laya.Loader.PREFAB,
+        url: ResourceMeta.DragRenderPrefabPath
+    },
+    {
+        type: Laya.Loader.PREFAB,
+        url: ResourceMeta.TipPrefabPath
+    },
+    {
+        type: Laya.Loader.PREFAB,
+        url: ResourceMeta.CommonItemPrefabPath
     },
     {
         type: Laya.Loader.PREFAB,

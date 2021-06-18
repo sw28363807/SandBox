@@ -1,5 +1,3 @@
-import EventMgr from "../helper/EventMgr";
-import GameEvent from "../meta/GameEvent";
 import GameMeta from "../meta/GameMeta";
 import GameModel from "../model/GameModel";
 
@@ -33,7 +31,8 @@ export default class ResourcePanel extends Laya.Script {
         let season = GameModel.getInstance().getGameSeason();
         let day = GameModel.getInstance().getGameDay();
         let hour = GameModel.getInstance().getGameHour();
-        this.timeLabel.text = String(this.seasonTextTable[season]) + "  " + String(day) + "日" + String(hour) + "时";
+        this.timeLabel.text = String(this.seasonTextTable[season]) + "  " + String((day).zeroPad(10)) + "日" + String((hour).zeroPad(10)) + "时";
+        
     }
 
     onTick() {

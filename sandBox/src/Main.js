@@ -50,7 +50,6 @@ class Main {
 			item.adjustY = item.height - item.realHeight;
 			item.type = Number(key);
 		}
-		
 	}
 }
 //激活启动类

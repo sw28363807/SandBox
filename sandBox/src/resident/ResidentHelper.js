@@ -15,37 +15,37 @@ export default class ResidentHelper {
             toY,
             width,
             height)) {
-            return false;
+            return true;
         }
         if (StoneMgr.getInstance().intersectsStone(
             toX,
             toY,
             width,
             height)) {
-            return false;
+            return true;
         }
         if (BuildingMgr.getInstance().intersectsBuilding(
             toX,
             toY,
             width,
             height)) {
-            return false;
+            return true;
         }
         if (WaterMgr.getInstance().intersectsWater(
             toX,
             toY,
             width,
             height)) {
-            return false;
+            return true;
         }
         if (FoodTriggerMgr.getInstance().intersectsFoodTrigger(
             toX,
             toY,
             width,
             height)) {
-            return false;
+            return true;
         }
-        return true;
+        return false;
     }
 
 

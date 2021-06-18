@@ -6,6 +6,8 @@ P 0B8E0B05 center2.png
 P 9920A0A0 child_school.png
 P A3C148DE farmland.png
 P 2973A9D8 hospital1_1.png
+P AA04A559 mask.png
+P C5F26416 mask2.png
 P 3F047A50 office.png
 P F7BE8EE6 pasture.png
 P 535961C3 pet_shop.png
@@ -16,6 +18,7 @@ P FCAB52E0 school_1.png
 P 61129CC1 scienceLab.png
 P 7D25B6CE shop_1.png
 D source/landscape
+P C28F2A84 aaa.png
 P C54733E9 animal1.png
 P 422E632E animal2.png
 P D891FC0E animal3.png
@@ -37,7 +40,7 @@ P CEDA6E51 food5.png
 P 9372BA67 food6.png
 P E5E912EF hua.png
 P A3C098AC stone1.png
-P FD508433 stoneicon.png
+P E4EF3E30 stoneicon.png
 P C11BF038 tree1.png
 P 920C3CF0 treeicon.png
 P A2663D43 water.png
@@ -119,7 +122,7 @@ P C8F5B93A man_work1.png
 P BD8C9CFB man_work2.png
 P 48818065 man_work3.png
 P D6C57F4B sick.png
-P 098A99ED talk.png
+P 1EC941BB talk.png
 P 966E7CCC woman_anger.png
 P C0DD56B7 woman_enjoy1.png
 P C2F35169 woman_enjoy2.png
@@ -159,5 +162,9 @@ P 9BE5D38F slider.png
 P A508BEED slider2.png
 P 41CAA2E4 sliderBg.png
 P 76F0627B sliderBg2.png
-P CDAE9881 under2.png
-P 4506097F under3.png
+P C00D9112 tipunder.png
+P 454617C6 under2.png
+P 62CAA296 under3.png
+P 38B6DC1C under4.png
+P 1BD77B63 under5.png
+P 48E3181B under6.png

@@ -2,6 +2,12 @@
    <item name="source/ui/under.png" type="Image" compress="0" pack="0" quality="80" props="sizeGrid=57,79,63,70" picType="0" scale="0"/>
    <item name="source/ui/slider.png" type="Sprite" compress="0" pack="0" quality="80" props="" picType="0" scale="0"/>
    <item name="source/ui/under1.png" type="Sprite" compress="0" pack="0" quality="80" props="sizeGrid=159,253,169,207" picType="0" scale="0"/>
-   <item name="source/ui/under2.png" type="Sprite" compress="0" pack="0" quality="80" props="sizeGrid=132,79,114,78" picType="0" scale="0"/>
+   <item name="source/ui/under2.png" type="Sprite" compress="0" pack="0" quality="80" props="sizeGrid=70,89,74,107" picType="0" scale="0"/>
    <item name="source/ui/under3.png" type="Sprite" compress="0" pack="0" quality="80" props="sizeGrid=34,36,37,36" picType="0" scale="0"/>
+   <item name="source/building/mask2.png" type="Sprite" compress="0" pack="0" quality="80" props="sizeGrid=56,56,57,58" picType="0" scale="0"/>
+   <item name="source/building/mask.png" type="Sprite" compress="0" pack="0" quality="80" props="sizeGrid=46,48,46,44" picType="0" scale="0"/>
+   <item name="source/ui/tipunder.png" type="Sprite" compress="0" pack="0" quality="80" props="sizeGrid=26,132,28,152" picType="0" scale="0"/>
+   <item name="source/ui/under4.png" type="Sprite" compress="0" pack="0" quality="80" props="sizeGrid=41,41,47,44" picType="0" scale="0"/>
+   <item name="source/ui/under5.png" type="Sprite" compress="0" pack="0" quality="80" props="sizeGrid=60,46,75,56" picType="0" scale="0"/>
+   <item name="source/ui/under6.png" type="Sprite" compress="0" pack="0" quality="80" props="sizeGrid=80,126,68,126" picType="0" scale="0"/>
 </res>

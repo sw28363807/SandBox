@@ -1,6 +1,10 @@
 import BuildingMgr from "../building/BuildingMgr";
+import ResourceMgr from "../game/ResourceMgr";
+import TipMgr from "../helper/TipMgr";
 import BuildingMeta from "../meta/BuildingMeta";
 import GameContext from "../meta/GameContext";
+import ResourceMeta from "../meta/ResourceMeta";
+import GameModel from "../model/GameModel";
 import ResidentHelper from "../resident/ResidentHelper";
 
 export default class CommandPanel extends Laya.Script {
@@ -27,28 +31,36 @@ export default class CommandPanel extends Laya.Script {
                 this.dataArray.push(item);
             }
         }
-        this.prefabDef = null;
         this.clip = this.under.getChildByName("clip");
         this.content = this.clip.getChildByName("content");
-        let distance = 128;
-        let ySpace = 20;
-        Laya.loader.create("prefab/CommonItem.prefab", Laya.Handler.create(this, function (prefabDef) {
-            prefabDef = prefabDef;
-            for (let index = 0; index < this.dataArray.length; index++) {
-                let data = this.dataArray[index];
-                let control = prefabDef.create();
-                let spr = control.getChildByName("spr");
-                spr.loadImage(data.preview);
-                let nameLabel = control.getChildByName("textName");
-                nameLabel.text = data.buildingName;
-                this.content.addChild(control);
-                control.y = index * distance + index * ySpace;
-                control.showIndex = index;
-                control.showData = data;
-                this.items[String(index)] = control;
+        let ySpace = 5;
+        this.dragRender = Laya.loader.getRes(ResourceMeta.DragRenderPrefabPath).create();
+        let itemPrefabDef = Laya.loader.getRes(ResourceMeta.CommonItemPrefabPath);
+        let distance = 0;
+        for (let index = 0; index < this.dataArray.length; index++) {
+            let data = this.dataArray[index];
+            let control = itemPrefabDef.create();
+            if (index == 0) {
+                distance = control.height;
             }
-        }));
-        this.content.height += distance * this.dataArray.length + ySpace * this.dataArray.length;
+            let spr = control.getChildByName("spr");
+            spr.loadImage(data.preview);
+            let nameLabel = control.getChildByName("textName");
+            nameLabel.text = "[" + data.buildingName + "]";
+            let treeNeed = control.getChildByName("treeNeed");
+            treeNeed.text = "木材:" + String(data.costTree);
+            let stoneNeed = control.getChildByName("stoneNeed");
+            stoneNeed.text = "石材:" + String(data.CostStone);
+            let desc = control.getChildByName("desc");
+            desc.text = data.desc;
+            this.content.addChild(control);
+            control.y = index * distance + (index + 1) * ySpace;
+            control.showIndex = index;
+            control.showData = data;
+            this.items[String(index)] = control;
+        }
+
+        this.content.height = distance * this.dataArray.length + ySpace * this.dataArray.length;
     }
 
     getItem(stageX, stageY) {
@@ -70,7 +82,7 @@ export default class CommandPanel extends Laya.Script {
             this.touchDownPoint = new Laya.Point(e.stageX, e.stageY);
             let item = this.getItem(e.stageX, e.stageY);
             if (item) {
-                Laya.timer.once(1000, this, this.onDragStart, [item]);
+                Laya.timer.once(200, this, this.onDragStart, [item]);
             }
         });
 
@@ -114,9 +126,19 @@ export default class CommandPanel extends Laya.Script {
                 this.dragRender.destroy(true);
                 this.dragRender = null;
             }
-            this.dragRender = new Laya.Box();
+            
+            let prefabDef = Laya.loader.getRes(ResourceMeta.DragRenderPrefabPath);
+            this.dragRender = prefabDef.create();
             this.dragRender.width = data.width;
             this.dragRender.height = data.height;
+            this.dragRender.dragMask = this.dragRender.getChildByName("dragMask");
+            this.dragRender.dragMask.width = data.width;
+            this.dragRender.dragMask.height = data.height;
+
+            this.dragRender.dragMask2 = this.dragRender.getChildByName("dragMask2");
+            this.dragRender.dragMask2.width = data.width;
+            this.dragRender.dragMask2.height = data.height;
+
             this.setBuildingCreateEnabled(true);
             this.touchLayer.addChild(this.dragRender);
 
@@ -167,8 +189,10 @@ export default class CommandPanel extends Laya.Script {
             let dpX = point.x - this.dragRender.width / 2;
             let dpY = point.y - this.dragRender.height / 2;
             let data = this.dragItem.showData;
-            if (!BuildingMgr.getInstance().intersectsBuilding(dpX, dpY, this.dragRender.width, this.dragRender.height)) {
+            if (!ResidentHelper.isOccupySpace(dpX, dpY, this.dragRender.width, this.dragRender.height)) {
                 this.onBuild(data, dpX, dpY);
+            } else {
+                TipMgr.getInstance().showTip("不可放置~");
             }
         }
 
@@ -210,11 +234,8 @@ export default class CommandPanel extends Laya.Script {
 
     setBuildingCreateEnabled(enabled) {
         if (this.dragRender) {
-            if (enabled) {
-                this.dragRender.bgColor = BuildingMeta.BuildingCreateStateColor.enabled;
-            } else {
-                this.dragRender.bgColor = BuildingMeta.BuildingCreateStateColor.disabled;
-            }
+            this.dragRender.dragMask.visible = enabled;
+            this.dragRender.dragMask2.visible = !enabled;
         }
     }
 
@@ -251,6 +272,8 @@ export default class CommandPanel extends Laya.Script {
     }
 
     onBuild(data, dpX, dpY) {
+        GameModel.getInstance().addTreeNum(-BuildingMeta.BuildingDatas[String(data.type)].costTree);
+        GameModel.getInstance().addStoneNum(-BuildingMeta.BuildingDatas[String(data.type)].CostStone);
         let building = BuildingMgr.getInstance().createBuildingByConfig({
             parent: GameContext.mapContainer,
             x: Math.round(dpX),
