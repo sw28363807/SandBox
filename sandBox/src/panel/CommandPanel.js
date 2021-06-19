@@ -149,6 +149,10 @@ export default class CommandPanel extends Laya.Script {
 
     onDragStart(item) {
         Laya.timer.clear(this, this.onDragStart);
+        if (item.lock.visible) {
+            TipMgr.getInstance().showTip("建造条件不足");
+            return;
+        }
         this.dragItem = item;
         this.setTouchLayerEnabled(true);
         if (this.dragItem) {

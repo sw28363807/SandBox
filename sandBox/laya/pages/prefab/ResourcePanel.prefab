@@ -18,7 +18,7 @@
             "x":15,
             "type":"Image",
             "searchKey":"Image",
-            "props":{"y":0,"x":0,"width":240,"skin":"source/ui/under4.png","presetID":8,"preset":"laya/pages/prefab/ResourcePanel.prefab","height":100},
+            "props":{"y":0,"x":0,"width":600,"skin":"source/ui/under4.png","presetID":8,"preset":"laya/pages/prefab/ResourcePanel.prefab","height":100},
             "nodeParent":106,
             "label":"Image(ResourcePanel)",
             "isDirectory":false,
