@@ -28,7 +28,7 @@ export default class ResidentMgr extends Laya.Script {
 
     initSelf() {
         Laya.timer.loop(ResidentMeta.ResidentMakeIdeaStep, this, this.onMakeIdea);
-        Laya.timer.loop(0, this, this.onUpdateZorder);
+        Laya.timer.loop(100, this, this.onUpdateZorder);
     }
 
     onUpdateZorder() {

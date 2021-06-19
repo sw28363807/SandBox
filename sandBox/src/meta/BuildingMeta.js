@@ -65,8 +65,8 @@ BuildingMeta.BuildingDatas = {
     [String(BuildingMeta.BuildingType.HospitalType)]: {
         prefab: ResourceMeta.HospitalPrefabPath,
         preview: "source/building/hospital1_1.png",
-        realWidth: 500,
-        realHeight: 500,
+        realWidth: 300,
+        realHeight: 300,
         createBuildingSpeed: 2000,
         useBuildingTime: 5000,
         createPriority: 2,
@@ -122,8 +122,8 @@ BuildingMeta.BuildingDatas = {
     [String(BuildingMeta.BuildingType.ShopType)]: {
         prefab: ResourceMeta.ShopPrefabPath,
         preview: "source/building/shop_1.png",
-        realWidth: 500,
-        realHeight: 500,
+        realWidth: 200,
+        realHeight: 200,
         createBuildingSpeed: 2000,
         useBuildingTime: 5000,
         createPriority: 2,
@@ -178,8 +178,8 @@ BuildingMeta.BuildingDatas = {
     [String(BuildingMeta.BuildingType.PoliceStationType)]: {
         prefab: ResourceMeta.PoliceStationPrefabPath,
         preview: "source/building/police.png",
-        realWidth: 500,
-        realHeight: 500,
+        realWidth: 300,
+        realHeight: 300,
         createBuildingSpeed: 2000,
         useBuildingTime: 5000,
         createPriority: 2,
@@ -206,8 +206,8 @@ BuildingMeta.BuildingDatas = {
     [String(BuildingMeta.BuildingType.OfficeType)]: {
         prefab: ResourceMeta.OfficePrefabPath,
         preview: "source/building/office.png",
-        realWidth: 500,
-        realHeight: 500,
+        realWidth: 300,
+        realHeight: 300,
         createBuildingSpeed: 2000,
         useBuildingTime: 5000,
         createPriority: 2,
