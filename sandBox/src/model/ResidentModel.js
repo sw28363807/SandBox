@@ -250,10 +250,10 @@ export default class ResidentModel extends Laya.Script {
 
     // 能够结婚（被动）
     canMarry(manModel) {
-        if (this.getMakeLoveSystemTime() == 0 &&
+        if (this.getSex() == 2 &&
+            this.getMakeLoveSystemTime() == 0 &&
             this.getAge() > ResidentMeta.ResidentMarryAge &&
-            this.getFSMState() == ResidentMeta.ResidentState.IdleState &&
-            this.getSex() == 2) {
+            this.getFSMState() == ResidentMeta.ResidentState.IdleState) {
             if (this.loverId == 0) {
                 return true;
             } else {

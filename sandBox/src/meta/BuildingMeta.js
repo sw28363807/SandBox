@@ -57,8 +57,8 @@ BuildingMeta.BuildingDatas = {
         useBuildingTime: 5000,
         createPriority: 1,
         buildingName: "家",
-        costTree: 6,
-        CostStone: 6,
+        costTree: 2,
+        CostStone: 2,
         desc: "居住的地方",
     },
     // 医院

@@ -20,6 +20,33 @@ export default class CommandPanel extends Laya.Script {
         this.setTouchLayerEnabled(false);
         this.initItems();
         this.initScrollTouch();
+        Laya.timer.loop(300, this, this.refreshCondition);
+        this.refreshCondition();
+    }
+
+    onDisable() {
+        Laya.timer.clear(this, this.refreshCondition);
+    }
+
+    refreshCondition() {
+        for (const key in this.items) {
+            let item = this.items[key];
+            let showData = item.showData;
+            let treeNum = GameModel.getInstance().getTreeNum();
+            let stoneNum = GameModel.getInstance().getStoneNum();
+            let maskVisible = false;
+            item.treeNeed.color = "#1497ef";
+            item.stoneNeed.color = "#1497ef";
+            if (treeNum < showData.costTree) {
+                maskVisible = true;
+                item.treeNeed.color = "#ef1437";
+            }
+            if (stoneNum < showData.CostStone) {
+                maskVisible = true;
+                item.stoneNeed.color = "#ef1437";
+            }
+            item.lock.visible = maskVisible;
+        }
     }
 
     initItems() {
@@ -53,6 +80,10 @@ export default class CommandPanel extends Laya.Script {
             stoneNeed.text = "石材:" + String(data.CostStone);
             let desc = control.getChildByName("desc");
             desc.text = data.desc;
+            let lock = control.getChildByName("lock");
+            control.lock = lock;
+            control.treeNeed = treeNeed;
+            control.stoneNeed = stoneNeed;
             this.content.addChild(control);
             control.y = index * distance + (index + 1) * ySpace;
             control.showIndex = index;
@@ -283,9 +314,5 @@ export default class CommandPanel extends Laya.Script {
             prefab: data.prefab,
             buildingType: data.type,
         });
-    }
-
-    onDisable() {
-
     }
 }

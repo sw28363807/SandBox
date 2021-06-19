@@ -31,11 +31,11 @@ import Scene=Laya.Scene;]]>   </codeImportsTS>
    <startScene>scene/TestScene.scene</startScene>
    <engineType>2D   </engineType>
    <scaleMode>fixedwidth   </scaleMode>
-   <screenMode>horizontal   </screenMode>
+   <screenMode>none </screenMode>
    <alignV>top   </alignV>
    <alignH>left   </alignH>
    <designWidth>1336   </designWidth>
-   <designHeight>750   </designHeight>
+   <designHeight>   750</designHeight>
    <codeViewExportPath>src/view   </codeViewExportPath>
    <picType>0   </picType>
    <atlasType>1   </atlasType>
