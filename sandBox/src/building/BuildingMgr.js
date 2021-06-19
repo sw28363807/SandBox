@@ -42,6 +42,16 @@ export default class BuildingMgr extends Laya.Script {
         return building;
     }
 
+    // 移除建筑物
+    removeBuildingById(id) {
+        let building = this.buildings[String(id)];
+        if (building) {
+            delete this.buildings[String(id)];
+            building.destroy(true);
+            GameModel.getInstance().removeBuildingModel(id);
+        }
+    }
+
     // 资源是够足够去建造
     canCreateBuildingForResource(buildingType) {
         let curTreeNum = GameModel.getInstance().getTreeNum();
@@ -49,7 +59,7 @@ export default class BuildingMgr extends Laya.Script {
         let buildingMetaData = BuildingMeta.BuildingDatas[String(buildingType)];
         if (curTreeNum >= buildingMetaData.costTree &&
             curStoneNum >= buildingMetaData.CostStone) {
-                return true;
+            return true;
         }
         return false;
     }

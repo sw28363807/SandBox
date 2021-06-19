@@ -268,6 +268,11 @@ export default class GameModel extends Laya.Script {
         delete this.residentModels[String(id)];
     }
 
+    // 移除建筑物model
+    removeBuildingModel(id) {
+        delete this.buildingModels[String(id)];
+    }
+
     // 人物数值timer
     onUpdateResidentValue() {
         // 数值计算定时器

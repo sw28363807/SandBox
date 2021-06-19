@@ -19,6 +19,7 @@ import LabLogic from "./building/LabLogic"
 import OfficeLogic from "./building/OfficeLogic"
 import OperaLogic from "./building/OperaLogic"
 import PastureLogic from "./building/PastureLogic"
+import PetShopLogic from "./building/PetShopLogic"
 import PoliceStationLogic from "./building/PoliceStationLogic"
 import PowerPlantLogic from "./building/PowerPlantLogic"
 import ResidentLogic from "./resident/ResidentLogic"
@@ -52,6 +53,7 @@ export default class GameConfig {
 		reg("building/OfficeLogic.js",OfficeLogic);
 		reg("building/OperaLogic.js",OperaLogic);
 		reg("building/PastureLogic.js",PastureLogic);
+		reg("building/PetShopLogic.js",PetShopLogic);
 		reg("building/PoliceStationLogic.js",PoliceStationLogic);
 		reg("building/PowerPlantLogic.js",PowerPlantLogic);
 		reg("resident/ResidentLogic.js",ResidentLogic);

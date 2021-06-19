@@ -69,6 +69,20 @@ export default class ResidentMgr extends Laya.Script {
     removeResidentById(id) {
         let resident = this.residents[String(id)];
         if (resident) {
+            let myModel = resident.residentLogicScript.getModel();
+            // 此处还要移除房子和离婚
+            for (const key in this.residents) {
+                let other = this.residents[key];
+                let otherModel = other.residentLogicScript.getModel();
+                if (otherModel.getLoverId() == id) {
+                    otherModel.setLoverId(0);
+                }
+                if (myModel.getSex() == 1) {
+                    if (otherModel.getMyHomeId() == myModel.getMyHomeId()) {
+                        otherModel.setMyHomeId(0);
+                    }
+                }
+            }
             delete this.residents[String(id)];
             resident.destroy(true);
             GameModel.getInstance().removeResientModel(id);

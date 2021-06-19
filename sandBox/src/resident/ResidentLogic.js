@@ -539,6 +539,7 @@ export default class ResidentLogic extends Laya.Script {
             }
         }
         else if (state == ResidentMeta.ResidentState.Die) {
+            BuildingMgr.getInstance().removeBuildingById(this.model.getMyHomeId());
             this.residentMgrInstance.removeResidentById(this.model.getResidentId());
             return;
         }

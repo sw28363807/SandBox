@@ -18,7 +18,6 @@ export default class ResidentModel extends Laya.Script {
         // 隐藏数值
         this.positive = 0.6;            //积极性
         this.myHomeId = 0;              //我的家的ID
-        this.loverId = 0;               //配偶ID
         this.isInChildSchool = false;   //当前是不是处在幼儿园中
         this.ageExp = 0;
         this.makeLoveSystemTime = 0;
@@ -254,14 +253,7 @@ export default class ResidentModel extends Laya.Script {
             this.getMakeLoveSystemTime() == 0 &&
             this.getAge() > ResidentMeta.ResidentMarryAge &&
             this.getFSMState() == ResidentMeta.ResidentState.IdleState) {
-            if (this.loverId == 0) {
-                return true;
-            } else {
-                if (manModel.getLoverId() == this.residentId) {
-                    return true;
-                }
-                return false;
-            }
+            return true;
         }
         return false;
     }

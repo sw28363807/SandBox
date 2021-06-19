@@ -2,7 +2,7 @@
     "x":0,
     "type":"Box",
     "selectedBox":154,
-    "selecteID":163,
+    "selecteID":161,
     "searchKey":"Box,CommonItem",
     "props":{"y":0,"x":0,"width":300,"presetID":1,"preset":"laya/pages/prefab/CommonItem.prefab","name":"CommonItem","isPresetRoot":true,"height":200},
     "nodeParent":-1,
@@ -118,7 +118,7 @@
             "x":15,
             "type":"Text",
             "searchKey":"Text,desc",
-            "props":{"zOrder":1,"y":47,"x":133,"wordWrap":true,"width":150,"text":"孙文","presetID":7,"preset":"laya/pages/prefab/CommonItem.prefab","name":"desc","leading":3,"height":70,"fontSize":18,"font":"Microsoft YaHei","color":"#cd25cd","bold":true},
+            "props":{"zOrder":1,"y":55,"x":133,"wordWrap":true,"width":150,"text":"孙文","presetID":7,"preset":"laya/pages/prefab/CommonItem.prefab","name":"desc","leading":3,"height":70,"fontSize":18,"font":"Microsoft YaHei","color":"#cd25cd","bold":true},
             "nodeParent":154,
             "label":"desc",
             "isDirectory":false,
@@ -142,7 +142,8 @@
             "compId":163,
             "child":[
                 ],
-            "$LOCKED":false
+            "$LOCKED":false,
+            "$HIDDEN":true
         }],
     "animations":[
         {

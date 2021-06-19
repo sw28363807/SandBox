@@ -3,12 +3,6 @@ import ResourceMeta from "./ResourceMeta";
 export default class BuildingMeta {
 }
 
-
-BuildingMeta.BuildingCreateStateColor = {
-    enabled: "#5ddb36",
-    disabled: "#ffffff",
-};
-
 BuildingMeta.BuildingType = {
     NullTyupe: 0,   //无类型
     HomeType: 1,    //居民的家
@@ -24,6 +18,7 @@ BuildingMeta.BuildingType = {
     OfficeType: 11,         //鞋子楼
     ChildSchoolType: 12,        //幼儿园
     RestaurantType: 13,         //餐厅
+    PetShopType: 14,         //宠物店
 };
 
 BuildingMeta.BuildingState = {
@@ -229,5 +224,19 @@ BuildingMeta.BuildingDatas = {
         costTree: 6,
         CostStone: 6,
         desc: "可以囤积食物，增加食物增长值",
+    },
+    // 宠物店
+    [String(BuildingMeta.BuildingType.PetShopType)]: {
+        prefab: ResourceMeta.PetShopPrefabPath,
+        preview: "source/building/pet_shop.png",
+        realWidth: 200,
+        realHeight: 200,
+        createBuildingSpeed: 2000,
+        useBuildingTime: 5000,
+        createPriority: 2,
+        buildingName: "宠物店",
+        costTree: 6,
+        CostStone: 6,
+        desc: "饲养宠物可以不减快乐值哦",
     },
 };

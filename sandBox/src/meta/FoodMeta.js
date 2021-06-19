@@ -2,7 +2,7 @@ export default class FoodMeta {
 }
 
 FoodMeta.FoodMaxNumPerTrigger = 2;  //每个食物触发器的最大生成食物数量
-FoodMeta.FoodUpdateTime = 20000;        //更新食物出现的时间
+FoodMeta.FoodUpdateTime = 40000;        //更新食物出现的时间
 FoodMeta.FoodZOrder = 99;           //食物层级
 FoodMeta.DrinkWaterTime = 5000;     //喝水时间
 

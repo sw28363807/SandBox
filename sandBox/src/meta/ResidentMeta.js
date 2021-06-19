@@ -58,6 +58,8 @@ ResidentMeta.ResidentState = {
     CreateChildSchool: 50,     //建造幼儿园
     GotoChildSchoolForLearn: 51,     //赶去幼儿园学习
     ChildLearn: 52,                 //去幼儿园学习
+    GotoContinueCreatePetShop: 49, //跑去建造宠物店
+    CreatePetShop: 50,     //建造宠物店
 };
 
 // 小人可以自动建造的列表(建造行为)
@@ -74,6 +76,7 @@ ResidentMeta.ResidentContinueCreateMap = {
     [String(ResidentMeta.ResidentState.GotoContinueCreateLab)]: ResidentMeta.ResidentState.CreateLab,
     [String(ResidentMeta.ResidentState.GotoContinueCreateOffice)]: ResidentMeta.ResidentState.CreateOffice,
     [String(ResidentMeta.ResidentState.GotoContinueCreateChildSchool)]: ResidentMeta.ResidentState.CreateChildSchool,
+    [String(ResidentMeta.ResidentState.GotoContinueCreatePetShop)]: ResidentMeta.ResidentState.CreatePetShop,
 };
 
 // 小人的建筑的使用行为
@@ -96,7 +99,8 @@ ResidentMeta.ResidentCreateBuildingAIMap = {
     [String(BuildingMeta.BuildingType.PoliceStationType)]: ResidentMeta.ResidentState.GotoContinueCreatePoliceStation,
     [String(BuildingMeta.BuildingType.LabType)]: ResidentMeta.ResidentState.GotoContinueCreateLab,
     [String(BuildingMeta.BuildingType.OfficeType)]: ResidentMeta.ResidentState.GotoContinueCreateOffice,
-    [String(BuildingMeta.BuildingType.ChildSchoolType)]: ResidentMeta.ResidentState.GotoContinueCreateChildSchool
+    [String(BuildingMeta.BuildingType.ChildSchoolType)]: ResidentMeta.ResidentState.GotoContinueCreateChildSchool,
+    [String(BuildingMeta.BuildingType.PetShopType)]: ResidentMeta.ResidentState.GotoContinueCreatePetShop,
 };
 // 动画枚举
 ResidentMeta.ResidentAnim = {
