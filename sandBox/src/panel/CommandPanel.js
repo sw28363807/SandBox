@@ -41,7 +41,7 @@ export default class CommandPanel extends Laya.Script {
                 maskVisible = true;
                 item.treeNeed.color = "#ef1437";
             }
-            if (stoneNum < showData.CostStone) {
+            if (stoneNum < showData.costStone) {
                 maskVisible = true;
                 item.stoneNeed.color = "#ef1437";
             }
@@ -77,7 +77,7 @@ export default class CommandPanel extends Laya.Script {
             let treeNeed = control.getChildByName("treeNeed");
             treeNeed.text = "木材:" + String(data.costTree);
             let stoneNeed = control.getChildByName("stoneNeed");
-            stoneNeed.text = "石材:" + String(data.CostStone);
+            stoneNeed.text = "石材:" + String(data.costStone);
             let desc = control.getChildByName("desc");
             desc.text = data.desc;
             let lock = control.getChildByName("lock");
@@ -308,7 +308,7 @@ export default class CommandPanel extends Laya.Script {
 
     onBuild(data, dpX, dpY) {
         GameModel.getInstance().addTreeNum(-BuildingMeta.BuildingDatas[String(data.type)].costTree);
-        GameModel.getInstance().addStoneNum(-BuildingMeta.BuildingDatas[String(data.type)].CostStone);
+        GameModel.getInstance().addStoneNum(-BuildingMeta.BuildingDatas[String(data.type)].costStone);
         let building = BuildingMgr.getInstance().createBuildingByConfig({
             parent: GameContext.mapContainer,
             x: Math.round(dpX),

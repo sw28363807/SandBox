@@ -55,10 +55,9 @@ export default class ResidentHelper {
         let statusSets = new Set([BuildingMeta.BuildingState.PreCreating, BuildingMeta.BuildingState.Creating]);
         let buildingTypeSets = new Set([]);
         for (const key in ResidentMeta.ResidentCreateBuildingAIMap) {
-            buildingTypeSets.add(Number(key));
+            buildingTypeSets.add(key);
         }
         let array = [];
-        array.push();
         for (const key in buildings) {
             let building = buildings[key];
             let curDistance = new Laya.Point(building.x, building.y).distance(x, y);
@@ -69,14 +68,14 @@ export default class ResidentHelper {
                 buildingTypeSets.has(buildingType)) {
                 array.push({
                     building: building,
-                    state: ResidentMeta.ResidentCreateBuildingAIMap[String(buildingType)]
+                    state: ResidentMeta.ResidentCreateBuildingAIMap[buildingType],
                 });
             }
         }
         if (array.length == 0) {
             return null;
         }
-        let index = RandomMgr.randomNumer(0, array.length - 1);
+        let index = RandomMgr.randomNumber(0, array.length - 1);
         let cell = array[index];
         return cell;
     }

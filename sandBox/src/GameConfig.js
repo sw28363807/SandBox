@@ -13,6 +13,7 @@ import AnimalLogic from "./animal/AnimalLogic"
 import ChildSchoolLogic from "./building/ChildSchoolLogic"
 import FarmLandLogic from "./building/FarmLandLogic"
 import FoodLogic from "./source/FoodLogic"
+import FoodPoolLogic from "./building/FoodPoolLogic"
 import HomeLogic from "./building/HomeLogic"
 import HospitalLogic from "./building/HospitalLogic"
 import LabLogic from "./building/LabLogic"
@@ -28,6 +29,7 @@ import RestaurantLogic from "./building/RestaurantLogic"
 import SchoolLogic from "./building/SchoolLogic"
 import ShopLogic from "./building/ShopLogic"
 import TipLogic from "./helper/TipLogic"
+import WaterPoolLogic from "./building/WaterPoolLogic"
 
 export default class GameConfig {
     static init() {
@@ -47,6 +49,7 @@ export default class GameConfig {
 		reg("building/ChildSchoolLogic.js",ChildSchoolLogic);
 		reg("building/FarmLandLogic.js",FarmLandLogic);
 		reg("source/FoodLogic.js",FoodLogic);
+		reg("building/FoodPoolLogic.js",FoodPoolLogic);
 		reg("building/HomeLogic.js",HomeLogic);
 		reg("building/HospitalLogic.js",HospitalLogic);
 		reg("building/LabLogic.js",LabLogic);
@@ -62,6 +65,7 @@ export default class GameConfig {
 		reg("building/SchoolLogic.js",SchoolLogic);
 		reg("building/ShopLogic.js",ShopLogic);
 		reg("helper/TipLogic.js",TipLogic);
+		reg("building/WaterPoolLogic.js",WaterPoolLogic);
     }
 }
 GameConfig.width = 1336;

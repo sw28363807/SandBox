@@ -1,3 +1,4 @@
+import RandomMgr from "../helper/RandomMgr";
 import BuildingMeta from "../meta/BuildingMeta";
 import GameMeta from "../meta/GameMeta";
 import ResidentMeta from "../meta/ResidentMeta";
@@ -242,6 +243,18 @@ export default class GameModel extends Laya.Script {
     // 移除食物Model
     removeFoodModelById(id) {
         delete this.foodModels[String(id)];
+    }
+
+    randomSex() {
+        let num = this.getAllChildResidentNum();
+        if (num < 6) {
+            if (num % 2 == 0) {
+                return 1;
+            } else {
+                return 2;
+            }
+        }
+        return RandomMgr.randomSex();
     }
 
     // 设置结婚

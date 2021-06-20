@@ -63,7 +63,7 @@ export default class RandomMgr {
     }
 
     // 随机一个数字
-    static randomNumer(min, max) {
+    static randomNumber(min, max) {
         let a = Math.random();
         return min + Math.round(a * (max - min));
     }
@@ -93,7 +93,7 @@ export default class RandomMgr {
         if (array.length == 0) {
             return null;
         }
-        let index = RandomMgr.randomNumer(0, array.length - 1);
+        let index = RandomMgr.randomNumber(0, array.length - 1);
         let cell = array[index];
         return cell;
     }

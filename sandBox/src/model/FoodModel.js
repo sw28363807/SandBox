@@ -2,7 +2,7 @@ import FoodMeta from "../meta/FoodMeta";
 
 export default class FoodModel extends Laya.Script {
 
-    constructor() { 
+    constructor() {
         super();
         this.food = 0;
         this.foodId = 0;
@@ -43,14 +43,14 @@ export default class FoodModel extends Laya.Script {
         return this.state;
     }
 
-    // 获得食物
-    getFood() {
-        return this.food;
-    }
-
     // 设置当前食物的状态
     setFoodState(state) {
         this.state = state;
+    }
+
+    // 获得食物
+    getFood() {
+        return this.food;
     }
 
     // 获得吃东西的cd时间

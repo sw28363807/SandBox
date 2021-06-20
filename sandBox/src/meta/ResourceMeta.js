@@ -28,6 +28,8 @@ ResourceMeta.RestaurantPrefabPath = "prefab/Restaurant.prefab";       //餐厅pr
 ResourceMeta.PoliceStationPrefabPath = "prefab/PoliceStation.prefab";    //警察局prefab路径
 ResourceMeta.LabPrefabPath = "prefab/Lab.prefab";    //实验室prefab路径
 ResourceMeta.PetShopPrefabPath = "prefab/PetShop.prefab";    //宠物店prefab路径
+ResourceMeta.FoodPoolPrefabPath = "prefab/FoodPool.prefab";    //食物仓库prefab路径
+ResourceMeta.WaterPoolPrefabPath = "prefab/WaterPool.prefab";    //水仓库prefab路径
 
 // 图集map
 ResourceMeta.ResourceMap = [
@@ -130,5 +132,13 @@ ResourceMeta.ResourceMap = [
     {
         type: Laya.Loader.PREFAB,
         url: ResourceMeta.ShopPrefabPath
+    },
+    {
+        type: Laya.Loader.PREFAB,
+        url: ResourceMeta.FoodPoolPrefabPath
+    },
+    {
+        type: Laya.Loader.PREFAB,
+        url: ResourceMeta.WaterPoolPrefabPath
     },
 ];

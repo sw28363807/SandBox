@@ -47,8 +47,14 @@ export default class ResidentLogic extends Laya.Script {
         this.ResidentTempData.destroy(true);
         this.stopGoto();
         this.removeAllEvents();
+        this.removeAllTimers();
+    }
+
+    removeAllTimers() {
         Laya.timer.clear(this, this.onDoWorkFinish);
         Laya.timer.clear(this, this.hideTip);
+        Laya.timer.clear(this, this.onCollectSendFinish);
+        Laya.timer.clear(this, this.onPutDownSend);
     }
 
     // 注册消息
@@ -300,6 +306,9 @@ export default class ResidentLogic extends Laya.Script {
         Laya.timer.clear(this, this.onDoWorkFinish);
         let createBuildingNextState = this.canGotoCreateBuilding(state);
         let useBuildingNextState = this.canGotoUseBuilding(state);
+        let sendAIMeta = this.canSendExt(state);
+        let canCollect = this.canCollect(state);
+        let canSendToDest = this.canSendToDest(state);
         // 是否要继续建造
         if (createBuildingNextState) {
             this.startGotoContinueCreateBuilding({
@@ -319,6 +328,21 @@ export default class ResidentLogic extends Laya.Script {
         }
         else if (this.canStartUseBuilding(state)) {
             this.startUseBuilding();
+        }
+        // 送货
+        else if (sendAIMeta) {
+            this.gotoFindSend({
+                sendAIMeta: sendAIMeta,
+                sendInfo: param
+            });
+        }
+        // 能够打包货物
+        else if (canCollect) {
+            this.colletSend(param);
+        }
+        // 是否能够送打包物品到目标
+        else if (canSendToDest) {
+            this.gotoSendToDest(param);
         }
         // 待机
         else if (state == ResidentMeta.ResidentState.IdleState) {
@@ -361,7 +385,7 @@ export default class ResidentLogic extends Laya.Script {
         // 吃食物
         else if (state == ResidentMeta.ResidentState.EatFood) {
             this.curEatingFood = param;
-            let script = this.curEatingFood.getComponent(FoodLogic);
+            let script = this.curEatingFood.foodScript;
             let model = script.getModel();
             model.setFoodState(FoodMeta.FoodState.Eating);
             this.setStateAniVisible(true);
@@ -481,18 +505,21 @@ export default class ResidentLogic extends Laya.Script {
             this.onFinishUseBuilding(state);
             this.clearUseBuilding();
         }
+        // 打包送货完成 
+        else if (this.canSendFinish(state)) {
+            this.onFinishSend(param);
+        }
         // 吃食物完成
         else if (state == ResidentMeta.ResidentState.EatFood) {
-            let script = this.curEatingFood.getComponent(FoodLogic);
+            let script = this.curEatingFood.foodScript;
             let foodModel = script.getModel();
             this.model.addFood(foodModel.getFood());
-            foodModel.setFoodState(FoodMeta.FoodState.EatFinish);
             FoodMgr.getInstance().removeFoodById(foodModel.getFoodId());
             this.curEatingFood = null;
         }
         // 喝水完成
         else if (state == ResidentMeta.ResidentState.DrinkWater) {
-            this.model.addWater(100);
+            this.model.addWater(ResidentMeta.ResidentDrinkWaterAddValue);
         }
         // 砍树完成
         else if (state == ResidentMeta.ResidentState.CutDownTree) {
@@ -743,12 +770,13 @@ export default class ResidentLogic extends Laya.Script {
                 this.owner.y += ResidentMeta.ResidentGotoYOff;
                 woman.residentLogicScript.refreshFSMState(ResidentMeta.ResidentState.IdleState);
                 this.refreshFSMState(ResidentMeta.ResidentState.IdleState);
+
                 this.residentMgrInstance.createResidentByConfig({
                     parent: GameContext.mapContainer,
                     x: woman.x,
                     y: woman.y,
                     age: 1,
-                    sex: RandomMgr.randomSex(),
+                    sex: GameModel.getInstance().randomSex(),
                     food: 70,
                     water: 70,
                 });
@@ -858,9 +886,10 @@ export default class ResidentLogic extends Laya.Script {
             x: this.owner.x,
             y: this.owner.y,
             state: FoodMeta.FoodState.CanEat,
+            area: 2000,
         });
         if (nearstFood) {
-            let script = nearstFood.getComponent(FoodLogic);
+            let script = nearstFood.foodScript;
             script.getModel().setFoodState(FoodMeta.FoodState.Occupy);
             this.gotoDestExt({ x: nearstFood.x, y: nearstFood.y }, Laya.Handler.create(this, function () {
                 this.refreshFSMState(ResidentMeta.ResidentState.EatFood, nearstFood);
@@ -1037,40 +1066,42 @@ export default class ResidentLogic extends Laya.Script {
         this.level2Results = [];
         // =================================正式================start
         // 喝水
-        this.processDrinkWater();
+        // this.processDrinkWater();
         //吃饭
-        this.processEatFood();
+        // this.processEatFood();
         // 社交
-        this.processSocial();
+        // this.processSocial();
         // 砍树
-        this.processCutDownTree();
+        // this.processCutDownTree();
         // 收集石头
-        this.processCollectStone();
+        // this.processCollectStone();
         // 跑去打猎
-        this.processHunt();
+        // this.processHunt();
         // 盖房子
-        this.processCreateHome();
+        // this.processCreateHome();
         // 找恋人
-        this.processLookForLover();
+        // this.processLookForLover();
         // 去幼儿园学习
-        this.processLearnForChildSchool();
+        // this.processLearnForChildSchool();
         // 打架
-        this.processFight();
+        // this.processFight();
         // 赶着去溜达
-        this.processRandomWalk();
+        // this.processRandomWalk();
         // 跑去治病
-        this.processHeal();
+        // this.processHeal();
         // 跑去上课
-        this.processTeach();
+        // this.processTeach();
         // 跑去建造
         this.processCreateBuilding();
+        // 跑去运送
+        this.processSend();
         // =================================正式================end
     }
 
     // 执行策略
     doResult() {
         while (this.level1Results.length != 0) {
-            let index = RandomMgr.randomNumer(0, this.level1Results.length - 1);
+            let index = RandomMgr.randomNumber(0, this.level1Results.length - 1);
             let cell = this.level1Results[index];
             this.ideaResult = false;
             cell.func.runWith(cell.param);
@@ -1081,7 +1112,7 @@ export default class ResidentLogic extends Laya.Script {
         }
 
         while (this.level2Results.length != 0) {
-            let index = RandomMgr.randomNumer(0, this.level2Results.length - 1);
+            let index = RandomMgr.randomNumber(0, this.level2Results.length - 1);
             let cell = this.level2Results[index];
             this.ideaResult = false;
             cell.func.runWith(cell.param);
@@ -1225,25 +1256,27 @@ export default class ResidentLogic extends Laya.Script {
         if (RandomMgr.randomYes(0.2)) {
             if (this.model.canAskMarry()) {
                 let home = BuildingMgr.getInstance().getBuildingById(this.model.getMyHomeId());
-                let homeModel = home.buildingScript.getModel();
-                let curNum = GameModel.getInstance().getAllResidentNum();
-                let maxNum = GameModel.getInstance().getHomeNum() * ResidentMeta.ResidentNumPerHome;
-                if (homeModel.getBuildingState() == BuildingMeta.BuildingState.Noraml &&
-                    curNum <= maxNum) {
-                    let cell = {
-                        func: Laya.Handler.create(this, function (param) {
-                            let woman = this.residentMgrInstance.getCanMarryWoman(this.model);
-                            if (woman) {
-                                let womanScript = woman.residentLogicScript;
-                                let womanModel = womanScript.getModel();
-                                GameModel.getInstance().setMarried(this.model, womanModel);
-                                this.refreshFSMState(ResidentMeta.ResidentState.LoverMan);
-                                womanScript.refreshFSMState(ResidentMeta.ResidentState.LoverWoman);
-                                this.ideaResult = true;
-                            }
-                        })
-                    };
-                    this.level1Results.push(cell);
+                if (home) {
+                    let homeModel = home.buildingScript.getModel();
+                    let curNum = GameModel.getInstance().getAllResidentNum();
+                    let maxNum = GameModel.getInstance().getHomeNum() * ResidentMeta.ResidentNumPerHome;
+                    if (homeModel.getBuildingState() == BuildingMeta.BuildingState.Noraml &&
+                        curNum <= maxNum) {
+                        let cell = {
+                            func: Laya.Handler.create(this, function (param) {
+                                let woman = this.residentMgrInstance.getCanMarryWoman(this.model);
+                                if (woman) {
+                                    let womanScript = woman.residentLogicScript;
+                                    let womanModel = womanScript.getModel();
+                                    GameModel.getInstance().setMarried(this.model, womanModel);
+                                    this.refreshFSMState(ResidentMeta.ResidentState.LoverMan);
+                                    womanScript.refreshFSMState(ResidentMeta.ResidentState.LoverWoman);
+                                    this.ideaResult = true;
+                                }
+                            })
+                        };
+                        this.level1Results.push(cell);
+                    }
                 }
             }
         }
@@ -1352,6 +1385,197 @@ export default class ResidentLogic extends Laya.Script {
                 }),
             };
             this.level2Results.push(createCell);
+        }
+    }
+
+
+    // 处理运送
+    processSend() {
+        for (const key in ResidentMeta.ResidentSendAIMap) {
+            if (this.canSend(key)) {
+                let sendCell = {
+                    func: Laya.Handler.create(this, function () {
+                        let sendInfo = this.getSendAndDest(key);
+                        if (sendInfo && sendInfo.send && sendInfo.dest) {
+                            this.preSend(key, sendInfo);
+                            this.refreshFSMState(key, sendInfo);
+                            this.ideaResult = true;
+                        }
+                    }),
+                };
+                this.level2Results.push(sendCell);
+            }
+        }
+    }
+
+    canSendExt(fsmState) {
+        return ResidentMeta.ResidentSendAIMap[fsmState];
+    }
+
+    gotoFindSend(info) {
+        let sendAIMeta = info.sendAIMeta;
+        let sendInfo = info.sendInfo;
+        this.setAnim(ResidentMeta.ResidentAnim.Walk);
+        let collectState = sendAIMeta.collectState;
+        this.gotoDestExt({
+            x: sendInfo.send.x + sendInfo.send.width / 2 - this.owner.width / 2,
+            y: sendInfo.send.y + sendInfo.send.height - this.owner.height + ResidentMeta.ResidentGotoYOff,
+        }, Laya.Handler.create(this, function () {
+            this.refreshFSMState(collectState, info);
+        }));
+    }
+
+    canCollect(fsmState) {
+        for (const key in ResidentMeta.ResidentSendAIMap) {
+            let item = ResidentMeta.ResidentSendAIMap[key];
+            if (fsmState == item.collectState && fsmState != undefined && fsmState != null) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    canSendToDest(fsmState) {
+        for (const key in ResidentMeta.ResidentSendAIMap) {
+            let item = ResidentMeta.ResidentSendAIMap[key];
+            if (fsmState == item.lastState && fsmState != undefined && fsmState != null) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    canSendFinish(fsmState) {
+        for (const key in ResidentMeta.ResidentSendAIMap) {
+            let item = ResidentMeta.ResidentSendAIMap[key];
+            if (fsmState == item.lastState && fsmState != undefined && fsmState != null) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    colletSend(info) {
+        this.setAnim(ResidentMeta.ResidentAnim.Work);
+        this.setStateAniVisible(true);
+        this.setStateAni("ani9");
+        Laya.timer.once(ResidentMeta.ResidentCollectSendTime, this, this.onCollectSendFinish, [info]);
+    }
+
+    onCollectSendFinish(info) {
+        let sendAIMeta = info.sendAIMeta;
+        this.onGetAddValueInfo(info);
+        this.refreshFSMState(sendAIMeta.lastState, info);
+    }
+
+    gotoSendToDest(info) {
+        this.setStateAniVisible(true);
+        this.setStateAni("ani10");
+        let sendInfo = info.sendInfo;
+        this.gotoDestExt({
+            x: sendInfo.dest.x + sendInfo.dest.width / 2 - this.owner.width / 2,
+            y: sendInfo.dest.y + sendInfo.dest.height - this.owner.height + ResidentMeta.ResidentGotoYOff,
+        }, Laya.Handler.create(this, function () {
+            this.onPutDownSend(info);
+        }));
+    }
+
+    onPutDownSend(info) {
+        this.owner.visible = false;
+        Laya.timer.once(1000, this, function () {
+            this.owner.visible = true;
+            this.onDoWorkFinish(this.makeParam(info));
+        });
+    }
+
+    //此处用户定义
+    // ==============================================================================
+    onGetAddValueInfo(info) {
+        let sendInfo = info.sendInfo;
+        let fsmState = this.model.getFSMState();
+        // 食物增加值
+        if (fsmState == ResidentMeta.ResidentState.CollectFood) {
+            let foodModel = sendInfo.send.foodScript.getModel();
+            let addFoodNum = foodModel.getFood();
+            FoodMgr.getInstance().removeFoodById(foodModel.getFoodId());
+            sendInfo.send = null;
+            info.addFood = addFoodNum;
+        }
+        // 水源增加值
+        else if (fsmState == ResidentMeta.ResidentState.CollectWater) {
+            info.addWater = ResidentMeta.ResidentSaveWaterAddValue;
+        }
+    }
+
+    onFinishSend(param) {
+        let extraParam = param.extraParam;
+        let dest = extraParam.sendInfo.dest;
+        let fsmState = this.model.getFSMState();
+        // 运送食物完成
+        if (fsmState == ResidentMeta.ResidentState.SendFoodToFoodPool) {
+            dest.buildingScript.addFoodToPool(extraParam.addFood);
+        }
+        // 运送水源完成
+        else if (fsmState == ResidentMeta.ResidentState.SendWaterToWaterPool) {
+            dest.buildingScript.addWaterToPool(extraParam.addWater);
+        }
+    }
+
+    canSend(AIType) {
+        // 食物判断
+        if (AIType == ResidentMeta.ResidentState.FindFoodForSend) {
+            if (this.model.getAge() < ResidentMeta.ResidentAdultAge) {
+                return false;
+            }
+            return true;
+        }
+        // 水源判断
+        else if (AIType == ResidentMeta.ResidentState.FindWaterForSend) {
+            if (this.model.getAge() < ResidentMeta.ResidentAdultAge) {
+                return false;
+            }
+            return true;
+        }
+    }
+
+    getSendAndDest(AIType) {
+        // 食物
+        if (AIType == ResidentMeta.ResidentState.FindFoodForSend) {
+            let nearstFood = FoodMgr.getInstance().getNearstFood({
+                x: this.owner.x,
+                y: this.owner.y,
+                state: FoodMeta.FoodState.CanEat,
+                area: 2000
+            });
+            let nearstBuilding = BuildingMgr.getInstance().getNearstBuilding(this.owner.x,
+                this.owner.y, BuildingMeta.BuildingType.FoodPoolType,
+                2000, [BuildingMeta.BuildingState.Noraml]);
+            if (nearstBuilding && !nearstBuilding.buildingScript.isReachFoodMax()) {
+                return {
+                    AIType: AIType,
+                    send: nearstFood,
+                    dest: nearstBuilding,
+                };
+            }
+            return null;
+        }
+        // 水源
+        else if (AIType == ResidentMeta.ResidentState.FindWaterForSend) {
+            let nearstWater = WaterMgr.getInstance().randomWater(this.owner.x, this.owner.y, 2000);
+            let nearstBuilding = BuildingMgr.getInstance().getNearstBuilding(this.owner.x,
+                this.owner.y, BuildingMeta.BuildingType.WaterPoolType,
+                2000, [BuildingMeta.BuildingState.Noraml]);
+            return {
+                AIType: AIType,
+                send: nearstWater,
+                dest: nearstBuilding,
+            };
+        }
+    }
+
+    preSend(AIType, sendInfo) {
+        if (AIType == ResidentMeta.ResidentState.FindFoodForSend) {
+            sendInfo.send.foodScript.getModel().setFoodState(FoodMeta.FoodState.Occupy);
         }
     }
 }

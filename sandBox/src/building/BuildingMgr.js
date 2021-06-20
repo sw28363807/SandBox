@@ -58,7 +58,7 @@ export default class BuildingMgr extends Laya.Script {
         let curStoneNum = GameModel.getInstance().getStoneNum();
         let buildingMetaData = BuildingMeta.BuildingDatas[String(buildingType)];
         if (curTreeNum >= buildingMetaData.costTree &&
-            curStoneNum >= buildingMetaData.CostStone) {
+            curStoneNum >= buildingMetaData.costStone) {
             return true;
         }
         return false;
@@ -119,7 +119,7 @@ export default class BuildingMgr extends Laya.Script {
     //     if (ret.length == 0) {
     //         return null;
     //     }
-    //     let index = RandomMgr.randomNumer(0, ret.length - 1);
+    //     let index = RandomMgr.randomNumber(0, ret.length - 1);
     //     return {building: ret[index], state: };
     // }
 }

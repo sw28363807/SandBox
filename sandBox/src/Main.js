@@ -48,7 +48,7 @@ class Main {
 			item.height = buildingInfo.json.props.height;
 			item.adjustX = (item.width - item.realWidth)/2;
 			item.adjustY = item.height - item.realHeight;
-			item.type = Number(key);
+			item.type = key;
 		}
 	}
 }

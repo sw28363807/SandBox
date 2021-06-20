@@ -1,4 +1,9 @@
 export default class FoodMeta {
+    static obtainFoodState() {
+        for (const key in FoodMeta.FoodState) {
+            FoodMeta.FoodState[key] = key;
+        }
+    }
 }
 
 FoodMeta.FoodMaxNumPerTrigger = 2;  //每个食物触发器的最大生成食物数量
@@ -26,8 +31,9 @@ FoodMeta.FoodAddValue = {
 }
 
 FoodMeta.FoodState = {
-    CanEat: 1,      //能够吃
-    Occupy: 2,      //被占据
-    Eating: 3,      //正在被吃
-    EatFinish: 4,   //被吃完 
-};
+    CanEat: "",      //能够吃
+    Occupy: "",      //被占据
+    Eating: "",      //正在被吃
+}
+
+FoodMeta.obtainFoodState();

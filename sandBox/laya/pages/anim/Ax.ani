@@ -22,213 +22,13 @@
             "isDirectory":false,
             "isAniNode":true,
             "hasChild":false,
-            "compId":3,
-            "child":[
-                ]
-        },
-        {
-            "type":"GraphicNode",
-            "searchKey":"GraphicNode",
-            "props":{},
-            "nodeParent":2,
-            "label":"GraphicNode",
-            "isDirectory":false,
-            "isAniNode":true,
-            "hasChild":false,
             "compId":4,
-            "child":[
-                ]
-        },
-        {
-            "type":"GraphicNode",
-            "searchKey":"GraphicNode",
-            "props":{},
-            "nodeParent":2,
-            "label":"GraphicNode",
-            "isDirectory":false,
-            "isAniNode":true,
-            "hasChild":false,
-            "compId":5,
-            "child":[
-                ]
-        },
-        {
-            "type":"GraphicNode",
-            "searchKey":"GraphicNode",
-            "props":{},
-            "nodeParent":2,
-            "label":"GraphicNode",
-            "isDirectory":false,
-            "isAniNode":true,
-            "hasChild":false,
-            "compId":6,
-            "child":[
-                ]
-        },
-        {
-            "type":"GraphicNode",
-            "searchKey":"GraphicNode",
-            "props":{},
-            "nodeParent":2,
-            "label":"GraphicNode",
-            "isDirectory":false,
-            "isAniNode":true,
-            "hasChild":false,
-            "compId":7,
-            "child":[
-                ]
-        },
-        {
-            "type":"GraphicNode",
-            "searchKey":"GraphicNode",
-            "props":{},
-            "nodeParent":2,
-            "label":"GraphicNode",
-            "isDirectory":false,
-            "isAniNode":true,
-            "hasChild":false,
-            "compId":8,
-            "child":[
-                ]
-        },
-        {
-            "type":"GraphicNode",
-            "searchKey":"GraphicNode",
-            "props":{},
-            "nodeParent":2,
-            "label":"GraphicNode",
-            "isDirectory":false,
-            "isAniNode":true,
-            "hasChild":false,
-            "compId":9,
             "child":[
                 ]
         }],
     "animations":[
         {
             "nodes":[
-                {
-                    "target":3,
-                    "keyframes":{
-                        "y":[
-                            {
-                                "value":48,
-                                "tweenMethod":"linearNone",
-                                "tween":true,
-                                "target":3,
-                                "key":"y",
-                                "index":0
-                            }],
-                        "skin":[
-                            {
-                                "value":"source/resident/collect.png",
-                                "tweenMethod":"linearNone",
-                                "tween":false,
-                                "target":3,
-                                "key":"skin",
-                                "index":0
-                            }],
-                        "rotation":[
-                            {
-                                "value":0,
-                                "tweenMethod":"linearNone",
-                                "tween":true,
-                                "target":3,
-                                "key":"rotation",
-                                "index":0
-                            },
-                            {
-                                "value":20,
-                                "tweenMethod":"linearNone",
-                                "tween":true,
-                                "target":3,
-                                "key":"rotation",
-                                "index":2
-                            },
-                            {
-                                "value":0,
-                                "tweenMethod":"linearNone",
-                                "tween":true,
-                                "target":3,
-                                "key":"rotation",
-                                "index":4
-                            },
-                            {
-                                "value":-20,
-                                "tweenMethod":"linearNone",
-                                "tween":true,
-                                "target":3,
-                                "key":"rotation",
-                                "index":6
-                            },
-                            {
-                                "value":0,
-                                "tweenMethod":"linearNone",
-                                "tween":true,
-                                "target":3,
-                                "key":"rotation",
-                                "index":8
-                            }],
-                        "pivotY":[
-                            {
-                                "value":48,
-                                "tweenMethod":"linearNone",
-                                "tween":true,
-                                "target":3,
-                                "key":"pivotY",
-                                "index":0
-                            }]
-                    }
-                },
-                {
-                    "target":4,
-                    "keyframes":{
-
-                    }
-                },
-                {
-                    "target":5,
-                    "keyframes":{
-
-                    }
-                },
-                {
-                    "target":6,
-                    "keyframes":{
-
-                    }
-                },
-                {
-                    "target":7,
-                    "keyframes":{
-
-                    }
-                },
-                {
-                    "target":8,
-                    "keyframes":{
-
-                    }
-                },
-                {
-                    "target":9,
-                    "keyframes":{
-
-                    }
-                }],
-            "name":"ani2",
-            "id":1,
-            "frameRate":24,
-            "action":0
-        },
-        {
-            "nodes":[
-                {
-                    "target":3,
-                    "keyframes":{
-
-                    }
-                },
                 {
                     "target":4,
                     "keyframes":{
@@ -317,36 +117,6 @@
                                 "index":2
                             }]
                     }
-                },
-                {
-                    "target":5,
-                    "keyframes":{
-
-                    }
-                },
-                {
-                    "target":6,
-                    "keyframes":{
-
-                    }
-                },
-                {
-                    "target":7,
-                    "keyframes":{
-
-                    }
-                },
-                {
-                    "target":8,
-                    "keyframes":{
-
-                    }
-                },
-                {
-                    "target":9,
-                    "keyframes":{
-
-                    }
                 }],
             "name":"ani1",
             "id":1,
@@ -356,35 +126,25 @@
         {
             "nodes":[
                 {
-                    "target":3,
-                    "keyframes":{
-
-                    }
-                },
-                {
                     "target":4,
-                    "keyframes":{
-
-                    }
-                },
-                {
-                    "target":5,
                     "keyframes":{
                         "y":[
                             {
-                                "value":49,
+                                "value":61,
                                 "tweenMethod":"linearNone",
                                 "tween":true,
-                                "target":5,
+                                "target":4,
+                                "label":null,
                                 "key":"y",
                                 "index":0
                             }],
                         "x":[
                             {
-                                "value":24,
+                                "value":26,
                                 "tweenMethod":"linearNone",
                                 "tween":true,
-                                "target":5,
+                                "target":4,
+                                "label":null,
                                 "key":"x",
                                 "index":0
                             }],
@@ -393,7 +153,8 @@
                                 "value":"source/resident/eat.png",
                                 "tweenMethod":"linearNone",
                                 "tween":false,
-                                "target":5,
+                                "target":4,
+                                "label":null,
                                 "key":"skin",
                                 "index":0
                             }],
@@ -402,7 +163,8 @@
                                 "value":0,
                                 "tweenMethod":"linearNone",
                                 "tween":true,
-                                "target":5,
+                                "target":4,
+                                "label":null,
                                 "key":"skewY",
                                 "index":0
                             },
@@ -410,7 +172,8 @@
                                 "value":0,
                                 "tweenMethod":"linearNone",
                                 "tween":true,
-                                "target":5,
+                                "target":4,
+                                "label":null,
                                 "key":"skewY",
                                 "index":2
                             },
@@ -418,7 +181,8 @@
                                 "value":0,
                                 "tweenMethod":"linearNone",
                                 "tween":true,
-                                "target":5,
+                                "target":4,
+                                "label":null,
                                 "key":"skewY",
                                 "index":4
                             },
@@ -426,7 +190,8 @@
                                 "value":0,
                                 "tweenMethod":"linearNone",
                                 "tween":true,
-                                "target":5,
+                                "target":4,
+                                "label":null,
                                 "key":"skewY",
                                 "index":6
                             }],
@@ -435,7 +200,8 @@
                                 "value":10,
                                 "tweenMethod":"linearNone",
                                 "tween":true,
-                                "target":5,
+                                "target":4,
+                                "label":null,
                                 "key":"rotation",
                                 "index":0
                             },
@@ -443,7 +209,8 @@
                                 "value":0,
                                 "tweenMethod":"linearNone",
                                 "tween":true,
-                                "target":5,
+                                "target":4,
+                                "label":null,
                                 "key":"rotation",
                                 "index":2
                             },
@@ -451,7 +218,8 @@
                                 "value":-10,
                                 "tweenMethod":"linearNone",
                                 "tween":true,
-                                "target":5,
+                                "target":4,
+                                "label":null,
                                 "key":"rotation",
                                 "index":4
                             },
@@ -459,52 +227,31 @@
                                 "value":0,
                                 "tweenMethod":"linearNone",
                                 "tween":true,
-                                "target":5,
+                                "target":4,
+                                "label":null,
                                 "key":"rotation",
                                 "index":6
                             }],
                         "pivotY":[
                             {
-                                "value":48,
+                                "value":60,
                                 "tweenMethod":"linearNone",
                                 "tween":true,
-                                "target":5,
+                                "target":4,
+                                "label":null,
                                 "key":"pivotY",
                                 "index":0
                             }],
                         "pivotX":[
                             {
-                                "value":24,
+                                "value":30,
                                 "tweenMethod":"linearNone",
                                 "tween":true,
-                                "target":5,
+                                "target":4,
+                                "label":null,
                                 "key":"pivotX",
                                 "index":0
                             }]
-                    }
-                },
-                {
-                    "target":6,
-                    "keyframes":{
-
-                    }
-                },
-                {
-                    "target":7,
-                    "keyframes":{
-
-                    }
-                },
-                {
-                    "target":8,
-                    "keyframes":{
-
-                    }
-                },
-                {
-                    "target":9,
-                    "keyframes":{
-
                     }
                 }],
             "name":"ani3",
@@ -515,32 +262,15 @@
         {
             "nodes":[
                 {
-                    "target":3,
-                    "keyframes":{
-
-                    }
-                },
-                {
                     "target":4,
-                    "keyframes":{
-
-                    }
-                },
-                {
-                    "target":5,
-                    "keyframes":{
-
-                    }
-                },
-                {
-                    "target":6,
                     "keyframes":{
                         "y":[
                             {
                                 "value":40,
                                 "tweenMethod":"linearNone",
                                 "tween":true,
-                                "target":6,
+                                "target":4,
+                                "label":null,
                                 "key":"y",
                                 "index":0
                             }],
@@ -549,7 +279,8 @@
                                 "value":24,
                                 "tweenMethod":"linearNone",
                                 "tween":true,
-                                "target":6,
+                                "target":4,
+                                "label":null,
                                 "key":"x",
                                 "index":0
                             }],
@@ -558,7 +289,8 @@
                                 "value":"source/resident/drinkwater.png",
                                 "tweenMethod":"linearNone",
                                 "tween":false,
-                                "target":6,
+                                "target":4,
+                                "label":null,
                                 "key":"skin",
                                 "index":0
                             }],
@@ -567,7 +299,8 @@
                                 "value":1,
                                 "tweenMethod":"linearNone",
                                 "tween":true,
-                                "target":6,
+                                "target":4,
+                                "label":null,
                                 "key":"scaleY",
                                 "index":0
                             },
@@ -575,7 +308,8 @@
                                 "value":1.5,
                                 "tweenMethod":"linearNone",
                                 "tween":true,
-                                "target":6,
+                                "target":4,
+                                "label":null,
                                 "key":"scaleY",
                                 "index":5
                             },
@@ -583,7 +317,8 @@
                                 "value":1,
                                 "tweenMethod":"linearNone",
                                 "tween":true,
-                                "target":6,
+                                "target":4,
+                                "label":null,
                                 "key":"scaleY",
                                 "index":10
                             }],
@@ -592,7 +327,8 @@
                                 "value":1,
                                 "tweenMethod":"linearNone",
                                 "tween":true,
-                                "target":6,
+                                "target":4,
+                                "label":null,
                                 "key":"scaleX",
                                 "index":0
                             },
@@ -600,7 +336,8 @@
                                 "value":1,
                                 "tweenMethod":"linearNone",
                                 "tween":true,
-                                "target":6,
+                                "target":4,
+                                "label":null,
                                 "key":"scaleX",
                                 "index":5
                             },
@@ -608,7 +345,8 @@
                                 "value":1.5,
                                 "tweenMethod":"linearNone",
                                 "tween":true,
-                                "target":6,
+                                "target":4,
+                                "label":null,
                                 "key":"scaleX",
                                 "index":10
                             },
@@ -616,7 +354,8 @@
                                 "value":1,
                                 "tweenMethod":"linearNone",
                                 "tween":true,
-                                "target":6,
+                                "target":4,
+                                "label":null,
                                 "key":"scaleX",
                                 "index":15
                             }],
@@ -625,7 +364,8 @@
                                 "value":0,
                                 "tweenMethod":"linearNone",
                                 "tween":true,
-                                "target":6,
+                                "target":4,
+                                "label":null,
                                 "key":"rotation",
                                 "index":0
                             }],
@@ -634,7 +374,8 @@
                                 "value":48,
                                 "tweenMethod":"linearNone",
                                 "tween":true,
-                                "target":6,
+                                "target":4,
+                                "label":null,
                                 "key":"pivotY",
                                 "index":0
                             }],
@@ -643,28 +384,11 @@
                                 "value":24,
                                 "tweenMethod":"linearNone",
                                 "tween":true,
-                                "target":6,
+                                "target":4,
+                                "label":null,
                                 "key":"pivotX",
                                 "index":0
                             }]
-                    }
-                },
-                {
-                    "target":7,
-                    "keyframes":{
-
-                    }
-                },
-                {
-                    "target":8,
-                    "keyframes":{
-
-                    }
-                },
-                {
-                    "target":9,
-                    "keyframes":{
-
                     }
                 }],
             "name":"ani4",
@@ -675,38 +399,15 @@
         {
             "nodes":[
                 {
-                    "target":3,
-                    "keyframes":{
-
-                    }
-                },
-                {
                     "target":4,
-                    "keyframes":{
-
-                    }
-                },
-                {
-                    "target":5,
-                    "keyframes":{
-
-                    }
-                },
-                {
-                    "target":6,
-                    "keyframes":{
-
-                    }
-                },
-                {
-                    "target":7,
                     "keyframes":{
                         "y":[
                             {
                                 "value":24,
                                 "tweenMethod":"linearNone",
                                 "tween":true,
-                                "target":7,
+                                "target":4,
+                                "label":null,
                                 "key":"y",
                                 "index":0
                             }],
@@ -715,7 +416,8 @@
                                 "value":24,
                                 "tweenMethod":"linearNone",
                                 "tween":true,
-                                "target":7,
+                                "target":4,
+                                "label":null,
                                 "key":"x",
                                 "index":0
                             }],
@@ -724,7 +426,8 @@
                                 "value":"source/resident/heart.png",
                                 "tweenMethod":"linearNone",
                                 "tween":false,
-                                "target":7,
+                                "target":4,
+                                "label":null,
                                 "key":"skin",
                                 "index":0
                             }],
@@ -733,7 +436,8 @@
                                 "value":1,
                                 "tweenMethod":"linearNone",
                                 "tween":true,
-                                "target":7,
+                                "target":4,
+                                "label":null,
                                 "key":"scaleY",
                                 "index":0
                             },
@@ -741,7 +445,8 @@
                                 "value":1.1,
                                 "tweenMethod":"linearNone",
                                 "tween":true,
-                                "target":7,
+                                "target":4,
+                                "label":null,
                                 "key":"scaleY",
                                 "index":5
                             },
@@ -749,7 +454,8 @@
                                 "value":1,
                                 "tweenMethod":"linearNone",
                                 "tween":true,
-                                "target":7,
+                                "target":4,
+                                "label":null,
                                 "key":"scaleY",
                                 "index":10
                             },
@@ -757,7 +463,8 @@
                                 "value":0.9,
                                 "tweenMethod":"linearNone",
                                 "tween":true,
-                                "target":7,
+                                "target":4,
+                                "label":null,
                                 "key":"scaleY",
                                 "index":15
                             },
@@ -765,7 +472,8 @@
                                 "value":1,
                                 "tweenMethod":"linearNone",
                                 "tween":true,
-                                "target":7,
+                                "target":4,
+                                "label":null,
                                 "key":"scaleY",
                                 "index":20
                             }],
@@ -774,7 +482,8 @@
                                 "value":1,
                                 "tweenMethod":"linearNone",
                                 "tween":true,
-                                "target":7,
+                                "target":4,
+                                "label":null,
                                 "key":"scaleX",
                                 "index":0
                             },
@@ -782,7 +491,8 @@
                                 "value":0.9,
                                 "tweenMethod":"linearNone",
                                 "tween":true,
-                                "target":7,
+                                "target":4,
+                                "label":null,
                                 "key":"scaleX",
                                 "index":5
                             },
@@ -790,7 +500,8 @@
                                 "value":1,
                                 "tweenMethod":"linearNone",
                                 "tween":true,
-                                "target":7,
+                                "target":4,
+                                "label":null,
                                 "key":"scaleX",
                                 "index":10
                             },
@@ -798,7 +509,8 @@
                                 "value":1.1,
                                 "tweenMethod":"linearNone",
                                 "tween":true,
-                                "target":7,
+                                "target":4,
+                                "label":null,
                                 "key":"scaleX",
                                 "index":15
                             },
@@ -806,7 +518,8 @@
                                 "value":1,
                                 "tweenMethod":"linearNone",
                                 "tween":true,
-                                "target":7,
+                                "target":4,
+                                "label":null,
                                 "key":"scaleX",
                                 "index":20
                             }],
@@ -815,7 +528,8 @@
                                 "value":24,
                                 "tweenMethod":"linearNone",
                                 "tween":true,
-                                "target":7,
+                                "target":4,
+                                "label":null,
                                 "key":"pivotY",
                                 "index":0
                             }],
@@ -824,22 +538,11 @@
                                 "value":24,
                                 "tweenMethod":"linearNone",
                                 "tween":true,
-                                "target":7,
+                                "target":4,
+                                "label":null,
                                 "key":"pivotX",
                                 "index":0
                             }]
-                    }
-                },
-                {
-                    "target":8,
-                    "keyframes":{
-
-                    }
-                },
-                {
-                    "target":9,
-                    "keyframes":{
-
                     }
                 }],
             "name":"ani5",
@@ -850,44 +553,15 @@
         {
             "nodes":[
                 {
-                    "target":3,
-                    "keyframes":{
-
-                    }
-                },
-                {
                     "target":4,
-                    "keyframes":{
-
-                    }
-                },
-                {
-                    "target":5,
-                    "keyframes":{
-
-                    }
-                },
-                {
-                    "target":6,
-                    "keyframes":{
-
-                    }
-                },
-                {
-                    "target":7,
-                    "keyframes":{
-
-                    }
-                },
-                {
-                    "target":8,
                     "keyframes":{
                         "y":[
                             {
                                 "value":50,
                                 "tweenMethod":"linearNone",
                                 "tween":true,
-                                "target":8,
+                                "target":4,
+                                "label":null,
                                 "key":"y",
                                 "index":0
                             }],
@@ -896,7 +570,8 @@
                                 "value":0,
                                 "tweenMethod":"linearNone",
                                 "tween":true,
-                                "target":8,
+                                "target":4,
+                                "label":null,
                                 "key":"x",
                                 "index":0
                             }],
@@ -905,7 +580,8 @@
                                 "value":"source/resident/talk.png",
                                 "tweenMethod":"linearNone",
                                 "tween":false,
-                                "target":8,
+                                "target":4,
+                                "label":null,
                                 "key":"skin",
                                 "index":0
                             }],
@@ -914,7 +590,8 @@
                                 "value":0,
                                 "tweenMethod":"linearNone",
                                 "tween":true,
-                                "target":8,
+                                "target":4,
+                                "label":null,
                                 "key":"rotation",
                                 "index":0
                             },
@@ -922,7 +599,8 @@
                                 "value":0,
                                 "tweenMethod":"linearNone",
                                 "tween":true,
-                                "target":8,
+                                "target":4,
+                                "label":null,
                                 "key":"rotation",
                                 "index":10
                             },
@@ -930,7 +608,8 @@
                                 "value":10,
                                 "tweenMethod":"linearNone",
                                 "tween":true,
-                                "target":8,
+                                "target":4,
+                                "label":null,
                                 "key":"rotation",
                                 "index":15
                             },
@@ -938,7 +617,8 @@
                                 "value":0,
                                 "tweenMethod":"linearNone",
                                 "tween":true,
-                                "target":8,
+                                "target":4,
+                                "label":null,
                                 "key":"rotation",
                                 "index":20
                             },
@@ -946,7 +626,8 @@
                                 "value":-10,
                                 "tweenMethod":"linearNone",
                                 "tween":true,
-                                "target":8,
+                                "target":4,
+                                "label":null,
                                 "key":"rotation",
                                 "index":25
                             },
@@ -954,7 +635,8 @@
                                 "value":0,
                                 "tweenMethod":"linearNone",
                                 "tween":true,
-                                "target":8,
+                                "target":4,
+                                "label":null,
                                 "key":"rotation",
                                 "index":30
                             }],
@@ -963,7 +645,8 @@
                                 "value":64,
                                 "tweenMethod":"linearNone",
                                 "tween":true,
-                                "target":8,
+                                "target":4,
+                                "label":null,
                                 "key":"pivotY",
                                 "index":0
                             }],
@@ -972,7 +655,8 @@
                                 "value":0,
                                 "tweenMethod":"linearNone",
                                 "tween":true,
-                                "target":8,
+                                "target":4,
+                                "label":null,
                                 "key":"pivotX",
                                 "index":0
                             }],
@@ -981,7 +665,8 @@
                                 "value":0,
                                 "tweenMethod":"linearNone",
                                 "tween":true,
-                                "target":8,
+                                "target":4,
+                                "label":null,
                                 "key":"alpha",
                                 "index":0
                             },
@@ -989,7 +674,8 @@
                                 "value":1,
                                 "tweenMethod":"linearNone",
                                 "tween":true,
-                                "target":8,
+                                "target":4,
+                                "label":null,
                                 "key":"alpha",
                                 "index":5
                             },
@@ -997,7 +683,8 @@
                                 "value":1,
                                 "tweenMethod":"linearNone",
                                 "tween":true,
-                                "target":8,
+                                "target":4,
+                                "label":null,
                                 "key":"alpha",
                                 "index":35
                             },
@@ -1005,16 +692,11 @@
                                 "value":0,
                                 "tweenMethod":"linearNone",
                                 "tween":true,
-                                "target":8,
+                                "target":4,
+                                "label":null,
                                 "key":"alpha",
                                 "index":40
                             }]
-                    }
-                },
-                {
-                    "target":9,
-                    "keyframes":{
-
                     }
                 }],
             "name":"ani6",
@@ -1025,60 +707,36 @@
         {
             "nodes":[
                 {
-                    "target":3,
-                    "keyframes":{
-
-                    }
-                },
-                {
                     "target":4,
-                    "keyframes":{
-
-                    }
-                },
-                {
-                    "target":5,
-                    "keyframes":{
-
-                    }
-                },
-                {
-                    "target":6,
-                    "keyframes":{
-
-                    }
-                },
-                {
-                    "target":7,
-                    "keyframes":{
-
-                    }
-                },
-                {
-                    "target":8,
-                    "keyframes":{
-
-                    }
-                },
-                {
-                    "target":9,
                     "keyframes":{
                         "y":[
                             {
-                                "value":24,
+                                "value":33,
                                 "tweenMethod":"linearNone",
                                 "tween":true,
-                                "target":9,
+                                "target":4,
+                                "label":null,
                                 "key":"y",
                                 "index":0
                             }],
                         "x":[
                             {
-                                "value":24,
+                                "value":28,
                                 "tweenMethod":"linearNone",
                                 "tween":true,
-                                "target":9,
+                                "target":4,
+                                "label":null,
                                 "key":"x",
+                                "index":0
+                            }],
+                        "width":[
+                            {
+                                "value":100,
+                                "tweenMethod":"linearNone",
+                                "tween":true,
+                                "target":4,
+                                "label":null,
+                                "key":"width",
                                 "index":0
                             }],
                         "skin":[
@@ -1086,7 +744,8 @@
                                 "value":"source/resident/attack.png",
                                 "tweenMethod":"linearNone",
                                 "tween":false,
-                                "target":9,
+                                "target":4,
+                                "label":null,
                                 "key":"skin",
                                 "index":0
                             },
@@ -1094,7 +753,8 @@
                                 "value":"source/resident/attack.png",
                                 "tweenMethod":"linearNone",
                                 "tween":false,
-                                "target":9,
+                                "target":4,
+                                "label":null,
                                 "key":"skin",
                                 "index":34
                             }],
@@ -1103,7 +763,8 @@
                                 "value":0.5,
                                 "tweenMethod":"linearNone",
                                 "tween":true,
-                                "target":9,
+                                "target":4,
+                                "label":null,
                                 "key":"scaleY",
                                 "index":0
                             },
@@ -1111,7 +772,8 @@
                                 "value":1,
                                 "tweenMethod":"linearNone",
                                 "tween":true,
-                                "target":9,
+                                "target":4,
+                                "label":null,
                                 "key":"scaleY",
                                 "index":5
                             },
@@ -1119,7 +781,8 @@
                                 "value":1,
                                 "tweenMethod":"linearNone",
                                 "tween":true,
-                                "target":9,
+                                "target":4,
+                                "label":null,
                                 "key":"scaleY",
                                 "index":29
                             },
@@ -1127,7 +790,8 @@
                                 "value":0.5,
                                 "tweenMethod":"linearNone",
                                 "tween":true,
-                                "target":9,
+                                "target":4,
+                                "label":null,
                                 "key":"scaleY",
                                 "index":34
                             }],
@@ -1136,7 +800,8 @@
                                 "value":0.5,
                                 "tweenMethod":"linearNone",
                                 "tween":true,
-                                "target":9,
+                                "target":4,
+                                "label":null,
                                 "key":"scaleX",
                                 "index":0
                             },
@@ -1144,7 +809,8 @@
                                 "value":1,
                                 "tweenMethod":"linearNone",
                                 "tween":true,
-                                "target":9,
+                                "target":4,
+                                "label":null,
                                 "key":"scaleX",
                                 "index":5
                             },
@@ -1152,7 +818,8 @@
                                 "value":1,
                                 "tweenMethod":"linearNone",
                                 "tween":true,
-                                "target":9,
+                                "target":4,
+                                "label":null,
                                 "key":"scaleX",
                                 "index":29
                             },
@@ -1160,7 +827,8 @@
                                 "value":0.5,
                                 "tweenMethod":"linearNone",
                                 "tween":true,
-                                "target":9,
+                                "target":4,
+                                "label":null,
                                 "key":"scaleX",
                                 "index":34
                             }],
@@ -1169,7 +837,8 @@
                                 "value":0,
                                 "tweenMethod":"linearNone",
                                 "tween":true,
-                                "target":9,
+                                "target":4,
+                                "label":null,
                                 "key":"rotation",
                                 "index":0
                             },
@@ -1177,7 +846,8 @@
                                 "value":0,
                                 "tweenMethod":"linearNone",
                                 "tween":true,
-                                "target":9,
+                                "target":4,
+                                "label":null,
                                 "key":"rotation",
                                 "index":5
                             },
@@ -1185,7 +855,8 @@
                                 "value":-30,
                                 "tweenMethod":"linearNone",
                                 "tween":true,
-                                "target":9,
+                                "target":4,
+                                "label":null,
                                 "key":"rotation",
                                 "index":7
                             },
@@ -1193,7 +864,8 @@
                                 "value":0,
                                 "tweenMethod":"linearNone",
                                 "tween":true,
-                                "target":9,
+                                "target":4,
+                                "label":null,
                                 "key":"rotation",
                                 "index":9
                             },
@@ -1201,7 +873,8 @@
                                 "value":30,
                                 "tweenMethod":"linearNone",
                                 "tween":true,
-                                "target":9,
+                                "target":4,
+                                "label":null,
                                 "key":"rotation",
                                 "index":11
                             },
@@ -1209,7 +882,8 @@
                                 "value":0,
                                 "tweenMethod":"linearNone",
                                 "tween":true,
-                                "target":9,
+                                "target":4,
+                                "label":null,
                                 "key":"rotation",
                                 "index":13
                             },
@@ -1217,7 +891,8 @@
                                 "value":-15,
                                 "tweenMethod":"linearNone",
                                 "tween":true,
-                                "target":9,
+                                "target":4,
+                                "label":null,
                                 "key":"rotation",
                                 "index":15
                             },
@@ -1225,7 +900,8 @@
                                 "value":0,
                                 "tweenMethod":"linearNone",
                                 "tween":true,
-                                "target":9,
+                                "target":4,
+                                "label":null,
                                 "key":"rotation",
                                 "index":17
                             },
@@ -1233,7 +909,8 @@
                                 "value":15,
                                 "tweenMethod":"linearNone",
                                 "tween":true,
-                                "target":9,
+                                "target":4,
+                                "label":null,
                                 "key":"rotation",
                                 "index":19
                             },
@@ -1241,7 +918,8 @@
                                 "value":0,
                                 "tweenMethod":"linearNone",
                                 "tween":true,
-                                "target":9,
+                                "target":4,
+                                "label":null,
                                 "key":"rotation",
                                 "index":21
                             },
@@ -1249,7 +927,8 @@
                                 "value":-5,
                                 "tweenMethod":"linearNone",
                                 "tween":true,
-                                "target":9,
+                                "target":4,
+                                "label":null,
                                 "key":"rotation",
                                 "index":23
                             },
@@ -1257,7 +936,8 @@
                                 "value":0,
                                 "tweenMethod":"linearNone",
                                 "tween":true,
-                                "target":9,
+                                "target":4,
+                                "label":null,
                                 "key":"rotation",
                                 "index":25
                             },
@@ -1265,7 +945,8 @@
                                 "value":5,
                                 "tweenMethod":"linearNone",
                                 "tween":true,
-                                "target":9,
+                                "target":4,
+                                "label":null,
                                 "key":"rotation",
                                 "index":27
                             },
@@ -1273,26 +954,39 @@
                                 "value":0,
                                 "tweenMethod":"linearNone",
                                 "tween":true,
-                                "target":9,
+                                "target":4,
+                                "label":null,
                                 "key":"rotation",
                                 "index":29
                             }],
                         "pivotY":[
                             {
-                                "value":24,
+                                "value":15,
                                 "tweenMethod":"linearNone",
                                 "tween":true,
-                                "target":9,
+                                "target":4,
+                                "label":null,
                                 "key":"pivotY",
                                 "index":0
                             }],
                         "pivotX":[
                             {
-                                "value":24,
+                                "value":50,
                                 "tweenMethod":"linearNone",
                                 "tween":true,
-                                "target":9,
+                                "target":4,
+                                "label":null,
                                 "key":"pivotX",
+                                "index":0
+                            }],
+                        "height":[
+                            {
+                                "value":30,
+                                "tweenMethod":"linearNone",
+                                "tween":true,
+                                "target":4,
+                                "label":null,
+                                "key":"height",
                                 "index":0
                             }]
                     }
@@ -1305,84 +999,158 @@
         {
             "nodes":[
                 {
-                    "target":3,
-                    "keyframes":{
-
-                    }
-                },
-                {
                     "target":4,
-                    "keyframes":{
-
-                    }
-                },
-                {
-                    "target":5,
-                    "keyframes":{
-
-                    }
-                },
-                {
-                    "target":6,
-                    "keyframes":{
-
-                    }
-                },
-                {
-                    "target":7,
-                    "keyframes":{
-
-                    }
-                },
-                {
-                    "target":8,
-                    "keyframes":{
-
-                    }
-                },
-                {
-                    "target":9,
                     "keyframes":{
                         "y":[
                             {
-                                "value":24,
+                                "value":48,
                                 "tweenMethod":"linearNone",
                                 "tween":true,
-                                "target":9,
+                                "target":4,
+                                "key":"y",
+                                "index":0
+                            },
+                            {
+                                "value":48,
+                                "tweenMethod":"linearNone",
+                                "tween":true,
+                                "target":4,
+                                "key":"y",
+                                "index":2
+                            }],
+                        "skin":[
+                            {
+                                "value":"source/resident/collect.png",
+                                "tweenMethod":"linearNone",
+                                "tween":false,
+                                "target":4,
+                                "key":"skin",
+                                "index":0
+                            },
+                            {
+                                "value":"source/resident/collect.png",
+                                "tweenMethod":"linearNone",
+                                "tween":false,
+                                "target":4,
+                                "key":"skin",
+                                "index":10
+                            }],
+                        "rotation":[
+                            {
+                                "value":0,
+                                "tweenMethod":"linearNone",
+                                "tween":true,
+                                "target":4,
+                                "key":"rotation",
+                                "index":0
+                            },
+                            {
+                                "value":20,
+                                "tweenMethod":"linearNone",
+                                "tween":true,
+                                "target":4,
+                                "key":"rotation",
+                                "index":2
+                            },
+                            {
+                                "value":0,
+                                "tweenMethod":"linearNone",
+                                "tween":true,
+                                "target":4,
+                                "key":"rotation",
+                                "index":4
+                            },
+                            {
+                                "value":-20,
+                                "tweenMethod":"linearNone",
+                                "tween":true,
+                                "target":4,
+                                "key":"rotation",
+                                "index":6
+                            },
+                            {
+                                "value":0,
+                                "tweenMethod":"linearNone",
+                                "tween":true,
+                                "target":4,
+                                "key":"rotation",
+                                "index":8
+                            }],
+                        "pivotY":[
+                            {
+                                "value":48,
+                                "tweenMethod":"linearNone",
+                                "tween":true,
+                                "target":4,
+                                "key":"pivotY",
+                                "index":0
+                            },
+                            {
+                                "value":48,
+                                "tweenMethod":"linearNone",
+                                "tween":true,
+                                "target":4,
+                                "key":"pivotY",
+                                "index":2
+                            }]
+                    }
+                }],
+            "name":"ani2",
+            "id":1,
+            "frameRate":24,
+            "action":0
+        },
+        {
+            "nodes":[
+                {
+                    "target":4,
+                    "keyframes":{
+                        "y":[
+                            {
+                                "value":33,
+                                "tweenMethod":"linearNone",
+                                "tween":true,
+                                "target":4,
+                                "label":null,
                                 "key":"y",
                                 "index":0
                             }],
                         "x":[
                             {
-                                "value":24,
+                                "value":28,
                                 "tweenMethod":"linearNone",
                                 "tween":true,
-                                "target":9,
+                                "target":4,
+                                "label":null,
                                 "key":"x",
+                                "index":0
+                            }],
+                        "width":[
+                            {
+                                "value":100,
+                                "tweenMethod":"linearNone",
+                                "tween":true,
+                                "target":4,
+                                "label":null,
+                                "key":"width",
                                 "index":0
                             }],
                         "skin":[
                             {
-                                "value":"source/resident/fight.png",
+                                "value":"source/resident/attack.png",
                                 "tweenMethod":"linearNone",
                                 "tween":false,
-                                "target":9,
+                                "target":4,
+                                "label":null,
                                 "key":"skin",
                                 "index":0
                             },
                             {
-                                "value":"source/resident/fight.png",
+                                "value":"source/resident/attack.png",
                                 "tweenMethod":"linearNone",
                                 "tween":false,
-                                "target":9,
-                                "key":"skin",
-                                "index":5
-                            },
-                            {
-                                "value":"source/resident/fight.png",
-                                "tweenMethod":"linearNone",
-                                "tween":false,
-                                "target":9,
+                                "target":4,
+                                "label":null,
                                 "key":"skin",
                                 "index":34
                             }],
@@ -1391,7 +1159,8 @@
                                 "value":0.5,
                                 "tweenMethod":"linearNone",
                                 "tween":true,
-                                "target":9,
+                                "target":4,
+                                "label":null,
                                 "key":"scaleY",
                                 "index":0
                             },
@@ -1399,7 +1168,8 @@
                                 "value":1,
                                 "tweenMethod":"linearNone",
                                 "tween":true,
-                                "target":9,
+                                "target":4,
+                                "label":null,
                                 "key":"scaleY",
                                 "index":5
                             },
@@ -1407,7 +1177,8 @@
                                 "value":1,
                                 "tweenMethod":"linearNone",
                                 "tween":true,
-                                "target":9,
+                                "target":4,
+                                "label":null,
                                 "key":"scaleY",
                                 "index":29
                             },
@@ -1415,7 +1186,8 @@
                                 "value":0.5,
                                 "tweenMethod":"linearNone",
                                 "tween":true,
-                                "target":9,
+                                "target":4,
+                                "label":null,
                                 "key":"scaleY",
                                 "index":34
                             }],
@@ -1424,7 +1196,8 @@
                                 "value":0.5,
                                 "tweenMethod":"linearNone",
                                 "tween":true,
-                                "target":9,
+                                "target":4,
+                                "label":null,
                                 "key":"scaleX",
                                 "index":0
                             },
@@ -1432,7 +1205,8 @@
                                 "value":1,
                                 "tweenMethod":"linearNone",
                                 "tween":true,
-                                "target":9,
+                                "target":4,
+                                "label":null,
                                 "key":"scaleX",
                                 "index":5
                             },
@@ -1440,7 +1214,8 @@
                                 "value":1,
                                 "tweenMethod":"linearNone",
                                 "tween":true,
-                                "target":9,
+                                "target":4,
+                                "label":null,
                                 "key":"scaleX",
                                 "index":29
                             },
@@ -1448,7 +1223,8 @@
                                 "value":0.5,
                                 "tweenMethod":"linearNone",
                                 "tween":true,
-                                "target":9,
+                                "target":4,
+                                "label":null,
                                 "key":"scaleX",
                                 "index":34
                             }],
@@ -1457,7 +1233,8 @@
                                 "value":0,
                                 "tweenMethod":"linearNone",
                                 "tween":true,
-                                "target":9,
+                                "target":4,
+                                "label":null,
                                 "key":"rotation",
                                 "index":0
                             },
@@ -1465,7 +1242,8 @@
                                 "value":0,
                                 "tweenMethod":"linearNone",
                                 "tween":true,
-                                "target":9,
+                                "target":4,
+                                "label":null,
                                 "key":"rotation",
                                 "index":5
                             },
@@ -1473,7 +1251,8 @@
                                 "value":-30,
                                 "tweenMethod":"linearNone",
                                 "tween":true,
-                                "target":9,
+                                "target":4,
+                                "label":null,
                                 "key":"rotation",
                                 "index":7
                             },
@@ -1481,7 +1260,8 @@
                                 "value":0,
                                 "tweenMethod":"linearNone",
                                 "tween":true,
-                                "target":9,
+                                "target":4,
+                                "label":null,
                                 "key":"rotation",
                                 "index":9
                             },
@@ -1489,7 +1269,8 @@
                                 "value":30,
                                 "tweenMethod":"linearNone",
                                 "tween":true,
-                                "target":9,
+                                "target":4,
+                                "label":null,
                                 "key":"rotation",
                                 "index":11
                             },
@@ -1497,7 +1278,8 @@
                                 "value":0,
                                 "tweenMethod":"linearNone",
                                 "tween":true,
-                                "target":9,
+                                "target":4,
+                                "label":null,
                                 "key":"rotation",
                                 "index":13
                             },
@@ -1505,7 +1287,8 @@
                                 "value":-15,
                                 "tweenMethod":"linearNone",
                                 "tween":true,
-                                "target":9,
+                                "target":4,
+                                "label":null,
                                 "key":"rotation",
                                 "index":15
                             },
@@ -1513,7 +1296,8 @@
                                 "value":0,
                                 "tweenMethod":"linearNone",
                                 "tween":true,
-                                "target":9,
+                                "target":4,
+                                "label":null,
                                 "key":"rotation",
                                 "index":17
                             },
@@ -1521,7 +1305,8 @@
                                 "value":15,
                                 "tweenMethod":"linearNone",
                                 "tween":true,
-                                "target":9,
+                                "target":4,
+                                "label":null,
                                 "key":"rotation",
                                 "index":19
                             },
@@ -1529,7 +1314,8 @@
                                 "value":0,
                                 "tweenMethod":"linearNone",
                                 "tween":true,
-                                "target":9,
+                                "target":4,
+                                "label":null,
                                 "key":"rotation",
                                 "index":21
                             },
@@ -1537,7 +1323,8 @@
                                 "value":-5,
                                 "tweenMethod":"linearNone",
                                 "tween":true,
-                                "target":9,
+                                "target":4,
+                                "label":null,
                                 "key":"rotation",
                                 "index":23
                             },
@@ -1545,7 +1332,8 @@
                                 "value":0,
                                 "tweenMethod":"linearNone",
                                 "tween":true,
-                                "target":9,
+                                "target":4,
+                                "label":null,
                                 "key":"rotation",
                                 "index":25
                             },
@@ -1553,7 +1341,8 @@
                                 "value":5,
                                 "tweenMethod":"linearNone",
                                 "tween":true,
-                                "target":9,
+                                "target":4,
+                                "label":null,
                                 "key":"rotation",
                                 "index":27
                             },
@@ -1561,16 +1350,263 @@
                                 "value":0,
                                 "tweenMethod":"linearNone",
                                 "tween":true,
-                                "target":9,
+                                "target":4,
+                                "label":null,
                                 "key":"rotation",
                                 "index":29
+                            }],
+                        "pivotY":[
+                            {
+                                "value":15,
+                                "tweenMethod":"linearNone",
+                                "tween":true,
+                                "target":4,
+                                "label":null,
+                                "key":"pivotY",
+                                "index":0
+                            }],
+                        "pivotX":[
+                            {
+                                "value":50,
+                                "tweenMethod":"linearNone",
+                                "tween":true,
+                                "target":4,
+                                "label":null,
+                                "key":"pivotX",
+                                "index":0
+                            }],
+                        "height":[
+                            {
+                                "value":30,
+                                "tweenMethod":"linearNone",
+                                "tween":true,
+                                "target":4,
+                                "label":null,
+                                "key":"height",
+                                "index":0
+                            }]
+                    }
+                }],
+            "name":"ani8",
+            "id":2,
+            "frameRate":24,
+            "action":0
+        },
+        {
+            "nodes":[
+                {
+                    "target":4,
+                    "keyframes":{
+                        "y":[
+                            {
+                                "value":24,
+                                "tweenMethod":"linearNone",
+                                "tween":true,
+                                "target":4,
+                                "key":"y",
+                                "index":0
+                            },
+                            {
+                                "value":24,
+                                "tweenMethod":"linearNone",
+                                "tween":true,
+                                "target":4,
+                                "label":null,
+                                "key":"y",
+                                "index":2
+                            }],
+                        "x":[
+                            {
+                                "value":24,
+                                "tweenMethod":"linearNone",
+                                "tween":true,
+                                "target":4,
+                                "key":"x",
+                                "index":0
+                            },
+                            {
+                                "value":24,
+                                "tweenMethod":"linearNone",
+                                "tween":true,
+                                "target":4,
+                                "label":null,
+                                "key":"x",
+                                "index":2
+                            }],
+                        "skin":[
+                            {
+                                "value":"source/resident/package.png",
+                                "tweenMethod":"linearNone",
+                                "tween":false,
+                                "target":4,
+                                "key":"skin",
+                                "index":0
+                            },
+                            {
+                                "value":"source/resident/package.png",
+                                "tweenMethod":"linearNone",
+                                "tween":false,
+                                "target":4,
+                                "label":null,
+                                "key":"skin",
+                                "index":2
+                            }],
+                        "scaleY":[
+                            {
+                                "value":1,
+                                "tweenMethod":"linearNone",
+                                "tween":true,
+                                "target":4,
+                                "key":"scaleY",
+                                "index":0
+                            },
+                            {
+                                "value":0.9,
+                                "tweenMethod":"linearNone",
+                                "tween":true,
+                                "target":4,
+                                "key":"scaleY",
+                                "index":6
+                            },
+                            {
+                                "value":1,
+                                "tweenMethod":"linearNone",
+                                "tween":true,
+                                "target":4,
+                                "key":"scaleY",
+                                "index":8
+                            }],
+                        "scaleX":[
+                            {
+                                "value":1,
+                                "tweenMethod":"linearNone",
+                                "tween":true,
+                                "target":4,
+                                "key":"scaleX",
+                                "index":0
+                            },
+                            {
+                                "value":0.9,
+                                "tweenMethod":"linearNone",
+                                "tween":true,
+                                "target":4,
+                                "key":"scaleX",
+                                "index":2
+                            },
+                            {
+                                "value":1,
+                                "tweenMethod":"linearNone",
+                                "tween":true,
+                                "target":4,
+                                "key":"scaleX",
+                                "index":4
                             }],
                         "pivotY":[
                             {
                                 "value":24,
                                 "tweenMethod":"linearNone",
                                 "tween":true,
-                                "target":9,
+                                "target":4,
+                                "key":"pivotY",
+                                "index":0
+                            },
+                            {
+                                "value":24,
+                                "tweenMethod":"linearNone",
+                                "tween":true,
+                                "target":4,
+                                "label":null,
+                                "key":"pivotY",
+                                "index":2
+                            }],
+                        "pivotX":[
+                            {
+                                "value":24,
+                                "tweenMethod":"linearNone",
+                                "tween":true,
+                                "target":4,
+                                "key":"pivotX",
+                                "index":0
+                            },
+                            {
+                                "value":24,
+                                "tweenMethod":"linearNone",
+                                "tween":true,
+                                "target":4,
+                                "label":null,
+                                "key":"pivotX",
+                                "index":2
+                            }]
+                    }
+                }],
+            "name":"ani9",
+            "id":2,
+            "frameRate":24,
+            "action":0
+        },
+        {
+            "nodes":[
+                {
+                    "target":4,
+                    "keyframes":{
+                        "y":[
+                            {
+                                "value":48,
+                                "tweenMethod":"linearNone",
+                                "tween":true,
+                                "target":4,
+                                "key":"y",
+                                "index":0
+                            }],
+                        "x":[
+                            {
+                                "value":24,
+                                "tweenMethod":"linearNone",
+                                "tween":true,
+                                "target":4,
+                                "key":"x",
+                                "index":0
+                            }],
+                        "skin":[
+                            {
+                                "value":"source/resident/package.png",
+                                "tweenMethod":"linearNone",
+                                "tween":false,
+                                "target":4,
+                                "key":"skin",
+                                "index":0
+                            }],
+                        "scaleY":[
+                            {
+                                "value":1,
+                                "tweenMethod":"linearNone",
+                                "tween":true,
+                                "target":4,
+                                "key":"scaleY",
+                                "index":0
+                            },
+                            {
+                                "value":0.9,
+                                "tweenMethod":"linearNone",
+                                "tween":true,
+                                "target":4,
+                                "key":"scaleY",
+                                "index":5
+                            },
+                            {
+                                "value":1,
+                                "tweenMethod":"linearNone",
+                                "tween":true,
+                                "target":4,
+                                "key":"scaleY",
+                                "index":10
+                            }],
+                        "pivotY":[
+                            {
+                                "value":48,
+                                "tweenMethod":"linearNone",
+                                "tween":true,
+                                "target":4,
                                 "key":"pivotY",
                                 "index":0
                             }],
@@ -1579,13 +1615,13 @@
                                 "value":24,
                                 "tweenMethod":"linearNone",
                                 "tween":true,
-                                "target":9,
+                                "target":4,
                                 "key":"pivotX",
                                 "index":0
                             }]
                     }
                 }],
-            "name":"ani8",
+            "name":"ani10",
             "id":2,
             "frameRate":24,
             "action":0

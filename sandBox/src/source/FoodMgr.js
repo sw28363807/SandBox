@@ -6,11 +6,11 @@ import FoodLogic from "./FoodLogic";
 
 export default class FoodMgr extends Laya.Script {
 
-    constructor() { 
+    constructor() {
         super();
         this.foods = {};
     }
-    
+
     static getInstance() {
         return FoodMgr.instance = FoodMgr.instance || new FoodMgr();
     }
@@ -21,6 +21,7 @@ export default class FoodMgr extends Laya.Script {
         let food = prefabDef.create();
         config.parent.addChild(food);
         let script = food.getComponent(FoodLogic);
+        food.foodScript = script;
         script.setTrigger(config.trigger);
         let model = GameModel.getInstance().newFoodModel(config);
         script.refreshByModel(model);
@@ -34,13 +35,12 @@ export default class FoodMgr extends Laya.Script {
         let ret = null;
         for (const key in this.foods) {
             let food = this.foods[key];
-            let script = food.getComponent(FoodLogic);
-            if (param.state != null && 
-                script.getModel().getFoodState() != param.state) {
-                    continue;
+            if (param.state != null &&
+                food.foodScript.getModel().getFoodState() != param.state) {
+                continue;
             }
             let curDistance = new Laya.Point(food.x, food.y).distance(param.x, param.y);
-            if (curDistance < distance) {
+            if (curDistance <= param.area && curDistance < distance) {
                 distance = curDistance;
                 ret = food;
             }
@@ -52,7 +52,7 @@ export default class FoodMgr extends Laya.Script {
     canFindFood() {
         for (const key in this.foods) {
             let food = this.foods[key];
-            let script = food.getComponent(FoodLogic);
+            let script = food.foodScript;
             if (script.getModel().getFoodState() == FoodMeta.FoodState.CanEat) {
                 return true;
             }
@@ -69,8 +69,7 @@ export default class FoodMgr extends Laya.Script {
     removeFoodById(foodId) {
         for (const key in this.foods) {
             let food = this.foods[key];
-            let foodScript = food.getComponent(FoodLogic);
-            if (foodScript.getModel().getFoodId() == foodId) {
+            if (food.foodScript.getModel().getFoodId() == foodId) {
                 food.destroy(true);
                 delete this.foods[key];
                 GameModel.getInstance().removeFoodModelById(foodId);

@@ -28,8 +28,8 @@ export default class FoodTrigger extends Laya.Script {
         if (this.curNum >= FoodMeta.FoodMaxNumPerTrigger) {
             return;
         }
-        let dstX = this.owner.x + RandomMgr.randomNumer(0, this.owner.width);
-        let dstY = this.owner.y + this.owner.height - RandomMgr.randomNumer(50, this.owner.height);
+        let dstX = this.owner.x + RandomMgr.randomNumber(0, this.owner.width);
+        let dstY = this.owner.y + this.owner.height - RandomMgr.randomNumber(50, this.owner.height);
         FoodMgr.getInstance().createFoodByConfig({
             parent: GameContext.mapContainer,
             x: dstX,

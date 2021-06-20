@@ -1,10 +1,11 @@
 D .
 D source
 D source/building
-P BA9CE607 building1_1.png
+P 598600CA building1_1.png
 P 0B8E0B05 center2.png
 P 9920A0A0 child_school.png
 P A3C148DE farmland.png
+P F91885C2 FoodPool.png
 P 5FAFEE96 hospital1_1.png
 P AA04A559 mask.png
 P C5F26416 mask2.png
@@ -17,6 +18,7 @@ P C36D5CB8 restaurant.png
 P FCAB52E0 school_1.png
 P 61129CC1 scienceLab.png
 P E20D9AA5 shop_1.png
+P 4B9D65B7 WaterPool.png
 D source/landscape
 P C28F2A84 aaa.png
 P C54733E9 animal1.png
@@ -46,7 +48,7 @@ P 920C3CF0 treeicon.png
 P A2663D43 water.png
 P F00114D0 waterIcon.png
 D source/resident
-P BD6BC384 attack.png
+P 851750F0 attack.png
 P C9247F2B baby_anger.png
 P D65EB557 baby_enjoy1.png
 P 5FD9464E baby_enjoy2.png
@@ -86,7 +88,7 @@ P FCC3C3D5 cutdown.png
 P 9B2D9708 dialog.png
 P 8841576C die.png
 P 4E592413 drinkwater.png
-P 2A4C782C eat.png
+P 2BBE0A53 eat.png
 P 305D5048 fight.png
 P 6F763E80 heart.png
 P A8E062E6 man_anger.png
@@ -121,6 +123,7 @@ P 0480C022 man_walk_up5.png
 P C8F5B93A man_work1.png
 P BD8C9CFB man_work2.png
 P 48818065 man_work3.png
+P EC30D0B7 package.png
 P D6C57F4B sick.png
 P 1EC941BB talk.png
 P 966E7CCC woman_anger.png

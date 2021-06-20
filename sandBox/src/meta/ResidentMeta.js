@@ -1,68 +1,85 @@
 import BuildingMeta from "./BuildingMeta";
 
 export default class ResidentMeta {
+    static obtainResidentState() {
+        for (const key in ResidentMeta.ResidentState) {
+            ResidentMeta.ResidentState[key] = key;
+        }
+    }
 }
 
 //0-空状态 1-待机 2-搜索寻找盖房的地方 3-建造房子 4-寻找木材
 ResidentMeta.ResidentState = {
-    NullState: 0,       //无状态
-    IdleState: 1,       //待机状态
-    FindBlockForCreateHome: 2,  //搜索能盖房的地方
-    GotoContinueCreateHome: 3,  //继续建造家
-    CreateHome: 4,      //建造房屋
-    FindTree: 5,         //搜索树木
-    CutDownTree: 6,      //砍伐树木
-    FindStone: 7,       //寻找石材
-    CollectStone: 8,    //收集石头
-    FindFood: 9,        //搜索食物
-    EatFood: 10,         //吃饭饭
-    FindWater: 11,      //寻找水源
-    DrinkWater: 12,    //喝水,
-    LoverMan: 13,        //恋人1(主动)
-    LoverWoman: 14,        //恋人2(被动),
-    LoverGoHomeMakeLove: 15, //恋人回家生孩子行进中
-    LoverMakeLove: 16,       //生孩子
-    JoinTalking: 17,          //加入聊天
-    TalkingAbout: 18,         //聊天
-    JoinHunt: 19,             //赶去打猎
-    Hunting: 20,              //打猎
-    Die: 21,                  //死亡
-    GotoContinueCreateHospital: 22, //跑去建造医院
-    CreateHospital: 23,     //建造医院
-    GotoTreat: 24,          //跑去治疗
-    Treating: 25,           //正在治疗
-    GotoContinueCreateSchool: 26, //跑去建造学校
-    CreateSchool: 27,     //建造学校
-    GoToSchool: 28,         //去上学的路上
-    Learning: 29,           //正在学习
-    GotoContinueCreatePowerPlant: 23, //跑去建造发电厂
-    CreatePowerPlant: 31,     //建造发电厂
-    GotoContinueCreateShop: 32, //跑去建造商店
-    CreateShop: 33,     //建造商店
-    GotoContinueCreateFarmLand: 34, //跑去建造农田
-    CreateFarmLand: 35,     //建造农田
-    GotoContinueCreatePasture: 36, //跑去建造牧场
-    CreatePasture: 37,     //建造牧场
-    GotoContinueCreateOpera: 38, //跑去建造歌剧院
-    CreateOpera: 39,     //建造歌剧院
-    JoinFight: 40,         //加入打群架
-    Fighting: 41,             //打架
-    GotoContinueCreatePoliceStation: 42, //跑去建造警察局
-    CreatePoliceStation: 43,     //建造警察局
-    GotoContinueCreateLab: 44, //跑去建造科学实验室
-    CreateLab: 45,     //建造科学实验室
-    GotoContinueCreateOffice: 46, //跑去建造写字楼
-    CreateOffice: 47,     //建造写字楼
-    RandomWalk: 48,     //随机走一个位置
-    GotoContinueCreateChildSchool: 49, //跑去建造幼儿园
-    CreateChildSchool: 50,     //建造幼儿园
-    GotoChildSchoolForLearn: 51,     //赶去幼儿园学习
-    ChildLearn: 52,                 //去幼儿园学习
-    GotoContinueCreatePetShop: 49, //跑去建造宠物店
-    CreatePetShop: 50,     //建造宠物店
+    NullState: "",       //无状态
+    IdleState: "",       //待机状态
+    FindBlockForCreateHome: "",  //搜索能盖房的地方
+    GotoContinueCreateHome: "",  //继续建造家
+    CreateHome: "",      //建造房屋
+    FindTree: "",         //搜索树木
+    CutDownTree: "",      //砍伐树木
+    FindStone: "",       //寻找石材
+    CollectStone: "",    //收集石头
+    FindFood: "",        //搜索食物
+    EatFood: "",         //吃饭饭
+    FindWater: "",      //寻找水源
+    DrinkWater: "",    //喝水,
+    LoverMan: "",        //恋人1(主动)
+    LoverWoman: "",        //恋人2(被动),
+    LoverGoHomeMakeLove: "", //恋人回家生孩子行进中
+    LoverMakeLove: "",       //生孩子
+    JoinTalking: "",          //加入聊天
+    TalkingAbout: "",         //聊天
+    JoinHunt: "",             //赶去打猎
+    Hunting: "",              //打猎
+    Die: "",                  //死亡
+    GotoContinueCreateHospital: "", //跑去建造医院
+    CreateHospital: "",     //建造医院
+    GotoTreat: "",          //跑去治疗
+    Treating: "",           //正在治疗
+    GotoContinueCreateSchool: "", //跑去建造学校
+    CreateSchool: "",     //建造学校
+    GoToSchool: "",         //去上学的路上
+    Learning: "",           //正在学习
+    GotoContinueCreatePowerPlant: "", //跑去建造发电厂
+    CreatePowerPlant: "",     //建造发电厂
+    GotoContinueCreateShop: "", //跑去建造商店
+    CreateShop: "",     //建造商店
+    GotoContinueCreateFarmLand: "", //跑去建造农田
+    CreateFarmLand: "",     //建造农田
+    GotoContinueCreatePasture: "", //跑去建造牧场
+    CreatePasture: "",     //建造牧场
+    GotoContinueCreateOpera: "", //跑去建造歌剧院
+    CreateOpera: "",     //建造歌剧院
+    JoinFight: "",         //加入打群架
+    Fighting: "",             //打架
+    GotoContinueCreatePoliceStation: "", //跑去建造警察局
+    CreatePoliceStation: "",     //建造警察局
+    GotoContinueCreateLab: "", //跑去建造科学实验室
+    CreateLab: "",     //建造科学实验室
+    GotoContinueCreateOffice: "", //跑去建造写字楼
+    CreateOffice: "",     //建造写字楼
+    RandomWalk: "",     //随机走一个位置
+    GotoContinueCreateChildSchool: "", //跑去建造幼儿园
+    CreateChildSchool: "",     //建造幼儿园
+    GotoChildSchoolForLearn: "",     //赶去幼儿园学习
+    ChildLearn: "",                 //去幼儿园学习
+    GotoContinueCreatePetShop: "", //跑去建造宠物店
+    CreatePetShop: "",     //建造宠物店
+    GotoContinueCreateFoodPool: "", //跑去建造食物仓库
+    CreateFoodPool: "",     //建造食物仓库
+    GotoContinueCreateWaterPool: "", //跑去建造水仓库
+    CreateWaterPool: "",     //建造食物水仓库
+    FindFoodForSend: "",     //寻找可以运送的食物
+    CollectFood: "",        //收集食物
+    SendFoodToFoodPool: "",  //运送食物去食物库
+    FindWaterForSend: "",     //寻找可以运送的水源
+    CollectWater: "",        //收集水源
+    SendWaterToWaterPool: "",  //运送食物去水源库
 };
+ResidentMeta.obtainResidentState();
 
 // 小人可以自动建造的列表(建造行为)
+// 建造----------------------------------------------------start
 ResidentMeta.ResidentContinueCreateMap = {
     [String(ResidentMeta.ResidentState.GotoContinueCreateHome)]: ResidentMeta.ResidentState.CreateHome,
     [String(ResidentMeta.ResidentState.GotoContinueCreateHospital)]: ResidentMeta.ResidentState.CreateHospital,
@@ -77,15 +94,9 @@ ResidentMeta.ResidentContinueCreateMap = {
     [String(ResidentMeta.ResidentState.GotoContinueCreateOffice)]: ResidentMeta.ResidentState.CreateOffice,
     [String(ResidentMeta.ResidentState.GotoContinueCreateChildSchool)]: ResidentMeta.ResidentState.CreateChildSchool,
     [String(ResidentMeta.ResidentState.GotoContinueCreatePetShop)]: ResidentMeta.ResidentState.CreatePetShop,
+    [String(ResidentMeta.ResidentState.GotoContinueCreateFoodPool)]: ResidentMeta.ResidentState.CreateFoodPool,
+    [String(ResidentMeta.ResidentState.GotoContinueCreateWaterPool)]: ResidentMeta.ResidentState.CreateWaterPool,
 };
-
-// 小人的建筑的使用行为
-
-ResidentMeta.ResidentUseBuildingMap = {
-    [String(ResidentMeta.ResidentState.GotoTreat)]:ResidentMeta.ResidentState.Treating,
-    [String(ResidentMeta.ResidentState.GoToSchool)]:ResidentMeta.ResidentState.Learning,
-    [String(ResidentMeta.ResidentState.GotoChildSchoolForLearn)]:ResidentMeta.ResidentState.ChildLearn,
-}
 
 // 小人去建造的AI列表
 ResidentMeta.ResidentCreateBuildingAIMap = {
@@ -101,7 +112,42 @@ ResidentMeta.ResidentCreateBuildingAIMap = {
     [String(BuildingMeta.BuildingType.OfficeType)]: ResidentMeta.ResidentState.GotoContinueCreateOffice,
     [String(BuildingMeta.BuildingType.ChildSchoolType)]: ResidentMeta.ResidentState.GotoContinueCreateChildSchool,
     [String(BuildingMeta.BuildingType.PetShopType)]: ResidentMeta.ResidentState.GotoContinueCreatePetShop,
+    [String(BuildingMeta.BuildingType.FoodPoolType)]: ResidentMeta.ResidentState.GotoContinueCreateFoodPool,
+    [String(BuildingMeta.BuildingType.WaterPoolType)]: ResidentMeta.ResidentState.GotoContinueCreateWaterPool,
 };
+// 建造----------------------------------------------------end
+
+
+
+
+
+// 小人的建筑的使用行为
+// 使用----------------------------------------------------start
+ResidentMeta.ResidentUseBuildingMap = {
+    [String(ResidentMeta.ResidentState.GotoTreat)]: ResidentMeta.ResidentState.Treating,
+    [String(ResidentMeta.ResidentState.GoToSchool)]: ResidentMeta.ResidentState.Learning,
+    [String(ResidentMeta.ResidentState.GotoChildSchoolForLearn)]: ResidentMeta.ResidentState.ChildLearn,
+}
+// 使用----------------------------------------------------end
+
+// 小人去运送的AI列表
+// 运送----------------------------------------------------start
+ResidentMeta.ResidentSendAIMap = {
+    [String(ResidentMeta.ResidentState.FindFoodForSend)]: {
+        collectState: ResidentMeta.ResidentState.CollectFood,
+        lastState: ResidentMeta.ResidentState.SendFoodToFoodPool,
+        buildingType: BuildingMeta.BuildingType.FoodPoolType,
+    },
+    [String(ResidentMeta.ResidentState.FindWaterForSend)]: {
+        collectState: ResidentMeta.ResidentState.CollectWater,
+        lastState: ResidentMeta.ResidentState.SendWaterToWaterPool,
+        buildingType: BuildingMeta.BuildingType.WaterPoolType,
+    }
+}
+// 运送----------------------------------------------------end
+
+
+
 // 动画枚举
 ResidentMeta.ResidentAnim = {
     Null: 0,    // 无动画
@@ -166,3 +212,6 @@ ResidentMeta.ResidentMarryAge = ResidentMeta.ResidentAdultAge + 2;         //结
 ResidentMeta.ResidentAgePeriod = 500 * 100;         //年龄的增长周期
 ResidentMeta.ResidentGotoYOff = 10;         //走向某个建筑物的y轴off
 ResidentMeta.ResidentChildSchoolSearchArea = 1000;         //寻找幼儿园的搜索范围
+ResidentMeta.ResidentCollectSendTime = 2000;         //打包寄送物品的时间
+ResidentMeta.ResidentDrinkWaterAddValue = 50;         //喝水增加值
+ResidentMeta.ResidentSaveWaterAddValue = 100;         //储藏水的增加值
