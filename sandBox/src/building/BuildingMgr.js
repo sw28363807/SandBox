@@ -80,9 +80,9 @@ export default class BuildingMgr extends Laya.Script {
     getNearstBuilding(x, y, buildingType, area, states) {
         let sets = new Set(states);
         let ret = null;
+        let distance = 99999999;
         for (const key in this.buildings) {
             let building = this.buildings[key];
-            let distance = 99999999;
             let curDistance = new Laya.Point(building.x, building.y).distance(x, y);
             // console.debug(building.building);
             // console.debug(building.model.getBuildingState());
@@ -93,6 +93,26 @@ export default class BuildingMgr extends Laya.Script {
                 model.getBuildingType() == buildingType) {
                 distance = curDistance;
                 ret = building;
+            }
+        }
+        return ret;
+    }
+
+    // 获得所有符合条件的建筑
+    getAlltBuildingForCondition(x, y, buildingType, area, states) {
+        let sets = new Set(states);
+        let ret = [];
+        for (const key in this.buildings) {
+            let building = this.buildings[key];
+            let curDistance = new Laya.Point(building.x, building.y).distance(x, y);
+            // console.debug(building.building);
+            // console.debug(building.model.getBuildingState());
+            // console.debug(building.model.getBuildingType());
+            let model = building.buildingScript.getModel();
+            if (curDistance <= area &&
+                sets.has(model.getBuildingState()) &&
+                model.getBuildingType() == buildingType) {
+                ret.push(building);
             }
         }
         return ret;

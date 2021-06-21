@@ -75,6 +75,11 @@ ResidentMeta.ResidentState = {
     FindWaterForSend: "",     //寻找可以运送的水源
     CollectWater: "",        //收集水源
     SendWaterToWaterPool: "",  //运送食物去水源库
+    GotoFoodPoolForEat: "",     //赶去食物仓库
+    EatFoodInFoodPool: "",      //去食物仓库吃饭
+    GotoWaterPoolForDrink: "",     //赶去水库
+    DrinkWaterInWaterPool: "",      //去水仓库喝水
+
 };
 ResidentMeta.obtainResidentState();
 
@@ -118,15 +123,30 @@ ResidentMeta.ResidentCreateBuildingAIMap = {
 // 建造----------------------------------------------------end
 
 
-
-
-
 // 小人的建筑的使用行为
 // 使用----------------------------------------------------start
 ResidentMeta.ResidentUseBuildingMap = {
-    [String(ResidentMeta.ResidentState.GotoTreat)]: ResidentMeta.ResidentState.Treating,
-    [String(ResidentMeta.ResidentState.GoToSchool)]: ResidentMeta.ResidentState.Learning,
-    [String(ResidentMeta.ResidentState.GotoChildSchoolForLearn)]: ResidentMeta.ResidentState.ChildLearn,
+    [String(ResidentMeta.ResidentState.GotoTreat)]: {
+        nextState: ResidentMeta.ResidentState.Treating,
+        buildingType: BuildingMeta.BuildingType.HospitalType,
+    },
+
+    [String(ResidentMeta.ResidentState.GoToSchool)]: {
+        nextState:ResidentMeta.ResidentState.Learning,
+        buildingType: BuildingMeta.BuildingType.SchoolType,
+    },
+    [String(ResidentMeta.ResidentState.GoToSGotoChildSchoolForLearnchool)]: {
+        nextState:ResidentMeta.ResidentState.ChildLearn,
+        buildingType: BuildingMeta.BuildingType.ChildSchoolType,
+    },
+    [String(ResidentMeta.ResidentState.GotoFoodPoolForEat)]: {
+        nextState:ResidentMeta.ResidentState.EatFoodInFoodPool,
+        buildingType: BuildingMeta.BuildingType.FoodPoolType,
+    },
+    [String(ResidentMeta.ResidentState.GotoWaterPoolForDrink)]: {
+        nextState:ResidentMeta.ResidentState.DrinkWaterInWaterPool,
+        buildingType: BuildingMeta.BuildingType.WaterPoolType,
+    },
 }
 // 使用----------------------------------------------------end
 

@@ -320,7 +320,7 @@ export default class ResidentLogic extends Laya.Script {
         else if (useBuildingNextState) {
             this.startGotoBuildingForUse({
                 building: param,
-                nextState: useBuildingNextState
+                nextState: useBuildingNextState.nextState
             });
         }
         else if (this.canStartCreateBuilding(state)) {
@@ -587,6 +587,152 @@ export default class ResidentLogic extends Laya.Script {
     }
 
     // ==================================================================================================使用建筑AIStart
+    onUseBuildingCondition(aiData) {
+        // 去治疗
+        if (aiData == ResidentMeta.ResidentState.GotoTreat) {
+            if (this.model.getSick() == 2) {
+                this.useBuildingAIPriority = 1;
+                return true
+            }
+            return false
+        }
+        // 去学校
+        else if (aiData == ResidentMeta.ResidentState.GoToSchool) {
+            if (this.model.getTeach() < 100) {
+                return true;
+            }
+            return false;
+        }
+        // 去幼儿园
+        else if (aiData == ResidentMeta.ResidentState.GotoChildSchoolForLearn) {
+            if (this.model.getAge() < ResidentMeta.ResidentAdultAge) {
+                return true;
+            }
+            return false;
+        }
+        // 去食物库
+        else if (aiData == ResidentMeta.ResidentState.GotoFoodPoolForEat) {
+            if (this.model.getFood() < 90) {
+                return true;
+            }
+            return false;
+        }
+        // 去水库
+        else if (aiData == ResidentMeta.ResidentState.GotoWaterPoolForDrink) {
+            if (this.model.getWater() < 90) {
+                return true;
+            }
+            return false;
+        }
+    }
+
+    onGetBuilding(aiData, data) {
+        // 去治疗
+        if (aiData == ResidentMeta.ResidentState.GotoTreat) {
+            let building = BuildingMgr.getInstance().getNearstBuilding(this.owner.x,
+                this.owner.y, data.buildingType,
+                2000, [BuildingMeta.BuildingState.Noraml]);
+            return building
+        }
+        // 去学校
+        else if (aiData == ResidentMeta.ResidentState.GoToSchool) {
+            let building = BuildingMgr.getInstance().getNearstBuilding(this.owner.x,
+                this.owner.y, data.buildingType,
+                2000, [BuildingMeta.BuildingState.Noraml]);
+            return building
+        }
+        // 去幼儿园
+        else if (aiData == ResidentMeta.ResidentState.GotoChildSchoolForLearn) {
+            let building = BuildingMgr.getInstance().getNearstBuilding(this.owner.x,
+                this.owner.y, data.buildingType,
+                2000, [BuildingMeta.BuildingState.Noraml]);
+            return building
+        }
+        // 去食物库
+        else if (aiData == ResidentMeta.ResidentState.GotoFoodPoolForEat) {
+            let buildings = BuildingMgr.getInstance().getAlltBuildingForCondition(this.owner.x,
+                this.owner.y, data.buildingType,
+                2000, [BuildingMeta.BuildingState.Noraml]);
+            if (buildings.length != 0) {
+                for (const key in buildings) {
+                    let item = buildings[key];
+                    let curSaveFood = item.buildingScript.getCurSaveFood();
+                    if (curSaveFood > 0) {
+                        return item;
+                    }
+                }
+            }
+            return null;
+        }
+        // 去水库
+        else if (aiData == ResidentMeta.ResidentState.GotoWaterPoolForDrink) {
+            let buildings = BuildingMgr.getInstance().getAlltBuildingForCondition(this.owner.x,
+                this.owner.y, data.buildingType,
+                2000, [BuildingMeta.BuildingState.Noraml]);
+            if (buildings.length != 0) {
+                for (const key in buildings) {
+                    let item = buildings[key];
+                    let curSaveWater = item.buildingScript.getCurSaveWater();
+                    if (curSaveWater > 0) {
+                        return item;
+                    }
+                }
+            }
+            return null;
+        }
+    }
+
+    onFinishUseBuilding(state) {
+        // 治疗完成
+        if (state == ResidentMeta.ResidentState.Treating) {
+            this.model.setSick(1);
+            this.setBuffAniVisible(false);
+            this.stopBuffAni();
+        }
+        // 学习完成
+        else if (state == ResidentMeta.ResidentState.Learning) {
+            this.model.addTeach(BuildingMeta.BuildingDatas[String(BuildingMeta.BuildingType.SchoolType)].addTeach);
+        }
+        // 在幼儿园学习完成
+        else if (state == ResidentMeta.ResidentState.ChildLearn) {
+            this.model.addAgeExp(Math.round(ResidentMeta.ResidentAgePeriod / 2), true);
+        }
+        // 在食物库吃饭完成
+        else if (state == ResidentMeta.ResidentState.EatFoodInFoodPool) {
+            let residentFood = this.model.getFood();
+            let curSaveFood = this.useBuilding.buildingScript.getCurSaveFood();
+            let needFood = Math.round(100 - residentFood);
+            let deltay = 0;
+            if (needFood >= curSaveFood) {
+                deltay = curSaveFood
+            } else {
+                deltay = needFood;
+            }
+            if (deltay > 40) {
+                deltay = 40;
+            }
+            this.useBuilding.buildingScript.addFoodToPool(-deltay);
+            this.model.addFood(deltay);
+        }
+        // 在水库喝水完成
+        else if (state == ResidentMeta.ResidentState.DrinkWaterInWaterPool) {
+            let residentWater = this.model.getFood();
+            let curSaveWater = this.useBuilding.buildingScript.getCurSaveWater();
+            let needWater = Math.round(100 - residentWater);
+            let deltay = 0;
+            if (needWater >= curSaveWater) {
+                deltay = curSaveWater
+            } else {
+                deltay = needWater;
+            }
+            if (deltay > 40) {
+                deltay = 40;
+            }
+            this.useBuilding.buildingScript.addWaterToPool(-deltay);
+            this.model.addWater(deltay);
+        }
+    }
+
     canGotoUseBuilding(fsmState) {
         let value = ResidentMeta.ResidentUseBuildingMap[String(fsmState)];
         return value;
@@ -607,7 +753,7 @@ export default class ResidentLogic extends Laya.Script {
     canStartUseBuilding(fsmState) {
         for (const key in ResidentMeta.ResidentUseBuildingMap) {
             let value = ResidentMeta.ResidentUseBuildingMap[key];
-            if (value == fsmState && fsmState != undefined && fsmState != null) {
+            if (value.nextState == fsmState && fsmState != undefined && fsmState != null) {
                 return true;
             }
         }
@@ -617,7 +763,7 @@ export default class ResidentLogic extends Laya.Script {
     canFinishUseBuilding(fsmState) {
         for (const key in ResidentMeta.ResidentUseBuildingMap) {
             let value = ResidentMeta.ResidentUseBuildingMap[key];
-            if (value == fsmState && fsmState != undefined && fsmState != null) {
+            if (value.nextState == fsmState && fsmState != undefined && fsmState != null) {
                 return true;
             }
         }
@@ -639,23 +785,6 @@ export default class ResidentLogic extends Laya.Script {
     clearUseBuilding() {
         Laya.timer.clear(this, this.onDoWorkFinish);
         this.useBuilding = null;
-    }
-
-    onFinishUseBuilding(state) {
-        // 治疗完成
-        if (state == ResidentMeta.ResidentState.Treating) {
-            this.model.setSick(1);
-            this.setBuffAniVisible(false);
-            this.stopBuffAni();
-        }
-        // 学习完成
-        else if (state == ResidentMeta.ResidentState.Learning) {
-            this.model.addTeach(BuildingMeta.BuildingDatas[String(BuildingMeta.BuildingType.SchoolType)].addTeach);
-        }
-        // 在幼儿园学习完成
-        else if (state == ResidentMeta.ResidentState.ChildLearn) {
-            this.model.addAgeExp(Math.round(ResidentMeta.ResidentAgePeriod / 2), true);
-        }
     }
     // ==================================================================================================使用建筑AIEnd
 
@@ -1095,6 +1224,8 @@ export default class ResidentLogic extends Laya.Script {
         this.processCreateBuilding();
         // 跑去运送
         this.processSend();
+        // 跑去使用建筑
+        this.processUseBuildingAI();
         // =================================正式================end
     }
 
@@ -1282,23 +1413,6 @@ export default class ResidentLogic extends Laya.Script {
         }
     }
 
-    processLearnForChildSchool() {
-        let cell = {
-            func: Laya.Handler.create(this, function (param) {
-                let building = BuildingMgr.getInstance().getNearstBuilding(this.owner.x,
-                    this.owner.y, BuildingMeta.BuildingType.ChildSchoolType,
-                    2000, [BuildingMeta.BuildingState.Noraml]);
-                if (building) {
-                    this.refreshFSMState(ResidentMeta.ResidentState.GotoChildSchoolForLearn, building);
-                    this.ideaResult = true;
-                }
-            }),
-        };
-        if (this.model.getAge() < ResidentMeta.ResidentAdultAge) {
-            this.level2Results.push(cell);
-        }
-    }
-
     processFight() {
         let cell = {
             func: Laya.Handler.create(this, function (param) {
@@ -1337,40 +1451,6 @@ export default class ResidentLogic extends Laya.Script {
             }),
         };
         this.level2Results.push(cell);
-    }
-
-    processHeal() {
-        if (this.model.getSick() == 2) {
-            let cell = {
-                func: Laya.Handler.create(this, function (param) {
-                    let building = BuildingMgr.getInstance().getNearstBuilding(this.owner.x,
-                        this.owner.y, BuildingMeta.BuildingType.HospitalType,
-                        2000, [BuildingMeta.BuildingState.Noraml]);
-                    if (building) {
-                        this.refreshFSMState(ResidentMeta.ResidentState.GotoTreat, building);
-                        this.ideaResult = true;
-                    }
-                })
-            };
-            this.level1Results.push(cell);
-        }
-    }
-
-    processTeach() {
-        if (this.model.getTeach() < 100) {
-            let cell = {
-                func: Laya.Handler.create(this, function (param) {
-                    let building = BuildingMgr.getInstance().getNearstBuilding(this.owner.x,
-                        this.owner.y, BuildingMeta.BuildingType.SchoolType,
-                        1000, [BuildingMeta.BuildingState.Noraml]);
-                    if (building) {
-                        this.refreshFSMState(ResidentMeta.ResidentState.GoToSchool, building);
-                        this.ideaResult = true;
-                    }
-                })
-            };
-            this.level2Results.push(cell);
-        }
     }
 
     processCreateBuilding() {
@@ -1576,6 +1656,81 @@ export default class ResidentLogic extends Laya.Script {
     preSend(AIType, sendInfo) {
         if (AIType == ResidentMeta.ResidentState.FindFoodForSend) {
             sendInfo.send.foodScript.getModel().setFoodState(FoodMeta.FoodState.Occupy);
+        }
+    }
+
+    // processHeal() {
+    //     if (this.model.getSick() == 2) {
+    //         let cell = {
+    //             func: Laya.Handler.create(this, function (param) {
+    //                 let building = BuildingMgr.getInstance().getNearstBuilding(this.owner.x,
+    //                     this.owner.y, BuildingMeta.BuildingType.HospitalType,
+    //                     2000, [BuildingMeta.BuildingState.Noraml]);
+    //                 if (building) {
+    //                     this.refreshFSMState(ResidentMeta.ResidentState.GotoTreat, building);
+    //                     this.ideaResult = true;
+    //                 }
+    //             })
+    //         };
+    //         this.level1Results.push(cell);
+    //     }
+    // }
+
+    // processTeach() {
+    //     if (this.model.getTeach() < 100) {
+    //         let cell = {
+    //             func: Laya.Handler.create(this, function (param) {
+    //                 let building = BuildingMgr.getInstance().getNearstBuilding(this.owner.x,
+    //                     this.owner.y, BuildingMeta.BuildingType.SchoolType,
+    //                     1000, [BuildingMeta.BuildingState.Noraml]);
+    //                 if (building) {
+    //                     this.refreshFSMState(ResidentMeta.ResidentState.GoToSchool, building);
+    //                     this.ideaResult = true;
+    //                 }
+    //             })
+    //         };
+    //         this.level2Results.push(cell);
+    //     }
+    // }
+
+    // processLearnForChildSchool() {
+    //     let cell = {
+    //         func: Laya.Handler.create(this, function (param) {
+    //             let building = BuildingMgr.getInstance().getNearstBuilding(this.owner.x,
+    //                 this.owner.y, BuildingMeta.BuildingType.ChildSchoolType,
+    //                 2000, [BuildingMeta.BuildingState.Noraml]);
+    //             if (building) {
+    //                 this.refreshFSMState(ResidentMeta.ResidentState.GotoChildSchoolForLearn, building);
+    //                 this.ideaResult = true;
+    //             }
+    //         }),
+    //     };
+    //     if (this.model.getAge() < ResidentMeta.ResidentAdultAge) {
+    //         this.level2Results.push(cell);
+    //     }
+    // }
+
+    //处理使用建筑
+    processUseBuildingAI() {
+        for (const key in ResidentMeta.ResidentUseBuildingMap) {
+            let item = ResidentMeta.ResidentUseBuildingMap[key];
+            this.useBuildingAIPriority = 2;
+            if (this.onUseBuildingCondition(key)) {
+                let cell = {
+                    func: Laya.Handler.create(this, function () {
+                        let building = this.onGetBuilding(key, item);
+                        if (building) {
+                            this.refreshFSMState(key, building);
+                            this.ideaResult = true;
+                        }
+                    })
+                };
+                if (this.useBuildingAIPriority == 2) {
+                    this.level2Results.push(cell);
+                } else {
+                    this.level1Results.push(cell);
+                }
+            }
         }
     }
 }

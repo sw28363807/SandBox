@@ -13,18 +13,21 @@ export default class WaterPoolLogic extends BuildingBaseLogic {
         this.maxSave = BuildingMeta.BuildingDatas[BuildingMeta.BuildingType.WaterPoolType].maxSave;
     }
 
+    getCurSaveWater() {
+        let curSaveWater = this.getModel().getExteraData("curWater");
+        if (curSaveWater == undefined || curSaveWater == null) {
+            curSaveWater = 0;
+        }
+        return curSaveWater;
+    }
+
     isReachWaterMax() {
-        let model = this.getModel();
-        let curSaveWater = model.getExteraData("curWater");
-        return curSaveWater >= this.maxSave;
+        return this.getCurSaveWater() >= this.maxSave;
     }
 
     addWaterToPool(num) {
         let model = this.getModel();
-        let curSaveWater = model.getExteraData("curWater");
-        if (curSaveWater == null || curSaveWater == undefined) {
-            curSaveWater = 0;
-        }
+        let curSaveWater = this.getCurSaveWater();
         curSaveWater += num;
         if (curSaveWater < 0) {
             curSaveWater = 0;

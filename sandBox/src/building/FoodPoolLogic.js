@@ -13,18 +13,21 @@ export default class FoodPoolLogic extends BuildingBaseLogic {
         this.maxSave = BuildingMeta.BuildingDatas[BuildingMeta.BuildingType.FoodPoolType].maxSave;
     }
 
+    getCurSaveFood() {
+        let curSaveFood = this.getModel().getExteraData("curFood");
+        if (curSaveFood == undefined || curSaveFood == null) {
+            curSaveFood = 0;
+        }
+        return curSaveFood;
+    }
+
     isReachFoodMax() {
-        let model = this.getModel();
-        let curSaveFood = model.getExteraData("curFood");
-        return curSaveFood >= this.maxSave;
+        return this.getCurSaveFood() >= this.maxSave;
     }
 
     addFoodToPool(num) {
         let model = this.getModel();
-        let curSaveFood = model.getExteraData("curFood");
-        if (curSaveFood == null || curSaveFood == undefined) {
-            curSaveFood = 0;
-        }
+        let curSaveFood = this.getCurSaveFood()
         curSaveFood += num;
         if (curSaveFood < 0) {
             curSaveFood = 0;
