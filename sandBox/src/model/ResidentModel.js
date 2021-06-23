@@ -21,6 +21,8 @@ export default class ResidentModel extends Laya.Script {
         this.isInChildSchool = false;   //当前是不是处在幼儿园中
         this.ageExp = 0;
         this.makeLoveSystemTime = 0;
+        this.petType = 0;               //宠物ID
+
 
         this.temperature = 36;  //体温
         this.age = 1;       //年龄
@@ -95,7 +97,18 @@ export default class ResidentModel extends Laya.Script {
             if (data.ageExp) {
                 this.ageExp = data.ageExp;
             }
+            if (data.petType) {
+                this.petType = data.petType;
+            }
         }
+    }
+
+    setPetType(petType) {
+        this.petType = petType;
+    }
+
+    getPetType() {
+        return this.petType;
     }
 
     recordMakeLoveSystemTime() {

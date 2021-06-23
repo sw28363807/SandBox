@@ -79,6 +79,8 @@ ResidentMeta.ResidentState = {
     EatFoodInFoodPool: "",      //去食物仓库吃饭
     GotoWaterPoolForDrink: "",     //赶去水库
     DrinkWaterInWaterPool: "",      //去水仓库喝水
+    GotoPetShopForTakeOutPet: "",     //赶去宠物店去领取宠物
+    TakeOutPet: "",                  //领取宠物
 
 };
 ResidentMeta.obtainResidentState();
@@ -146,6 +148,10 @@ ResidentMeta.ResidentUseBuildingMap = {
     [String(ResidentMeta.ResidentState.GotoWaterPoolForDrink)]: {
         nextState:ResidentMeta.ResidentState.DrinkWaterInWaterPool,
         buildingType: BuildingMeta.BuildingType.WaterPoolType,
+    },
+    [String(ResidentMeta.ResidentState.GotoPetShopForTakeOutPet)]: {
+        nextState:ResidentMeta.ResidentState.TakeOutPet,
+        buildingType: BuildingMeta.BuildingType.PetShopType,
     },
 }
 // 使用----------------------------------------------------end

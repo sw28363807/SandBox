@@ -34,6 +34,9 @@ export default class ResidentMgr extends Laya.Script {
     onUpdateZorder() {
         for (let key in this.residents) {
             let resident = this.residents[key];
+            if (resident.residentLogicScript.pet) {
+                Utils.setMapZOrder(resident.residentLogicScript.pet);
+            }
             Utils.setMapZOrder(resident);
         }
     }

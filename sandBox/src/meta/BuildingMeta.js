@@ -41,6 +41,7 @@ BuildingMeta.BuildingState = {
     PreCreating: "",     //等待建造
     Creating: "",        //正在建造
     Noraml: "",          //正常状态
+    Occupy: "",          //占用状态
 };
 
 BuildingMeta.obtainBuildingState();
@@ -247,8 +248,8 @@ BuildingMeta.BuildingDatas = {
         useBuildingTime: 5000,
         createPriority: 2,
         buildingName: "宠物店",
-        costTree: 6,
-        costStone: 6,
+        costTree: 0,
+        costStone: 0,
         desc: "饲养宠物可以不减快乐值哦",
     },
     // 食物仓库

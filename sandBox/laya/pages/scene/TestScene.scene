@@ -2,11 +2,11 @@
     "x":0,
     "type":"Scene",
     "selectedBox":2,
-    "selecteID":179,
+    "selecteID":184,
     "searchKey":"Scene",
     "props":{"width":1336,"sceneColor":"#000000","height":750},
     "nodeParent":-1,
-    "maxID":184,
+    "maxID":186,
     "label":"Scene",
     "isOpen":true,
     "isDirectory":true,
@@ -599,14 +599,13 @@
             "nodeParent":2,
             "maxID":115,
             "label":"ResourcePanel",
-            "isOpen":true,
+            "isOpen":false,
             "isDirectory":true,
             "isAniNode":true,
             "hasChild":true,
             "compId":180,
             "child":[
                 {
-                    "x":30,
                     "type":"Image",
                     "searchKey":"Image",
                     "props":{"y":1,"x":0,"presetID":8,"preset":"laya/pages/prefab/ResourcePanel.prefab"},
@@ -620,7 +619,6 @@
                         ]
                 },
                 {
-                    "x":30,
                     "type":"Sprite",
                     "searchKey":"Sprite",
                     "props":{"presetID":2,"preset":"laya/pages/prefab/ResourcePanel.prefab"},
@@ -634,7 +632,6 @@
                         ]
                 },
                 {
-                    "x":30,
                     "type":"Sprite",
                     "searchKey":"Sprite",
                     "props":{"presetID":3,"preset":"laya/pages/prefab/ResourcePanel.prefab"},
@@ -648,7 +645,6 @@
                         ]
                 },
                 {
-                    "x":30,
                     "type":"Text",
                     "searchKey":"Text",
                     "props":{"presetID":4,"preset":"laya/pages/prefab/ResourcePanel.prefab"},
@@ -662,7 +658,6 @@
                         ]
                 },
                 {
-                    "x":30,
                     "type":"Text",
                     "searchKey":"Text",
                     "props":{"presetID":5,"preset":"laya/pages/prefab/ResourcePanel.prefab"},
@@ -677,7 +672,6 @@
                         ]
                 },
                 {
-                    "x":30,
                     "type":"Text",
                     "searchKey":"Text",
                     "props":{"presetID":7,"preset":"laya/pages/prefab/ResourcePanel.prefab"},
@@ -691,7 +685,6 @@
                         ]
                 },
                 {
-                    "x":30,
                     "type":"Script",
                     "switchAble":true,
                     "source":"src/panel/ResourcePanel.js",

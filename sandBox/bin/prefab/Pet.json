@@ -1,0 +1,1 @@
+{"type":"Box","props":{"y":0,"x":0,"width":50,"presetID":1,"name":"Pet","isPresetRoot":true,"height":50},"compId":184,"child":[{"type":"Animation","props":{"source":"anim/Pet.ani","presetID":2,"name":"ani","autoAnimation":"pet1"},"compId":185},{"type":"Script","props":{"presetID":3,"runtime":"animal/PetLogic.js"},"compId":187}],"loadList":["anim/Pet.ani"],"loadList3D":[]}
