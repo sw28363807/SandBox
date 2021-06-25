@@ -8,19 +8,20 @@ import StoneMgr from "../source/StoneMgr";
 import FoodMgr from "../source/FoodMgr";
 import WaterMgr from "../source/WaterMgr";
 import FoodMeta from "../meta/FoodMeta";
-import FoodLogic from "../source/FoodLogic";
 import GameModel from "../model/GameModel";
 import EventMgr from "../helper/EventMgr";
 import GameEvent from "../meta/GameEvent";
 import BuildingMeta from "../meta/BuildingMeta";
 import AnimalMgr from "../animal/AnimalMgr";
 import AnimalLogic from "../animal/AnimalLogic";
-import Utils from "../helper/Utils";
 import ResidentTipMeta from "../meta/ResidentTipMeta";
 import ResidentHelper from "./ResidentHelper";
 import GameMeta from "../meta/GameMeta";
 import ResidentTempData from "./ResidentTempData";
 import ResourceMeta from "../meta/ResourceMeta";
+import MoveLogic from "../helper/MoveLogic"
+import PetLogic from "../animal/PetLogic";
+
 
 export default class ResidentLogic extends Laya.Script {
 
@@ -32,6 +33,7 @@ export default class ResidentLogic extends Laya.Script {
         // Laya.timer.once(1000, this, function () {
         //     this.refreshFSMState(ResidentMeta.ResidentState.FindWater);
         // });
+        this.initMoveLogic();
     }
 
     onEnable() {
@@ -45,9 +47,30 @@ export default class ResidentLogic extends Laya.Script {
 
     onDisable() {
         this.ResidentTempData.destroy(true);
-        this.stopGoto();
         this.removeAllEvents();
         this.removeAllTimers();
+    }
+
+    initMoveLogic() {
+        let owner = this;
+        this.leftFunc = function () {
+            owner.ani.play(0, true, "walk_left");
+        };
+        this.rightFunc = function () {
+            owner.ani.play(0, true, "walk_right");
+        };
+        this.upFunc = function () {
+            owner.ani.play(0, true, "walk_up");
+        };
+        this.downFunc = function () {
+            owner.ani.play(0, true, "walk_down");
+        };
+        this.getMoveScript().setCallbackFunc({
+            leftFunc : this.leftFunc,
+            rightFunc : this.rightFunc,
+            upFunc : this.upFunc,
+            downFunc : this.downFunc,
+        });
     }
 
     removeAllTimers() {
@@ -288,6 +311,10 @@ export default class ResidentLogic extends Laya.Script {
         this.owner.visible = visible;
     }
 
+    getMoveScript() {
+        return this.owner.residentMoveLogicScript;
+    }
+
     //  设置状态机状态
     refreshFSMState(state, param) {
         let curState = this.model.getFSMState();
@@ -302,7 +329,7 @@ export default class ResidentLogic extends Laya.Script {
         this.setVisible(true);
         this.stopStateAni();
         this.stopAni();
-        this.stopGoto();
+        this.getMoveScript().stopGoto();
         Laya.timer.clear(this, this.onDoWorkFinish);
         let createBuildingNextState = this.canGotoCreateBuilding(state);
         let useBuildingNextState = this.canGotoUseBuilding(state);
@@ -578,7 +605,7 @@ export default class ResidentLogic extends Laya.Script {
 
     // 随机跑一个位置
     startGotoRandomPoint(p) {
-        this.gotoDestExt({
+        this.walkTo({
             x: p.x,
             y: p.y,
         }, Laya.Handler.create(this, function () {
@@ -769,12 +796,12 @@ export default class ResidentLogic extends Laya.Script {
         let value = ResidentMeta.ResidentUseBuildingMap[String(fsmState)];
         return value;
     }
-
+    
     startGotoBuildingForUse(config) {
         this.setAnim(ResidentMeta.ResidentAnim.Walk);
         this.useBuilding = config.building;
         let nextState = config.nextState;
-        this.gotoDestExt({
+        this.walkTo({
             x: this.useBuilding.x + this.useBuilding.width / 2 - this.owner.width / 2,
             y: this.useBuilding.y + this.useBuilding.height - this.owner.height + ResidentMeta.ResidentGotoYOff,
         }, Laya.Handler.create(this, function () {
@@ -857,7 +884,7 @@ export default class ResidentLogic extends Laya.Script {
         this.continueCreateBuilding = config.building;
         let nextState = config.nextState;
         this.continueCreateBuilding.buildingScript.joinResidentIdToBuilding(this.model.getResidentId());
-        this.gotoDestExt({
+        this.walkTo({
             x: this.continueCreateBuilding.x + this.continueCreateBuilding.width / 2 - this.owner.width / 2,
             y: this.continueCreateBuilding.y + this.continueCreateBuilding.height - this.owner.height + ResidentMeta.ResidentGotoYOff,
         }, Laya.Handler.create(this, function () {
@@ -889,7 +916,7 @@ export default class ResidentLogic extends Laya.Script {
         script.joinHunt(this.model.getResidentId());
         script.pauseWalk();
         let pos = RandomMgr.randomPointForX(this.hurtAnimal.x, this.hurtAnimal.y + this.hurtAnimal.height, this.hurtAnimal.width);
-        this.gotoDestExt({
+        this.walkTo({
             x: pos.x - this.owner.width / 2,
             y: pos.y - this.owner.height / 2,
         }, Laya.Handler.create(this, function () {
@@ -900,7 +927,7 @@ export default class ResidentLogic extends Laya.Script {
     // 走到聊天点
     startJoinTalkingPoint(talkingModel) {
         let pos = talkingModel.getTalkingPosInArea();
-        this.gotoDestExt({
+        this.walkTo({
             x: pos.x,
             y: pos.y,
         }, Laya.Handler.create(this, function () {
@@ -911,7 +938,7 @@ export default class ResidentLogic extends Laya.Script {
     // 走到聊天点
     startJoinFightPoint(fightModel) {
         let pos = fightModel.getFightPosInArea();
-        this.gotoDestExt({
+        this.walkTo({
             x: pos.x,
             y: pos.y,
         }, Laya.Handler.create(this, function () {
@@ -950,7 +977,7 @@ export default class ResidentLogic extends Laya.Script {
         let womanId = this.model.getLoverId();
         let woman = this.residentMgrInstance.getResidentById(womanId);
         if (woman) {
-            this.gotoDestExt({
+            this.walkTo({
                 x: woman.x + woman.width,
                 y: woman.y,
             }, Laya.Handler.create(this, function () {
@@ -966,7 +993,7 @@ export default class ResidentLogic extends Laya.Script {
     startGoHomeAndWoman() {
         let myHome = BuildingMgr.getInstance().getBuildingById(this.model.getMyHomeId());
         if (myHome) {
-            this.gotoDestExt({
+            this.walkTo({
                 x: myHome.x + myHome.width / 2 - this.owner.width / 2,
                 y: myHome.y + myHome.height - this.owner.height + ResidentMeta.ResidentGotoYOff,
                 forceFirstY: true,
@@ -978,6 +1005,22 @@ export default class ResidentLogic extends Laya.Script {
         }
     }
 
+    walkTo(config, handler) {
+        this.getMoveScript().gotoDestExt(config, handler);
+        if (this.getPet()) {
+            let copyConfig = {
+                x: config.x + 60,
+                y: config.y - 40,
+                speed: 120,
+                forceFirstY: config.isFirstY,
+                tag: 1
+            };
+            Laya.timer.once(1000, this, function () {
+                this.getPetScript().walkTo(copyConfig);
+            });
+        }
+    }
+
     // 开始寻找可以建房子的空地
     startFindCreateHomeBlock() {
         if (this.findCreateHomeTimes < ResidentMeta.ResidentFindPathTimes) {
@@ -986,7 +1029,7 @@ export default class ResidentLogic extends Laya.Script {
                     this.owner.y,
                     300,
                     GameContext.mapWidth, GameContext.mapHeight, GameMeta.MapSideOff, GameMeta.MapSideOff);
-                this.gotoDestExt({ x: dstP.x, y: dstP.y }, Laya.Handler.create(this, function () {
+                this.walkTo({ x: dstP.x, y: dstP.y }, Laya.Handler.create(this, function () {
                     this.findCreateHomeTimes++;
                     // 查看此处可不可以盖房
                     let data = BuildingMeta.BuildingDatas[String(BuildingMeta.BuildingType.HomeType)];
@@ -1017,7 +1060,7 @@ export default class ResidentLogic extends Laya.Script {
     startFindANearstTree() {
         let nearstTree = TreeMgr.getInstance().getNearstTree(this.owner.x, this.owner.y);
         if (nearstTree) {
-            this.gotoDestExt({
+            this.walkTo({
                 x: nearstTree.x + nearstTree.width / 2 - this.owner.width / 2,
                 y: nearstTree.y + nearstTree.height - this.owner.height + 20
             }, Laya.Handler.create(this, function () {
@@ -1033,7 +1076,7 @@ export default class ResidentLogic extends Laya.Script {
         let nearstWater = WaterMgr.getInstance().randomWater(this.owner.x, this.owner.y, 2000);
         if (nearstWater) {
             let dsp = RandomMgr.randomPointInRect(nearstWater.x, nearstWater.y, nearstWater.width, nearstWater.height);
-            this.gotoDestExt({ x: dsp.x, y: dsp.y }, Laya.Handler.create(this, function () {
+            this.walkTo({ x: dsp.x, y: dsp.y }, Laya.Handler.create(this, function () {
                 this.refreshFSMState(ResidentMeta.ResidentState.DrinkWater);
             }));
         } else {
@@ -1052,7 +1095,7 @@ export default class ResidentLogic extends Laya.Script {
         if (nearstFood) {
             let script = nearstFood.foodScript;
             script.getModel().setFoodState(FoodMeta.FoodState.Occupy);
-            this.gotoDestExt({ x: nearstFood.x, y: nearstFood.y }, Laya.Handler.create(this, function () {
+            this.walkTo({ x: nearstFood.x, y: nearstFood.y }, Laya.Handler.create(this, function () {
                 this.refreshFSMState(ResidentMeta.ResidentState.EatFood, nearstFood);
             }));
         } else {
@@ -1064,154 +1107,12 @@ export default class ResidentLogic extends Laya.Script {
         let nearstStone = StoneMgr.getInstance().getNearstStone(this.owner.x, this.owner.y);
         if (nearstStone) {
             let dsp = RandomMgr.randomPointInRect(nearstStone.x, nearstStone.y, nearstStone.width, nearstStone.height);
-            this.gotoDestExt({ x: dsp.x, y: nearstStone.y + nearstStone.height }, Laya.Handler.create(this, function () {
+            this.walkTo({ x: dsp.x, y: nearstStone.y + nearstStone.height }, Laya.Handler.create(this, function () {
                 this.refreshFSMState(ResidentMeta.ResidentState.CollectStone);
             }));
         } else {
             this.refreshFSMState(ResidentMeta.ResidentState.IdleState);
         }
-    }
-
-
-
-    // 行走到某个位置
-    _gotoDest(info, handler) {
-        this.stopAGoto();
-        let dstX = info.x;
-        let dstY = info.y;
-        let distance = new Laya.Point(dstX, dstY).distance(this.owner.x, this.owner.y);
-        let r = distance / ResidentMeta.ResidentMoveSpeed;
-        let time = r * 1000;
-        Laya.timer.once(time + 50, this, this.onGotoTimeOut, [info, handler]);
-        this.owner.SSSX = dstX;
-        this.owner.SSSY = dstY;
-        let dst = null;
-        if (dstX != this.owner.x) {
-            dst = { x: dstX };
-        }
-        if (dstY != this.owner.y) {
-            dst = { y: dstY };
-        }
-        this.tweenObject = Laya.Tween.to(this.owner, dst, time, null, Laya.Handler.create(this, function () {
-            this.stopAGoto();
-            if (handler) {
-                handler.run();
-            }
-        }));
-        // this.tweenObject.pause();
-        // Laya.timer.once(0, this, this.onGotoTimeOut, [info, handler]);
-    }
-
-    onGotoTimeOut(info, handler) {
-        // console.debug("BBBBBBBBBBBBBBBBBBBBB");
-        // console.debug(this.tweenObject);
-        // console.debug({ x: this.owner.x, y: this.owner.y });
-        // console.debug({ x: this.owner.SSSX, y: this.owner.SSSY });
-        // console.debug(info);
-        // console.debug(this.movePaths.length);
-        // console.debug(this.tweenObject.gid);
-        // console.debug("DDDDDDDDDDDDDDDDDDDD");
-
-        this.stopAGoto();
-        this._gotoDest(info, handler);
-        // if (this.tweenObject) {
-        //     Laya.timer.clear(this, this.onGotoTimeOut);
-        //     this.tweenObject.restart();
-        // }
-    }
-
-    // 行走到某个位置
-    _gotoDest2(handler) {
-        if (this.movePaths.length != 0) {
-            let p = this.movePaths[0];
-            if (p.direct.x != 0) {
-                p.direct.x < 0 ? this.ani.play(0, true, "walk_left") : this.ani.play(0, true, "walk_right");
-            } else {
-                p.direct.y < 0 ? this.ani.play(0, true, "walk_up") : this.ani.play(0, true, "walk_down");
-            }
-            this._gotoDest(p, Laya.Handler.create(this, function () {
-                this.movePaths.splice(0, 1);
-                this._gotoDest2(handler);
-            }));
-        } else {
-            this.stopGoto();
-            if (handler) {
-                handler.run();
-            }
-        }
-    }
-
-    // 行走到某个位置
-    gotoDestExt(info, handler) {
-        // 目标点
-        let dstX = Math.round(info.x);
-        let dstY = Math.round(info.y);
-        // 当前点
-        let curX = Math.round(this.owner.x);
-        let curY = Math.round(this.owner.y);
-        let xDelta = dstX - curX;
-        let yDelta = dstY - curY;
-        if (xDelta == 0 && yDelta == 0) {
-            if (handler) {
-                handler.run();
-            }
-        }
-        // this.model.Cur = String(curX) + "_"+ String(curY);
-        // this.model.Dst = String(dstX) + "_"+ String(dstY);
-        // let xDistance = Math.abs(xDelta);
-        // let yDistance = Math.abs(yDelta);
-        let signX = Utils.getSign2(xDelta);
-        let signY = Utils.getSign2(yDelta);
-        if (RandomMgr.randomYes() || info.forceFirstY) {
-            let p1 = {
-                x: curX,
-                y: dstY,
-                direct: { x: 0, y: signY },
-            };
-            let p2 = {
-                x: dstX,
-                y: dstY,
-                direct: { x: signX, y: 0 },
-            };
-            if (signY != 0) {
-                this.movePaths.push(p1);
-            }
-            if (signX != 0) {
-                this.movePaths.push(p2);
-            }
-        } else {
-            let p1 = {
-                x: dstX,
-                y: curY,
-                direct: { x: signX, y: 0 },
-            };
-            let p2 = {
-                x: dstX,
-                y: dstY,
-                direct: { x: 0, y: signY },
-            };
-            if (signX != 0) {
-                this.movePaths.push(p1);
-            }
-            if (signY != 0) {
-                this.movePaths.push(p2);
-            }
-        }
-        this._gotoDest2(handler);
-    }
-
-
-    stopAGoto() {
-        Laya.timer.clear(this, this.onGotoTimeOut);
-        if (this.tweenObject) {
-            Laya.Tween.clear(this.tweenObject);
-            this.tweenObject = null;
-        }
-    }
-
-    stopGoto() {
-        this.stopAGoto();
-        this.movePaths = [];
     }
 
     makeParam(extraParam) {
@@ -1229,7 +1130,7 @@ export default class ResidentLogic extends Laya.Script {
         this.level2Results = [];
         // =================================正式================start
         // 喝水
-        // this.processDrinkWater();
+        this.processDrinkWater();
         //吃饭
         // this.processEatFood();
         // 社交
@@ -1531,7 +1432,7 @@ export default class ResidentLogic extends Laya.Script {
         let sendInfo = info.sendInfo;
         this.setAnim(ResidentMeta.ResidentAnim.Walk);
         let collectState = sendAIMeta.collectState;
-        this.gotoDestExt({
+        this.walkTo({
             x: sendInfo.send.x + sendInfo.send.width / 2 - this.owner.width / 2,
             y: sendInfo.send.y + sendInfo.send.height - this.owner.height + ResidentMeta.ResidentGotoYOff,
         }, Laya.Handler.create(this, function () {
@@ -1586,7 +1487,7 @@ export default class ResidentLogic extends Laya.Script {
         this.setStateAniVisible(true);
         this.setStateAni("ani10");
         let sendInfo = info.sendInfo;
-        this.gotoDestExt({
+        this.walkTo({
             x: sendInfo.dest.x + sendInfo.dest.width / 2 - this.owner.width / 2,
             y: sendInfo.dest.y + sendInfo.dest.height - this.owner.height + ResidentMeta.ResidentGotoYOff,
         }, Laya.Handler.create(this, function () {
@@ -1634,7 +1535,7 @@ export default class ResidentLogic extends Laya.Script {
             dest.buildingScript.addWaterToPool(extraParam.addWater);
         }
     }
-
+    
     canSend(AIType) {
         // 食物判断
         if (AIType == ResidentMeta.ResidentState.FindFoodForSend) {
@@ -1721,9 +1622,19 @@ export default class ResidentLogic extends Laya.Script {
     addPetByPetType(petType) {
         let petPrefabDef = Laya.loader.getRes(ResourceMeta.PetPrefabPath);
         let pet = petPrefabDef.create();
+        pet.petScript = pet.getComponent(PetLogic);
         this.pet = pet;
         this.owner.parent.addChild(this.pet);
         this.pet.x = this.owner.x + this.owner.width;
         this.pet.y = this.owner.y + 20;
+    }
+
+    // 获得宠物
+    getPet() {
+        return this.pet;
+    }
+
+    getPetScript() {
+        return this.getPet().petScript;
     }
 }

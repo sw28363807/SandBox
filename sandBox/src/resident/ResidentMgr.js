@@ -1,3 +1,4 @@
+import MoveLogic from "../helper/MoveLogic";
 import Utils from "../helper/Utils";
 import ResidentMeta from "../meta/ResidentMeta";
 import ResourceMeta from "../meta/ResourceMeta";
@@ -61,6 +62,8 @@ export default class ResidentMgr extends Laya.Script {
         config.parent.addChild(resident);
         let script = resident.getComponent(ResidentLogic);
         resident.residentLogicScript = script;
+        let moveScript = resident.getComponent(MoveLogic);
+        resident.residentMoveLogicScript = moveScript;
         let model = GameModel.getInstance().newResidentModel(config);
         script.refreshByModel(model);
         script.setResidentMgrInstance(this);

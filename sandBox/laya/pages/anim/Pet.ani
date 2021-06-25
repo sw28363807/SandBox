@@ -32,9 +32,63 @@
                 {
                     "target":3,
                     "keyframes":{
+                        "skin":[
+                            {
+                                "value":"source/resident/yang_01.png",
+                                "tweenMethod":"linearNone",
+                                "tween":false,
+                                "target":3,
+                                "key":"skin",
+                                "index":0
+                            },
+                            {
+                                "value":"source/resident/yang_02.png",
+                                "tweenMethod":"linearNone",
+                                "tween":false,
+                                "target":3,
+                                "key":"skin",
+                                "index":3
+                            },
+                            {
+                                "value":"source/resident/yang_03.png",
+                                "tweenMethod":"linearNone",
+                                "tween":false,
+                                "target":3,
+                                "key":"skin",
+                                "index":6
+                            },
+                            {
+                                "value":"source/resident/yang_04.png",
+                                "tweenMethod":"linearNone",
+                                "tween":false,
+                                "target":3,
+                                "key":"skin",
+                                "index":9
+                            },
+                            {
+                                "value":"source/resident/yang_01.png",
+                                "tweenMethod":"linearNone",
+                                "tween":false,
+                                "target":3,
+                                "label":null,
+                                "key":"skin",
+                                "index":12
+                            }]
+                    }
+                }],
+            "name":"walk_up",
+            "id":1,
+            "frameRate":24,
+            "action":0
+        },
+        {
+            "nodes":[
+                {
+                    "target":3,
+                    "keyframes":{
                         "y":[
                             {
-                                "value":50,
+                                "value":64,
                                 "tweenMethod":"linearNone",
                                 "tween":true,
                                 "target":3,
@@ -42,26 +96,17 @@
                                 "index":0
                             },
                             {
-                                "value":50,
+                                "value":64,
                                 "tweenMethod":"linearNone",
                                 "tween":true,
                                 "target":3,
                                 "label":null,
                                 "key":"y",
-                                "index":10
-                            },
-                            {
-                                "value":50,
-                                "tweenMethod":"linearNone",
-                                "tween":true,
-                                "target":3,
-                                "label":null,
-                                "key":"y",
-                                "index":20
+                                "index":12
                             }],
                         "x":[
                             {
-                                "value":25,
+                                "value":64,
                                 "tweenMethod":"linearNone",
                                 "tween":true,
                                 "target":3,
@@ -69,26 +114,17 @@
                                 "index":0
                             },
                             {
-                                "value":25,
+                                "value":64,
                                 "tweenMethod":"linearNone",
                                 "tween":true,
                                 "target":3,
                                 "label":null,
                                 "key":"x",
-                                "index":10
-                            },
-                            {
-                                "value":25,
-                                "tweenMethod":"linearNone",
-                                "tween":true,
-                                "target":3,
-                                "label":null,
-                                "key":"x",
-                                "index":20
+                                "index":12
                             }],
                         "skin":[
                             {
-                                "value":"source/resident/pet1.png",
+                                "value":"source/resident/yang_08.png",
                                 "tweenMethod":"linearNone",
                                 "tween":false,
                                 "target":3,
@@ -96,22 +132,364 @@
                                 "index":0
                             },
                             {
-                                "value":"source/resident/pet1.png",
+                                "value":"source/resident/yang_07.png",
+                                "tweenMethod":"linearNone",
+                                "tween":false,
+                                "target":3,
+                                "key":"skin",
+                                "index":3
+                            },
+                            {
+                                "value":"source/resident/yang_06.png",
+                                "tweenMethod":"linearNone",
+                                "tween":false,
+                                "target":3,
+                                "key":"skin",
+                                "index":6
+                            },
+                            {
+                                "value":"source/resident/yang_05.png",
+                                "tweenMethod":"linearNone",
+                                "tween":false,
+                                "target":3,
+                                "key":"skin",
+                                "index":9
+                            },
+                            {
+                                "value":"source/resident/yang_08.png",
+                                "tweenMethod":"linearNone",
+                                "tween":false,
+                                "target":3,
+                                "label":null,
+                                "key":"skin",
+                                "index":12
+                            }],
+                        "pivotY":[
+                            {
+                                "value":64,
+                                "tweenMethod":"linearNone",
+                                "tween":true,
+                                "target":3,
+                                "key":"pivotY",
+                                "index":0
+                            },
+                            {
+                                "value":64,
+                                "tweenMethod":"linearNone",
+                                "tween":true,
+                                "target":3,
+                                "label":null,
+                                "key":"pivotY",
+                                "index":12
+                            }],
+                        "pivotX":[
+                            {
+                                "value":64,
+                                "tweenMethod":"linearNone",
+                                "tween":true,
+                                "target":3,
+                                "key":"pivotX",
+                                "index":0
+                            },
+                            {
+                                "value":64,
+                                "tweenMethod":"linearNone",
+                                "tween":true,
+                                "target":3,
+                                "label":null,
+                                "key":"pivotX",
+                                "index":12
+                            }]
+                    }
+                }],
+            "name":"walk_left",
+            "id":1,
+            "frameRate":24,
+            "action":0
+        },
+        {
+            "nodes":[
+                {
+                    "target":3,
+                    "keyframes":{
+                        "skin":[
+                            {
+                                "value":"source/resident/yang_12.png",
+                                "tweenMethod":"linearNone",
+                                "tween":false,
+                                "target":3,
+                                "key":"skin",
+                                "index":0
+                            },
+                            {
+                                "value":"source/resident/yang_11.png",
+                                "tweenMethod":"linearNone",
+                                "tween":false,
+                                "target":3,
+                                "key":"skin",
+                                "index":3
+                            },
+                            {
+                                "value":"source/resident/yang_10.png",
+                                "tweenMethod":"linearNone",
+                                "tween":false,
+                                "target":3,
+                                "key":"skin",
+                                "index":6
+                            },
+                            {
+                                "value":"source/resident/yang_09.png",
+                                "tweenMethod":"linearNone",
+                                "tween":false,
+                                "target":3,
+                                "key":"skin",
+                                "index":9
+                            },
+                            {
+                                "value":"source/resident/yang_12.png",
+                                "tweenMethod":"linearNone",
+                                "tween":false,
+                                "target":3,
+                                "label":null,
+                                "key":"skin",
+                                "index":12
+                            }]
+                    }
+                }],
+            "name":"walk_down",
+            "id":1,
+            "frameRate":24,
+            "action":0
+        },
+        {
+            "nodes":[
+                {
+                    "target":3,
+                    "keyframes":{
+                        "y":[
+                            {
+                                "value":64,
+                                "tweenMethod":"linearNone",
+                                "tween":true,
+                                "target":3,
+                                "key":"y",
+                                "index":0
+                            },
+                            {
+                                "value":64,
+                                "tweenMethod":"linearNone",
+                                "tween":true,
+                                "target":3,
+                                "label":null,
+                                "key":"y",
+                                "index":12
+                            }],
+                        "x":[
+                            {
+                                "value":64,
+                                "tweenMethod":"linearNone",
+                                "tween":true,
+                                "target":3,
+                                "key":"x",
+                                "index":0
+                            },
+                            {
+                                "value":64,
+                                "tweenMethod":"linearNone",
+                                "tween":true,
+                                "target":3,
+                                "label":null,
+                                "key":"x",
+                                "index":12
+                            }],
+                        "skin":[
+                            {
+                                "value":"source/resident/yang_08.png",
+                                "tweenMethod":"linearNone",
+                                "tween":false,
+                                "target":3,
+                                "key":"skin",
+                                "index":0
+                            },
+                            {
+                                "value":"source/resident/yang_07.png",
+                                "tweenMethod":"linearNone",
+                                "tween":false,
+                                "target":3,
+                                "key":"skin",
+                                "index":3
+                            },
+                            {
+                                "value":"source/resident/yang_06.png",
+                                "tweenMethod":"linearNone",
+                                "tween":false,
+                                "target":3,
+                                "key":"skin",
+                                "index":6
+                            },
+                            {
+                                "value":"source/resident/yang_05.png",
+                                "tweenMethod":"linearNone",
+                                "tween":false,
+                                "target":3,
+                                "key":"skin",
+                                "index":9
+                            },
+                            {
+                                "value":"source/resident/yang_08.png",
+                                "tweenMethod":"linearNone",
+                                "tween":false,
+                                "target":3,
+                                "label":null,
+                                "key":"skin",
+                                "index":12
+                            }],
+                        "scaleX":[
+                            {
+                                "value":-1,
+                                "tweenMethod":"linearNone",
+                                "tween":true,
+                                "target":3,
+                                "key":"scaleX",
+                                "index":0
+                            },
+                            {
+                                "value":-1,
+                                "tweenMethod":"linearNone",
+                                "tween":true,
+                                "target":3,
+                                "label":null,
+                                "key":"scaleX",
+                                "index":12
+                            }],
+                        "pivotY":[
+                            {
+                                "value":64,
+                                "tweenMethod":"linearNone",
+                                "tween":true,
+                                "target":3,
+                                "key":"pivotY",
+                                "index":0
+                            },
+                            {
+                                "value":64,
+                                "tweenMethod":"linearNone",
+                                "tween":true,
+                                "target":3,
+                                "label":null,
+                                "key":"pivotY",
+                                "index":12
+                            }],
+                        "pivotX":[
+                            {
+                                "value":64,
+                                "tweenMethod":"linearNone",
+                                "tween":true,
+                                "target":3,
+                                "key":"pivotX",
+                                "index":0
+                            },
+                            {
+                                "value":64,
+                                "tweenMethod":"linearNone",
+                                "tween":true,
+                                "target":3,
+                                "label":null,
+                                "key":"pivotX",
+                                "index":12
+                            }]
+                    }
+                }],
+            "name":"walk_right",
+            "id":1,
+            "frameRate":24,
+            "action":0
+        },
+        {
+            "nodes":[
+                {
+                    "target":3,
+                    "keyframes":{
+                        "y":[
+                            {
+                                "value":85,
+                                "tweenMethod":"linearNone",
+                                "tween":true,
+                                "target":3,
+                                "key":"y",
+                                "index":0
+                            },
+                            {
+                                "value":85,
+                                "tweenMethod":"linearNone",
+                                "tween":true,
+                                "target":3,
+                                "label":null,
+                                "key":"y",
+                                "index":5
+                            },
+                            {
+                                "value":85,
+                                "tweenMethod":"linearNone",
+                                "tween":true,
+                                "target":3,
+                                "label":null,
+                                "key":"y",
+                                "index":10
+                            }],
+                        "x":[
+                            {
+                                "value":64,
+                                "tweenMethod":"linearNone",
+                                "tween":true,
+                                "target":3,
+                                "key":"x",
+                                "index":0
+                            },
+                            {
+                                "value":64,
+                                "tweenMethod":"linearNone",
+                                "tween":true,
+                                "target":3,
+                                "label":null,
+                                "key":"x",
+                                "index":5
+                            },
+                            {
+                                "value":64,
+                                "tweenMethod":"linearNone",
+                                "tween":true,
+                                "target":3,
+                                "label":null,
+                                "key":"x",
+                                "index":10
+                            }],
+                        "skin":[
+                            {
+                                "value":"source/resident/yang_09.png",
+                                "tweenMethod":"linearNone",
+                                "tween":false,
+                                "target":3,
+                                "key":"skin",
+                                "index":0
+                            },
+                            {
+                                "value":"source/resident/yang_09.png",
+                                "tweenMethod":"linearNone",
+                                "tween":false,
+                                "target":3,
+                                "label":null,
+                                "key":"skin",
+                                "index":5
+                            },
+                            {
+                                "value":"source/resident/yang_09.png",
                                 "tweenMethod":"linearNone",
                                 "tween":false,
                                 "target":3,
                                 "label":null,
                                 "key":"skin",
                                 "index":10
-                            },
-                            {
-                                "value":"source/resident/pet1.png",
-                                "tweenMethod":"linearNone",
-                                "tween":false,
-                                "target":3,
-                                "label":null,
-                                "key":"skin",
-                                "index":20
                             }],
                         "scaleY":[
                             {
@@ -138,103 +516,10 @@
                                 "label":null,
                                 "key":"scaleY",
                                 "index":10
-                            },
-                            {
-                                "value":1.1,
-                                "tweenMethod":"linearNone",
-                                "tween":true,
-                                "target":3,
-                                "key":"scaleY",
-                                "index":15
-                            },
-                            {
-                                "value":1,
-                                "tweenMethod":"linearNone",
-                                "tween":true,
-                                "target":3,
-                                "label":null,
-                                "key":"scaleY",
-                                "index":20
-                            }],
-                        "scaleX":[
-                            {
-                                "value":1,
-                                "tweenMethod":"linearNone",
-                                "tween":true,
-                                "target":3,
-                                "key":"scaleX",
-                                "index":0
-                            },
-                            {
-                                "value":0.9,
-                                "tweenMethod":"linearNone",
-                                "tween":true,
-                                "target":3,
-                                "key":"scaleX",
-                                "index":5
-                            },
-                            {
-                                "value":1,
-                                "tweenMethod":"linearNone",
-                                "tween":true,
-                                "target":3,
-                                "label":null,
-                                "key":"scaleX",
-                                "index":10
-                            },
-                            {
-                                "value":0.9,
-                                "tweenMethod":"linearNone",
-                                "tween":true,
-                                "target":3,
-                                "key":"scaleX",
-                                "index":15
-                            },
-                            {
-                                "value":1,
-                                "tweenMethod":"linearNone",
-                                "tween":true,
-                                "target":3,
-                                "label":null,
-                                "key":"scaleX",
-                                "index":20
-                            }],
-                        "rotation":[
-                            {
-                                "value":0,
-                                "tweenMethod":"linearNone",
-                                "tween":true,
-                                "target":3,
-                                "key":"rotation",
-                                "index":0
-                            },
-                            {
-                                "value":10,
-                                "tweenMethod":"linearNone",
-                                "tween":true,
-                                "target":3,
-                                "key":"rotation",
-                                "index":5
-                            },
-                            {
-                                "value":-10,
-                                "tweenMethod":"linearNone",
-                                "tween":true,
-                                "target":3,
-                                "key":"rotation",
-                                "index":15
-                            },
-                            {
-                                "value":0,
-                                "tweenMethod":"linearNone",
-                                "tween":true,
-                                "target":3,
-                                "key":"rotation",
-                                "index":20
                             }],
                         "pivotY":[
                             {
-                                "value":50,
+                                "value":85,
                                 "tweenMethod":"linearNone",
                                 "tween":true,
                                 "target":3,
@@ -242,26 +527,26 @@
                                 "index":0
                             },
                             {
-                                "value":50,
+                                "value":85,
+                                "tweenMethod":"linearNone",
+                                "tween":true,
+                                "target":3,
+                                "label":null,
+                                "key":"pivotY",
+                                "index":5
+                            },
+                            {
+                                "value":85,
                                 "tweenMethod":"linearNone",
                                 "tween":true,
                                 "target":3,
                                 "label":null,
                                 "key":"pivotY",
                                 "index":10
-                            },
-                            {
-                                "value":50,
-                                "tweenMethod":"linearNone",
-                                "tween":true,
-                                "target":3,
-                                "label":null,
-                                "key":"pivotY",
-                                "index":20
                             }],
                         "pivotX":[
                             {
-                                "value":25,
+                                "value":64,
                                 "tweenMethod":"linearNone",
                                 "tween":true,
                                 "target":3,
@@ -269,26 +554,26 @@
                                 "index":0
                             },
                             {
-                                "value":25,
+                                "value":64,
+                                "tweenMethod":"linearNone",
+                                "tween":true,
+                                "target":3,
+                                "label":null,
+                                "key":"pivotX",
+                                "index":5
+                            },
+                            {
+                                "value":64,
                                 "tweenMethod":"linearNone",
                                 "tween":true,
                                 "target":3,
                                 "label":null,
                                 "key":"pivotX",
                                 "index":10
-                            },
-                            {
-                                "value":25,
-                                "tweenMethod":"linearNone",
-                                "tween":true,
-                                "target":3,
-                                "label":null,
-                                "key":"pivotX",
-                                "index":20
                             }]
                     }
                 }],
-            "name":"pet1",
+            "name":"idle",
             "id":1,
             "frameRate":24,
             "action":0

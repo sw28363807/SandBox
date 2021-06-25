@@ -124,8 +124,6 @@ P C8F5B93A man_work1.png
 P BD8C9CFB man_work2.png
 P 48818065 man_work3.png
 P EC30D0B7 package.png
-P F2BD1A38 pet1.png
-P 6A1868B1 pet2.png
 P D6C57F4B sick.png
 P 1EC941BB talk.png
 P 966E7CCC woman_anger.png
@@ -160,6 +158,18 @@ P B1905647 woman_walk_up5.png
 P A1F6B101 woman_work1.png
 P 577414D9 woman_work2.png
 P 73DBBABA woman_work3.png
+P 0B6FE57F yang_01.png
+P 7E462877 yang_02.png
+P A11110B6 yang_03.png
+P FBAB52DF yang_04.png
+P D686E1BF yang_05.png
+P 2F1C6FC4 yang_06.png
+P 43720861 yang_07.png
+P B5CA2E4F yang_08.png
+P A938CDDA yang_09.png
+P 1B377F13 yang_10.png
+P 686A2639 yang_11.png
+P BE0F8169 yang_12.png
 D source/scene
 D source/ui
 P F4F08B52 btn1.png
