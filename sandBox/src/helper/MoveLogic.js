@@ -7,6 +7,8 @@ export default class MoveLogic extends Laya.Script {
     constructor() {
         super();
         this.movePaths = [];
+        this.curDest = null;
+        this.finishHandler = null;
     }
 
     // 设置回调
@@ -17,16 +19,64 @@ export default class MoveLogic extends Laya.Script {
         this.downFunc = config.downFunc;
     }
 
-    onEnable() {
-
+    onStart() {
     }
 
-    onDisable() {
+    onDestroy() {
         this.stopGoto();
     }
 
+    refreshDirectCallback() {
+        if (this.curDest) {
+            if (this.curDest.x) {
+                if (this.curDest.direct > 0) {
+                    if (this.rightFunc) {
+                        this.rightFunc();
+                    }
+                } else {
+                    if (this.leftFunc) {
+                        this.leftFunc();
+                    }
+                }
+            } else {
+                if (this.curDest.direct > 0) {
+                    if (this.downFunc) {
+                        this.downFunc();
+                    }
+                } else {
+                    if (this.upFunc) {
+                        this.upFunc();
+                    }
+                }
+            }
+        }
+    }
+
+    startGoto() {
+        if (!this.curDest) {
+            if (this.movePaths.length == 0) {
+                if (this.finishHandler) {
+                    this.finishHandler.run();
+                    return;
+                }
+            }
+            this.curDest = this.movePaths[0];
+            this.refreshDirectCallback();
+            this.lastFrameTime = Laya.Browser.now();
+            Laya.timer.frameLoop(1, this, this._onFrameUpdate);
+        }
+    }
+
+    stopGoto() {
+        this.movePaths = [];
+        this.curDest = null;
+        this.lastFrameTime = 0;
+        Laya.timer.clear(this, this._onFrameUpdate);
+    }
+
     // 行走到某个位置
-    gotoDestExt(info, handler) {
+    gotoDest(info, handler) {
+        this.finishHandler = handler;
         if (info.speed) {
             this.speed = info.speed;
         } else {
@@ -41,22 +91,20 @@ export default class MoveLogic extends Laya.Script {
         let xDelta = dstX - curX;
         let yDelta = dstY - curY;
         if (xDelta == 0 && yDelta == 0) {
-            if (handler) {
-                handler.run();
+            if (this.finishHandler) {
+                this.finishHandler.run();
             }
         }
         let signX = Utils.getSign2(xDelta);
         let signY = Utils.getSign2(yDelta);
-        if (info.forceFirstY || (RandomMgr.randomYes() && (info.forceFirstY == undefined || info.forceFirstY == null) ) ) {
+        if (info.forceFirstY || (RandomMgr.randomYes() && (info.forceFirstY == undefined || info.forceFirstY == null))) {
             let p1 = {
-                x: curX,
                 y: dstY,
-                direct: { x: 0, y: signY },
+                direct: signY,
             };
             let p2 = {
                 x: dstX,
-                y: dstY,
-                direct: { x: signX, y: 0 },
+                direct: signX,
             };
             if (signY != 0) {
                 this.movePaths.push(p1);
@@ -68,13 +116,11 @@ export default class MoveLogic extends Laya.Script {
         } else {
             let p1 = {
                 x: dstX,
-                y: curY,
-                direct: { x: signX, y: 0 },
+                direct: signX,
             };
             let p2 = {
-                x: dstX,
                 y: dstY,
-                direct: { x: 0, y: signY },
+                direct: signY,
             };
             if (signX != 0) {
                 this.movePaths.push(p1);
@@ -84,86 +130,63 @@ export default class MoveLogic extends Laya.Script {
             }
             info.isFirstY = false;
         }
-        this._gotoDest2(handler);
+        this.startGoto();
     }
 
-    // 行走到某个位置
-    _gotoDest2(handler) {
-        if (this.movePaths.length != 0) {
-            let p = this.movePaths[0];
-            if (p.direct.x != 0) {
-                if (p.direct.x < 0) {
-                    if (this.leftFunc) {
-                        this.leftFunc();
-                    }
-                } else {
-                    if (this.rightFunc) {
-                        this.rightFunc();
-                    }
-                }
+
+    _onFrameUpdate() {
+        let deltay = Laya.Browser.now() - this.lastFrameTime;
+        this._onTick(deltay);
+        this.lastFrameTime = Laya.Browser.now();
+    }
+
+    _onTick(dt) {
+        if (this.curDest.x) {
+            // console.debug("start1");
+            // console.debug(this.curDest);
+            // console.debug(this.owner.x);
+            // console.debug(Utils.getSign2(this.curDest.x - this.owner.x));
+            // console.debug(this.curDest.direct);
+            // console.debug(this.movePaths.length);
+            // console.debug("end1");
+            if (Utils.getSign2(this.curDest.x - this.owner.x) == this.curDest.direct) {
+                this.owner.x += this.curDest.direct * this.speed * dt / 30;
             } else {
-                if (p.direct.y < 0) {
-                    if (this.upFunc) {
-                        this.upFunc();
-                    }
+                this.owner.x = this.curDest.x;
+                this.movePaths.splice(0, 1);
+                if (this.movePaths.length != 0) {
+                    this.curDest = this.movePaths[0];
+                    this.refreshDirectCallback();
                 } else {
-                    if (this.downFunc) {
-                        this.downFunc();
+                    if (this.finishHandler) {
+                        this.finishHandler.run();
                     }
+                    this.stopGoto();
                 }
             }
-            this._gotoDest(p, Laya.Handler.create(this, function () {
-                this.movePaths.splice(0, 1);
-                this._gotoDest2(handler);
-            }));
         } else {
-            this.stopGoto();
-            if (handler) {
-                handler.run();
+            // console.debug("start");
+            // console.debug(this.curDest);
+            // console.debug(this.owner.y);
+            // console.debug(Utils.getSign2(this.curDest.y - this.owner.y));
+            // console.debug(this.curDest.direct);
+            // console.debug(this.movePaths.length);
+            // console.debug("end");
+            if (Utils.getSign2(this.curDest.y - this.owner.y) == this.curDest.direct) {
+                this.owner.y += this.curDest.direct * this.speed * dt / 30;
+            } else {
+                this.owner.y = this.curDest.y;
+                this.movePaths.splice(0, 1);
+                if (this.movePaths.length != 0) {
+                    this.curDest = this.movePaths[0];
+                    this.refreshDirectCallback();
+                } else {
+                    if (this.finishHandler) {
+                        this.finishHandler.run();
+                    }
+                    this.stopGoto();
+                }
             }
         }
-    }
-
-
-    // 行走到某个位置
-    _gotoDest(info, handler) {
-        this.stopAGoto();
-        let dstX = info.x;
-        let dstY = info.y;
-        let distance = new Laya.Point(dstX, dstY).distance(this.owner.x, this.owner.y);
-        let r = distance / this.speed;
-        let time = r * 1000;
-        Laya.timer.once(time + 50, this, this._onGotoTimeOut, [info, handler]);
-        let dst = null;
-        if (dstX != this.owner.x) {
-            dst = { x: dstX };
-        }
-        if (dstY != this.owner.y) {
-            dst = { y: dstY };
-        }
-        this.tweenObject = Laya.Tween.to(this.owner, dst, time, null, Laya.Handler.create(this, function () {
-            this.stopAGoto();
-            if (handler) {
-                handler.run();
-            }
-        }));
-    }
-
-    _onGotoTimeOut(info, handler) {
-        this.stopAGoto();
-        this._gotoDest(info, handler);
-    }
-
-    stopAGoto() {
-        Laya.timer.clear(this, this._onGotoTimeOut);
-        if (this.tweenObject) {
-            Laya.Tween.clear(this.tweenObject);
-            this.tweenObject = null;
-        }
-    }
-
-    stopGoto() {
-        this.stopAGoto();
-        this.movePaths = [];
     }
 }

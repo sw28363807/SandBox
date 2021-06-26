@@ -1,0 +1,1 @@
+{"type":"Box","props":{"y":0,"x":0,"width":128,"presetID":1,"name":"Tree","isPresetRoot":true,"height":200},"compId":84,"child":[{"type":"Animation","props":{"y":70,"x":7,"source":"anim/Tree.ani","presetID":4,"name":"ani"},"compId":87},{"type":"Script","props":{"y":0,"x":0,"presetID":3,"runtime":"source/Treelogic.js"},"compId":86}],"loadList":["anim/Tree.ani"],"loadList3D":[]}

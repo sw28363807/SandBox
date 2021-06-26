@@ -42,7 +42,7 @@ export default class PetLogic extends Laya.Script {
     }
 
     walkTo(config, handler) {
-        this.moveLogic.gotoDestExt(config, Laya.Handler.create(this, function () {
+        this.moveLogic.gotoDest(config, Laya.Handler.create(this, function () {
             this.ani.play(0, true, "idle");
             if (handler) {
                 handler.run();

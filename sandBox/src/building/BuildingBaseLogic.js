@@ -19,6 +19,10 @@ export default class BuildingBaseLogic extends Laya.Script {
     }
 
     onDisable() {
+       
+    }
+
+    onDestroy() {
         this.stopTimer();
     }
 

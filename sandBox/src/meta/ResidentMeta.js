@@ -192,7 +192,7 @@ ResidentMeta.CutDownTreeTime = 10000;
 ResidentMeta.CollectStoneTime = 10000;
 
 // 人物移动速度
-ResidentMeta.ResidentMoveSpeed = 150;
+ResidentMeta.ResidentMoveSpeed = 4;
 
 // 聊天的时间步长
 ResidentMeta.SocialTimeStep = 1000;

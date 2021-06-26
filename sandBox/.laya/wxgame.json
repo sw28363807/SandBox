@@ -10,7 +10,7 @@
     "compressJsonNoteList": [
         ""
     ],
-    "compressImage": false,
+    "compressImage": true,
     "compressImageFilter": [
         "$basePath/**/*.{png,jpg}"
     ],
@@ -69,7 +69,7 @@
     "useMinJsLibs": true,
     "es6toes5": false,
     "projectType": "js",
-    "pubTime": 1624086386631,
+    "pubTime": 1624729655599,
     "uesEnginePlugin": false,
     "wxOptimize": {
         "useOptimizeOpen": false,

@@ -46,6 +46,10 @@ export default class ResidentLogic extends Laya.Script {
     }
 
     onDisable() {
+
+    }
+
+    onDestroy() {
         this.ResidentTempData.destroy(true);
         this.removeAllEvents();
         this.removeAllTimers();
@@ -1006,7 +1010,7 @@ export default class ResidentLogic extends Laya.Script {
     }
 
     walkTo(config, handler) {
-        this.getMoveScript().gotoDestExt(config, handler);
+        this.getMoveScript().gotoDest(config, handler);
         if (this.getPet()) {
             let copyConfig = {
                 x: config.x + 60,
@@ -1132,33 +1136,27 @@ export default class ResidentLogic extends Laya.Script {
         // 喝水
         this.processDrinkWater();
         //吃饭
-        // this.processEatFood();
+        this.processEatFood();
         // 社交
-        // this.processSocial();
+        this.processSocial();
         // 砍树
-        // this.processCutDownTree();
+        this.processCutDownTree();
         // 收集石头
-        // this.processCollectStone();
+        this.processCollectStone();
         // 跑去打猎
-        // this.processHunt();
+        this.processHunt();
         // 盖房子
-        // this.processCreateHome();
+        this.processCreateHome();
         // 找恋人
-        // this.processLookForLover();
-        // 去幼儿园学习
-        // this.processLearnForChildSchool();
+        this.processLookForLover();
         // 打架
-        // this.processFight();
+        this.processFight();
         // 赶着去溜达
-        // this.processRandomWalk();
-        // 跑去治病
-        // this.processHeal();
-        // 跑去上课
-        // this.processTeach();
+        this.processRandomWalk();
         // 跑去建造
         this.processCreateBuilding();
         // // 跑去运送
-        // this.processSend();
+        this.processSend();
         // 跑去使用建筑
         this.processUseBuildingAI();
         // =================================正式================end

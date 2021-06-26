@@ -14,7 +14,6 @@ export default class FoodLogic extends Laya.Script {
     }
 
     onDisable() {
-        Laya.timer.clear(this, this.fadeOutFinish);
     }
 
     onStart() {
@@ -28,6 +27,7 @@ export default class FoodLogic extends Laya.Script {
     }
 
     onDestroy() {
+        Laya.timer.clear(this, this.fadeOutFinish);
         if (this.trigger) {
             this.trigger.addNum(-1);
         }
