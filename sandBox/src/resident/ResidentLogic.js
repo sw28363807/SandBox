@@ -816,6 +816,8 @@ export default class ResidentLogic extends Laya.Script {
     onUseBuildingPre(useData) {
         if (useData.buildingType == BuildingMeta.BuildingType.FireType) {
             this.setAnim(ResidentMeta.ResidentAnim.Enjoy);
+            this.setStateAniVisible(true);
+            this.setStateAni("ani11");
         }
         // console.debug(useData);
     }
@@ -833,7 +835,8 @@ export default class ResidentLogic extends Laya.Script {
         let destX = this.useBuilding.x + this.useBuilding.width / 2 - this.owner.width / 2;
         let destY = this.useBuilding.y + this.useBuilding.height - this.owner.height + ResidentMeta.ResidentGotoYOff;
         if (data.useType == 2) {
-            let p = RandomMgr.randomByArea3(destX, destY, 50, 100);
+            destY = this.useBuilding.y + this.useBuilding.height / 2 - this.owner.height + ResidentMeta.ResidentGotoYOff;
+            let p = RandomMgr.randomByArea3(destX, destY, 70, 150);
             destX = p.x;
             destY = p.y;
         }

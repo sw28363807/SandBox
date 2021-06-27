@@ -33,7 +33,7 @@ export default class GameModel extends Laya.Script {
         this.stoneNum = 0;
         this.gameYear = 0;
         this.gameDay = 0;
-        this.gameSeason = 0;
+        this.gameSeason = 3;
         this.gameHour = 0;    //时间小时
     }
 
