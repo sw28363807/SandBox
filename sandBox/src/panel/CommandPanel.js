@@ -54,7 +54,7 @@ export default class CommandPanel extends Laya.Script {
         this.items = {};
         for (const key in BuildingMeta.BuildingDatas) {
             let item = BuildingMeta.BuildingDatas[key];
-            if (item.type != BuildingMeta.BuildingType.HomeType) {
+            if (item.preview && item.preview != "") {
                 this.dataArray.push(item);
             }
         }

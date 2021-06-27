@@ -24,7 +24,7 @@ export default class ResidentModel extends Laya.Script {
         this.petType = 0;               //宠物ID
 
 
-        this.temperature = 36;  //体温
+        this.temperature = 19;  //体温
         this.age = 1;       //年龄
         this.sex = 1;   // 性别 1 男 2 女
         this.married = 1; //1 未婚 2 已婚
@@ -101,6 +101,14 @@ export default class ResidentModel extends Laya.Script {
                 this.petType = data.petType;
             }
         }
+    }
+
+    getTemperature() {
+        return this.temperature;
+    }
+
+    setTemperature(temperature) {
+        this.temperature = temperature;
     }
 
     setPetType(petType) {

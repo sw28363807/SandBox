@@ -12,6 +12,7 @@ import CommandPanel from "./panel/CommandPanel"
 import AnimalLogic from "./animal/AnimalLogic"
 import ChildSchoolLogic from "./building/ChildSchoolLogic"
 import FarmLandLogic from "./building/FarmLandLogic"
+import FireLogic from "./building/FireLogic"
 import FoodLogic from "./source/FoodLogic"
 import FoodPoolLogic from "./building/FoodPoolLogic"
 import HomeLogic from "./building/HomeLogic"
@@ -50,6 +51,7 @@ export default class GameConfig {
 		reg("animal/AnimalLogic.js",AnimalLogic);
 		reg("building/ChildSchoolLogic.js",ChildSchoolLogic);
 		reg("building/FarmLandLogic.js",FarmLandLogic);
+		reg("building/FireLogic.js",FireLogic);
 		reg("source/FoodLogic.js",FoodLogic);
 		reg("building/FoodPoolLogic.js",FoodPoolLogic);
 		reg("building/HomeLogic.js",HomeLogic);

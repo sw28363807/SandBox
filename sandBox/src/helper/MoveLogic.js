@@ -141,7 +141,7 @@ export default class MoveLogic extends Laya.Script {
     }
 
     _onTick(dt) {
-        if (this.curDest.x) {
+        if (this.curDest.x != undefined && this.curDest.x != null) {
             // console.debug("start1");
             // console.debug(this.curDest);
             // console.debug(this.owner.x);
@@ -158,10 +158,10 @@ export default class MoveLogic extends Laya.Script {
                     this.curDest = this.movePaths[0];
                     this.refreshDirectCallback();
                 } else {
+                    this.stopGoto();
                     if (this.finishHandler) {
                         this.finishHandler.run();
                     }
-                    this.stopGoto();
                 }
             }
         } else {
@@ -181,10 +181,10 @@ export default class MoveLogic extends Laya.Script {
                     this.curDest = this.movePaths[0];
                     this.refreshDirectCallback();
                 } else {
+                    this.stopGoto();
                     if (this.finishHandler) {
                         this.finishHandler.run();
                     }
-                    this.stopGoto();
                 }
             }
         }

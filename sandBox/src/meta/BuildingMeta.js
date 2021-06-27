@@ -6,7 +6,7 @@ export default class BuildingMeta {
             BuildingMeta.BuildingType[key] = key;
         }
     }
-    
+
     static obtainBuildingState() {
         for (const key in BuildingMeta.BuildingState) {
             BuildingMeta.BuildingState[key] = key;
@@ -32,6 +32,7 @@ BuildingMeta.BuildingType = {
     PetShopType: "",         //宠物店
     FoodPoolType: "",         //食物仓库
     WaterPoolType: "",         //水仓库
+    FireType: "",              //火堆
 };
 
 BuildingMeta.obtainBuildingType();
@@ -58,15 +59,15 @@ BuildingMeta.BuildingDatas = {
     // 家
     [String(BuildingMeta.BuildingType.HomeType)]: {
         prefab: ResourceMeta.HomePrefabPath,
-        preview: "source/building/building1_1.png",
+        preview: "",
         realWidth: 200,
         realHeight: 200,
         createBuildingSpeed: 2000,
         useBuildingTime: 5000,
         createPriority: 1,
         buildingName: "家",
-        costTree: 2,
-        costStone: 2,
+        costTree: 0,
+        costStone: 0,
         desc: "居住的地方",
     },
     // 医院
@@ -281,5 +282,19 @@ BuildingMeta.BuildingDatas = {
         costStone: 0,
         maxSave: 1000,
         desc: "可以保存水源以便今后使用",
+    },
+    // 火堆
+    [String(BuildingMeta.BuildingType.FireType)]: {
+        prefab: ResourceMeta.FirePrefabPath,
+        preview: "",
+        realWidth: 200,
+        realHeight: 200,
+        createBuildingSpeed: 2000,
+        useBuildingTime: 5000,
+        createPriority: 2,
+        buildingName: "",
+        costTree: 0,
+        costStone: 0,
+        desc: "",
     },
 };

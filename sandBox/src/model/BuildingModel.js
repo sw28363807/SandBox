@@ -2,7 +2,7 @@ import BuildingMeta from "../meta/BuildingMeta";
 
 export default class BuildingModel extends Laya.Script {
 
-    constructor() { 
+    constructor() {
         super();
 
         this.buildingId = 0;    //建筑ID
