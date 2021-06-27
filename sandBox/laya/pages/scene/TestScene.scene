@@ -1,12 +1,12 @@
 {
     "x":0,
     "type":"Scene",
-    "selectedBox":2,
-    "selecteID":184,
+    "selectedBox":10,
+    "selecteID":200,
     "searchKey":"Scene",
     "props":{"width":1336,"sceneColor":"#000000","height":750},
     "nodeParent":-1,
-    "maxID":186,
+    "maxID":202,
     "label":"Scene",
     "isOpen":true,
     "isDirectory":true,
@@ -38,13 +38,14 @@
             "props":{"y":0,"x":0,"width":1336,"name":"ScrollView","height":750,"bgColor":"#f8f3f7"},
             "nodeParent":2,
             "label":"ScrollView",
-            "isOpen":false,
+            "isOpen":true,
             "isDirectory":true,
             "isAniNode":true,
             "hasChild":true,
             "compId":9,
             "child":[
                 {
+                    "x":30,
                     "type":"Box",
                     "searchKey":"Box,container",
                     "props":{"y":0,"x":0,"width":15000,"name":"container","height":15000,"bgColor":"#e72c29"},
@@ -57,6 +58,7 @@
                     "compId":10,
                     "child":[
                         {
+                            "x":45,
                             "type":"Box",
                             "searchKey":"Box",
                             "props":{"presetID":1,"preset":"laya/pages/prefab/Season.prefab"},
@@ -113,6 +115,7 @@
                             "$HIDDEN":false
                         },
                         {
+                            "x":45,
                             "type":"Box",
                             "searchKey":"Box",
                             "props":{"y":7614,"x":7794,"presetID":1,"preset":"laya/pages/prefab/Tree.prefab"},
@@ -155,11 +158,12 @@
                                 }]
                         },
                         {
+                            "x":45,
                             "type":"Box",
                             "selectedBox":35,
                             "selecteID":38,
                             "searchKey":"Box",
-                            "props":{"y":7406,"x":7794,"presetID":1,"preset":"laya/pages/prefab/FoodTrigger.prefab"},
+                            "props":{"y":7206,"x":8067,"presetID":1,"preset":"laya/pages/prefab/FoodTrigger.prefab"},
                             "nodeParent":10,
                             "maxID":40,
                             "label":"FoodTrigger",
@@ -188,39 +192,168 @@
                                 {
                                     "type":"Sprite",
                                     "searchKey":"Sprite",
-                                    "props":{"presetID":3,"preset":"laya/pages/prefab/FoodTrigger.prefab"},
+                                    "props":{"presetID":8,"preset":"laya/pages/prefab/FoodTrigger.prefab"},
                                     "nodeParent":97,
                                     "label":"Sprite(FoodTrigger)",
+                                    "isOpen":true,
                                     "isDirectory":false,
                                     "isAniNode":true,
                                     "hasChild":false,
-                                    "compId":161,
+                                    "compId":184,
                                     "child":[
                                         ]
                                 },
                                 {
                                     "type":"Sprite",
                                     "searchKey":"Sprite",
-                                    "props":{"presetID":4,"preset":"laya/pages/prefab/FoodTrigger.prefab"},
+                                    "props":{"presetID":9,"preset":"laya/pages/prefab/FoodTrigger.prefab"},
                                     "nodeParent":97,
                                     "label":"Sprite(FoodTrigger)",
+                                    "isOpen":true,
                                     "isDirectory":false,
                                     "isAniNode":true,
                                     "hasChild":false,
-                                    "compId":162,
+                                    "compId":185,
                                     "child":[
                                         ]
                                 },
                                 {
                                     "type":"Sprite",
                                     "searchKey":"Sprite",
-                                    "props":{"presetID":5,"preset":"laya/pages/prefab/FoodTrigger.prefab"},
+                                    "props":{"presetID":10,"preset":"laya/pages/prefab/FoodTrigger.prefab"},
                                     "nodeParent":97,
                                     "label":"Sprite(FoodTrigger)",
+                                    "isOpen":true,
                                     "isDirectory":false,
                                     "isAniNode":true,
                                     "hasChild":false,
-                                    "compId":163,
+                                    "compId":186,
+                                    "child":[
+                                        ]
+                                },
+                                {
+                                    "type":"Sprite",
+                                    "searchKey":"Sprite",
+                                    "props":{"presetID":11,"preset":"laya/pages/prefab/FoodTrigger.prefab"},
+                                    "nodeParent":97,
+                                    "label":"Sprite(FoodTrigger)",
+                                    "isOpen":true,
+                                    "isDirectory":false,
+                                    "isAniNode":true,
+                                    "hasChild":false,
+                                    "compId":187,
+                                    "child":[
+                                        ]
+                                },
+                                {
+                                    "type":"Sprite",
+                                    "searchKey":"Sprite",
+                                    "props":{"presetID":12,"preset":"laya/pages/prefab/FoodTrigger.prefab"},
+                                    "nodeParent":97,
+                                    "label":"Sprite(FoodTrigger)",
+                                    "isOpen":true,
+                                    "isDirectory":false,
+                                    "isAniNode":true,
+                                    "hasChild":false,
+                                    "compId":188,
+                                    "child":[
+                                        ]
+                                },
+                                {
+                                    "type":"Sprite",
+                                    "searchKey":"Sprite",
+                                    "props":{"presetID":13,"preset":"laya/pages/prefab/FoodTrigger.prefab"},
+                                    "nodeParent":97,
+                                    "label":"Sprite(FoodTrigger)",
+                                    "isOpen":true,
+                                    "isDirectory":false,
+                                    "isAniNode":true,
+                                    "hasChild":false,
+                                    "compId":189,
+                                    "child":[
+                                        ]
+                                },
+                                {
+                                    "type":"Sprite",
+                                    "searchKey":"Sprite",
+                                    "props":{"presetID":14,"preset":"laya/pages/prefab/FoodTrigger.prefab"},
+                                    "nodeParent":97,
+                                    "label":"Sprite(FoodTrigger)",
+                                    "isOpen":true,
+                                    "isDirectory":false,
+                                    "isAniNode":true,
+                                    "hasChild":false,
+                                    "compId":190,
+                                    "child":[
+                                        ]
+                                },
+                                {
+                                    "type":"Sprite",
+                                    "searchKey":"Sprite",
+                                    "props":{"presetID":15,"preset":"laya/pages/prefab/FoodTrigger.prefab"},
+                                    "nodeParent":97,
+                                    "label":"Sprite(FoodTrigger)",
+                                    "isOpen":true,
+                                    "isDirectory":false,
+                                    "isAniNode":true,
+                                    "hasChild":false,
+                                    "compId":191,
+                                    "child":[
+                                        ]
+                                },
+                                {
+                                    "type":"Sprite",
+                                    "searchKey":"Sprite",
+                                    "props":{"presetID":16,"preset":"laya/pages/prefab/FoodTrigger.prefab"},
+                                    "nodeParent":97,
+                                    "label":"Sprite(FoodTrigger)",
+                                    "isOpen":true,
+                                    "isDirectory":false,
+                                    "isAniNode":true,
+                                    "hasChild":false,
+                                    "compId":192,
+                                    "child":[
+                                        ]
+                                },
+                                {
+                                    "type":"Sprite",
+                                    "searchKey":"Sprite",
+                                    "props":{"presetID":17,"preset":"laya/pages/prefab/FoodTrigger.prefab"},
+                                    "nodeParent":97,
+                                    "label":"Sprite(FoodTrigger)",
+                                    "isOpen":true,
+                                    "isDirectory":false,
+                                    "isAniNode":true,
+                                    "hasChild":false,
+                                    "compId":193,
+                                    "child":[
+                                        ]
+                                },
+                                {
+                                    "type":"Sprite",
+                                    "searchKey":"Sprite",
+                                    "props":{"presetID":18,"preset":"laya/pages/prefab/FoodTrigger.prefab"},
+                                    "nodeParent":97,
+                                    "label":"Sprite(FoodTrigger)",
+                                    "isOpen":true,
+                                    "isDirectory":false,
+                                    "isAniNode":true,
+                                    "hasChild":false,
+                                    "compId":194,
+                                    "child":[
+                                        ]
+                                },
+                                {
+                                    "type":"Sprite",
+                                    "searchKey":"Sprite",
+                                    "props":{"presetID":19,"preset":"laya/pages/prefab/FoodTrigger.prefab"},
+                                    "nodeParent":97,
+                                    "label":"Sprite(FoodTrigger)",
+                                    "isOpen":true,
+                                    "isDirectory":false,
+                                    "isAniNode":true,
+                                    "hasChild":false,
+                                    "compId":195,
                                     "child":[
                                         ]
                                 }],
@@ -235,6 +368,217 @@
                                 }]
                         },
                         {
+                            "x":45,
+                            "type":"Box",
+                            "selectedBox":35,
+                            "selecteID":59,
+                            "searchKey":"Box",
+                            "props":{"y":7650,"x":6837,"presetID":1,"preset":"laya/pages/prefab/FoodTrigger.prefab"},
+                            "nodeParent":10,
+                            "maxID":60,
+                            "label":"FoodTrigger",
+                            "isOpen":false,
+                            "isDirectory":true,
+                            "isAniNode":true,
+                            "hasChild":true,
+                            "compId":200,
+                            "child":[
+                                {
+                                    "type":"Script",
+                                    "switchAble":true,
+                                    "source":"src/source/FoodTrigger.js",
+                                    "searchKey":"Script,FoodTrigger",
+                                    "removeAble":true,
+                                    "props":{"presetID":2,"preset":"laya/pages/prefab/FoodTrigger.prefab"},
+                                    "nodeParent":200,
+                                    "label":"FoodTrigger",
+                                    "isDirectory":false,
+                                    "isAniNode":true,
+                                    "hasChild":false,
+                                    "compId":201,
+                                    "child":[
+                                        ]
+                                },
+                                {
+                                    "type":"Sprite",
+                                    "searchKey":"Sprite",
+                                    "props":{"presetID":8,"preset":"laya/pages/prefab/FoodTrigger.prefab"},
+                                    "nodeParent":200,
+                                    "label":"Sprite(FoodTrigger)",
+                                    "isOpen":true,
+                                    "isDirectory":false,
+                                    "isAniNode":true,
+                                    "hasChild":false,
+                                    "compId":48,
+                                    "child":[
+                                        ]
+                                },
+                                {
+                                    "type":"Sprite",
+                                    "searchKey":"Sprite",
+                                    "props":{"presetID":9,"preset":"laya/pages/prefab/FoodTrigger.prefab"},
+                                    "nodeParent":200,
+                                    "label":"Sprite(FoodTrigger)",
+                                    "isOpen":true,
+                                    "isDirectory":false,
+                                    "isAniNode":true,
+                                    "hasChild":false,
+                                    "compId":49,
+                                    "child":[
+                                        ]
+                                },
+                                {
+                                    "type":"Sprite",
+                                    "searchKey":"Sprite",
+                                    "props":{"presetID":10,"preset":"laya/pages/prefab/FoodTrigger.prefab"},
+                                    "nodeParent":200,
+                                    "label":"Sprite(FoodTrigger)",
+                                    "isOpen":true,
+                                    "isDirectory":false,
+                                    "isAniNode":true,
+                                    "hasChild":false,
+                                    "compId":50,
+                                    "child":[
+                                        ]
+                                },
+                                {
+                                    "type":"Sprite",
+                                    "searchKey":"Sprite",
+                                    "props":{"presetID":11,"preset":"laya/pages/prefab/FoodTrigger.prefab"},
+                                    "nodeParent":200,
+                                    "label":"Sprite(FoodTrigger)",
+                                    "isOpen":true,
+                                    "isDirectory":false,
+                                    "isAniNode":true,
+                                    "hasChild":false,
+                                    "compId":51,
+                                    "child":[
+                                        ]
+                                },
+                                {
+                                    "type":"Sprite",
+                                    "searchKey":"Sprite",
+                                    "props":{"presetID":12,"preset":"laya/pages/prefab/FoodTrigger.prefab"},
+                                    "nodeParent":200,
+                                    "label":"Sprite(FoodTrigger)",
+                                    "isOpen":true,
+                                    "isDirectory":false,
+                                    "isAniNode":true,
+                                    "hasChild":false,
+                                    "compId":52,
+                                    "child":[
+                                        ]
+                                },
+                                {
+                                    "type":"Sprite",
+                                    "searchKey":"Sprite",
+                                    "props":{"presetID":13,"preset":"laya/pages/prefab/FoodTrigger.prefab"},
+                                    "nodeParent":200,
+                                    "label":"Sprite(FoodTrigger)",
+                                    "isOpen":true,
+                                    "isDirectory":false,
+                                    "isAniNode":true,
+                                    "hasChild":false,
+                                    "compId":53,
+                                    "child":[
+                                        ]
+                                },
+                                {
+                                    "type":"Sprite",
+                                    "searchKey":"Sprite",
+                                    "props":{"presetID":14,"preset":"laya/pages/prefab/FoodTrigger.prefab"},
+                                    "nodeParent":200,
+                                    "label":"Sprite(FoodTrigger)",
+                                    "isOpen":true,
+                                    "isDirectory":false,
+                                    "isAniNode":true,
+                                    "hasChild":false,
+                                    "compId":54,
+                                    "child":[
+                                        ]
+                                },
+                                {
+                                    "type":"Sprite",
+                                    "searchKey":"Sprite",
+                                    "props":{"presetID":15,"preset":"laya/pages/prefab/FoodTrigger.prefab"},
+                                    "nodeParent":200,
+                                    "label":"Sprite(FoodTrigger)",
+                                    "isOpen":true,
+                                    "isDirectory":false,
+                                    "isAniNode":true,
+                                    "hasChild":false,
+                                    "compId":55,
+                                    "child":[
+                                        ]
+                                },
+                                {
+                                    "type":"Sprite",
+                                    "searchKey":"Sprite",
+                                    "props":{"presetID":16,"preset":"laya/pages/prefab/FoodTrigger.prefab"},
+                                    "nodeParent":200,
+                                    "label":"Sprite(FoodTrigger)",
+                                    "isOpen":true,
+                                    "isDirectory":false,
+                                    "isAniNode":true,
+                                    "hasChild":false,
+                                    "compId":56,
+                                    "child":[
+                                        ]
+                                },
+                                {
+                                    "type":"Sprite",
+                                    "searchKey":"Sprite",
+                                    "props":{"presetID":17,"preset":"laya/pages/prefab/FoodTrigger.prefab"},
+                                    "nodeParent":200,
+                                    "label":"Sprite(FoodTrigger)",
+                                    "isOpen":true,
+                                    "isDirectory":false,
+                                    "isAniNode":true,
+                                    "hasChild":false,
+                                    "compId":57,
+                                    "child":[
+                                        ]
+                                },
+                                {
+                                    "type":"Sprite",
+                                    "searchKey":"Sprite",
+                                    "props":{"presetID":18,"preset":"laya/pages/prefab/FoodTrigger.prefab"},
+                                    "nodeParent":200,
+                                    "label":"Sprite(FoodTrigger)",
+                                    "isOpen":true,
+                                    "isDirectory":false,
+                                    "isAniNode":true,
+                                    "hasChild":false,
+                                    "compId":58,
+                                    "child":[
+                                        ]
+                                },
+                                {
+                                    "type":"Sprite",
+                                    "searchKey":"Sprite",
+                                    "props":{"presetID":19,"preset":"laya/pages/prefab/FoodTrigger.prefab"},
+                                    "nodeParent":200,
+                                    "label":"Sprite(FoodTrigger)",
+                                    "isOpen":true,
+                                    "isDirectory":false,
+                                    "isAniNode":true,
+                                    "hasChild":false,
+                                    "compId":59,
+                                    "child":[
+                                        ]
+                                }],
+                            "animations":[
+                                {
+                                    "nodes":[
+                                        ],
+                                    "name":"ani1",
+                                    "id":1,
+                                    "frameRate":24,
+                                    "action":0
+                                }]
+                        },
+                        {
+                            "x":45,
                             "type":"Box",
                             "selectedBox":90,
                             "selecteID":94,
@@ -290,6 +634,7 @@
                                 }]
                         },
                         {
+                            "x":45,
                             "type":"Box",
                             "selectedBox":99,
                             "selecteID":101,
@@ -370,6 +715,7 @@
                                 }]
                         },
                         {
+                            "x":45,
                             "type":"Box",
                             "selectedBox":99,
                             "selecteID":108,
@@ -490,6 +836,7 @@
                                 }]
                         },
                         {
+                            "x":45,
                             "type":"Box",
                             "searchKey":"Box",
                             "props":{"y":7539,"x":7303,"presetID":1,"preset":"laya/pages/prefab/AnimalTrigger.prefab"},
@@ -519,6 +866,7 @@
                                 }]
                         },
                         {
+                            "x":45,
                             "type":"Box",
                             "searchKey":"Box",
                             "props":{"y":0,"x":0,"width":15000,"height":100,"bgColor":"#71db50"},
@@ -532,6 +880,7 @@
                                 ]
                         },
                         {
+                            "x":45,
                             "type":"Box",
                             "searchKey":"Box",
                             "props":{"y":14900,"x":0,"width":15000,"height":100,"bgColor":"#71db50"},
@@ -545,6 +894,7 @@
                                 ]
                         },
                         {
+                            "x":45,
                             "type":"Box",
                             "searchKey":"Box",
                             "props":{"y":0,"x":0,"width":100,"height":15000,"bgColor":"#71db50"},
@@ -559,6 +909,7 @@
                                 ]
                         },
                         {
+                            "x":45,
                             "type":"Box",
                             "searchKey":"Box",
                             "props":{"y":0,"x":14900,"width":100,"height":15000,"bgColor":"#71db50"},
@@ -573,6 +924,7 @@
                         }]
                 },
                 {
+                    "x":30,
                     "type":"Script",
                     "switchAble":true,
                     "source":"src/helper/MapScrollView.js",

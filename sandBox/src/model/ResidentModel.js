@@ -24,7 +24,8 @@ export default class ResidentModel extends Laya.Script {
         this.petType = 0;               //宠物ID
 
 
-        this.temperature = 19;  //体温
+        this.temperature = ResidentMeta.ResidentStandardTemperature;  //体温
+        this.temperatureTick = 0;
         this.age = 1;       //年龄
         this.sex = 1;   // 性别 1 男 2 女
         this.married = 1; //1 未婚 2 已婚
@@ -103,12 +104,19 @@ export default class ResidentModel extends Laya.Script {
         }
     }
 
+    addTemperature(num) {
+        this.setTemperature(this.getTemperature() + num);
+    }
+
     getTemperature() {
         return this.temperature;
     }
 
     setTemperature(temperature) {
         this.temperature = temperature;
+        if (this.temperature < 30) {
+            this.temperature = 30;
+        }
     }
 
     setPetType(petType) {
@@ -217,9 +225,18 @@ export default class ResidentModel extends Laya.Script {
     }
 
     // 下降需求和上升满足
-    onStep() {
+    onStep(config) {
         if (TimeUtils.getSystemTime() >= this.getMakeLoveSystemTime() + ResidentMeta.MakeLoveMaxDeltay) {
             this.makeLoveSystemTime = 0;
+        }
+        if (config.gameSeason == 3) {
+            this.temperatureTick++;
+            if (this.temperatureTick > ResidentMeta.ResidentReduceTemperatureTickStep) {
+                this.addTemperature(-ResidentMeta.ResidentReduceTemperatureValue);
+                this.temperatureTick = 0;
+            }
+        } else {
+            this.temperatureTick = 0;
         }
         this.addAgeExp(ResidentMeta.ResidentMakeIdeaStep, true);
         if (this.getLife() <= 0 && this.getFSMState() == ResidentMeta.ResidentState.IdleState) {
@@ -237,7 +254,10 @@ export default class ResidentModel extends Laya.Script {
             }
         }
         // 处在饥饿状态和缺水减少生命值
-        if (this.food <= 0 || this.water <= 0 || this.getSick() == 2) {
+        if (this.food <= 0 ||
+            this.water <= 0 ||
+            this.getSick() == 2 ||
+            this.temperature < ResidentMeta.ResidentDangerTemperature) {
             if (this.getSick() == 2) {
                 this.addLife(ResidentMeta.ResidentReduceLifeBaseValue * 1.5);
             } else {

@@ -46,13 +46,12 @@ export default class ResidentLogic extends Laya.Script {
     }
 
     onDisable() {
-
-    }
-
-    onDestroy() {
         this.ResidentTempData.destroy(true);
         this.removeAllEvents();
         this.removeAllTimers();
+    }
+
+    onDestroy() {
     }
 
     initMoveLogic() {
@@ -667,7 +666,11 @@ export default class ResidentLogic extends Laya.Script {
         }
         // 去火堆周围
         else if (aiData == ResidentMeta.ResidentState.GotoFireForHeating) {
-            if (this.model.getTemperature() < 20) {
+            if (this.model.getTemperature() < ResidentMeta.ResidentDangerTemperature) {
+                return true;
+            }
+            if (this.model.getTemperature() <= 32) {
+                this.useBuildingAIPriority = 1;
                 return true;
             }
             return false;
@@ -811,6 +814,10 @@ export default class ResidentLogic extends Laya.Script {
             this.addPetByPetType(first);
             this.useBuilding.buildingScript.getModel().setBuildingState(BuildingMeta.BuildingState.Noraml);
         }
+        // 火堆烤火完成
+        else if (state == ResidentMeta.ResidentState.Heating) {
+            this.model.setTemperature(ResidentMeta.ResidentStandardTemperature);
+        }
     }
 
     onUseBuildingPre(useData) {
@@ -836,7 +843,7 @@ export default class ResidentLogic extends Laya.Script {
         let destY = this.useBuilding.y + this.useBuilding.height - this.owner.height + ResidentMeta.ResidentGotoYOff;
         if (data.useType == 2) {
             destY = this.useBuilding.y + this.useBuilding.height / 2 - this.owner.height + ResidentMeta.ResidentGotoYOff;
-            let p = RandomMgr.randomByArea3(destX, destY, 70, 150);
+            let p = RandomMgr.randomByArea3(destX, destY, 70, 100);
             destX = p.x;
             destY = p.y;
         }
@@ -1167,28 +1174,28 @@ export default class ResidentLogic extends Laya.Script {
         this.level1Results = [];
         this.level2Results = [];
         // =================================正式================start
-        // // 喝水
-        // this.processDrinkWater();
-        // //吃饭
-        // this.processEatFood();
-        // // 社交
-        // this.processSocial();
-        // // 砍树
-        // this.processCutDownTree();
-        // // 收集石头
-        // this.processCollectStone();
-        // // 跑去打猎
-        // this.processHunt();
-        // // 找恋人
-        // this.processLookForLover();
-        // // 打架
-        // this.processFight();
-        // // 赶着去溜达
-        // this.processRandomWalk();
-        // // 跑去建造
-        // this.processCreateBuilding();
-        // // // 跑去运送
-        // this.processSend();
+        // 喝水
+        this.processDrinkWater();
+        //吃饭
+        this.processEatFood();
+        // 社交
+        this.processSocial();
+        // 砍树
+        this.processCutDownTree();
+        // 收集石头
+        this.processCollectStone();
+        // 跑去打猎
+        this.processHunt();
+        // 找恋人
+        this.processLookForLover();
+        // 打架
+        this.processFight();
+        // 赶着去溜达
+        this.processRandomWalk();
+        // 跑去建造
+        this.processCreateBuilding();
+        // // 跑去运送
+        this.processSend();
         // 跑去使用建筑
         this.processUseBuildingAI();
         // 自动搜索建筑去建造AI
@@ -1598,11 +1605,14 @@ export default class ResidentLogic extends Laya.Script {
             let nearstBuilding = BuildingMgr.getInstance().getNearstBuilding(this.owner.x,
                 this.owner.y, BuildingMeta.BuildingType.WaterPoolType,
                 2000, [BuildingMeta.BuildingState.Noraml]);
-            return {
-                AIType: AIType,
-                send: nearstWater,
-                dest: nearstBuilding,
-            };
+            if (nearstBuilding && !nearstBuilding.buildingScript.isReachWaterMax()) {
+                return {
+                    AIType: AIType,
+                    send: nearstWater,
+                    dest: nearstBuilding,
+                };
+            }
+            return null;
         }
     }
 
@@ -1686,7 +1696,7 @@ export default class ResidentLogic extends Laya.Script {
         }
         // 建造火堆
         else if (fsmState == ResidentMeta.ResidentState.FindBlockForCreateFire) {
-            this.firNum = 1;
+            // this.firNum = 1;
             // this.model.setMyHomeId(building.buildingScript.getModel().getBuildingId());
         }
     }
@@ -1706,10 +1716,25 @@ export default class ResidentLogic extends Laya.Script {
         }
         // 建造火堆
         else if (findType == ResidentMeta.ResidentState.FindBlockForCreateFire) {
-            return RandomMgr.randomYes() &&
-                this.model.getAge() >= ResidentMeta.ResidentAdultAge &&
-                BuildingMgr.getInstance().canCreateBuildingForResource(BuildingMeta.BuildingType.FireType) &&
-                !this.firNum;
+            if (!RandomMgr.randomYes()) {
+                return false;
+            }
+            if (this.model.getAge() < ResidentMeta.ResidentAdultAge) {
+                return false;
+            }
+            if (!BuildingMgr.getInstance().canCreateBuildingForResource(BuildingMeta.BuildingType.FireType)) {
+                return false;
+            }
+            if (this.model.getTemperature() >= ResidentMeta.ResidentStandardTemperature - 3) {
+                return false;
+            }
+            let buildings = BuildingMgr.getInstance().getAlltBuildingForCondition(this.owner.x,
+                this.owner.y, BuildingMeta.BuildingType.FireType,
+                2000, [BuildingMeta.BuildingState.Noraml]);
+            if (buildings.length != 0) {
+                return false;
+            }
+            return true;
         }
     }
 }

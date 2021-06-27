@@ -92,10 +92,10 @@ ResidentMeta.obtainResidentState();
 // 小人去搜索可以建造的地方
 // 建造搜索----------------------------------------------------start
 ResidentMeta.ResidentFindCreateBuildingBlockAIMap = {
-    // [ResidentMeta.ResidentState.FindBlockForCreateHome]: {
-    //     buildingType: BuildingMeta.BuildingType.HomeType,
-    //     nextState: ResidentMeta.ResidentState.GotoContinueCreateHome,
-    // },
+    [ResidentMeta.ResidentState.FindBlockForCreateHome]: {
+        buildingType: BuildingMeta.BuildingType.HomeType,
+        nextState: ResidentMeta.ResidentState.GotoContinueCreateHome,
+    },
     [ResidentMeta.ResidentState.FindBlockForCreateFire]: {
         buildingType: BuildingMeta.BuildingType.FireType,
         nextState: ResidentMeta.ResidentState.GotoContinueCreateFire,
@@ -272,3 +272,7 @@ ResidentMeta.ResidentChildSchoolSearchArea = 1000;         //寻找幼儿园的�
 ResidentMeta.ResidentCollectSendTime = 2000;         //打包寄送物品的时间
 ResidentMeta.ResidentDrinkWaterAddValue = 50;         //喝水增加值
 ResidentMeta.ResidentSaveWaterAddValue = 100;         //储藏水的增加值
+ResidentMeta.ResidentStandardTemperature = 36;         //体温标准值
+ResidentMeta.ResidentDangerTemperature = 34;         //体温危险值
+ResidentMeta.ResidentReduceTemperatureValue = 1;      //体温减少值
+ResidentMeta.ResidentReduceTemperatureTickStep = 50;      //体温减少步长
