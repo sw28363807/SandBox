@@ -1,12 +1,14 @@
 import BuildingMeta from "../meta/BuildingMeta";
 import GameModel from "../model/GameModel";
 import BuildingBaseLogic from "./BuildingBaseLogic";
+import RandomMgr from "../helper/RandomMgr";
 
 export default class BuildingMgr extends Laya.Script {
 
     constructor() {
         super();
         this.buildings = {};
+        
     }
 
     static getInstance() {
@@ -77,22 +79,21 @@ export default class BuildingMgr extends Laya.Script {
     }
 
     // 获得一个最近的范围内的还未建造完成的建筑
-    getNearstBuilding(x, y, buildingType, area, states) {
+    getNearstBuilding(x, y, buildingType, area, states, filterFunc) {
         let sets = new Set(states);
         let ret = null;
-        let distance = 99999999;
+        // let distance = 99999999;
         for (const key in this.buildings) {
             let building = this.buildings[key];
             let curDistance = new Laya.Point(building.x, building.y).distance(x, y);
-            // console.debug(building.building);
-            // console.debug(building.model.getBuildingState());
-            // console.debug(building.model.getBuildingType());
             let model = building.buildingScript.getModel();
             if (curDistance <= area &&
                 sets.has(model.getBuildingState()) &&
-                model.getBuildingType() == buildingType) {
-                distance = curDistance;
+                model.getBuildingType() == buildingType && 
+                (filterFunc == null || filterFunc == undefined || (filterFunc && filterFunc(building)))) {
+                // distance = curDistance;
                 ret = building;
+                return ret;
             }
         }
         return ret;
@@ -119,27 +120,8 @@ export default class BuildingMgr extends Laya.Script {
     }
 
 
-    // getRandomBuilding(x, y, buildingTypes, area, states) {
-    //     let statusSets = new Set(states);
-    //     let buildingTypeSets = new Set(buildingTypes);
-    //     let ret = [];
-    //     for (const key in this.buildings) {
-    //         let building = this.buildings[key];
-    //         let curDistance = new Laya.Point(building.x, building.y).distance(x, y);
-    //         let model = building.buildingScript.getModel();
-    //         if (curDistance <= area &&
-    //             statusSets.has(model.getBuildingState()) &&
-    //             buildingTypeSets.has(model.getBuildingType())) {
-    //             ret.push({
-    //                 building: building,
-    //                 state: 
-    //             });
-    //         }
-    //     }
-    //     if (ret.length == 0) {
-    //         return null;
-    //     }
-    //     let index = RandomMgr.randomNumber(0, ret.length - 1);
-    //     return {building: ret[index], state: };
-    // }
+    getRandomBuilding(x, y, buildingTypes, area, states) {
+        let buildings = this.getAlltBuildingForCondition(x, y, buildingTypes, area, states);
+        return RandomMgr.randomACellInArray(buildings);
+    }
 }

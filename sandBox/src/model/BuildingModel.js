@@ -10,7 +10,6 @@ export default class BuildingModel extends Laya.Script {
         this.y = 0;             //建筑位置y
         this.buildingType = BuildingMeta.BuildingType.NullTyupe;  //建筑类型
         this.buildingState = BuildingMeta.BuildingState.NullState;  //建筑状态
-        this.sendEventResidentIds = new Set([]);
         this.exteraData = {};
     }
 
@@ -20,18 +19,6 @@ export default class BuildingModel extends Laya.Script {
 
     getExteraData(key) {
         return this.exteraData[key];
-    }
-
-    addResidentId(id) {
-        this.sendEventResidentIds.add(id);
-    }
-
-    getResidentIds() {
-        return this.sendEventResidentIds;
-    }
-
-    clearResidentIds() {
-        this.sendEventResidentIds.clear();
     }
 
     // 获得建筑类型

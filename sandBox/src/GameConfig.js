@@ -2,8 +2,8 @@
 import TestSceneLogic from "./scene/TestSceneLogic"
 import SeasonLogic from "./game/SeasonLogic"
 import Treelogic from "./source/Treelogic"
-import FoodTrigger from "./source/FoodTrigger"
 import StoneLogic from "./source/StoneLogic"
+import FoodTrigger from "./source/FoodTrigger"
 import Waterlogic from "./source/Waterlogic"
 import AnimalTrigger from "./animal/AnimalTrigger"
 import MapScrollView from "./helper/MapScrollView"
@@ -41,8 +41,8 @@ export default class GameConfig {
 		reg("scene/TestSceneLogic.js",TestSceneLogic);
 		reg("game/SeasonLogic.js",SeasonLogic);
 		reg("source/Treelogic.js",Treelogic);
-		reg("source/FoodTrigger.js",FoodTrigger);
 		reg("source/StoneLogic.js",StoneLogic);
+		reg("source/FoodTrigger.js",FoodTrigger);
 		reg("source/Waterlogic.js",Waterlogic);
 		reg("animal/AnimalTrigger.js",AnimalTrigger);
 		reg("helper/MapScrollView.js",MapScrollView);

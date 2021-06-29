@@ -8,6 +8,8 @@ export default class BuildingBaseLogic extends Laya.Script {
 
     constructor() { 
         super();
+        this.residentCreateIdList  = new Set([]);   //建造建筑的人物ID列表
+        this.residentUseIdList = new Set([]);       //使用建筑的人物ID列表
     }
     
     onEnable() {
@@ -48,8 +50,20 @@ export default class BuildingBaseLogic extends Laya.Script {
         this.slider.width = 1;
     }
 
-    joinResidentIdToBuilding(residentId) {
-        this.model.addResidentId(residentId);
+    joinResidentIdToBuildingForCreate(residentId) {
+        this.residentCreateIdList.add(residentId);
+    }
+
+    joinResidentIdToBuildingForUse(residentId) {
+        this.residentUseIdList.add(residentId);
+    }
+
+    removeResidentIdToBuildingForUse(residentId) {
+        this.residentUseIdList.delete(residentId);
+    }
+
+    getResidentIdToBuildingForUseNum() {
+        return this.residentUseIdList.size;
     }
 
     // 开始建造
@@ -80,12 +94,12 @@ export default class BuildingBaseLogic extends Laya.Script {
         Utils.setMapZOrder(this.owner);
         this.onCreateBuildingFinish();
         EventMgr.getInstance().postEvent(GameEvent.CREATE_BUILDING_FINISH, this.makeParam(this.model));
-        this.model.clearResidentIds();
+        this.residentCreateIdList.clear();
     }
 
     makeParam(extraParam) {
         let ret = {};
-        ret.residentIds = this.model.getResidentIds();
+        ret.residentIds = this.residentCreateIdList;
         ret.extraParam = extraParam;
         return ret;
     }

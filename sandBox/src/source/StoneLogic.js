@@ -9,7 +9,7 @@ export default class StoneLogic extends Laya.Script {
     }
     
     onEnable() {
-        this.ani = this.owner.getChildByName("ani");
+        // this.ani = this.owner.getChildByName("ani");
         Utils.setMapZOrder(this.owner);
     }
 
@@ -17,7 +17,7 @@ export default class StoneLogic extends Laya.Script {
     }
 
     onStart() {
-        this.ani.play(0, true, "idle1");
+        // this.ani.play(0, true, "idle1");
     }
 
     setStoneID(id) {

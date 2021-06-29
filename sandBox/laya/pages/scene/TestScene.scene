@@ -2,11 +2,11 @@
     "x":0,
     "type":"Scene",
     "selectedBox":10,
-    "selecteID":200,
+    "selecteID":204,
     "searchKey":"Scene",
     "props":{"width":1336,"sceneColor":"#000000","height":750},
     "nodeParent":-1,
-    "maxID":202,
+    "maxID":207,
     "label":"Scene",
     "isOpen":true,
     "isDirectory":true,
@@ -155,6 +155,116 @@
                                     "compId":112,
                                     "child":[
                                         ]
+                                }]
+                        },
+                        {
+                            "x":45,
+                            "type":"Box",
+                            "selectedBox":90,
+                            "selecteID":97,
+                            "searchKey":"Box",
+                            "props":{"y":7858,"x":7372,"presetID":1,"preset":"laya/pages/prefab/Stone1.prefab"},
+                            "nodeParent":10,
+                            "maxID":98,
+                            "label":"Stone1",
+                            "isOpen":false,
+                            "isDirectory":true,
+                            "isAniNode":true,
+                            "hasChild":true,
+                            "compId":204,
+                            "child":[
+                                {
+                                    "type":"Sprite",
+                                    "searchKey":"Sprite",
+                                    "props":{"presetID":4,"preset":"laya/pages/prefab/Stone1.prefab"},
+                                    "nodeParent":204,
+                                    "label":"Sprite(Stone1)",
+                                    "isDirectory":false,
+                                    "isAniNode":true,
+                                    "hasChild":false,
+                                    "compId":205,
+                                    "child":[
+                                        ]
+                                },
+                                {
+                                    "type":"Script",
+                                    "switchAble":true,
+                                    "source":"src/source/StoneLogic.js",
+                                    "searchKey":"Script,StoneLogic",
+                                    "removeAble":true,
+                                    "props":{"presetID":3,"preset":"laya/pages/prefab/Stone1.prefab"},
+                                    "nodeParent":204,
+                                    "label":"StoneLogic",
+                                    "isDirectory":false,
+                                    "isAniNode":true,
+                                    "hasChild":false,
+                                    "compId":206,
+                                    "child":[
+                                        ]
+                                }],
+                            "animations":[
+                                {
+                                    "nodes":[
+                                        ],
+                                    "name":"ani1",
+                                    "id":1,
+                                    "frameRate":24,
+                                    "action":0
+                                }]
+                        },
+                        {
+                            "x":45,
+                            "type":"Box",
+                            "selectedBox":90,
+                            "selecteID":97,
+                            "searchKey":"Box",
+                            "props":{"y":7214,"x":7625,"presetID":1,"preset":"laya/pages/prefab/Stone2.prefab"},
+                            "nodeParent":10,
+                            "maxID":98,
+                            "label":"Stone2",
+                            "isOpen":false,
+                            "isDirectory":true,
+                            "isAniNode":true,
+                            "hasChild":true,
+                            "compId":202,
+                            "child":[
+                                {
+                                    "type":"Sprite",
+                                    "searchKey":"Sprite",
+                                    "props":{"presetID":4,"preset":"laya/pages/prefab/Stone2.prefab"},
+                                    "nodeParent":202,
+                                    "label":"Sprite(Stone2)",
+                                    "isDirectory":false,
+                                    "isAniNode":true,
+                                    "hasChild":false,
+                                    "compId":203,
+                                    "child":[
+                                        ]
+                                },
+                                {
+                                    "type":"Script",
+                                    "switchAble":true,
+                                    "source":"src/source/StoneLogic.js",
+                                    "searchKey":"Script,StoneLogic",
+                                    "removeAble":true,
+                                    "props":{"presetID":3,"preset":"laya/pages/prefab/Stone2.prefab"},
+                                    "nodeParent":202,
+                                    "label":"StoneLogic",
+                                    "isDirectory":false,
+                                    "isAniNode":true,
+                                    "hasChild":false,
+                                    "compId":95,
+                                    "child":[
+                                        ]
+                                }],
+                            "animations":[
+                                {
+                                    "nodes":[
+                                        ],
+                                    "name":"ani1",
+                                    "id":1,
+                                    "frameRate":24,
+                                    "action":0
                                 }]
                         },
                         {
@@ -564,62 +674,6 @@
                                     "isAniNode":true,
                                     "hasChild":false,
                                     "compId":59,
-                                    "child":[
-                                        ]
-                                }],
-                            "animations":[
-                                {
-                                    "nodes":[
-                                        ],
-                                    "name":"ani1",
-                                    "id":1,
-                                    "frameRate":24,
-                                    "action":0
-                                }]
-                        },
-                        {
-                            "x":45,
-                            "type":"Box",
-                            "selectedBox":90,
-                            "selecteID":94,
-                            "searchKey":"Box",
-                            "props":{"y":7303,"x":7561,"presetID":1,"preset":"laya/pages/prefab/Stone.prefab"},
-                            "nodeParent":10,
-                            "maxID":96,
-                            "label":"Stone",
-                            "isOpen":false,
-                            "isDirectory":true,
-                            "isAniNode":true,
-                            "hasChild":true,
-                            "compId":98,
-                            "child":[
-                                {
-                                    "type":"Script",
-                                    "switchAble":true,
-                                    "source":"src/source/StoneLogic.js",
-                                    "searchKey":"Script,StoneLogic",
-                                    "removeAble":true,
-                                    "props":{"presetID":3,"preset":"laya/pages/prefab/Stone.prefab"},
-                                    "nodeParent":98,
-                                    "label":"StoneLogic",
-                                    "isDirectory":false,
-                                    "isAniNode":true,
-                                    "hasChild":false,
-                                    "compId":95,
-                                    "child":[
-                                        ]
-                                },
-                                {
-                                    "type":"Animation",
-                                    "searchKey":"Animation",
-                                    "props":{"presetID":4,"preset":"laya/pages/prefab/Stone.prefab"},
-                                    "nodeParent":98,
-                                    "label":"ani",
-                                    "isOpen":true,
-                                    "isDirectory":false,
-                                    "isAniNode":true,
-                                    "hasChild":false,
-                                    "compId":113,
                                     "child":[
                                         ]
                                 }],
