@@ -570,7 +570,7 @@ export default class ResidentLogic extends Laya.Script {
         else if (state == ResidentMeta.ResidentState.Fighting) {
             let fightModel = param.extraParam;
             fightModel.addFightNum(-1);
-            this.model.addLife(-100);
+            this.model.addLife(-ResidentMeta.ResidentFightReduceValue);
             if (fightModel.getFightNum() == 0) {
                 GameModel.getInstance().removeFightPoint(fightModel.getFightPointId());
             }
@@ -1148,7 +1148,7 @@ export default class ResidentLogic extends Laya.Script {
 
     // 寻找最近的食物
     startFindANearstFood() {
-        let nearstFood = FoodMgr.getInstance().getNearstFood({
+        let nearstFood = FoodMgr.getInstance().getRandomFood({
             x: this.owner.x,
             y: this.owner.y,
             state: FoodMeta.FoodState.CanEat,
@@ -1597,7 +1597,7 @@ export default class ResidentLogic extends Laya.Script {
     getSendAndDest(AIType) {
         // 食物
         if (AIType == ResidentMeta.ResidentState.FindFoodForSend) {
-            let nearstFood = FoodMgr.getInstance().getNearstFood({
+            let nearstFood = FoodMgr.getInstance().getRandomFood({
                 x: this.owner.x,
                 y: this.owner.y,
                 state: FoodMeta.FoodState.CanEat,
@@ -1732,9 +1732,6 @@ export default class ResidentLogic extends Laya.Script {
         }
         // 建造火堆
         else if (findType == ResidentMeta.ResidentState.FindBlockForCreateFire) {
-            if (!RandomMgr.randomYes()) {
-                return false;
-            }
             if (this.model.getAge() < ResidentMeta.ResidentAdultAge) {
                 return false;
             }

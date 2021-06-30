@@ -16,15 +16,32 @@ export default class FoodTrigger extends Laya.Script {
     }
 
     onDisable() {
-        Laya.timer.clear(this, this.onCreateFood);
+        this.stopTrigger();
     }
 
     onStart() {
-        Laya.timer.loop(FoodMeta.FoodUpdateTime, this, this.onCreateFood);
+        this.restartTrigger(FoodMeta.FoodUpdateTime);
+    }
+
+    restartTrigger(time) {
+        this.stopTrigger();
+        this.startTrigger(time);
+    }
+
+    startTrigger(time) {
+        Laya.timer.loop(time, this, this.onCreateFood);
         this.onCreateFood();
     }
 
+    stopTrigger() {
+        Laya.timer.clear(this, this.onCreateFood);
+    }
+
     onCreateFood() {
+        this.createFood();
+    }
+
+    createFood() {
         if (this.curNum >= FoodMeta.FoodMaxNumPerTrigger) {
             return;
         }

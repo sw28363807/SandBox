@@ -237,6 +237,7 @@ export default class ResidentModel extends Laya.Script {
             }
         } else {
             this.temperatureTick = 0;
+            this.setTemperature(ResidentMeta.ResidentStandardTemperature);
         }
         this.addAgeExp(ResidentMeta.ResidentMakeIdeaStep, true);
         if (this.getLife() <= 0 && this.getFSMState() == ResidentMeta.ResidentState.IdleState) {

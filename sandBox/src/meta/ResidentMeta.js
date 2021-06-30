@@ -159,7 +159,7 @@ ResidentMeta.ResidentUseBuildingMap = {
         buildingType: BuildingMeta.BuildingType.SchoolType,
         useType: 1,     //1 隐藏使用 2 周围使用 默认为1
     },
-    [ResidentMeta.ResidentState.GoToSGotoChildSchoolForLearnchool]: {
+    [ResidentMeta.ResidentState.GotoChildSchoolForLearn]: {
         nextState: ResidentMeta.ResidentState.ChildLearn,
         buildingType: BuildingMeta.BuildingType.ChildSchoolType,
         useType: 1,     //1 隐藏使用 2 周围使用 默认为1
@@ -254,6 +254,7 @@ ResidentMeta.ResidentTreatTime = 10000; //治疗的时间
 ResidentMeta.ResidentLearnTime = 5000; //学习的时间
 ResidentMeta.ResidentLearnTimeForChildLearn = 10000; //幼儿园学习的时间
 ResidentMeta.ResidentSocialLowToFight = 20;  //需要社交的警戒线，低于这个值就是要打架了
+ResidentMeta.ResidentFightReduceValue = 20;  //打架减少值
 ResidentMeta.ResidentSocialNeedValue = 50;  //需要社交的警戒线，低于这个值就是需要社交了
 ResidentMeta.ResidentWaterNeedValue = 20;  //需要喝水的警戒线，低于这个值就是需要喝水了
 ResidentMeta.ResidentFoodNeedValue = 20;  //需要吃饭的警戒线，低于这个值就是需要吃饭了

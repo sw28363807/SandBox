@@ -295,7 +295,7 @@ BuildingMeta.BuildingDatas = {
         buildingName: "",
         costTree: 0,
         costStone: 0,
-        heatingMaxTImes: 3,
+        heatingMaxTImes: 10,
         desc: "",
     },
 };

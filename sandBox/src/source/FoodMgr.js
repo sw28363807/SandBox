@@ -1,3 +1,4 @@
+import RandomMgr from "../helper/RandomMgr";
 import FoodMeta from "../meta/FoodMeta";
 import GameMeta from "../meta/GameMeta";
 import ResourceMeta from "../meta/ResourceMeta";
@@ -29,10 +30,8 @@ export default class FoodMgr extends Laya.Script {
         return food;
     }
 
-    // 获得距离最近的一个食物
-    getNearstFood(param) {
-        let distance = 99999999;
-        let ret = null;
+    getRandomFood(param) {
+        let foodArray = [];
         for (const key in this.foods) {
             let food = this.foods[key];
             if (param.state != null &&
@@ -40,12 +39,11 @@ export default class FoodMgr extends Laya.Script {
                 continue;
             }
             let curDistance = new Laya.Point(food.x, food.y).distance(param.x, param.y);
-            if (curDistance <= param.area && curDistance < distance) {
-                distance = curDistance;
-                ret = food;
+            if (curDistance <= param.area) {
+                foodArray.push(food);
             }
         }
-        return ret;
+        return RandomMgr.randomACellInArray(foodArray);
     }
 
     // 是否可以去找食物
