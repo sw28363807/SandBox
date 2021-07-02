@@ -22,11 +22,11 @@ FoodMeta.FoodTypes = {
 FoodMeta.FoodAddValue = {
     [FoodMeta.FoodTypes.FruitType]: {
         deltayTime: 5000,       //吃食物所用的时间
-        addValue: 30,           //吃食物所增加的值
+        addValue: 90,           //吃食物所增加的值
     },
     [FoodMeta.FoodTypes.MeatType]: {
         deltayTime: 5000,       //吃食物所用的时间
-        addValue: 30,           //吃食物所增加的值
+        addValue: 120,           //吃食物所增加的值
     },
 }
 

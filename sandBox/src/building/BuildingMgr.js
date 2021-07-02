@@ -100,7 +100,7 @@ export default class BuildingMgr extends Laya.Script {
     }
 
     // 获得所有符合条件的建筑
-    getAlltBuildingForCondition(x, y, buildingType, area, states) {
+    getAlltBuildingForCondition(x, y, buildingType, area, states, conditionFunc, isRandomOne) {
         let sets = new Set(states);
         let ret = [];
         for (const key in this.buildings) {
@@ -112,9 +112,13 @@ export default class BuildingMgr extends Laya.Script {
             let model = building.buildingScript.getModel();
             if (curDistance <= area &&
                 sets.has(model.getBuildingState()) &&
-                model.getBuildingType() == buildingType) {
+                model.getBuildingType() == buildingType &&
+                (conditionFunc == undefined || conditionFunc == null || (conditionFunc && conditionFunc(building)))) {
                 ret.push(building);
             }
+        }
+        if (isRandomOne) {
+            return RandomMgr.randomACellInArray(ret);
         }
         return ret;
     }

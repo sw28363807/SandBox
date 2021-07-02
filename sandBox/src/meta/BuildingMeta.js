@@ -151,8 +151,8 @@ BuildingMeta.BuildingDatas = {
         useBuildingTime: 5000,
         createPriority: 2,
         buildingName: "农田",
-        costTree: 6,
-        costStone: 6,
+        costTree: 0,
+        costStone: 0,
         desc: "可以种植增加食物",
     },
     // 牧场
@@ -265,7 +265,7 @@ BuildingMeta.BuildingDatas = {
         buildingName: "食物仓库",
         costTree: 0,
         costStone: 0,
-        maxSave: 300,
+        maxSave: 600,
         desc: "可以保存食物以便今后使用",
     },
     // 水仓库

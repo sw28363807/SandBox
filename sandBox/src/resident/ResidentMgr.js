@@ -3,7 +3,11 @@ import Utils from "../helper/Utils";
 import ResidentMeta from "../meta/ResidentMeta";
 import ResourceMeta from "../meta/ResourceMeta";
 import GameModel from "../model/GameModel";
+import ResidentAILogic from "./ResidentAILogic";
+import ResidentCreateBuildingAILogic from "./ResidentCreateBuildingAILogic";
+import ResidentSendAILogic from "./ResidentSendAILogic";
 import ResidentLogic from "./ResidentLogic";
+
 
 export default class ResidentMgr extends Laya.Script {
 
@@ -13,6 +17,7 @@ export default class ResidentMgr extends Laya.Script {
     }
 
     onEnable() {
+        
     }
 
     onDisable() {
@@ -46,7 +51,7 @@ export default class ResidentMgr extends Laya.Script {
         for (let key in this.residents) {
             let resident = this.residents[key];
             Utils.setMapZOrder(resident);
-            resident.residentLogicScript.makeIdea();
+            resident.AILogicScript.makeIdea();
         }
     }
 
@@ -60,15 +65,25 @@ export default class ResidentMgr extends Laya.Script {
         let prefabDef = Laya.loader.getRes(ResourceMeta.ResidentPrefabPath);
         let resident = prefabDef.create();
         config.parent.addChild(resident);
+        this.initAllLogic(resident);
+        let model = GameModel.getInstance().newResidentModel(config);
+        resident.residentLogicScript.refreshByModel(model);
+        resident.residentLogicScript.setResidentMgrInstance(this);
+        this.residents[String(model.getResidentId())] = resident;
+        return resident;
+    }
+
+    initAllLogic(resident) {
         let script = resident.getComponent(ResidentLogic);
         resident.residentLogicScript = script;
         let moveScript = resident.getComponent(MoveLogic);
         resident.residentMoveLogicScript = moveScript;
-        let model = GameModel.getInstance().newResidentModel(config);
-        script.refreshByModel(model);
-        script.setResidentMgrInstance(this);
-        this.residents[String(model.getResidentId())] = resident;
-        return resident;
+        let AIScript = resident.getComponent(ResidentAILogic);
+        resident.AILogicScript = AIScript;
+        let createBuildingScript = resident.getComponent(ResidentCreateBuildingAILogic);
+        resident.createBuildingScript = createBuildingScript;
+        let sendScript = resident.getComponent(ResidentSendAILogic);
+        resident.sendScript = sendScript;
     }
 
     // 移除居民
