@@ -676,23 +676,23 @@ export default class ResidentLogic extends Laya.Script {
     onGetBuilding(aiData, data) {
         // 去治疗
         if (aiData == ResidentMeta.ResidentState.GotoTreat) {
-            let building = BuildingMgr.getInstance().getNearstBuilding(this.owner.x,
+            let building = BuildingMgr.getInstance().getAlltBuildingForCondition(this.owner.x,
                 this.owner.y, data.buildingType,
-                2000, [BuildingMeta.BuildingState.Noraml]);
+                2000, [BuildingMeta.BuildingState.Noraml], null, true);
             return building
         }
         // 去学校
         else if (aiData == ResidentMeta.ResidentState.GoToSchool) {
-            let building = BuildingMgr.getInstance().getRandomBuilding(this.owner.x,
+            let building = BuildingMgr.getInstance().getAlltBuildingForCondition(this.owner.x,
                 this.owner.y, data.buildingType,
-                2000, [BuildingMeta.BuildingState.Noraml]);
+                2000, [BuildingMeta.BuildingState.Noraml], null, true);
             return building
         }
         // 去幼儿园
         else if (aiData == ResidentMeta.ResidentState.GotoChildSchoolForLearn) {
-            let building = BuildingMgr.getInstance().getRandomBuilding(this.owner.x,
+            let building = BuildingMgr.getInstance().getAlltBuildingForCondition(this.owner.x,
                 this.owner.y, data.buildingType,
-                2000, [BuildingMeta.BuildingState.Noraml]);
+                2000, [BuildingMeta.BuildingState.Noraml], null, true);
             return building
         }
         // 去食物库
@@ -727,7 +727,7 @@ export default class ResidentLogic extends Laya.Script {
         else if (aiData == ResidentMeta.ResidentState.GotoPetShopForTakeOutPet) {
             let buildings = BuildingMgr.getInstance().getAlltBuildingForCondition(this.owner.x,
                 this.owner.y, data.buildingType,
-                2000, [BuildingMeta.BuildingState.Noraml]);
+                2000, [BuildingMeta.BuildingState.Noraml], null, true);
             if (buildings.length != 0) {
                 for (const key in buildings) {
                     let item = buildings[key];
@@ -742,11 +742,11 @@ export default class ResidentLogic extends Laya.Script {
         }
         // 去火堆
         else if (aiData == ResidentMeta.ResidentState.GotoFireForHeating) {
-            let building = BuildingMgr.getInstance().getRandomBuilding(this.owner.x,
+            let building = BuildingMgr.getInstance().getAlltBuildingForCondition(this.owner.x,
                 this.owner.y, data.buildingType,
                 2000, [BuildingMeta.BuildingState.Noraml], function (building) {
                     return building.buildingScript.getHeatingTimes() < building.buildingScript.getHeatingMaxTimes();
-                });
+                }, true);
             return building;
         }
     }
@@ -1394,7 +1394,7 @@ export default class ResidentLogic extends Laya.Script {
             }
             let buildings = BuildingMgr.getInstance().getAlltBuildingForCondition(this.owner.x,
                 this.owner.y, BuildingMeta.BuildingType.FireType,
-                2000, [BuildingMeta.BuildingState.Noraml]);
+                2000, [BuildingMeta.BuildingState.Noraml], null, true);
             if (buildings.length != 0) {
                 return false;
             }

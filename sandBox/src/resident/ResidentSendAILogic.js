@@ -130,11 +130,16 @@ export default class ResidentSendAILogic extends Laya.Script {
         let fsmState = this.getModel().getFSMState();
         // 食物增加值
         if (fsmState == ResidentMeta.ResidentState.CollectFood) {
-            let foodModel = sendInfo.send.foodScript.getModel();
-            let addFoodNum = foodModel.getFood();
-            FoodMgr.getInstance().removeFoodById(foodModel.getFoodId());
-            sendInfo.send = null;
-            info.addFood = addFoodNum;
+            if (sendInfo.sendType == 2) {
+                let foodModel = sendInfo.send.foodScript.getModel();
+                let addFoodNum = foodModel.getFood();
+                FoodMgr.getInstance().removeFoodById(foodModel.getFoodId());
+                sendInfo.send = null;
+                info.addFood = addFoodNum;
+            } else if (sendInfo.sendType == 1) {
+                sendInfo.send = null;
+                info.addFood = 100;
+            }
         }
         // 水源增加值
         else if (fsmState == ResidentMeta.ResidentState.CollectWater) {
@@ -176,20 +181,43 @@ export default class ResidentSendAILogic extends Laya.Script {
     getSendAndDest(AIType) {
         // 食物
         if (AIType == ResidentMeta.ResidentState.FindFoodForSend) {
+            let sendType = 0;
+            let sendObject = null;
+            // 寻找农田
+            let farmlandFilterFunc =  function (building) {
+                return building.buildingScript.getCurSaveFood() > 20;
+            };
+            let nearstFarmland = BuildingMgr.getInstance().getAlltBuildingForCondition(this.owner.x,
+                this.owner.y, BuildingMeta.BuildingType.FarmLandType,
+                2000, [BuildingMeta.BuildingState.Noraml], farmlandFilterFunc, true);
+            // 寻找食物
             let nearstFood = FoodMgr.getInstance().getRandomFood({
                 x: this.owner.x,
                 y: this.owner.y,
                 state: FoodMeta.FoodState.CanEat,
                 area: 2000
             });
-            let nearstBuilding = BuildingMgr.getInstance().getRandomBuilding(this.owner.x,
+
+            if (nearstFarmland) {
+                sendType = 1;
+                sendObject = nearstFarmland;
+            } else if (nearstFood) {
+                sendType = 2;
+                sendObject = nearstFood;
+            }
+
+            let foodPoolFilterFunc = function (building) {
+                return !building.buildingScript.isReachFoodMax();
+            };
+            let nearstBuilding = BuildingMgr.getInstance().getAlltBuildingForCondition(this.owner.x,
                 this.owner.y, BuildingMeta.BuildingType.FoodPoolType,
-                2000, [BuildingMeta.BuildingState.Noraml]);
-            if (nearstBuilding && !nearstBuilding.buildingScript.isReachFoodMax()) {
+                2000, [BuildingMeta.BuildingState.Noraml], foodPoolFilterFunc, true);
+            if (nearstBuilding) {
                 return {
                     AIType: AIType,
-                    send: nearstFood,
+                    send: sendObject,
                     dest: nearstBuilding,
+                    sendType: sendType,
                 };
             }
             return null;
@@ -197,10 +225,13 @@ export default class ResidentSendAILogic extends Laya.Script {
         // 水源
         else if (AIType == ResidentMeta.ResidentState.FindWaterForSend) {
             let nearstWater = WaterMgr.getInstance().randomWater(this.owner.x, this.owner.y, 2000);
-            let nearstBuilding = BuildingMgr.getInstance().getRandomBuilding(this.owner.x,
+            let waterFilterFunc = function (building) {
+                return !building.buildingScript.isReachWaterMax()
+            }
+            let nearstBuilding = BuildingMgr.getInstance().getAlltBuildingForCondition(this.owner.x,
                 this.owner.y, BuildingMeta.BuildingType.WaterPoolType,
-                2000, [BuildingMeta.BuildingState.Noraml]);
-            if (nearstBuilding && !nearstBuilding.buildingScript.isReachWaterMax()) {
+                2000, [BuildingMeta.BuildingState.Noraml], waterFilterFunc, true);
+            if (nearstBuilding) {
                 return {
                     AIType: AIType,
                     send: nearstWater,
@@ -213,7 +244,9 @@ export default class ResidentSendAILogic extends Laya.Script {
 
     preSend(AIType, sendInfo) {
         if (AIType == ResidentMeta.ResidentState.FindFoodForSend) {
-            sendInfo.send.foodScript.getModel().setFoodState(FoodMeta.FoodState.Occupy);
+            if (sendInfo.sendType == 2) {
+                sendInfo.send.foodScript.getModel().setFoodState(FoodMeta.FoodState.Occupy);   
+            }
         }
     }
 }
