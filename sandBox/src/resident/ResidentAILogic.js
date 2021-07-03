@@ -44,32 +44,27 @@ export default class ResidentAILogic extends Laya.Script {
         this.level1Results = [];
         this.level2Results = [];
         // =================================正式================start
-        // // 喝水
-        // this.processDrinkWater();
-        // //吃饭
-        // this.processEatFood();
         // // 社交
         // this.processSocial();
-        // // 砍树
-        // this.processCutDownTree();
-        // // 收集石头
-        // this.processCollectStone();
         // // 跑去打猎
         // this.processHunt();
         // // 找恋人
         // this.processLookForLover();
         // // 打架
         // this.processFight();
-        // // 赶着去溜达
-        // this.processRandomWalk();
-        // 跑去建造
-        this.owner.createBuildingScript.processCreateBuilding(this.level1Results, this.level2Results);
-        // // 跑去运送
-        this.owner.sendScript.processSend(this.level1Results, this.level2Results);
         // 跑去使用建筑
         // this.processUseBuildingAI();
         // 自动搜索建筑去建造AI
         // this.processResidentFindCreateBuildingBlockAI();
+
+        // 赶着去溜达
+        // this.owner.randomWalkScript.processRandomWalk(this.level1Results, this.level2Results);
+        // 跑去做某些事情
+        // this.owner.doSomeThingScript.processDoSomeThing(this.level1Results, this.level2Results);
+        // 跑去建造
+        // this.owner.createBuildingScript.processCreateBuilding(this.level1Results, this.level2Results);
+        // // 跑去运送
+        // this.owner.sendScript.processSend(this.level1Results, this.level2Results);
         // =================================正式================end
     }
 

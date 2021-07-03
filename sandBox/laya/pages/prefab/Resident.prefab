@@ -5,7 +5,7 @@
     "searchKey":"Box,Resident",
     "props":{"width":64,"presetID":1,"preset":"laya/pages/prefab/Resident.prefab","name":"Resident","isPresetRoot":true,"height":64},
     "nodeParent":-1,
-    "maxID":21,
+    "maxID":23,
     "label":"Resident",
     "isOpen":true,
     "isDirectory":true,
@@ -195,6 +195,40 @@
             "isAniNode":true,
             "hasChild":false,
             "compId":20,
+            "child":[
+                ]
+        },
+        {
+            "x":15,
+            "type":"Script",
+            "switchAble":true,
+            "source":"src/resident/ResidentDoSomeThingAILogic.js",
+            "searchKey":"Script,ResidentDoSomeThingAILogic",
+            "removeAble":true,
+            "props":{"presetID":17,"preset":"laya/pages/prefab/Resident.prefab"},
+            "nodeParent":3,
+            "label":"ResidentDoSomeThingAILogic",
+            "isDirectory":false,
+            "isAniNode":true,
+            "hasChild":false,
+            "compId":21,
+            "child":[
+                ]
+        },
+        {
+            "x":15,
+            "type":"Script",
+            "switchAble":true,
+            "source":"src/resident/ResidentRandomWalkAILogic.js",
+            "searchKey":"Script,ResidentRandomWalkAILogic",
+            "removeAble":true,
+            "props":{"presetID":18,"preset":"laya/pages/prefab/Resident.prefab"},
+            "nodeParent":3,
+            "label":"ResidentRandomWalkAILogic",
+            "isDirectory":false,
+            "isAniNode":true,
+            "hasChild":false,
+            "compId":22,
             "child":[
                 ]
         }],

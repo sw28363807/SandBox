@@ -7,6 +7,8 @@ import ResidentAILogic from "./ResidentAILogic";
 import ResidentCreateBuildingAILogic from "./ResidentCreateBuildingAILogic";
 import ResidentSendAILogic from "./ResidentSendAILogic";
 import ResidentLogic from "./ResidentLogic";
+import ResidentDoSomeThingAILogic from "./ResidentDoSomeThingAILogic";
+import ResidentRandomWalkAILogic from "./ResidentRandomWalkAILogic";
 
 
 export default class ResidentMgr extends Laya.Script {
@@ -84,6 +86,10 @@ export default class ResidentMgr extends Laya.Script {
         resident.createBuildingScript = createBuildingScript;
         let sendScript = resident.getComponent(ResidentSendAILogic);
         resident.sendScript = sendScript;
+        let doSomeThingScript = resident.getComponent(ResidentDoSomeThingAILogic);
+        resident.doSomeThingScript = doSomeThingScript;
+        let randomWalkScript = resident.getComponent(ResidentRandomWalkAILogic);
+        resident.randomWalkScript = randomWalkScript;
     }
 
     // 移除居民

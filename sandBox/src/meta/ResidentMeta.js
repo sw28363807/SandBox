@@ -89,6 +89,25 @@ ResidentMeta.ResidentState = {
 };
 ResidentMeta.obtainResidentState();
 
+// 小人去到某地做些事情AI
+// 小人去到某地做些事情AI----------------------------------------------------start
+ResidentMeta.ResidentGOtoSomeWhereDoSomeThingAIMap = {
+    // [ResidentMeta.ResidentState.FindFood]: {
+    //     nextState: ResidentMeta.ResidentState.EatFood,
+    // },
+    // [ResidentMeta.ResidentState.FindWater]: {
+    //     nextState: ResidentMeta.ResidentState.DrinkWater,
+    // },
+    // [ResidentMeta.ResidentState.FindTree]: {
+    //     nextState: ResidentMeta.ResidentState.CutDownTree,
+    // },
+    [ResidentMeta.ResidentState.FindStone]: {
+        nextState: ResidentMeta.ResidentState.CollectStone,
+    },
+    
+};
+// 小人去到某地做些事情AI----------------------------------------------------start
+
 // 小人去搜索可以建造的地方
 // 建造搜索----------------------------------------------------start
 ResidentMeta.ResidentFindCreateBuildingBlockAIMap = {

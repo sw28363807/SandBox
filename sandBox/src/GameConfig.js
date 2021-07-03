@@ -30,6 +30,8 @@ import ResidentLogic from "./resident/ResidentLogic"
 import ResidentAILogic from "./resident/ResidentAILogic"
 import ResidentCreateBuildingAILogic from "./resident/ResidentCreateBuildingAILogic"
 import ResidentSendAILogic from "./resident/ResidentSendAILogic"
+import ResidentDoSomeThingAILogic from "./resident/ResidentDoSomeThingAILogic"
+import ResidentRandomWalkAILogic from "./resident/ResidentRandomWalkAILogic"
 import ResidentDetailsPanel from "./panel/ResidentDetailsPanel"
 import RestaurantLogic from "./building/RestaurantLogic"
 import SchoolLogic from "./building/SchoolLogic"
@@ -72,6 +74,8 @@ export default class GameConfig {
 		reg("resident/ResidentAILogic.js",ResidentAILogic);
 		reg("resident/ResidentCreateBuildingAILogic.js",ResidentCreateBuildingAILogic);
 		reg("resident/ResidentSendAILogic.js",ResidentSendAILogic);
+		reg("resident/ResidentDoSomeThingAILogic.js",ResidentDoSomeThingAILogic);
+		reg("resident/ResidentRandomWalkAILogic.js",ResidentRandomWalkAILogic);
 		reg("panel/ResidentDetailsPanel.js",ResidentDetailsPanel);
 		reg("building/RestaurantLogic.js",RestaurantLogic);
 		reg("building/SchoolLogic.js",SchoolLogic);

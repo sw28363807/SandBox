@@ -15,6 +15,8 @@ export default class ResidentSendAILogic extends Laya.Script {
     }
 
     onDisable() {
+        Laya.timer.clear(this, this.onCollectSendFinish);
+        Laya.timer.clear(this, this.onPutDownSend);
     }
 
     onStart() {
