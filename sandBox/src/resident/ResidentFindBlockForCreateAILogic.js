@@ -124,7 +124,7 @@ export default class ResidentFindBlockForCreateAILogic extends Laya.Script {
                 }
             }));
         } else {
-            this.refreshFSMState(ResidentMeta.ResidentState.IdleState);
+            this.owner.residentLogicScript.refreshFSMState(ResidentMeta.ResidentState.IdleState);
             this.findCreateBuildingTimes = 0;
         }
     }

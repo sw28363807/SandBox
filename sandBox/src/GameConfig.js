@@ -36,6 +36,8 @@ import ResidentFindBlockForCreateAILogic from "./resident/ResidentFindBlockForCr
 import ResidentSocialAILogic from "./resident/ResidentSocialAILogic"
 import ResidentUseBuildingAILogic from "./resident/ResidentUseBuildingAILogic"
 import ResidentHuntAILogic from "./resident/ResidentHuntAILogic"
+import ResidentFightAILogic from "./resident/ResidentFightAILogic"
+import ResidentLookForLoverAILogic from "./resident/ResidentLookForLoverAILogic"
 import ResidentDetailsPanel from "./panel/ResidentDetailsPanel"
 import RestaurantLogic from "./building/RestaurantLogic"
 import SchoolLogic from "./building/SchoolLogic"
@@ -84,6 +86,8 @@ export default class GameConfig {
 		reg("resident/ResidentSocialAILogic.js",ResidentSocialAILogic);
 		reg("resident/ResidentUseBuildingAILogic.js",ResidentUseBuildingAILogic);
 		reg("resident/ResidentHuntAILogic.js",ResidentHuntAILogic);
+		reg("resident/ResidentFightAILogic.js",ResidentFightAILogic);
+		reg("resident/ResidentLookForLoverAILogic.js",ResidentLookForLoverAILogic);
 		reg("panel/ResidentDetailsPanel.js",ResidentDetailsPanel);
 		reg("building/RestaurantLogic.js",RestaurantLogic);
 		reg("building/SchoolLogic.js",SchoolLogic);

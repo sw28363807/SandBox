@@ -391,28 +391,19 @@ export default class ResidentLogic extends Laya.Script {
         }
         // 恋爱男方
         else if (state == ResidentMeta.ResidentState.LoverMan) {
-            this.setAnim(ResidentMeta.ResidentAnim.Walk);
-            this.setStateAniVisible(true);
-            this.setStateAni("ani5");
-            this.startFindWoman();
+            this.owner.lookForLoverScript.startFindWoman();
         }
         // 恋爱女方
         else if (state == ResidentMeta.ResidentState.LoverWoman) {
-            this.setAnim(ResidentMeta.ResidentAnim.Idle);
-            this.setStateAniVisible(true);
-            this.setStateAni("ani5");
+            this.owner.lookForLoverScript.onWomanWaitMan();
         }
         // 两口子一起回家
         else if (state == ResidentMeta.ResidentState.LoverGoHomeMakeLove) {
-            this.setAnim(ResidentMeta.ResidentAnim.Walk);
-            this.setStateAniVisible(true);
-            this.setStateAni("ani5");
-            this.startGoHomeAndWoman();
+            this.owner.lookForLoverScript.startGoHomeAndWoman();
         }
         // 生孩子
         else if (state == ResidentMeta.ResidentState.LoverMakeLove) {
-            this.setVisible(false);
-            this.startMakelove();
+            this.owner.lookForLoverScript.startMakelove();
         }
         // 加入到聊天中
         else if (state == ResidentMeta.ResidentState.JoinTalking) {
@@ -424,15 +415,11 @@ export default class ResidentLogic extends Laya.Script {
         }
         // 加入到打架中
         else if (state == ResidentMeta.ResidentState.JoinFight) {
-            this.setAnim(ResidentMeta.ResidentAnim.Walk);
-            this.startJoinFightPoint(param);
+            this.owner.fightScript.startJoinFightPoint(param);
         }
         // 打架
         else if (state == ResidentMeta.ResidentState.Fighting) {
-            this.setAnim(ResidentMeta.ResidentAnim.Anger, null, RandomMgr.randomYes() ? "left" : "right");
-            this.setStateAniVisible(true);
-            this.setStateAni("ani8");
-            Laya.timer.once(ResidentMeta.SocialFightStep * 10, this, this.onDoWorkFinish, [this.makeParam(param)]);
+            this.owner.fightScript.onFight(param);
         }
         // 赶去打猎
         else if (state == ResidentMeta.ResidentState.JoinHunt) {
@@ -488,12 +475,7 @@ export default class ResidentLogic extends Laya.Script {
         }
         // 打架结束
         else if (state == ResidentMeta.ResidentState.Fighting) {
-            let fightModel = param.extraParam;
-            fightModel.addFightNum(-1);
-            this.model.addLife(-ResidentMeta.ResidentFightReduceValue);
-            if (fightModel.getFightNum() == 0) {
-                GameModel.getInstance().removeFightPoint(fightModel.getFightPointId());
-            }
+            this.owner.fightScript.onFightFinished(param);
         }
         // 正在赶去打猎
         else if (state == ResidentMeta.ResidentState.JoinHunt || state == ResidentMeta.ResidentState.Hunting) {
@@ -508,76 +490,6 @@ export default class ResidentLogic extends Laya.Script {
             this.clearContinueCreateBuilding();
         }
         this.doWorkFinishClearFunc();
-    }
-
-    // 走到打架点
-    startJoinFightPoint(fightModel) {
-        let pos = fightModel.getFightPosInArea();
-        this.walkTo({
-            x: pos.x,
-            y: pos.y,
-        }, Laya.Handler.create(this, function () {
-            this.refreshFSMState(ResidentMeta.ResidentState.Fighting, fightModel);
-        }));
-    }
-
-    // 开始生孩子
-    startMakelove() {
-        if (this.model.getSex() == 1) {
-            let myHome = BuildingMgr.getInstance().getBuildingById(this.model.getMyHomeId());
-            let homeScript = myHome.buildingScript;
-            homeScript.startMakeLove(Laya.Handler.create(this, function () {
-                let womanId = this.model.getLoverId();
-                let woman = this.residentMgrInstance.getResidentById(womanId);
-                woman.y += ResidentMeta.ResidentGotoYOff;
-                this.owner.y += ResidentMeta.ResidentGotoYOff;
-                woman.residentLogicScript.refreshFSMState(ResidentMeta.ResidentState.IdleState);
-                this.refreshFSMState(ResidentMeta.ResidentState.IdleState);
-
-                this.residentMgrInstance.createResidentByConfig({
-                    parent: GameContext.mapContainer,
-                    x: woman.x,
-                    y: woman.y,
-                    age: 1,
-                    sex: GameModel.getInstance().randomSex(),
-                    food: 70,
-                    water: 70,
-                });
-            }));
-        }
-        this.model.recordMakeLoveSystemTime();
-    }
-    // 开始去找即将要成亲的女方
-    startFindWoman() {
-        let womanId = this.model.getLoverId();
-        let woman = this.residentMgrInstance.getResidentById(womanId);
-        if (woman) {
-            this.walkTo({
-                x: woman.x + woman.width,
-                y: woman.y,
-            }, Laya.Handler.create(this, function () {
-                this.refreshFSMState(ResidentMeta.ResidentState.LoverGoHomeMakeLove);
-                woman.residentLogicScript.refreshFSMState(ResidentMeta.ResidentState.LoverGoHomeMakeLove);
-            }));
-        } else {
-            this.refreshFSMState(ResidentMeta.ResidentState.IdleState);
-        }
-    }
-
-    // 和媳妇一起回家生孩子
-    startGoHomeAndWoman() {
-        let myHome = BuildingMgr.getInstance().getBuildingById(this.model.getMyHomeId());
-        if (myHome) {
-            this.walkTo({
-                x: myHome.x + myHome.width / 2 - this.owner.width / 2,
-                y: myHome.y + myHome.height - this.owner.height + ResidentMeta.ResidentGotoYOff,
-                forceFirstY: true,
-            }, Laya.Handler.create(this, function () {
-                this.refreshFSMState(ResidentMeta.ResidentState.LoverMakeLove);
-            }));
-        } else {
-            this.refreshFSMState(ResidentMeta.ResidentState.IdleState);
-        }
     }
 
     walkTo(config, handler) {
@@ -599,75 +511,6 @@ export default class ResidentLogic extends Laya.Script {
         ret.residentIds = new Set([this.model.getResidentId()]);
         ret.extraParam = extraParam;
         return ret;
-    }
-
-    // processHunt() {
-    //     let cell = {
-    //         func: Laya.Handler.create(this, function (param) {
-    //             let animal = AnimalMgr.getInstance().getAnimalForAttack(this.owner.x, this.owner.y, 2000);
-    //             if (animal) {
-    //                 this.refreshFSMState(ResidentMeta.ResidentState.JoinHunt, animal);
-    //                 this.ideaResult = true;
-    //             }
-    //         })
-    //     };
-    //     if (RandomMgr.randomYes() && this.model.getAge() >= ResidentMeta.ResidentAdultAge) {
-    //         this.level2Results.push(cell);
-    //     }
-    // }
-
-    processLookForLover() {
-        if (RandomMgr.randomYes(0.2)) {
-            if (this.model.canAskMarry()) {
-                let home = BuildingMgr.getInstance().getBuildingById(this.model.getMyHomeId());
-                if (home) {
-                    let homeModel = home.buildingScript.getModel();
-                    let curNum = GameModel.getInstance().getAllResidentNum();
-                    let maxNum = GameModel.getInstance().getHomeNum() * ResidentMeta.ResidentNumPerHome;
-                    if (homeModel.getBuildingState() == BuildingMeta.BuildingState.Noraml &&
-                        curNum <= maxNum) {
-                        let cell = {
-                            func: Laya.Handler.create(this, function (param) {
-                                let woman = this.residentMgrInstance.getCanMarryWoman(this.model);
-                                if (woman) {
-                                    let womanScript = woman.residentLogicScript;
-                                    let womanModel = womanScript.getModel();
-                                    GameModel.getInstance().setMarried(this.model, womanModel);
-                                    this.refreshFSMState(ResidentMeta.ResidentState.LoverMan);
-                                    womanScript.refreshFSMState(ResidentMeta.ResidentState.LoverWoman);
-                                    this.ideaResult = true;
-                                }
-                            })
-                        };
-                        this.level1Results.push(cell);
-                    }
-                }
-            }
-        }
-    }
-
-    processFight() {
-        let cell = {
-            func: Laya.Handler.create(this, function (param) {
-                let resident = this.residentMgrInstance.getACanFightResident(this.model, this.owner.x, this.owner.y);
-                if (resident) {
-                    let fightModel = GameModel.getInstance().getOrCreateFightPoint(this.owner.x, this.owner.y, 30, 5);
-                    if (fightModel.getFightNum() == 0) {
-                        fightModel.addFightNum(2);
-                        this.refreshFSMState(ResidentMeta.ResidentState.JoinFight, fightModel);
-                        resident.residentLogicScript.refreshFSMState(ResidentMeta.ResidentState.JoinFight, fightModel);
-                    } else {
-                        fightModel.addFightNum(1);
-                        this.refreshFSMState(ResidentMeta.ResidentState.JoinFight, fightModel);
-                    }
-                    this.ideaResult = true;
-                }
-            })
-        };
-        if (this.model.getSocial() < ResidentMeta.ResidentSocialLowToFight &&
-            GameModel.getInstance().getAllResidentNum() >= ResidentMeta.ResidentFightNum) {
-            this.level2Results.push(cell);
-        }
     }
 
     //此处用户定义

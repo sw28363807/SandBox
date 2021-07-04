@@ -5,7 +5,7 @@
     "searchKey":"Box,Resident",
     "props":{"width":64,"presetID":1,"preset":"laya/pages/prefab/Resident.prefab","name":"Resident","isPresetRoot":true,"height":64},
     "nodeParent":-1,
-    "maxID":27,
+    "maxID":29,
     "label":"Resident",
     "isOpen":true,
     "isDirectory":true,
@@ -297,6 +297,40 @@
             "isAniNode":true,
             "hasChild":false,
             "compId":26,
+            "child":[
+                ]
+        },
+        {
+            "x":15,
+            "type":"Script",
+            "switchAble":true,
+            "source":"src/resident/ResidentFightAILogic.js",
+            "searchKey":"Script,ResidentFightAILogic",
+            "removeAble":true,
+            "props":{"presetID":23,"preset":"laya/pages/prefab/Resident.prefab"},
+            "nodeParent":3,
+            "label":"ResidentFightAILogic",
+            "isDirectory":false,
+            "isAniNode":true,
+            "hasChild":false,
+            "compId":27,
+            "child":[
+                ]
+        },
+        {
+            "x":15,
+            "type":"Script",
+            "switchAble":true,
+            "source":"src/resident/ResidentLookForLoverAILogic.js",
+            "searchKey":"Script,ResidentLookForLoverAILogic",
+            "removeAble":true,
+            "props":{"presetID":24,"preset":"laya/pages/prefab/Resident.prefab"},
+            "nodeParent":3,
+            "label":"ResidentLookForLoverAILogic",
+            "isDirectory":false,
+            "isAniNode":true,
+            "hasChild":false,
+            "compId":28,
             "child":[
                 ]
         }],
