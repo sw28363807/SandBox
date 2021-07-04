@@ -328,12 +328,12 @@ export default class ResidentLogic extends Laya.Script {
         this.getMoveScript().stopGoto();
         Laya.timer.clear(this, this.onDoWorkFinish);
         let createBuildingNextState = this.owner.createBuildingScript.canGotoCreateBuilding(state);
-        let useBuildingNextState = this.canGotoUseBuilding(state);
+        let useBuildingNextState = this.owner.useBuildingScript.canGotoUseBuilding(state);
         let sendAIMeta = this.owner.sendScript.canSendExt(state);
         let canCollect = this.owner.sendScript.canCollect(state);
         let canSendToDest = this.owner.sendScript.canSendToDest(state);
-        let canFindBlockForCreateBuilding = this.canFindCreateBuildingBlock(state);
-        let useData = this.canStartUseBuilding(state);
+        let canFindBlockForCreateBuilding = this.owner.findBlockForCreateScript.canFindCreateBuildingBlock(state);
+        let useData = this.owner.useBuildingScript.canStartUseBuilding(state);
         let canGotoTargetExt = this.owner.doSomeThingScript.canGotoTargetExt(state);
         let canDOSomeThing = this.owner.doSomeThingScript.canDoSomeThingExt(state);
         // 能否走过去做某些事情
@@ -353,7 +353,7 @@ export default class ResidentLogic extends Laya.Script {
         }
         // 是否要去使用建筑
         else if (useBuildingNextState) {
-            this.startGotoBuildingForUse({
+            this.owner.useBuildingScript.startGotoBuildingForUse({
                 building: param,
                 nextState: useBuildingNextState.nextState
             });
@@ -362,7 +362,7 @@ export default class ResidentLogic extends Laya.Script {
             this.owner.createBuildingScript.startCreateBuilding();
         }
         else if (useData) {
-            this.startUseBuilding(useData);
+            this.owner.useBuildingScript.startUseBuilding(useData);
         }
         // 送货
         else if (sendAIMeta) {
@@ -386,8 +386,8 @@ export default class ResidentLogic extends Laya.Script {
         // 搜寻
         else if (canFindBlockForCreateBuilding) {
             this.setAnim(ResidentMeta.ResidentAnim.Walk);
-            this.findCreateBuildingTimes = 0;
-            this.startFindCreateBuildingBlock(param);
+            this.owner.findBlockForCreateScript.findCreateBuildingTimes = 0;
+            this.owner.findBlockForCreateScript.startFindCreateBuildingBlock(param);
         }
         // 恋爱男方
         else if (state == ResidentMeta.ResidentState.LoverMan) {
@@ -416,15 +416,11 @@ export default class ResidentLogic extends Laya.Script {
         }
         // 加入到聊天中
         else if (state == ResidentMeta.ResidentState.JoinTalking) {
-            this.setAnim(ResidentMeta.ResidentAnim.Walk);
-            this.startJoinTalkingPoint(param);
+            this.owner.socialScript.startJoinTalkingPoint(param);
         }
         // 聊天
         else if (state == ResidentMeta.ResidentState.TalkingAbout) {
-            this.setAnim(ResidentMeta.ResidentAnim.Enjoy);
-            this.setStateAniVisible(true);
-            this.setStateAni("ani6");
-            Laya.timer.once(ResidentMeta.SocialTimeStep * 10, this, this.onDoWorkFinish, [this.makeParam(param)]);
+            this.owner.socialScript.onTalkingAbout(param);
         }
         // 加入到打架中
         else if (state == ResidentMeta.ResidentState.JoinFight) {
@@ -440,21 +436,11 @@ export default class ResidentLogic extends Laya.Script {
         }
         // 赶去打猎
         else if (state == ResidentMeta.ResidentState.JoinHunt) {
-            this.hurtAnimal = param;
-            let script = this.hurtAnimal.getComponent(AnimalLogic);
-            this.hurtAnimalId = script.getModel().getAnimalId();
-            this.setAnim(ResidentMeta.ResidentAnim.Walk);
-            this.startJoinHunt();
+            this.owner.huntScript.startJoinHunt(param);
         }
         // 赶去打猎完成
         else if (state == ResidentMeta.ResidentState.Hunting) {
-            if (this.hurtAnimal) {
-                let script = this.hurtAnimal.getComponent(AnimalLogic);
-                script.setHurt();
-                this.setStateAniVisible(true);
-                this.setStateAni("ani7");
-                this.setAnim(ResidentMeta.ResidentAnim.Work);
-            }
+            this.owner.huntScript.onHunting();
         }
         // 死亡
         else if (state == ResidentMeta.ResidentState.Die) {
@@ -485,9 +471,9 @@ export default class ResidentLogic extends Laya.Script {
             this.owner.createBuildingScript.clearContinueCreateBuilding();
         }
         // 使用完成
-        else if (this.canFinishUseBuilding(state)) {
-            this.onFinishUseBuilding(state);
-            this.clearUseBuilding();
+        else if (this.owner.useBuildingScript.canFinishUseBuilding(state)) {
+            this.owner.useBuildingScript.onFinishUseBuilding(state);
+            this.owner.useBuildingScript.clearUseBuilding();
         }
         // 打包送货完成 
         else if (this.owner.sendScript.canSendFinish(state)) {
@@ -498,12 +484,7 @@ export default class ResidentLogic extends Laya.Script {
         }
         // 聊天结束
         else if (state == ResidentMeta.ResidentState.TalkingAbout) {
-            let talkingModel = param.extraParam;
-            talkingModel.addTalkingNum(-1);
-            this.model.addSocial(ResidentMeta.ResidentAddSocialBaseValue);
-            if (talkingModel.getTalkingNum() == 0) {
-                GameModel.getInstance().removeTalkingPoint(talkingModel.getTalkingPointId());
-            }
+            this.owner.socialScript.onTalkingAboutFinished(param);
         }
         // 打架结束
         else if (state == ResidentMeta.ResidentState.Fighting) {
@@ -515,22 +496,8 @@ export default class ResidentLogic extends Laya.Script {
             }
         }
         // 正在赶去打猎
-        else if (state == ResidentMeta.ResidentState.JoinHunt) {
-            if (this.hurtAnimal) {
-                EventMgr.getInstance().removeEvent(GameEvent.HUNT_FINISH, this, this.onDoWorkFinish);
-                AnimalMgr.getInstance().removeAnimalById(this.hurtAnimalId);
-                this.hurtAnimal = null;
-                this.hurtAnimalId = null;
-            }
-        }
-        // 打猎中
-        else if (state == ResidentMeta.ResidentState.Hunting) {
-            if (this.hurtAnimal) {
-                EventMgr.getInstance().removeEvent(GameEvent.HUNT_FINISH, this, this.onDoWorkFinish);
-                AnimalMgr.getInstance().removeAnimalById(this.hurtAnimalId);
-                this.hurtAnimal = null;
-                this.hurtAnimalId = null;
-            }
+        else if (state == ResidentMeta.ResidentState.JoinHunt || state == ResidentMeta.ResidentState.Hunting) {
+            this.owner.huntScript.onHuntFinished();
         }
         else if (state == ResidentMeta.ResidentState.Die) {
             BuildingMgr.getInstance().removeBuildingById(this.model.getMyHomeId());
@@ -543,328 +510,7 @@ export default class ResidentLogic extends Laya.Script {
         this.doWorkFinishClearFunc();
     }
 
-    // ==================================================================================================使用建筑AIStart
-    onUseBuildingCondition(aiData) {
-        // 去治疗
-        if (aiData == ResidentMeta.ResidentState.GotoTreat) {
-            if (this.model.getSick() == 2) {
-                this.useBuildingAIPriority = 1;
-                return true;
-            }
-            return false;
-        }
-        // 去学校
-        else if (aiData == ResidentMeta.ResidentState.GoToSchool) {
-            if (this.model.getTeach() < 100) {
-                return true;
-            }
-            return false;
-        }
-        // 去幼儿园
-        else if (aiData == ResidentMeta.ResidentState.GotoChildSchoolForLearn) {
-            if (this.model.getAge() < ResidentMeta.ResidentAdultAge) {
-                return true;
-            }
-            return false;
-        }
-        // 去食物库
-        else if (aiData == ResidentMeta.ResidentState.GotoFoodPoolForEat) {
-            if (this.model.getFood() < 90) {
-                return true;
-            }
-            return false;
-        }
-        // 去水库
-        else if (aiData == ResidentMeta.ResidentState.GotoWaterPoolForDrink) {
-            if (this.model.getWater() < 90) {
-                return true;
-            }
-            return false;
-        }
-        // 去宠物店
-        else if (aiData == ResidentMeta.ResidentState.GotoPetShopForTakeOutPet) {
-            if (this.model.getPetType() != 0) {
-                return false;
-            }
-            return true;
-        }
-        // 去火堆周围
-        else if (aiData == ResidentMeta.ResidentState.GotoFireForHeating) {
-            if (this.model.getTemperature() < ResidentMeta.ResidentDangerTemperature) {
-                return true;
-            }
-            if (this.model.getTemperature() <= 32) {
-                this.useBuildingAIPriority = 1;
-                return true;
-            }
-            return false;
-        }
-    }
-
-    // 获取建筑
-    onGetBuilding(aiData, data) {
-        // 去治疗
-        if (aiData == ResidentMeta.ResidentState.GotoTreat) {
-            let building = BuildingMgr.getInstance().getAlltBuildingForCondition(this.owner.x,
-                this.owner.y, data.buildingType,
-                2000, [BuildingMeta.BuildingState.Noraml], null, true);
-            return building
-        }
-        // 去学校
-        else if (aiData == ResidentMeta.ResidentState.GoToSchool) {
-            let building = BuildingMgr.getInstance().getAlltBuildingForCondition(this.owner.x,
-                this.owner.y, data.buildingType,
-                2000, [BuildingMeta.BuildingState.Noraml], null, true);
-            return building
-        }
-        // 去幼儿园
-        else if (aiData == ResidentMeta.ResidentState.GotoChildSchoolForLearn) {
-            let building = BuildingMgr.getInstance().getAlltBuildingForCondition(this.owner.x,
-                this.owner.y, data.buildingType,
-                2000, [BuildingMeta.BuildingState.Noraml], null, true);
-            return building
-        }
-        // 去食物库
-        else if (aiData == ResidentMeta.ResidentState.GotoFoodPoolForEat) {
-            let filterFunc = function (building) {
-                let curSaveFood = building.buildingScript.getCurSaveFood();
-                if (curSaveFood > 0) {
-                    return true;
-                }
-                return false;
-            };
-            let building = BuildingMgr.getInstance().getAlltBuildingForCondition(this.owner.x,
-                this.owner.y, data.buildingType,
-                2000, [BuildingMeta.BuildingState.Noraml], filterFunc, true);
-            return building;
-        }
-        // 去水库
-        else if (aiData == ResidentMeta.ResidentState.GotoWaterPoolForDrink) {
-            let filterFunc = function (building) {
-                let curSaveWater = building.buildingScript.getCurSaveWater();
-                if (curSaveWater > 0) {
-                    return true;
-                }
-                return false;
-            };
-            let building = BuildingMgr.getInstance().getAlltBuildingForCondition(this.owner.x,
-                this.owner.y, data.buildingType,
-                2000, [BuildingMeta.BuildingState.Noraml], filterFunc, true);
-            return building;
-        }
-        // 去宠物店
-        else if (aiData == ResidentMeta.ResidentState.GotoPetShopForTakeOutPet) {
-            let buildings = BuildingMgr.getInstance().getAlltBuildingForCondition(this.owner.x,
-                this.owner.y, data.buildingType,
-                2000, [BuildingMeta.BuildingState.Noraml], null, true);
-            if (buildings.length != 0) {
-                for (const key in buildings) {
-                    let item = buildings[key];
-                    let petTypeId = item.buildingScript.getFirstPetInPetList();
-                    if (petTypeId > 0) {
-                        item.buildingScript.getModel().setBuildingState(BuildingMeta.BuildingState.Occupy);
-                        return item;
-                    }
-                }
-            }
-            return null;
-        }
-        // 去火堆
-        else if (aiData == ResidentMeta.ResidentState.GotoFireForHeating) {
-            let building = BuildingMgr.getInstance().getAlltBuildingForCondition(this.owner.x,
-                this.owner.y, data.buildingType,
-                2000, [BuildingMeta.BuildingState.Noraml], function (building) {
-                    return building.buildingScript.getHeatingTimes() < building.buildingScript.getHeatingMaxTimes();
-                }, true);
-            return building;
-        }
-    }
-
-
-    onGotoUseBuildingPre() {
-        let model = this.useBuilding.buildingScript.getModel();
-        let buildingType = model.getBuildingType();
-        if (buildingType == BuildingMeta.BuildingType.FireType) {
-            this.useBuilding.buildingScript.addHeatingTimes(1);
-            this.useBuilding.buildingScript.joinResidentIdToBuildingForUse(this.model.getResidentId());
-        }
-
-    }
-
-    onFinishUseBuilding(state) {
-        // 治疗完成
-        if (state == ResidentMeta.ResidentState.Treating) {
-            this.model.setSick(1);
-            this.setBuffAniVisible(false);
-            this.stopBuffAni();
-        }
-        // 学习完成
-        else if (state == ResidentMeta.ResidentState.Learning) {
-            this.model.addTeach(BuildingMeta.BuildingDatas[String(BuildingMeta.BuildingType.SchoolType)].addTeach);
-        }
-        // 在幼儿园学习完成
-        else if (state == ResidentMeta.ResidentState.ChildLearn) {
-            this.model.addAgeExp(Math.round(ResidentMeta.ResidentAgePeriod / 2), true);
-        }
-        // 在食物库吃饭完成
-        else if (state == ResidentMeta.ResidentState.EatFoodInFoodPool) {
-            let residentFood = this.model.getFood();
-            let curSaveFood = this.useBuilding.buildingScript.getCurSaveFood();
-            let needFood = Math.round(100 - residentFood);
-            let deltay = 0;
-            if (needFood >= curSaveFood) {
-                deltay = curSaveFood
-            } else {
-                deltay = needFood;
-            }
-            if (deltay > 40) {
-                deltay = 40;
-            }
-            this.useBuilding.buildingScript.addFoodToPool(-deltay);
-            this.model.addFood(deltay);
-        }
-        // 在水库喝水完成
-        else if (state == ResidentMeta.ResidentState.DrinkWaterInWaterPool) {
-            let residentWater = this.model.getWater();
-            let curSaveWater = this.useBuilding.buildingScript.getCurSaveWater();
-            let needWater = Math.round(100 - residentWater);
-            let deltay = 0;
-            if (needWater >= curSaveWater) {
-                deltay = curSaveWater
-            } else {
-                deltay = needWater;
-            }
-            if (deltay > 40) {
-                deltay = 40;
-            }
-            this.useBuilding.buildingScript.addWaterToPool(-deltay);
-            this.model.addWater(deltay);
-        }
-        // 宠物店领取宠物完成
-        else if (state == ResidentMeta.ResidentState.TakeOutPet) {
-            let first = this.useBuilding.buildingScript.popFirstPet();
-            this.model.setPetType(first);
-            this.addPetByPetType(first);
-            this.useBuilding.buildingScript.getModel().setBuildingState(BuildingMeta.BuildingState.Noraml);
-        }
-        // 火堆烤火完成
-        else if (state == ResidentMeta.ResidentState.Heating) {
-            this.model.setTemperature(ResidentMeta.ResidentStandardTemperature);
-            let buildingScript = this.useBuilding.buildingScript;
-            buildingScript.removeResidentIdToBuildingForUse(this.model.getResidentId());
-            if (buildingScript.getHeatingTimes() >= buildingScript.getHeatingMaxTimes()) {
-                let num = buildingScript.getResidentIdToBuildingForUseNum();
-                if (num == 0) {
-                    BuildingMgr.getInstance().removeBuildingById(buildingScript.getModel().getBuildingId());
-                }
-            }
-        }
-    }
-
-    onUseBuildingPre(useData) {
-        if (useData.buildingType == BuildingMeta.BuildingType.FireType) {
-            this.setAnim(ResidentMeta.ResidentAnim.Enjoy);
-            this.setStateAniVisible(true);
-            this.setStateAni("ani11");
-        }
-        // console.debug(useData);
-    }
-
-    canGotoUseBuilding(fsmState) {
-        let value = ResidentMeta.ResidentUseBuildingMap[String(fsmState)];
-        return value;
-    }
-
-    startGotoBuildingForUse(config) {
-        let data = ResidentMeta.ResidentUseBuildingMap[this.model.getFSMState()];
-        this.setAnim(ResidentMeta.ResidentAnim.Walk);
-        this.useBuilding = config.building;
-        let nextState = config.nextState;
-        let destX = this.useBuilding.x + this.useBuilding.width / 2 - this.owner.width / 2;
-        let destY = this.useBuilding.y + this.useBuilding.height - this.owner.height + ResidentMeta.ResidentGotoYOff;
-        if (data.useType == 2) {
-            destY = this.useBuilding.y + this.useBuilding.height / 2 - this.owner.height + ResidentMeta.ResidentGotoYOff;
-            let p = RandomMgr.randomByArea3(destX, destY, 70, 100);
-            destX = p.x;
-            destY = p.y;
-        }
-        this.onGotoUseBuildingPre();
-        this.walkTo({
-            x: destX,
-            y: destY,
-        }, Laya.Handler.create(this, function () {
-            this.refreshFSMState(nextState, this.useBuilding);
-        }));
-    }
-
-    canStartUseBuilding(fsmState) {
-        for (const key in ResidentMeta.ResidentUseBuildingMap) {
-            let value = ResidentMeta.ResidentUseBuildingMap[key];
-            if (value.nextState == fsmState && fsmState != undefined && fsmState != null) {
-                return value;
-            }
-        }
-        return null;
-    }
-
-    canFinishUseBuilding(fsmState) {
-        for (const key in ResidentMeta.ResidentUseBuildingMap) {
-            let value = ResidentMeta.ResidentUseBuildingMap[key];
-            if (value.nextState == fsmState && fsmState != undefined && fsmState != null) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    // 使用建筑
-    startUseBuilding(useData) {
-        if (this.useBuilding) {
-            this.stopAni();
-            if (useData.useType != 2) {
-                this.owner.visible = false;
-            }
-            let buildingModel = this.useBuilding.buildingScript.getModel();
-            let buildingType = buildingModel.getBuildingType();
-            let buildingMeta = BuildingMeta.BuildingDatas[String(buildingType)];
-            this.onUseBuildingPre(useData);
-            Laya.timer.once(buildingMeta.useBuildingTime, this, this.onDoWorkFinish, [this.makeParam(null)]);
-        }
-    }
-
-    clearUseBuilding() {
-        Laya.timer.clear(this, this.onDoWorkFinish);
-        this.useBuilding = null;
-    }
-    // ==================================================================================================使用建筑AIEnd
-
-    // 赶去打猎
-    startJoinHunt() {
-        EventMgr.getInstance().registEvent(GameEvent.HUNT_FINISH, this, this.onDoWorkFinish);
-        let script = this.hurtAnimal.getComponent(AnimalLogic);
-        script.joinHunt(this.model.getResidentId());
-        script.pauseWalk();
-        let pos = RandomMgr.randomPointForX(this.hurtAnimal.x, this.hurtAnimal.y + this.hurtAnimal.height, this.hurtAnimal.width);
-        this.walkTo({
-            x: pos.x - this.owner.width / 2,
-            y: pos.y - this.owner.height / 2,
-        }, Laya.Handler.create(this, function () {
-            this.refreshFSMState(ResidentMeta.ResidentState.Hunting);
-        }));
-    }
-
-    // 走到聊天点
-    startJoinTalkingPoint(talkingModel) {
-        let pos = talkingModel.getTalkingPosInArea();
-        this.walkTo({
-            x: pos.x,
-            y: pos.y,
-        }, Laya.Handler.create(this, function () {
-            this.refreshFSMState(ResidentMeta.ResidentState.TalkingAbout, talkingModel);
-        }));
-    }
-
-    // 走到聊天点
+    // 走到打架点
     startJoinFightPoint(fightModel) {
         let pos = fightModel.getFightPosInArea();
         this.walkTo({
@@ -948,40 +594,6 @@ export default class ResidentLogic extends Laya.Script {
         }
     }
 
-    // 开始寻找可以建房子的空地
-    startFindCreateBuildingBlock(itemData) {
-        if (this.findCreateBuildingTimes < ResidentMeta.ResidentFindPathTimes) {
-            let dstP = RandomMgr.randomByArea2(this.owner.x,
-                this.owner.y,
-                100,
-                GameContext.mapWidth, GameContext.mapHeight, GameMeta.MapSideOff, GameMeta.MapSideOff);
-            this.walkTo({ x: dstP.x, y: dstP.y }, Laya.Handler.create(this, function () {
-                this.findCreateBuildingTimes++;
-                // 查看此处可不可以建筑
-                let data = BuildingMeta.BuildingDatas[itemData.buildingType];
-                let toCreateX = this.owner.x - data.width / 2 + this.owner.width / 2;
-                let toCreateY = this.owner.y - data.height + this.owner.height;
-                if (!ResidentHelper.isOccupySpace(toCreateX, toCreateY,
-                    data.width, data.height)) {
-                    let building = BuildingMgr.getInstance().createBuildingByConfig({
-                        parent: GameContext.mapContainer,
-                        x: toCreateX,
-                        y: toCreateY,
-                        prefab: data.prefab,
-                        buildingType: itemData.buildingType,
-                    });
-                    this.onFindBlockForCreateBuilding(building, itemData);
-                    this.refreshFSMState(itemData.nextState, building);
-                } else {
-                    this.startFindCreateBuildingBlock(itemData);
-                }
-            }));
-        } else {
-            this.refreshFSMState(ResidentMeta.ResidentState.IdleState);
-            this.findCreateBuildingTimes = 0;
-        }
-    }
-
     makeParam(extraParam) {
         let ret = {};
         ret.residentIds = new Set([this.model.getResidentId()]);
@@ -989,46 +601,20 @@ export default class ResidentLogic extends Laya.Script {
         return ret;
     }
 
-    processSocial() {
-        let cell = {
-            func: Laya.Handler.create(this, function (param) {
-                let resident = this.residentMgrInstance.getACanSocialResident(this.owner);
-                if (resident) {
-                    let talkingModel = GameModel.getInstance().getOrCreateTalkingPoint(this.owner.x, this.owner.y, 40, 5);
-                    if (talkingModel.getTalkingNum() == 0) {
-                        talkingModel.addTalkingNum(2);
-                        this.refreshFSMState(ResidentMeta.ResidentState.JoinTalking, talkingModel);
-                        resident.getComponent(ResidentLogic).refreshFSMState(ResidentMeta.ResidentState.JoinTalking, talkingModel);
-                    } else {
-                        talkingModel.addTalkingNum(1);
-                        this.refreshFSMState(ResidentMeta.ResidentState.JoinTalking, talkingModel);
-                    }
-                    this.ideaResult = true;
-                }
-            })
-        };
-        let scocial = this.model.getSocial();
-        if (scocial < ResidentMeta.ResidentSocialNeedValue) {
-            this.level1Results.push(cell);
-        } else if (RandomMgr.randomYes() && scocial < 100) {
-            this.level2Results.push(cell);
-        }
-    }
-
-    processHunt() {
-        let cell = {
-            func: Laya.Handler.create(this, function (param) {
-                let animal = AnimalMgr.getInstance().getAnimalForAttack(this.owner.x, this.owner.y, 2000);
-                if (animal) {
-                    this.refreshFSMState(ResidentMeta.ResidentState.JoinHunt, animal);
-                    this.ideaResult = true;
-                }
-            })
-        };
-        if (RandomMgr.randomYes() && this.model.getAge() >= ResidentMeta.ResidentAdultAge) {
-            this.level2Results.push(cell);
-        }
-    }
+    // processHunt() {
+    //     let cell = {
+    //         func: Laya.Handler.create(this, function (param) {
+    //             let animal = AnimalMgr.getInstance().getAnimalForAttack(this.owner.x, this.owner.y, 2000);
+    //             if (animal) {
+    //                 this.refreshFSMState(ResidentMeta.ResidentState.JoinHunt, animal);
+    //                 this.ideaResult = true;
+    //             }
+    //         })
+    //     };
+    //     if (RandomMgr.randomYes() && this.model.getAge() >= ResidentMeta.ResidentAdultAge) {
+    //         this.level2Results.push(cell);
+    //     }
+    // }
 
     processLookForLover() {
         if (RandomMgr.randomYes(0.2)) {
@@ -1087,30 +673,6 @@ export default class ResidentLogic extends Laya.Script {
     //此处用户定义
     // ==============================================================================
 
-    //处理使用建筑
-    processUseBuildingAI() {
-        for (const key in ResidentMeta.ResidentUseBuildingMap) {
-            let item = ResidentMeta.ResidentUseBuildingMap[key];
-            this.useBuildingAIPriority = 2;
-            if (this.onUseBuildingCondition(key)) {
-                let cell = {
-                    func: Laya.Handler.create(this, function () {
-                        let building = this.onGetBuilding(key, item);
-                        if (building) {
-                            this.refreshFSMState(key, building);
-                            this.ideaResult = true;
-                        }
-                    })
-                };
-                if (this.useBuildingAIPriority == 2) {
-                    this.level2Results.push(cell);
-                } else {
-                    this.level1Results.push(cell);
-                }
-            }
-        }
-    }
-
     // 添加宠物
     addPetByPetType(petType) {
         let petPrefabDef = Laya.loader.getRes(ResourceMeta.PetPrefabPath);
@@ -1129,74 +691,5 @@ export default class ResidentLogic extends Laya.Script {
 
     getPetScript() {
         return this.getPet().petScript;
-    }
-
-
-    processResidentFindCreateBuildingBlockAI() {
-        for (const key in ResidentMeta.ResidentFindCreateBuildingBlockAIMap) {
-            this.findBlockAIPriority = 2;
-            let item = ResidentMeta.ResidentFindCreateBuildingBlockAIMap[key];
-            let can = this.canFindCreateBuildingBlockCondition(key, item);
-            if (can) {
-                let cell = {
-                    func: Laya.Handler.create(this, function () {
-                        this.refreshFSMState(key, item);
-                        this.ideaResult = true;
-                    })
-                };
-                if (this.findBlockAIPriority == 2) {
-                    this.level2Results.push(cell);
-                } else {
-                    this.level1Results.push(cell);
-                }
-            }
-        }
-    }
-
-    onFindBlockForCreateBuilding(building, itemData) {
-        let fsmState = this.model.getFSMState();
-        // 建造房屋
-        if (fsmState == ResidentMeta.ResidentState.FindBlockForCreateHome) {
-            this.model.setMyHomeId(building.buildingScript.getModel().getBuildingId());
-        }
-        // 建造火堆
-        else if (fsmState == ResidentMeta.ResidentState.FindBlockForCreateFire) {
-            // this.firNum = 1;
-            // this.model.setMyHomeId(building.buildingScript.getModel().getBuildingId());
-        }
-    }
-
-    canFindCreateBuildingBlock(fsmState) {
-        return ResidentMeta.ResidentFindCreateBuildingBlockAIMap[fsmState];
-    }
-
-    // 是否能够去搜索
-    canFindCreateBuildingBlockCondition(findType, itemData) {
-        // 建造房屋
-        if (findType == ResidentMeta.ResidentState.FindBlockForCreateHome) {
-            this.findBlockAIPriority = 1;
-            return RandomMgr.randomYes() && this.model.getMyHomeId() == 0 && this.model.getSex() == 1 &&
-                this.model.getAge() >= ResidentMeta.ResidentAdultAge &&
-                BuildingMgr.getInstance().canCreateBuildingForResource(BuildingMeta.BuildingType.HomeType);
-        }
-        // 建造火堆
-        else if (findType == ResidentMeta.ResidentState.FindBlockForCreateFire) {
-            if (this.model.getAge() < ResidentMeta.ResidentAdultAge) {
-                return false;
-            }
-            if (!BuildingMgr.getInstance().canCreateBuildingForResource(BuildingMeta.BuildingType.FireType)) {
-                return false;
-            }
-            if (this.model.getTemperature() >= ResidentMeta.ResidentStandardTemperature - 3) {
-                return false;
-            }
-            let buildings = BuildingMgr.getInstance().getAlltBuildingForCondition(this.owner.x,
-                this.owner.y, BuildingMeta.BuildingType.FireType,
-                2000, [BuildingMeta.BuildingState.Noraml], null, true);
-            if (buildings.length != 0) {
-                return false;
-            }
-            return true;
-        }
     }
 }
