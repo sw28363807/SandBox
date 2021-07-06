@@ -40,13 +40,16 @@ export default class ResidentCreateBuildingAILogic extends Laya.Script {
 
     canGotoCreateBuilding(fsmState) {
         let value = ResidentMeta.ResidentContinueCreateMap[String(fsmState)];
-        return value;
+        if (value) {
+            return value.nextState;
+        }
+        return null;
     }
 
     canStartCreateBuilding(fsmState) {
         for (const key in ResidentMeta.ResidentContinueCreateMap) {
             let value = ResidentMeta.ResidentContinueCreateMap[key];
-            if (value == fsmState && fsmState != undefined && fsmState != null) {
+            if (value && value.nextState == fsmState && fsmState != undefined && fsmState != null) {
                 return true;
             }
         }
@@ -56,7 +59,7 @@ export default class ResidentCreateBuildingAILogic extends Laya.Script {
     canFinishCreateBuilding(fsmState) {
         for (const key in ResidentMeta.ResidentContinueCreateMap) {
             let value = ResidentMeta.ResidentContinueCreateMap[key];
-            if (value == fsmState && fsmState != undefined && fsmState != null) {
+            if (value && value.nextState == fsmState && fsmState != undefined && fsmState != null) {
                 return true;
             }
             if (Number(key) == fsmState && fsmState != undefined && fsmState != null) {
@@ -70,7 +73,6 @@ export default class ResidentCreateBuildingAILogic extends Laya.Script {
     // 继续去建造建筑
     startGotoContinueCreateBuilding(config) {
         EventMgr.getInstance().registEvent(GameEvent.CREATE_BUILDING_FINISH, this.owner.residentLogicScript, this.owner.residentLogicScript.onDoWorkFinish);
-        this.owner.residentLogicScript.setAnim(ResidentMeta.ResidentAnim.Walk);
         this.continueCreateBuilding = config.building;
         let nextState = config.nextState;
         this.continueCreateBuilding.buildingScript.joinResidentIdToBuildingForCreate(this.getModel().getResidentId());

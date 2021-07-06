@@ -44,12 +44,10 @@ export default class ResidentFightAILogic extends Laya.Script {
             GameModel.getInstance().getAllResidentNum() >= ResidentMeta.ResidentFightNum) {
             level2Results.push(cell);
         }
-        level2Results.push(cell);
     }
 
     // 走到打架点
     startJoinFightPoint(fightModel) {
-        this.owner.residentLogicScript.setAnim(ResidentMeta.ResidentAnim.Walk);
         let pos = fightModel.getFightPosInArea();
         this.owner.residentLogicScript.walkTo({
             x: pos.x,

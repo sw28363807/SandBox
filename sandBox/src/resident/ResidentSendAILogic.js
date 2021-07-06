@@ -54,7 +54,6 @@ export default class ResidentSendAILogic extends Laya.Script {
     gotoFindSend(info) {
         let sendAIMeta = info.sendAIMeta;
         let sendInfo = info.sendInfo;
-        this.owner.residentLogicScript.setAnim(ResidentMeta.ResidentAnim.Walk);
         let collectState = sendAIMeta.collectState;
         this.owner.residentLogicScript.walkTo({
             x: sendInfo.send.x + sendInfo.send.width / 2 - this.owner.width / 2,

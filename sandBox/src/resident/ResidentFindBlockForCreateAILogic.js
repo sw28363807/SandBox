@@ -70,7 +70,7 @@ export default class ResidentFindBlockForCreateAILogic extends Laya.Script {
             let buildings = BuildingMgr.getInstance().getAlltBuildingForCondition(this.owner.x,
                 this.owner.y, BuildingMeta.BuildingType.FireType,
                 2000, [BuildingMeta.BuildingState.Noraml], null, true);
-            if (buildings.length != 0) {
+            if (!buildings) {
                 return false;
             }
             return true;

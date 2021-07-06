@@ -37,8 +37,12 @@ ResidentMeta.ResidentState = {
     Die: "",                  //死亡
     GotoContinueCreateHospital: "", //跑去建造医院
     CreateHospital: "",     //建造医院
+    GotoContinueCreateSpeedBuilding: "", //跑去建造健身房
+    CreateSpeedBuilding: "",     //建造健身房
     GotoTreat: "",          //跑去治疗
     Treating: "",           //正在治疗
+    GotoSpeedBuildingForAddSpeed: "",   //跑去健身房
+    AddSpeed: "",           //锻炼身体增加移动速度
     GotoContinueCreateSchool: "", //跑去建造学校
     CreateSchool: "",     //建造学校
     GoToSchool: "",         //去上学的路上
@@ -92,19 +96,19 @@ ResidentMeta.obtainResidentState();
 // 小人去到某地做些事情AI
 // 小人去到某地做些事情AI----------------------------------------------------start
 ResidentMeta.ResidentGOtoSomeWhereDoSomeThingAIMap = {
-    // [ResidentMeta.ResidentState.FindFood]: {
-    //     nextState: ResidentMeta.ResidentState.EatFood,
-    // },
-    // [ResidentMeta.ResidentState.FindWater]: {
-    //     nextState: ResidentMeta.ResidentState.DrinkWater,
-    // },
-    // [ResidentMeta.ResidentState.FindTree]: {
-    //     nextState: ResidentMeta.ResidentState.CutDownTree,
-    // },
+    [ResidentMeta.ResidentState.FindFood]: {
+        nextState: ResidentMeta.ResidentState.EatFood,
+    },
+    [ResidentMeta.ResidentState.FindWater]: {
+        nextState: ResidentMeta.ResidentState.DrinkWater,
+    },
+    [ResidentMeta.ResidentState.FindTree]: {
+        nextState: ResidentMeta.ResidentState.CutDownTree,
+    },
     [ResidentMeta.ResidentState.FindStone]: {
         nextState: ResidentMeta.ResidentState.CollectStone,
     },
-    
+
 };
 // 小人去到某地做些事情AI----------------------------------------------------start
 
@@ -126,44 +130,95 @@ ResidentMeta.ResidentFindCreateBuildingBlockAIMap = {
 
 // 小人可以自动建造的列表(建造行为)
 // 建造----------------------------------------------------start
-ResidentMeta.ResidentContinueCreateMap = {
-    [ResidentMeta.ResidentState.GotoContinueCreateHome]: ResidentMeta.ResidentState.CreateHome,
-    [ResidentMeta.ResidentState.GotoContinueCreateFire]: ResidentMeta.ResidentState.CreateFire,
-    [ResidentMeta.ResidentState.GotoContinueCreateHospital]: ResidentMeta.ResidentState.CreateHospital,
-    [ResidentMeta.ResidentState.GotoContinueCreateSchool]: ResidentMeta.ResidentState.CreateSchool,
-    [ResidentMeta.ResidentState.GotoContinueCreatePowerPlant]: ResidentMeta.ResidentState.CreatePowerPlant,
-    [ResidentMeta.ResidentState.GotoContinueCreateShop]: ResidentMeta.ResidentState.CreateShop,
-    [ResidentMeta.ResidentState.GotoContinueCreateFarmLand]: ResidentMeta.ResidentState.CreateFarmLand,
-    [ResidentMeta.ResidentState.GotoContinueCreatePasture]: ResidentMeta.ResidentState.CreatePasture,
-    [ResidentMeta.ResidentState.GotoContinueCreateOpera]: ResidentMeta.ResidentState.CreateOpera,
-    [ResidentMeta.ResidentState.GotoContinueCreatePoliceStation]: ResidentMeta.ResidentState.CreatePoliceStation,
-    [ResidentMeta.ResidentState.GotoContinueCreateLab]: ResidentMeta.ResidentState.CreateLab,
-    [ResidentMeta.ResidentState.GotoContinueCreateOffice]: ResidentMeta.ResidentState.CreateOffice,
-    [ResidentMeta.ResidentState.GotoContinueCreateChildSchool]: ResidentMeta.ResidentState.CreateChildSchool,
-    [ResidentMeta.ResidentState.GotoContinueCreatePetShop]: ResidentMeta.ResidentState.CreatePetShop,
-    [ResidentMeta.ResidentState.GotoContinueCreateFoodPool]: ResidentMeta.ResidentState.CreateFoodPool,
-    [ResidentMeta.ResidentState.GotoContinueCreateWaterPool]: ResidentMeta.ResidentState.CreateWaterPool,
-};
 
-// 小人去建造的AI列表
-ResidentMeta.ResidentCreateBuildingAIMap = {
-    [BuildingMeta.BuildingType.HospitalType]: ResidentMeta.ResidentState.GotoContinueCreateHospital,
-    [BuildingMeta.BuildingType.SchoolType]: ResidentMeta.ResidentState.GotoContinueCreateSchool,
-    [BuildingMeta.BuildingType.PowerPlantType]: ResidentMeta.ResidentState.GotoContinueCreatePowerPlant,
-    [BuildingMeta.BuildingType.ShopType]: ResidentMeta.ResidentState.GotoContinueCreateShop,
-    [BuildingMeta.BuildingType.FarmLandType]: ResidentMeta.ResidentState.GotoContinueCreateFarmLand,
-    [BuildingMeta.BuildingType.PastureType]: ResidentMeta.ResidentState.GotoContinueCreatePasture,
-    [BuildingMeta.BuildingType.OperaType]: ResidentMeta.ResidentState.GotoContinueCreateOpera,
-    [BuildingMeta.BuildingType.PoliceStationType]: ResidentMeta.ResidentState.GotoContinueCreatePoliceStation,
-    [BuildingMeta.BuildingType.LabType]: ResidentMeta.ResidentState.GotoContinueCreateLab,
-    [BuildingMeta.BuildingType.OfficeType]: ResidentMeta.ResidentState.GotoContinueCreateOffice,
-    [BuildingMeta.BuildingType.ChildSchoolType]: ResidentMeta.ResidentState.GotoContinueCreateChildSchool,
-    [BuildingMeta.BuildingType.PetShopType]: ResidentMeta.ResidentState.GotoContinueCreatePetShop,
-    [BuildingMeta.BuildingType.FoodPoolType]: ResidentMeta.ResidentState.GotoContinueCreateFoodPool,
-    [BuildingMeta.BuildingType.WaterPoolType]: ResidentMeta.ResidentState.GotoContinueCreateWaterPool,
+ResidentMeta.ResidentContinueCreateMap = {
+    [ResidentMeta.ResidentState.GotoContinueCreateHome]: {
+        nextState: ResidentMeta.ResidentState.CreateHome,
+        buildingType: BuildingMeta.BuildingType.HomeType,
+        isContinueCreate: false,
+    },
+    [ResidentMeta.ResidentState.GotoContinueCreateFire]: {
+        nextState: ResidentMeta.ResidentState.CreateFire,
+        buildingType: ResidentMeta.ResidentState.FireType,
+        isContinueCreate: false,
+    },
+    [ResidentMeta.ResidentState.GotoContinueCreateHospital]: {
+        nextState: ResidentMeta.ResidentState.CreateHospital,
+        buildingType: BuildingMeta.BuildingType.HospitalType,
+        isContinueCreate: true,
+    },
+    [ResidentMeta.ResidentState.GotoContinueCreateSchool]: {
+        nextState: ResidentMeta.ResidentState.CreateSchool,
+        buildingType: BuildingMeta.BuildingType.SchoolType,
+        isContinueCreate: true,
+    },
+    [ResidentMeta.ResidentState.GotoContinueCreatePowerPlant]: {
+        nextState: ResidentMeta.ResidentState.CreatePowerPlant,
+        buildingType: BuildingMeta.BuildingType.PowerPlantType,
+        isContinueCreate: true,
+    },
+    [ResidentMeta.ResidentState.GotoContinueCreateShop]: {
+        nextState: ResidentMeta.ResidentState.CreateShop,
+        buildingType: BuildingMeta.BuildingType.ShopType,
+        isContinueCreate: true,
+    },
+    [ResidentMeta.ResidentState.GotoContinueCreateFarmLand]: {
+        nextState: ResidentMeta.ResidentState.CreateFarmLand,
+        buildingType: BuildingMeta.BuildingType.FarmLandType,
+        isContinueCreate: true,
+    },
+    [ResidentMeta.ResidentState.GotoContinueCreatePasture]: {
+        nextState: ResidentMeta.ResidentState.CreatePasture,
+        buildingType: BuildingMeta.BuildingType.PastureType,
+        isContinueCreate: true,
+    },
+    [ResidentMeta.ResidentState.GotoContinueCreateOpera]: {
+        nextState: ResidentMeta.ResidentState.CreateOpera,
+        buildingType: BuildingMeta.BuildingType.OperaType,
+        isContinueCreate: true,
+    },
+    [ResidentMeta.ResidentState.GotoContinueCreatePoliceStation]: {
+        nextState: ResidentMeta.ResidentState.CreatePoliceStation,
+        buildingType: BuildingMeta.BuildingType.PoliceStationType,
+        isContinueCreate: true,
+    },
+    [ResidentMeta.ResidentState.GotoContinueCreateLab]: {
+        nextState: ResidentMeta.ResidentState.CreateLab,
+        buildingType: BuildingMeta.BuildingType.LabType,
+        isContinueCreate: true,
+    },
+    [ResidentMeta.ResidentState.GotoContinueCreateOffice]: {
+        nextState: ResidentMeta.ResidentState.CreateOffice,
+        buildingType: BuildingMeta.BuildingType.OfficeType,
+        isContinueCreate: true,
+    },
+    [ResidentMeta.ResidentState.GotoContinueCreateChildSchool]: {
+        nextState: ResidentMeta.ResidentState.CreateChildSchool,
+        buildingType: BuildingMeta.BuildingType.ChildSchoolType,
+        isContinueCreate: true,
+    },
+    [ResidentMeta.ResidentState.GotoContinueCreatePetShop]: {
+        nextState: ResidentMeta.ResidentState.CreatePetShop,
+        buildingType: BuildingMeta.BuildingType.PetShopType,
+        isContinueCreate: true,
+    },
+    [ResidentMeta.ResidentState.GotoContinueCreateFoodPool]: {
+        nextState: ResidentMeta.ResidentState.CreateFoodPool,
+        buildingType: BuildingMeta.BuildingType.FoodPoolType,
+        isContinueCreate: true,
+    },
+    [ResidentMeta.ResidentState.GotoContinueCreateWaterPool]: {
+        nextState: ResidentMeta.ResidentState.CreateWaterPool,
+        buildingType: BuildingMeta.BuildingType.WaterPoolType,
+        isContinueCreate: true,
+    },
+    [ResidentMeta.ResidentState.GotoContinueCreateSpeedBuilding]: {
+        nextState: ResidentMeta.ResidentState.CreateSpeedBuilding,
+        buildingType: BuildingMeta.BuildingType.SpeedBuildingType,
+        isContinueCreate: true,
+    },
 };
 // 建造----------------------------------------------------end
-
 
 // 小人的建筑的使用行为
 // 使用----------------------------------------------------start
@@ -202,6 +257,11 @@ ResidentMeta.ResidentUseBuildingMap = {
         nextState: ResidentMeta.ResidentState.Heating,
         buildingType: BuildingMeta.BuildingType.FireType,
         useType: 2,     //1 隐藏使用 2 周围使用 默认为1
+    },
+    [ResidentMeta.ResidentState.GotoSpeedBuildingForAddSpeed]: {
+        nextState: ResidentMeta.ResidentState.AddSpeed,
+        buildingType: BuildingMeta.BuildingType.SpeedBuildingType,
+        useType: 1,     //1 隐藏使用 2 周围使用 默认为1
     },
 }
 // 使用----------------------------------------------------end

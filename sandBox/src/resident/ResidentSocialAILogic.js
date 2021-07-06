@@ -51,7 +51,6 @@ export default class ResidentSocialAILogic extends Laya.Script {
 
     // 走到聊天点
     startJoinTalkingPoint(talkingModel) {
-        this.owner.residentLogicScript.setAnim(ResidentMeta.ResidentAnim.Walk);
         let pos = talkingModel.getTalkingPosInArea();
         this.owner.residentLogicScript.walkTo({
             x: pos.x,

@@ -59,7 +59,6 @@ export default class ResidentLookForLoverAILogic extends Laya.Script {
     startGoHomeAndWoman() {
         let myHome = BuildingMgr.getInstance().getBuildingById(this.getModel().getMyHomeId());
         if (myHome) {
-            this.owner.residentLogicScript.setAnim(ResidentMeta.ResidentAnim.Walk);
             this.owner.residentLogicScript.setStateAniVisible(true);
             this.owner.residentLogicScript.setStateAni("ani5");
             this.owner.residentLogicScript.walkTo({
@@ -79,7 +78,6 @@ export default class ResidentLookForLoverAILogic extends Laya.Script {
         let womanId = this.getModel().getLoverId();
         let woman = this.owner.residentLogicScript.residentMgrInstance.getResidentById(womanId);
         if (woman) {
-            this.owner.residentLogicScript.setAnim(ResidentMeta.ResidentAnim.Walk);
             this.owner.residentLogicScript.setStateAniVisible(true);
             this.owner.residentLogicScript.setStateAni("ani5");
             this.owner.residentLogicScript.walkTo({

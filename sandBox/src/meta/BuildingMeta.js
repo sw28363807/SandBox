@@ -33,6 +33,7 @@ BuildingMeta.BuildingType = {
     FoodPoolType: "",         //食物仓库
     WaterPoolType: "",         //水仓库
     FireType: "",              //火堆
+    SpeedBuildingType: "",    //健身房
 };
 
 BuildingMeta.obtainBuildingType();
@@ -298,5 +299,19 @@ BuildingMeta.BuildingDatas = {
         costStone: 0,
         heatingMaxTImes: 10,
         desc: "",
+    },
+    // 健身房
+    [String(BuildingMeta.BuildingType.SpeedBuildingType)]: {
+        prefab: ResourceMeta.SpeedBuildingPrefabPath,
+        preview: "source/building/speedBuilding.png",
+        realWidth: 250,
+        realHeight: 250,
+        createBuildingSpeed: 2000,
+        useBuildingTime: 5000,
+        createPriority: 2,
+        buildingName: "健身房",
+        costTree: 0,
+        costStone: 0,
+        desc: "可以健身增加居民移动速度",
     },
 };

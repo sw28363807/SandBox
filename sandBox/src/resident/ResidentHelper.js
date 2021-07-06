@@ -54,9 +54,22 @@ export default class ResidentHelper {
     static getAIGoToCreateBuildingInfo(x, y) {
         let buildings = BuildingMgr.getInstance().getBuildings();
         let statusSets = new Set([BuildingMeta.BuildingState.PreCreating, BuildingMeta.BuildingState.Creating]);
-        let buildingTypeSets = new Set([]);
-        for (const key in ResidentMeta.ResidentCreateBuildingAIMap) {
-            buildingTypeSets.add(key);
+        // let buildingTypeSets = new Set([]);
+        // for (const key in ResidentMeta.ResidentContinueCreateMap) {
+        //     let item = ResidentMeta.ResidentContinueCreateMap[key];
+        //     if (item.isContinueCreate) {
+        //         buildingTypeSets.add(key);
+        //     }
+        // }
+
+        let filter = function (buildingType) {
+            for (const key in ResidentMeta.ResidentContinueCreateMap) {
+                let item = ResidentMeta.ResidentContinueCreateMap[key];
+                if (item.isContinueCreate && buildingType == item.buildingType) {
+                    return key;
+                }
+            }
+            return null;
         }
         let array = [];
         for (const key in buildings) {
@@ -64,12 +77,12 @@ export default class ResidentHelper {
             let curDistance = new Laya.Point(building.x, building.y).distance(x, y);
             let model = building.buildingScript.getModel();
             let buildingType = model.getBuildingType();
+            let result = filter(buildingType);
             if (curDistance <= 1000 &&
-                statusSets.has(model.getBuildingState()) &&
-                buildingTypeSets.has(buildingType)) {
+                statusSets.has(model.getBuildingState()) && result) {
                 array.push({
                     building: building,
-                    state: ResidentMeta.ResidentCreateBuildingAIMap[buildingType],
+                    state: result,
                 });
             }
         }

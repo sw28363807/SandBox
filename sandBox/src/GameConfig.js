@@ -42,6 +42,7 @@ import ResidentDetailsPanel from "./panel/ResidentDetailsPanel"
 import RestaurantLogic from "./building/RestaurantLogic"
 import SchoolLogic from "./building/SchoolLogic"
 import ShopLogic from "./building/ShopLogic"
+import SpeedBuildingLogic from "./building/SpeedBuildingLogic"
 import TipLogic from "./helper/TipLogic"
 import WaterPoolLogic from "./building/WaterPoolLogic"
 
@@ -92,6 +93,7 @@ export default class GameConfig {
 		reg("building/RestaurantLogic.js",RestaurantLogic);
 		reg("building/SchoolLogic.js",SchoolLogic);
 		reg("building/ShopLogic.js",ShopLogic);
+		reg("building/SpeedBuildingLogic.js",SpeedBuildingLogic);
 		reg("helper/TipLogic.js",TipLogic);
 		reg("building/WaterPoolLogic.js",WaterPoolLogic);
     }

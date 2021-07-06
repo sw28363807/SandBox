@@ -20,8 +20,9 @@ export default class ResidentModel extends Laya.Script {
         this.myHomeId = 0;              //我的家的ID
         this.isInChildSchool = false;   //当前是不是处在幼儿园中
         this.ageExp = 0;
-        this.makeLoveSystemTime = 0;
+        this.makeLoveSystemTime = 0;    //生孩子间隔时间
         this.petType = 0;               //宠物ID
+        this.speedScale = 1;
 
 
         this.temperature = ResidentMeta.ResidentStandardTemperature;  //体温
@@ -101,7 +102,18 @@ export default class ResidentModel extends Laya.Script {
             if (data.petType) {
                 this.petType = data.petType;
             }
+            if (data.speedScale) {
+                this.speedScale = data.speedScale;
+            }
         }
+    }
+
+    setSpeedScale(scale) {
+        this.speedScale = scale;
+    }
+
+    getSpeedScale() {
+        return this.speedScale;
     }
 
     addTemperature(num) {

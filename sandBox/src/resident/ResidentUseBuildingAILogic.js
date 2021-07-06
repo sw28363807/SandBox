@@ -22,6 +22,8 @@ export default class ResidentUseBuildingAILogic extends Laya.Script {
         return this.model;
     }
 
+    // 用户自定义
+    // ============================================================================
     onUseBuildingCondition(aiData) {
         // 去治疗
         if (aiData == ResidentMeta.ResidentState.GotoTreat) {
@@ -77,32 +79,91 @@ export default class ResidentUseBuildingAILogic extends Laya.Script {
             }
             return false;
         }
-    }
-
-    //处理使用建筑
-    processUseBuildingAI(level1Results, level2Results) {
-        for (const key in ResidentMeta.ResidentUseBuildingMap) {
-            let item = ResidentMeta.ResidentUseBuildingMap[key];
-            this.useBuildingAIPriority = 2;
-            if (this.onUseBuildingCondition(key)) {
-                let cell = {
-                    func: Laya.Handler.create(this, function () {
-                        let building = this.onGetBuilding(key, item);
-                        if (building) {
-                            this.owner.residentLogicScript.refreshFSMState(key, building);
-                            this.owner.AILogicScript.ideaResult = true;
-                        }
-                    })
-                };
-                if (this.useBuildingAIPriority == 2) {
-                    level2Results.push(cell);
-                } else {
-                    level1Results.push(cell);
-                }
+        // 去健身房
+        else if (aiData == ResidentMeta.ResidentState.GotoSpeedBuildingForAddSpeed) {
+            if (this.getModel().getAge() < ResidentMeta.ResidentAdultAge) {
+                return false;
             }
+            if (this.getModel().getSpeedScale() > 1) {
+                return false;
+            }
+            return true;
         }
     }
 
+    onFinishUseBuilding(state) {
+        // 治疗完成
+        if (state == ResidentMeta.ResidentState.Treating) {
+            this.getModel().setSick(1);
+            this.owner.residentLogicScript.setBuffAniVisible(false);
+            this.owner.residentLogicScript.stopBuffAni();
+        }
+        // 学习完成
+        else if (state == ResidentMeta.ResidentState.Learning) {
+            this.getModel().addTeach(BuildingMeta.BuildingDatas[String(BuildingMeta.BuildingType.SchoolType)].addTeach);
+        }
+        // 在幼儿园学习完成
+        else if (state == ResidentMeta.ResidentState.ChildLearn) {
+            this.getModel().addAgeExp(Math.round(ResidentMeta.ResidentAgePeriod / 2), true);
+        }
+        // 在食物库吃饭完成
+        else if (state == ResidentMeta.ResidentState.EatFoodInFoodPool) {
+            let residentFood = this.model.getFood();
+            let curSaveFood = this.useBuilding.buildingScript.getCurSaveFood();
+            let needFood = Math.round(100 - residentFood);
+            let deltay = 0;
+            if (needFood >= curSaveFood) {
+                deltay = curSaveFood
+            } else {
+                deltay = needFood;
+            }
+            if (deltay > 40) {
+                deltay = 40;
+            }
+            this.useBuilding.buildingScript.addFoodToPool(-deltay);
+            this.getModel().addFood(deltay);
+        }
+        // 在水库喝水完成
+        else if (state == ResidentMeta.ResidentState.DrinkWaterInWaterPool) {
+            let residentWater = this.getModel().getWater();
+            let curSaveWater = this.useBuilding.buildingScript.getCurSaveWater();
+            let needWater = Math.round(100 - residentWater);
+            let deltay = 0;
+            if (needWater >= curSaveWater) {
+                deltay = curSaveWater
+            } else {
+                deltay = needWater;
+            }
+            if (deltay > 40) {
+                deltay = 40;
+            }
+            this.useBuilding.buildingScript.addWaterToPool(-deltay);
+            this.getModel().addWater(deltay);
+        }
+        // 宠物店领取宠物完成
+        else if (state == ResidentMeta.ResidentState.TakeOutPet) {
+            let first = this.useBuilding.buildingScript.popFirstPet();
+            this.getModel().setPetType(first);
+            this.owner.residentLogicScript.addPetByPetType(first);
+            this.useBuilding.buildingScript.getModel().setBuildingState(BuildingMeta.BuildingState.Noraml);
+        }
+        // 火堆烤火完成
+        else if (state == ResidentMeta.ResidentState.Heating) {
+            this.getModel().setTemperature(ResidentMeta.ResidentStandardTemperature);
+            let buildingScript = this.useBuilding.buildingScript;
+            buildingScript.removeResidentIdToBuildingForUse(this.getModel().getResidentId());
+            if (buildingScript.getHeatingTimes() >= buildingScript.getHeatingMaxTimes()) {
+                let num = buildingScript.getResidentIdToBuildingForUseNum();
+                if (num == 0) {
+                    BuildingMgr.getInstance().removeBuildingById(buildingScript.getModel().getBuildingId());
+                }
+            }
+        }
+        // 健身房锻炼完成
+        else if (state == ResidentMeta.ResidentState.AddSpeed) {
+            this.getModel().setSpeedScale(1.5);
+        }
+    }
 
     // 获取建筑
     onGetBuilding(aiData, data) {
@@ -181,6 +242,13 @@ export default class ResidentUseBuildingAILogic extends Laya.Script {
                 }, true);
             return building;
         }
+        // 去健身房
+        else if (aiData == ResidentMeta.ResidentState.GotoSpeedBuildingForAddSpeed) {
+            let building = BuildingMgr.getInstance().getAlltBuildingForCondition(this.owner.x,
+                this.owner.y, data.buildingType,
+                2000, [BuildingMeta.BuildingState.Noraml], null, true);
+            return building;
+        }
     }
 
 
@@ -195,72 +263,27 @@ export default class ResidentUseBuildingAILogic extends Laya.Script {
     }
 
 
+    // ====================================================================================
 
-    onFinishUseBuilding(state) {
-        // 治疗完成
-        if (state == ResidentMeta.ResidentState.Treating) {
-            this.getModel().setSick(1);
-            this.owner.residentLogicScript.setBuffAniVisible(false);
-            this.owner.residentLogicScript.stopBuffAni();
-        }
-        // 学习完成
-        else if (state == ResidentMeta.ResidentState.Learning) {
-            this.getModel().addTeach(BuildingMeta.BuildingDatas[String(BuildingMeta.BuildingType.SchoolType)].addTeach);
-        }
-        // 在幼儿园学习完成
-        else if (state == ResidentMeta.ResidentState.ChildLearn) {
-            this.getModel().addAgeExp(Math.round(ResidentMeta.ResidentAgePeriod / 2), true);
-        }
-        // 在食物库吃饭完成
-        else if (state == ResidentMeta.ResidentState.EatFoodInFoodPool) {
-            let residentFood = this.model.getFood();
-            let curSaveFood = this.useBuilding.buildingScript.getCurSaveFood();
-            let needFood = Math.round(100 - residentFood);
-            let deltay = 0;
-            if (needFood >= curSaveFood) {
-                deltay = curSaveFood
-            } else {
-                deltay = needFood;
-            }
-            if (deltay > 40) {
-                deltay = 40;
-            }
-            this.useBuilding.buildingScript.addFoodToPool(-deltay);
-            this.getModel().addFood(deltay);
-        }
-        // 在水库喝水完成
-        else if (state == ResidentMeta.ResidentState.DrinkWaterInWaterPool) {
-            let residentWater = this.getModel().getWater();
-            let curSaveWater = this.useBuilding.buildingScript.getCurSaveWater();
-            let needWater = Math.round(100 - residentWater);
-            let deltay = 0;
-            if (needWater >= curSaveWater) {
-                deltay = curSaveWater
-            } else {
-                deltay = needWater;
-            }
-            if (deltay > 40) {
-                deltay = 40;
-            }
-            this.useBuilding.buildingScript.addWaterToPool(-deltay);
-            this.getModel().addWater(deltay);
-        }
-        // 宠物店领取宠物完成
-        else if (state == ResidentMeta.ResidentState.TakeOutPet) {
-            let first = this.useBuilding.buildingScript.popFirstPet();
-            this.getModel().setPetType(first);
-            this.owner.residentLogicScript.addPetByPetType(first);
-            this.useBuilding.buildingScript.getModel().setBuildingState(BuildingMeta.BuildingState.Noraml);
-        }
-        // 火堆烤火完成
-        else if (state == ResidentMeta.ResidentState.Heating) {
-            this.getModel().setTemperature(ResidentMeta.ResidentStandardTemperature);
-            let buildingScript = this.useBuilding.buildingScript;
-            buildingScript.removeResidentIdToBuildingForUse(this.getModel().getResidentId());
-            if (buildingScript.getHeatingTimes() >= buildingScript.getHeatingMaxTimes()) {
-                let num = buildingScript.getResidentIdToBuildingForUseNum();
-                if (num == 0) {
-                    BuildingMgr.getInstance().removeBuildingById(buildingScript.getModel().getBuildingId());
+    //处理使用建筑
+    processUseBuildingAI(level1Results, level2Results) {
+        for (const key in ResidentMeta.ResidentUseBuildingMap) {
+            let item = ResidentMeta.ResidentUseBuildingMap[key];
+            this.useBuildingAIPriority = 2;
+            if (this.onUseBuildingCondition(key)) {
+                let cell = {
+                    func: Laya.Handler.create(this, function () {
+                        let building = this.onGetBuilding(key, item);
+                        if (building) {
+                            this.owner.residentLogicScript.refreshFSMState(key, building);
+                            this.owner.AILogicScript.ideaResult = true;
+                        }
+                    })
+                };
+                if (this.useBuildingAIPriority == 2) {
+                    level2Results.push(cell);
+                } else {
+                    level1Results.push(cell);
                 }
             }
         }
@@ -281,7 +304,6 @@ export default class ResidentUseBuildingAILogic extends Laya.Script {
 
     startGotoBuildingForUse(config) {
         let data = ResidentMeta.ResidentUseBuildingMap[this.getModel().getFSMState()];
-        this.owner.residentLogicScript.setAnim(ResidentMeta.ResidentAnim.Walk);
         this.useBuilding = config.building;
         let nextState = config.nextState;
         let destX = this.useBuilding.x + this.useBuilding.width / 2 - this.owner.width / 2;

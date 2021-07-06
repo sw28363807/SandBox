@@ -45,7 +45,6 @@ export default class ResidentHuntAILogic extends Laya.Script {
         this.hurtAnimal = param;
         let script = this.hurtAnimal.getComponent(AnimalLogic);
         this.hurtAnimalId = script.getModel().getAnimalId();
-        this.owner.residentLogicScript.setAnim(ResidentMeta.ResidentAnim.Walk);
         EventMgr.getInstance().registEvent(GameEvent.HUNT_FINISH,
             this.owner.residentLogicScript,
             this.owner.residentLogicScript.onDoWorkFinish);

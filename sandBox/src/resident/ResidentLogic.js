@@ -385,7 +385,6 @@ export default class ResidentLogic extends Laya.Script {
         }
         // 搜寻
         else if (canFindBlockForCreateBuilding) {
-            this.setAnim(ResidentMeta.ResidentAnim.Walk);
             this.owner.findBlockForCreateScript.findCreateBuildingTimes = 0;
             this.owner.findBlockForCreateScript.startFindCreateBuildingBlock(param);
         }
@@ -493,6 +492,8 @@ export default class ResidentLogic extends Laya.Script {
     }
 
     walkTo(config, handler) {
+        this.owner.residentLogicScript.setAnim(ResidentMeta.ResidentAnim.Walk);
+        config.speed = this.getModel().getSpeedScale() * ResidentMeta.ResidentMoveSpeed;
         this.getMoveScript().gotoDest(config, handler);
         if (this.getPet()) {
             let copyConfig = {
