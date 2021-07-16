@@ -37,8 +37,12 @@ ResidentMeta.ResidentState = {
     Die: "",                  //死亡
     GotoContinueCreateHospital: "", //跑去建造医院
     CreateHospital: "",     //建造医院
+    GotoContinueCreateVillageCom: "", //跑去建造农学堂
+    CreateVillageCom: "",     //建造农学堂
     GotoContinueCreateSpeedBuilding: "", //跑去建造健身房
     CreateSpeedBuilding: "",     //建造健身房
+    GotoContinueCreateToolBuilding: "", //跑去建造工具工坊
+    CreateToolBuilding: "",     //建造工具工坊
     GotoTreat: "",          //跑去治疗
     Treating: "",           //正在治疗
     GotoSpeedBuildingForAddSpeed: "",   //跑去健身房
@@ -63,6 +67,10 @@ ResidentMeta.ResidentState = {
     CreatePoliceStation: "",     //建造警察局
     GotoContinueCreateLab: "", //跑去建造科学实验室
     CreateLab: "",     //建造科学实验室
+    GotoContinueCreateBank: "", //跑去建造银行
+    CreateBank: "",     //建造银行
+    GotoContinueCreateBloodBuilding: "", //跑去建造养生堂
+    CreateBloodBuilding: "",     //建造养生堂
     GotoContinueCreateOffice: "", //跑去建造写字楼
     CreateOffice: "",     //建造写字楼
     RandomWalk: "",     //随机走一个位置
@@ -217,6 +225,26 @@ ResidentMeta.ResidentContinueCreateMap = {
         buildingType: BuildingMeta.BuildingType.SpeedBuildingType,
         isContinueCreate: true,
     },
+    [ResidentMeta.ResidentState.GotoContinueCreateToolBuilding]: {
+        nextState: ResidentMeta.ResidentState.CreateToolBuilding,
+        buildingType: BuildingMeta.BuildingType.ToolBuildingType,
+        isContinueCreate: true,
+    },
+    [ResidentMeta.ResidentState.GotoContinueCreateVillageCom]: {
+        nextState: ResidentMeta.ResidentState.CreateVillageCom,
+        buildingType: BuildingMeta.BuildingType.VilllageComType,
+        isContinueCreate: true,
+    },
+    [ResidentMeta.ResidentState.GotoContinueCreateBank]: {
+        nextState: ResidentMeta.ResidentState.CreateBank,
+        buildingType: BuildingMeta.BuildingType.BankType,
+        isContinueCreate: true,
+    },
+    [ResidentMeta.ResidentState.GotoContinueCreateBloodBuilding]: {
+        nextState: ResidentMeta.ResidentState.CreateBloodBuilding,
+        buildingType: BuildingMeta.BuildingType.BloodBuildingType,
+        isContinueCreate: true,
+    },
 };
 // 建造----------------------------------------------------end
 
@@ -299,7 +327,7 @@ ResidentMeta.ResidentAnim = {
 ResidentMeta.CutDownTreeTime = 10000;
 
 // 收集石头的时间
-ResidentMeta.CollectStoneTime = 10000;
+ResidentMeta.CollectStoneTime = 20*1000;
 
 // 人物移动速度
 ResidentMeta.ResidentMoveSpeed = 4;

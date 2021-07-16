@@ -10,6 +10,8 @@ import MapScrollView from "./helper/MapScrollView"
 import ResourcePanel from "./panel/ResourcePanel"
 import CommandPanel from "./panel/CommandPanel"
 import AnimalLogic from "./animal/AnimalLogic"
+import Banklogic from "./building/Banklogic"
+import BloodBuildingLogic from "./building/BloodBuildingLogic"
 import ChildSchoolLogic from "./building/ChildSchoolLogic"
 import FarmLandLogic from "./building/FarmLandLogic"
 import FireLogic from "./building/FireLogic"
@@ -44,6 +46,8 @@ import SchoolLogic from "./building/SchoolLogic"
 import ShopLogic from "./building/ShopLogic"
 import SpeedBuildingLogic from "./building/SpeedBuildingLogic"
 import TipLogic from "./helper/TipLogic"
+import ToolBuildingLogic from "./building/ToolBuildingLogic"
+import VillageComLogic from "./building/VillageComLogic"
 import WaterPoolLogic from "./building/WaterPoolLogic"
 
 export default class GameConfig {
@@ -61,6 +65,8 @@ export default class GameConfig {
 		reg("panel/ResourcePanel.js",ResourcePanel);
 		reg("panel/CommandPanel.js",CommandPanel);
 		reg("animal/AnimalLogic.js",AnimalLogic);
+		reg("building/Banklogic.js",Banklogic);
+		reg("building/BloodBuildingLogic.js",BloodBuildingLogic);
 		reg("building/ChildSchoolLogic.js",ChildSchoolLogic);
 		reg("building/FarmLandLogic.js",FarmLandLogic);
 		reg("building/FireLogic.js",FireLogic);
@@ -95,6 +101,8 @@ export default class GameConfig {
 		reg("building/ShopLogic.js",ShopLogic);
 		reg("building/SpeedBuildingLogic.js",SpeedBuildingLogic);
 		reg("helper/TipLogic.js",TipLogic);
+		reg("building/ToolBuildingLogic.js",ToolBuildingLogic);
+		reg("building/VillageComLogic.js",VillageComLogic);
 		reg("building/WaterPoolLogic.js",WaterPoolLogic);
     }
 }

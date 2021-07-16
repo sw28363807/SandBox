@@ -33,7 +33,11 @@ BuildingMeta.BuildingType = {
     FoodPoolType: "",         //食物仓库
     WaterPoolType: "",         //水仓库
     FireType: "",              //火堆
-    SpeedBuildingType: "",    //健身房
+    SpeedBuildingType: "",    //健身房,
+    ToolBuildingType: "",    //工具工坊,
+    VilllageComType: "",       //采集课堂,
+    BankType: "",               //银行,
+    BloodBuildingType: "",      //养生堂
 };
 
 BuildingMeta.obtainBuildingType();
@@ -313,5 +317,61 @@ BuildingMeta.BuildingDatas = {
         costTree: 0,
         costStone: 0,
         desc: "可以健身增加居民移动速度",
+    },
+    // 工具工坊
+    [String(BuildingMeta.BuildingType.ToolBuildingType)]: {
+        prefab: ResourceMeta.ToolBuildingPrefabPath,
+        preview: "source/building/ToolBuilding.png",
+        realWidth: 250,
+        realHeight: 250,
+        createBuildingSpeed: 2000,
+        useBuildingTime: 5000,
+        createPriority: 2,
+        buildingName: "工具工坊",
+        costTree: 0,
+        costStone: 0,
+        desc: "可以升级工具加快资源收集速度",
+    },
+    // 农学堂
+    [String(BuildingMeta.BuildingType.VilllageComType)]: {
+        prefab: ResourceMeta.VillageComPrefabPath,
+        preview: "source/building/villageCom.png",
+        realWidth: 300,
+        realHeight: 300,
+        createBuildingSpeed: 2000,
+        useBuildingTime: 5000,
+        createPriority: 2,
+        buildingName: "农学堂",
+        costTree: 0,
+        costStone: 0,
+        desc: "可以增加采集食物水源速度",
+    },
+    // 银行
+    [String(BuildingMeta.BuildingType.BankType)]: {
+        prefab: ResourceMeta.BankPrefabPath,
+        preview: "source/building/bank.png",
+        realWidth: 350,
+        realHeight: 350,
+        createBuildingSpeed: 2000,
+        useBuildingTime: 5000,
+        createPriority: 2,
+        buildingName: "银行",
+        costTree: 0,
+        costStone: 0,
+        desc: "可以各种资源之间互相兑换",
+    },
+    // 养生堂
+    [String(BuildingMeta.BuildingType.BloodBuildingType)]: {
+        prefab: ResourceMeta.BloodBuildingPrefabPath,
+        preview: "source/building/blood_building.png",
+        realWidth: 350,
+        realHeight: 350,
+        createBuildingSpeed: 2000,
+        useBuildingTime: 5000,
+        createPriority: 2,
+        buildingName: "养生堂",
+        costTree: 0,
+        costStone: 0,
+        desc: "可以恢复少量生命值",
     },
 };

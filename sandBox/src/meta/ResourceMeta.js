@@ -33,6 +33,10 @@ ResourceMeta.FoodPoolPrefabPath = "prefab/FoodPool.prefab";    //食物仓库pre
 ResourceMeta.WaterPoolPrefabPath = "prefab/WaterPool.prefab";    //水仓库prefab路径
 ResourceMeta.FirePrefabPath = "prefab/Fire.prefab";    //火堆prefab路径
 ResourceMeta.SpeedBuildingPrefabPath = "prefab/SpeedBuilding.prefab";    //健身房prefab路径
+ResourceMeta.ToolBuildingPrefabPath = "prefab/ToolBuilding.prefab";    //工具工坊prefab路径
+ResourceMeta.VillageComPrefabPath = "prefab/VillageCom.prefab";    //采集课堂prefab路径
+ResourceMeta.BankPrefabPath = "prefab/Bank.prefab";    //银行prefab路径
+ResourceMeta.BloodBuildingPrefabPath = "prefab/BloodBuilding.prefab";    //养生堂prefab路径
 
 // 图集map
 ResourceMeta.ResourceMap = [
@@ -156,5 +160,20 @@ ResourceMeta.ResourceMap = [
         type: Laya.Loader.PREFAB,
         url: ResourceMeta.SpeedBuildingPrefabPath
     },
-    
+    {
+        type: Laya.Loader.PREFAB,
+        url: ResourceMeta.ToolBuildingPrefabPath
+    },
+    {
+        type: Laya.Loader.PREFAB,
+        url: ResourceMeta.VillageComPrefabPath
+    },
+    {
+        type: Laya.Loader.PREFAB,
+        url: ResourceMeta.BankPrefabPath
+    },
+    {
+        type: Laya.Loader.PREFAB,
+        url: ResourceMeta.BloodBuildingPrefabPath
+    },
 ];
