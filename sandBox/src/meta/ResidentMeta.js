@@ -53,6 +53,8 @@ ResidentMeta.ResidentState = {
     Learning: "",           //正在学习
     GotoContinueCreatePowerPlant: "", //跑去建造发电厂
     CreatePowerPlant: "",     //建造发电厂
+    GotoContinueCreateOil: "", //跑去建造炼油厂
+    CreateOil: "",     //建造炼油厂
     GotoContinueCreateShop: "", //跑去建造商店
     CreateShop: "",     //建造商店
     GotoContinueCreateFarmLand: "", //跑去建造农田
@@ -163,6 +165,11 @@ ResidentMeta.ResidentContinueCreateMap = {
     [ResidentMeta.ResidentState.GotoContinueCreatePowerPlant]: {
         nextState: ResidentMeta.ResidentState.CreatePowerPlant,
         buildingType: BuildingMeta.BuildingType.PowerPlantType,
+        isContinueCreate: true,
+    },
+    [ResidentMeta.ResidentState.GotoContinueCreateOil]: {
+        nextState: ResidentMeta.ResidentState.CreateOil,
+        buildingType: BuildingMeta.BuildingType.OilType,
         isContinueCreate: true,
     },
     [ResidentMeta.ResidentState.GotoContinueCreateShop]: {

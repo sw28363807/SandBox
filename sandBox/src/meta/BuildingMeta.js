@@ -38,6 +38,7 @@ BuildingMeta.BuildingType = {
     VilllageComType: "",       //采集课堂,
     BankType: "",               //银行,
     BloodBuildingType: "",      //养生堂
+    OilType: "",      //炼油厂
 };
 
 BuildingMeta.obtainBuildingType();
@@ -373,5 +374,19 @@ BuildingMeta.BuildingDatas = {
         costTree: 0,
         costStone: 0,
         desc: "可以恢复少量生命值",
+    },
+    // 炼油厂
+    [String(BuildingMeta.BuildingType.OilType)]: {
+        prefab: ResourceMeta.OilPrefabPath,
+        preview: "source/building/oil.png",
+        realWidth: 500,
+        realHeight: 500,
+        createBuildingSpeed: 2000,
+        useBuildingTime: 5000,
+        createPriority: 2,
+        buildingName: "炼油厂",
+        costTree: 0,
+        costStone: 0,
+        desc: "可以提炼开采发展石油工业",
     },
 };

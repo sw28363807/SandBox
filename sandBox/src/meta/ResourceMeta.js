@@ -37,6 +37,7 @@ ResourceMeta.ToolBuildingPrefabPath = "prefab/ToolBuilding.prefab";    //工具�
 ResourceMeta.VillageComPrefabPath = "prefab/VillageCom.prefab";    //采集课堂prefab路径
 ResourceMeta.BankPrefabPath = "prefab/Bank.prefab";    //银行prefab路径
 ResourceMeta.BloodBuildingPrefabPath = "prefab/BloodBuilding.prefab";    //养生堂prefab路径
+ResourceMeta.OilPrefabPath = "prefab/Oil.prefab";    //炼油厂prefab路径
 
 // 图集map
 ResourceMeta.ResourceMap = [
@@ -175,5 +176,9 @@ ResourceMeta.ResourceMap = [
     {
         type: Laya.Loader.PREFAB,
         url: ResourceMeta.BloodBuildingPrefabPath
+    },
+    {
+        type: Laya.Loader.PREFAB,
+        url: ResourceMeta.OilPrefabPath
     },
 ];

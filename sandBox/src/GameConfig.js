@@ -21,6 +21,7 @@ import HomeLogic from "./building/HomeLogic"
 import HospitalLogic from "./building/HospitalLogic"
 import LabLogic from "./building/LabLogic"
 import OfficeLogic from "./building/OfficeLogic"
+import OilLogic from "./building/OilLogic"
 import OperaLogic from "./building/OperaLogic"
 import PastureLogic from "./building/PastureLogic"
 import PetLogic from "./animal/PetLogic"
@@ -76,6 +77,7 @@ export default class GameConfig {
 		reg("building/HospitalLogic.js",HospitalLogic);
 		reg("building/LabLogic.js",LabLogic);
 		reg("building/OfficeLogic.js",OfficeLogic);
+		reg("building/OilLogic.js",OilLogic);
 		reg("building/OperaLogic.js",OperaLogic);
 		reg("building/PastureLogic.js",PastureLogic);
 		reg("animal/PetLogic.js",PetLogic);
