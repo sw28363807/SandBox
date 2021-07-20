@@ -39,6 +39,7 @@ BuildingMeta.BuildingType = {
     BankType: "",               //银行,
     BloodBuildingType: "",      //养生堂
     OilType: "",      //炼油厂
+    FactoryType: "",  //工厂
 };
 
 BuildingMeta.obtainBuildingType();
@@ -388,5 +389,19 @@ BuildingMeta.BuildingDatas = {
         costTree: 0,
         costStone: 0,
         desc: "可以提炼开采发展石油工业",
+    },
+    // 工厂
+    [String(BuildingMeta.BuildingType.FactoryType)]: {
+        prefab: ResourceMeta.FactoryPrefabPath,
+        preview: "source/building/factory.png",
+        realWidth: 500,
+        realHeight: 500,
+        createBuildingSpeed: 2000,
+        useBuildingTime: 5000,
+        createPriority: 2,
+        buildingName: "工厂",
+        costTree: 0,
+        costStone: 0,
+        desc: "可以制造各种工业产品的地方",
     },
 };

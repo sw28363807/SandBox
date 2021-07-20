@@ -13,6 +13,7 @@ import AnimalLogic from "./animal/AnimalLogic"
 import Banklogic from "./building/Banklogic"
 import BloodBuildingLogic from "./building/BloodBuildingLogic"
 import ChildSchoolLogic from "./building/ChildSchoolLogic"
+import FactoryLogic from "./building/FactoryLogic"
 import FarmLandLogic from "./building/FarmLandLogic"
 import FireLogic from "./building/FireLogic"
 import FoodLogic from "./source/FoodLogic"
@@ -69,6 +70,7 @@ export default class GameConfig {
 		reg("building/Banklogic.js",Banklogic);
 		reg("building/BloodBuildingLogic.js",BloodBuildingLogic);
 		reg("building/ChildSchoolLogic.js",ChildSchoolLogic);
+		reg("building/FactoryLogic.js",FactoryLogic);
 		reg("building/FarmLandLogic.js",FarmLandLogic);
 		reg("building/FireLogic.js",FireLogic);
 		reg("source/FoodLogic.js",FoodLogic);
