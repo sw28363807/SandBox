@@ -3,7 +3,7 @@ D source
 D source/building
 P 44C1809F bank.png
 P B80D66C6 blood_building.png
-P 598600CA building1_1.png
+P F6B88FAF building1_1.png
 P 0B8E0B05 center2.png
 P 9920A0A0 child_school.png
 P 63081062 factory.png
@@ -14,7 +14,8 @@ P AA04A559 mask.png
 P C5F26416 mask2.png
 P 3819BECE office.png
 P F2DF8C14 oil.png
-P F7BE8EE6 pasture.png
+P 95646BC3 pasture.png
+P 55B3CCC2 pasture_big.png
 P 535961C3 pet_shop.png
 P CA7007E2 police.png
 P 87E13359 power_plant.png
@@ -109,6 +110,22 @@ P 4E592413 drinkwater.png
 P 2BBE0A53 eat.png
 P 305D5048 fight.png
 P 6F763E80 heart.png
+P 65FA56AB ji_01.png
+P 51DCC79F ji_02.png
+P 876D494E ji_03.png
+P 539E4F51 ji_04.png
+P EE165EF8 ji_05.png
+P 22E9547D ji_06.png
+P AADABB4E ji_07.png
+P DA155282 ji_08.png
+P 960C0132 ji_09.png
+P BCF1EFA2 ji_10.png
+P 035D622A ji_11.png
+P 9C9EC83D ji_12.png
+P 4D334E2D ji_13.png
+P 3BDB2DF4 ji_14.png
+P 83DBFBDE ji_15.png
+P EB9DAB09 ji_16.png
 P A8E062E6 man_anger.png
 P B58E08CF man_enjoy1.png
 P C3581EB4 man_enjoy2.png
@@ -191,6 +208,12 @@ P 686A2639 yang_11.png
 P BE0F8169 yang_12.png
 D source/scene
 D source/ui
+P 226DE563 64x64_blue.png
+P C0E22AB0 64x64_lime.png
+P 36401646 64x64_orange.png
+P F7B7E4FA 64x64_purple.png
+P BAC40AEE 64x64_red.png
+P BE781E65 64x64_yellow.png
 P F4F08B52 btn1.png
 P 9BE5D38F slider.png
 P A508BEED slider2.png

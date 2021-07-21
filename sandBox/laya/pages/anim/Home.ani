@@ -55,7 +55,7 @@
                     "keyframes":{
                         "y":[
                             {
-                                "value":200,
+                                "value":350,
                                 "tweenMethod":"linearNone",
                                 "tween":true,
                                 "target":3,
@@ -72,7 +72,7 @@
                             }],
                         "x":[
                             {
-                                "value":100,
+                                "value":175,
                                 "tweenMethod":"linearNone",
                                 "tween":true,
                                 "target":3,
@@ -180,7 +180,7 @@
                             }],
                         "pivotY":[
                             {
-                                "value":200,
+                                "value":350,
                                 "tweenMethod":"linearNone",
                                 "tween":true,
                                 "target":3,
@@ -197,7 +197,7 @@
                             }],
                         "pivotX":[
                             {
-                                "value":100,
+                                "value":175,
                                 "tweenMethod":"linearNone",
                                 "tween":true,
                                 "target":3,
@@ -235,7 +235,7 @@
                     "keyframes":{
                         "y":[
                             {
-                                "value":200,
+                                "value":350,
                                 "tweenMethod":"linearNone",
                                 "tween":true,
                                 "target":3,
@@ -252,7 +252,7 @@
                             }],
                         "x":[
                             {
-                                "value":100,
+                                "value":175,
                                 "tweenMethod":"linearNone",
                                 "tween":true,
                                 "target":3,
@@ -360,7 +360,7 @@
                             }],
                         "pivotY":[
                             {
-                                "value":200,
+                                "value":350,
                                 "tweenMethod":"linearNone",
                                 "tween":true,
                                 "target":3,
@@ -377,7 +377,7 @@
                             }],
                         "pivotX":[
                             {
-                                "value":100,
+                                "value":175,
                                 "tweenMethod":"linearNone",
                                 "tween":true,
                                 "target":3,

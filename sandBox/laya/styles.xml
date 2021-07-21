@@ -10,4 +10,8 @@
    <item name="source/ui/under4.png" type="Sprite" compress="0" pack="0" quality="80" props="sizeGrid=41,41,47,44" picType="0" scale="0"/>
    <item name="source/ui/under5.png" type="Sprite" compress="0" pack="0" quality="80" props="sizeGrid=60,46,75,56" picType="0" scale="0"/>
    <item name="source/ui/under6.png" type="Sprite" compress="0" pack="0" quality="80" props="sizeGrid=80,126,68,126" picType="0" scale="0"/>
+   <item name="source/ui/64x64_orange.png" type="Sprite" compress="0" pack="0" quality="80" props="sizeGrid=30,31,31,27" picType="0" scale="0"/>
+   <item name="source/ui/64x64_blue.png" type="Sprite" compress="0" pack="0" quality="80" props="sizeGrid=30,31,31,27" picType="0" scale="0"/>
+   <item name="source/ui/64x64_purple.png" type="Sprite" compress="0" pack="0" quality="80" props="sizeGrid=30,31,31,27" picType="0" scale="0"/>
+   <item name="source/ui/64x64_lime.png" type="Sprite" compress="0" pack="0" quality="80" props="sizeGrid=30,31,31,27" picType="0" scale="0"/>
 </res>

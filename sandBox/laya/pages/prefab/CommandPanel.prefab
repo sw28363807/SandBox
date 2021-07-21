@@ -1,7 +1,7 @@
 {
     "x":0,
     "type":"View",
-    "selectedBox":126,
+    "selectedBox":140,
     "selecteID":141,
     "searchKey":"View,CommandPanel",
     "props":{"y":0,"x":0,"width":375,"presetID":1,"preset":"laya/pages/prefab/CommandPanel.prefab","name":"CommandPanel","isPresetRoot":true,"hitTestPrior":false,"height":500},
@@ -31,7 +31,7 @@
                     "x":30,
                     "type":"Image",
                     "searchKey":"Image",
-                    "props":{"y":0,"x":-45,"width":420,"skin":"source/ui/under4.png","presetID":13,"preset":"laya/pages/prefab/CommandPanel.prefab","height":500},
+                    "props":{"y":0,"x":-45,"width":420,"skin":"source/ui/64x64_blue.png","presetID":13,"preset":"laya/pages/prefab/CommandPanel.prefab","height":500},
                     "nodeParent":140,
                     "label":"Image(CommandPanel)",
                     "isDirectory":false,

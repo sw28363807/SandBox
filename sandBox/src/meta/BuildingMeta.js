@@ -67,8 +67,8 @@ BuildingMeta.BuildingDatas = {
     [String(BuildingMeta.BuildingType.HomeType)]: {
         prefab: ResourceMeta.HomePrefabPath,
         preview: "",
-        realWidth: 200,
-        realHeight: 200,
+        realWidth: 350,
+        realHeight: 350,
         createBuildingSpeed: 2000,
         useBuildingTime: 5000,
         createPriority: 1,
@@ -166,15 +166,15 @@ BuildingMeta.BuildingDatas = {
     // 牧场
     [String(BuildingMeta.BuildingType.PastureType)]: {
         prefab: ResourceMeta.PasturePrefabPath,
-        preview: "source/building/pasture.png",
-        realWidth: 128,
-        realHeight: 128,
+        preview: "source/building/pasture_big.png",
+        realWidth: 500,
+        realHeight: 300,
         createBuildingSpeed: 2000,
         useBuildingTime: 5000,
         createPriority: 2,
         buildingName: "牧场",
-        costTree: 6,
-        costStone: 6,
+        costTree: 0,
+        costStone: 0,
         desc: "可以饲养动物增加食物来源",
     },
     // 歌剧院
