@@ -44,25 +44,25 @@ export default class ResidentAILogic extends Laya.Script {
         this.level1Results = [];
         this.level2Results = [];
         // =================================正式================start
-        // // // 找恋人
-        // this.owner.lookForLoverScript.processLookForLover(this.level1Results, this.level2Results);
-        // // // 打架
-        // this.owner.fightScript.processFight(this.level1Results, this.level2Results);
-        // // 跑去打猎
-        // this.owner.huntScript.processHunt(this.level1Results, this.level2Results);
-        // // 跑去使用建筑
-        // this.owner.useBuildingScript.processUseBuildingAI(this.level1Results, this.level2Results);
-        // // // 社交
-        // this.owner.socialScript.processSocial(this.level1Results, this.level2Results);
-        // // 自动搜索建筑去建造AI
-        // this.owner.findBlockForCreateScript.processResidentFindCreateBuildingBlockAI(this.level1Results, this.level2Results);
-        // // 赶着去溜达
-        // this.owner.randomWalkScript.processRandomWalk(this.level1Results, this.level2Results);
-        // // 跑去做某些事情
-        // this.owner.doSomeThingScript.processDoSomeThing(this.level1Results, this.level2Results);
+        // 找恋人
+        this.owner.lookForLoverScript.processLookForLover(this.level1Results, this.level2Results);
+        // // 打架
+        this.owner.fightScript.processFight(this.level1Results, this.level2Results);
+        // 跑去打猎
+        this.owner.huntScript.processHunt(this.level1Results, this.level2Results);
+        // 跑去使用建筑
+        this.owner.useBuildingScript.processUseBuildingAI(this.level1Results, this.level2Results);
+        // 社交
+        this.owner.socialScript.processSocial(this.level1Results, this.level2Results);
+        // 自动搜索建筑去建造AI
+        this.owner.findBlockForCreateScript.processResidentFindCreateBuildingBlockAI(this.level1Results, this.level2Results);
+        // 赶着去溜达
+        this.owner.randomWalkScript.processRandomWalk(this.level1Results, this.level2Results);
+        // 跑去做某些事情
+        this.owner.doSomeThingScript.processDoSomeThing(this.level1Results, this.level2Results);
         // 跑去建造
         this.owner.createBuildingScript.processCreateBuilding(this.level1Results, this.level2Results);
-        // // 跑去运送
+        // 跑去运送
         this.owner.sendScript.processSend(this.level1Results, this.level2Results);
         // =================================正式================end
     }
