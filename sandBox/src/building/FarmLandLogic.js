@@ -1,4 +1,7 @@
+import MoveLogic from "../helper/MoveLogic";
+import RandomMgr from "../helper/RandomMgr";
 import BuildingMeta from "../meta/BuildingMeta";
+import ResourceMeta from "../meta/ResourceMeta";
 import BuildingBaseLogic from "./BuildingBaseLogic";
 export default class FarmLandLogic extends BuildingBaseLogic {
 
@@ -61,5 +64,52 @@ export default class FarmLandLogic extends BuildingBaseLogic {
     onCreateBuildingFinish() {
         this.foodPoolText.visible = true;
         Laya.timer.loop(1000, this, this.onAddFood);
+        for (let index = 0; index < 3; index++) {
+            this.addAnimal();
+        }
+    }
+
+    addAnimal() {
+        let prefabDef = Laya.loader.getRes(ResourceMeta.Livestock3PrefabPath);
+        let animal = prefabDef.create();
+        this.owner.addChild(animal);
+        animal.moveScript = animal.getComponent(MoveLogic);
+        animal.ani = animal.getChildByName("ani");
+
+        let owner = animal;
+        let leftFunc = function () {
+            owner.ani.play(0, true, "walk_left");
+        };
+        let rightFunc = function () {
+            owner.ani.play(0, true, "walk_right");
+        };
+        let upFunc = function () {
+            owner.ani.play(0, true, "walk_up");
+        };
+        let downFunc = function () {
+            owner.ani.play(0, true, "walk_down");
+        };
+        animal.moveScript.setCallbackFunc({
+            leftFunc: leftFunc,
+            rightFunc: rightFunc,
+            upFunc: upFunc,
+            downFunc: downFunc,
+        });
+        let centerX = this.owner.width/2;
+        let centerY = this.owner.height/2;
+        animal.x = centerX;
+        animal.y = centerY;
+        this.startWalk(animal);
+    }
+
+    startWalk(animal) {
+        let dst = RandomMgr.randomPointInRect(0, 0, this.owner.width - animal.width, this.owner.height - animal.height);
+        animal.moveScript.gotoDest({
+            x: dst.x,
+            y: dst.y,
+            speed: 2,
+        }, Laya.Handler.create(this, function () {
+            this.startWalk(animal);
+        }));
     }
 }

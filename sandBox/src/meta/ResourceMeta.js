@@ -9,6 +9,7 @@ ResourceMeta.AnimalPrefabPath = "prefab/Animal.prefab";   //动物的prefab路�
 ResourceMeta.PetPrefabPath = "prefab/Pet.prefab";   //宠物的prefab路径
 ResourceMeta.Livestock1PrefabPath = "prefab/Livestock1.prefab";   //家畜1的prefab路径
 ResourceMeta.Livestock2PrefabPath = "prefab/Livestock2.prefab";   //家畜2的prefab路径
+ResourceMeta.Livestock3PrefabPath = "prefab/Livestock3.prefab";   //家畜3的prefab路径
 ResourceMeta.DragRenderPrefabPath = "prefab/DragRender.prefab";   //拖拽物
 ResourceMeta.TipPrefabPath = "prefab/Tip.prefab";   //Tips路径
 ResourceMeta.CommonItemPrefabPath = "prefab/CommonItem.prefab";   //菜单选项
@@ -95,6 +96,10 @@ ResourceMeta.ResourceMap = [
     {
         type: Laya.Loader.PREFAB,
         url: ResourceMeta.Livestock2PrefabPath
+    },
+    {
+        type: Laya.Loader.PREFAB,
+        url: ResourceMeta.Livestock3PrefabPath
     },
     {
         type: Laya.Loader.PREFAB,
