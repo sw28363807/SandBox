@@ -75,7 +75,7 @@ BuildingMeta.BuildingDatas = {
         buildingName: "家",
         costTree: 0,
         costStone: 0,
-        desc: "居住的地方",
+        desc: "居住的地方"
     },
     // 医院
     [String(BuildingMeta.BuildingType.HospitalType)]: {

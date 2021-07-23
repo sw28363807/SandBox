@@ -1,12 +1,12 @@
 {
     "x":0,
     "type":"Scene",
-    "selectedBox":10,
-    "selecteID":204,
+    "selectedBox":2,
+    "selecteID":207,
     "searchKey":"Scene",
     "props":{"width":1336,"sceneColor":"#000000","height":750},
     "nodeParent":-1,
-    "maxID":207,
+    "maxID":208,
     "label":"Scene",
     "isOpen":true,
     "isDirectory":true,
@@ -38,27 +38,25 @@
             "props":{"y":0,"x":0,"width":1336,"name":"ScrollView","height":750,"bgColor":"#f8f3f7"},
             "nodeParent":2,
             "label":"ScrollView",
-            "isOpen":true,
+            "isOpen":false,
             "isDirectory":true,
             "isAniNode":true,
             "hasChild":true,
             "compId":9,
             "child":[
                 {
-                    "x":30,
                     "type":"Box",
                     "searchKey":"Box,container",
                     "props":{"y":0,"x":0,"width":15000,"name":"container","height":15000,"bgColor":"#e72c29"},
                     "nodeParent":9,
                     "label":"container",
-                    "isOpen":true,
+                    "isOpen":false,
                     "isDirectory":true,
                     "isAniNode":true,
                     "hasChild":true,
                     "compId":10,
                     "child":[
                         {
-                            "x":45,
                             "type":"Box",
                             "searchKey":"Box",
                             "props":{"presetID":1,"preset":"laya/pages/prefab/Season.prefab"},
@@ -115,7 +113,6 @@
                             "$HIDDEN":false
                         },
                         {
-                            "x":45,
                             "type":"Box",
                             "searchKey":"Box",
                             "props":{"y":7614,"x":7794,"presetID":1,"preset":"laya/pages/prefab/Tree.prefab"},
@@ -158,7 +155,6 @@
                                 }]
                         },
                         {
-                            "x":45,
                             "type":"Box",
                             "selectedBox":90,
                             "selecteID":97,
@@ -213,7 +209,6 @@
                                 }]
                         },
                         {
-                            "x":45,
                             "type":"Box",
                             "selectedBox":90,
                             "selecteID":97,
@@ -268,7 +263,6 @@
                                 }]
                         },
                         {
-                            "x":45,
                             "type":"Box",
                             "selectedBox":35,
                             "selecteID":38,
@@ -478,7 +472,6 @@
                                 }]
                         },
                         {
-                            "x":45,
                             "type":"Box",
                             "selectedBox":35,
                             "selecteID":59,
@@ -688,7 +681,6 @@
                                 }]
                         },
                         {
-                            "x":45,
                             "type":"Box",
                             "selectedBox":99,
                             "selecteID":101,
@@ -769,7 +761,6 @@
                                 }]
                         },
                         {
-                            "x":45,
                             "type":"Box",
                             "selectedBox":99,
                             "selecteID":108,
@@ -890,7 +881,6 @@
                                 }]
                         },
                         {
-                            "x":45,
                             "type":"Box",
                             "searchKey":"Box",
                             "props":{"y":7539,"x":7303,"presetID":1,"preset":"laya/pages/prefab/AnimalTrigger.prefab"},
@@ -920,7 +910,6 @@
                                 }]
                         },
                         {
-                            "x":45,
                             "type":"Box",
                             "searchKey":"Box",
                             "props":{"y":0,"x":0,"width":15000,"height":100,"bgColor":"#71db50"},
@@ -934,7 +923,6 @@
                                 ]
                         },
                         {
-                            "x":45,
                             "type":"Box",
                             "searchKey":"Box",
                             "props":{"y":14900,"x":0,"width":15000,"height":100,"bgColor":"#71db50"},
@@ -948,7 +936,6 @@
                                 ]
                         },
                         {
-                            "x":45,
                             "type":"Box",
                             "searchKey":"Box",
                             "props":{"y":0,"x":0,"width":100,"height":15000,"bgColor":"#71db50"},
@@ -963,7 +950,6 @@
                                 ]
                         },
                         {
-                            "x":45,
                             "type":"Box",
                             "searchKey":"Box",
                             "props":{"y":0,"x":14900,"width":100,"height":15000,"bgColor":"#71db50"},
@@ -978,7 +964,6 @@
                         }]
                 },
                 {
-                    "x":30,
                     "type":"Script",
                     "switchAble":true,
                     "source":"src/helper/MapScrollView.js",

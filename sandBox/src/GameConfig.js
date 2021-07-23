@@ -21,12 +21,12 @@ import FoodPoolLogic from "./building/FoodPoolLogic"
 import HomeLogic from "./building/HomeLogic"
 import HospitalLogic from "./building/HospitalLogic"
 import LabLogic from "./building/LabLogic"
+import MoveLogic from "./helper/MoveLogic"
 import OfficeLogic from "./building/OfficeLogic"
 import OilLogic from "./building/OilLogic"
 import OperaLogic from "./building/OperaLogic"
 import PastureLogic from "./building/PastureLogic"
 import PetLogic from "./animal/PetLogic"
-import MoveLogic from "./helper/MoveLogic"
 import PetShopLogic from "./building/PetShopLogic"
 import PoliceStationLogic from "./building/PoliceStationLogic"
 import PowerPlantLogic from "./building/PowerPlantLogic"
@@ -78,12 +78,12 @@ export default class GameConfig {
 		reg("building/HomeLogic.js",HomeLogic);
 		reg("building/HospitalLogic.js",HospitalLogic);
 		reg("building/LabLogic.js",LabLogic);
+		reg("helper/MoveLogic.js",MoveLogic);
 		reg("building/OfficeLogic.js",OfficeLogic);
 		reg("building/OilLogic.js",OilLogic);
 		reg("building/OperaLogic.js",OperaLogic);
 		reg("building/PastureLogic.js",PastureLogic);
 		reg("animal/PetLogic.js",PetLogic);
-		reg("helper/MoveLogic.js",MoveLogic);
 		reg("building/PetShopLogic.js",PetShopLogic);
 		reg("building/PoliceStationLogic.js",PoliceStationLogic);
 		reg("building/PowerPlantLogic.js",PowerPlantLogic);

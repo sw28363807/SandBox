@@ -17,6 +17,7 @@ export default class MoveLogic extends Laya.Script {
         this.rightFunc = config.rightFunc;
         this.upFunc = config.upFunc;
         this.downFunc = config.downFunc;
+        this.tickFunc = config.tickFunc;
     }
 
     onStart() {
@@ -75,6 +76,7 @@ export default class MoveLogic extends Laya.Script {
     }
 
     // 行走到某个位置
+    //speed forceFirstY
     gotoDest(info, handler) {
         this.finishHandler = handler;
         if (info.speed) {

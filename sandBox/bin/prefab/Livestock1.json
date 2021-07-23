@@ -1,0 +1,1 @@
+{"type":"Box","props":{"y":0,"x":0,"width":64,"presetID":1,"name":"Livestock","isPresetRoot":true,"height":64},"compId":207,"child":[{"type":"Animation","props":{"source":"anim/Pet2.ani","scaleY":2,"scaleX":2,"presetID":2,"name":"ani"},"compId":208},{"type":"Script","props":{"presetID":3,"runtime":"helper/MoveLogic.js"},"compId":209}],"loadList":["anim/Pet2.ani"],"loadList3D":[]}

@@ -2,7 +2,6 @@ import EventMgr from "../helper/EventMgr";
 import Utils from "../helper/Utils";
 import BuildingMeta from "../meta/BuildingMeta";
 import GameEvent from "../meta/GameEvent";
-import GameModel from "../model/GameModel";
 
 export default class BuildingBaseLogic extends Laya.Script {
 

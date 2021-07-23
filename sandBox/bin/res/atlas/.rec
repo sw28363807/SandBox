@@ -15,7 +15,7 @@ P C5F26416 mask2.png
 P 3819BECE office.png
 P F2DF8C14 oil.png
 P 95646BC3 pasture.png
-P 55B3CCC2 pasture_big.png
+P 6E105225 pasture_big.png
 P 535961C3 pet_shop.png
 P CA7007E2 police.png
 P 87E13359 power_plant.png
@@ -206,6 +206,22 @@ P A938CDDA yang_09.png
 P 1B377F13 yang_10.png
 P 686A2639 yang_11.png
 P BE0F8169 yang_12.png
+P 12C8F99A zhu_01.png
+P EA847FDC zhu_02.png
+P 99B53CC4 zhu_03.png
+P F605B127 zhu_04.png
+P D3DBD97A zhu_05.png
+P 30E5CE24 zhu_06.png
+P B1F3F760 zhu_07.png
+P 316BD1BF zhu_08.png
+P 2A13B822 zhu_09.png
+P 98099FF1 zhu_10.png
+P 9215ACF1 zhu_11.png
+P EDFA686E zhu_12.png
+P D3C5DCF5 zhu_13.png
+P 49C41DF4 zhu_14.png
+P 6D95D3AC zhu_15.png
+P 1F89DF0A zhu_16.png
 D source/scene
 D source/ui
 P 226DE563 64x64_blue.png

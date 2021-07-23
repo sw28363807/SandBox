@@ -2,7 +2,7 @@
     "x":0,
     "type":"Box",
     "selectedBox":184,
-    "selecteID":185,
+    "selecteID":187,
     "searchKey":"Box,Pet",
     "props":{"y":0,"x":0,"width":100,"presetID":1,"preset":"laya/pages/prefab/Pet.prefab","name":"Pet","isPresetRoot":true,"height":100},
     "nodeParent":-1,
