@@ -100,7 +100,7 @@ export default class ResidentFindBlockForCreateAILogic extends Laya.Script {
         if (this.findCreateBuildingTimes < ResidentMeta.ResidentFindPathTimes) {
             let dstP = RandomMgr.randomByArea2(this.owner.x,
                 this.owner.y,
-                100,
+                300,
                 GameContext.mapWidth, GameContext.mapHeight, GameMeta.MapSideOff, GameMeta.MapSideOff);
             this.owner.residentLogicScript.walkTo({ x: dstP.x, y: dstP.y }, Laya.Handler.create(this, function () {
                 this.findCreateBuildingTimes++;
