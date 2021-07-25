@@ -25,16 +25,22 @@ export default class ResidentCreateBuildingAILogic extends Laya.Script {
 
     processCreateBuilding(level1Results, level2Results) {
         if (this.getModel().getAge() >= ResidentMeta.ResidentAdultAge) {
+            let AIInfo = ResidentHelper.getAIGoToCreateBuildingInfo(this.owner.x, this.owner.y);
             let createCell = {
                 func: Laya.Handler.create(this, function () {
-                    let AIInfo = ResidentHelper.getAIGoToCreateBuildingInfo(this.owner.x, this.owner.y);
                     if (AIInfo) {
                         this.owner.residentLogicScript.refreshFSMState(AIInfo.state, AIInfo.building);
                         this.owner.AILogicScript.ideaResult = true;
                     }
                 }),
             };
-            level2Results.push(createCell);
+            if (AIInfo) {
+                if (AIInfo.meta && AIInfo.meta.createPriority == 1) {
+                    level1Results.push(createCell);
+                } else {
+                    level2Results.push(createCell);   
+                }   
+            }
         }
     }
 

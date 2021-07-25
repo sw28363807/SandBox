@@ -54,14 +54,6 @@ export default class ResidentHelper {
     static getAIGoToCreateBuildingInfo(x, y) {
         let buildings = BuildingMgr.getInstance().getBuildings();
         let statusSets = new Set([BuildingMeta.BuildingState.PreCreating, BuildingMeta.BuildingState.Creating]);
-        // let buildingTypeSets = new Set([]);
-        // for (const key in ResidentMeta.ResidentContinueCreateMap) {
-        //     let item = ResidentMeta.ResidentContinueCreateMap[key];
-        //     if (item.isContinueCreate) {
-        //         buildingTypeSets.add(key);
-        //     }
-        // }
-
         let filter = function (buildingType) {
             for (const key in ResidentMeta.ResidentContinueCreateMap) {
                 let item = ResidentMeta.ResidentContinueCreateMap[key];
@@ -83,6 +75,7 @@ export default class ResidentHelper {
                 array.push({
                     building: building,
                     state: result,
+                    meta: BuildingMeta.BuildingDatas[buildingType],
                 });
             }
         }

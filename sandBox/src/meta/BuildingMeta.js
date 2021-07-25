@@ -81,8 +81,8 @@ BuildingMeta.BuildingDatas = {
     [String(BuildingMeta.BuildingType.HospitalType)]: {
         prefab: ResourceMeta.HospitalPrefabPath,
         preview: "source/building/hospital1_1.png",
-        realWidth: 300,
-        realHeight: 300,
+        realWidth: 400,
+        realHeight: 400,
         createBuildingSpeed: 2000,
         useBuildingTime: 5000,
         createPriority: 2,
@@ -110,8 +110,8 @@ BuildingMeta.BuildingDatas = {
     [String(BuildingMeta.BuildingType.ChildSchoolType)]: {
         prefab: ResourceMeta.ChildSchoolPrefabPath,
         preview: "source/building/child_school.png",
-        realWidth: 200,
-        realHeight: 200,
+        realWidth: 350,
+        realHeight: 350,
         createBuildingSpeed: 2000,
         useBuildingTime: 5000,
         createPriority: 2,
