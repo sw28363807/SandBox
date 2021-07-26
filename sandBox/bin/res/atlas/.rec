@@ -8,7 +8,7 @@ P 0B8E0B05 center2.png
 P AD0159FE child_school.png
 P 63081062 factory.png
 P A7FF6896 farmland.png
-P F91885C2 FoodPool.png
+P 14815FA5 FoodPool.png
 P 1CF80236 hospital1_1.png
 P AA04A559 mask.png
 P C5F26416 mask2.png
@@ -26,7 +26,7 @@ P E20D9AA5 shop_1.png
 P 69D3B37B speedBuilding.png
 P 5F4E7C62 ToolBuilding.png
 P 2FF27650 villageCom.png
-P 4B9D65B7 WaterPool.png
+P A4FE1240 WaterPool.png
 D source/landscape
 P C28F2A84 aaa.png
 P C54733E9 animal1.png

@@ -265,8 +265,8 @@ BuildingMeta.BuildingDatas = {
     [String(BuildingMeta.BuildingType.FoodPoolType)]: {
         prefab: ResourceMeta.FoodPoolPrefabPath,
         preview: "source/building/FoodPool.png",
-        realWidth: 100,
-        realHeight: 100,
+        realWidth: 300,
+        realHeight: 300,
         createBuildingSpeed: 2000,
         useBuildingTime: 5000,
         createPriority: 1,
@@ -280,8 +280,8 @@ BuildingMeta.BuildingDatas = {
     [String(BuildingMeta.BuildingType.WaterPoolType)]: {
         prefab: ResourceMeta.WaterPoolPrefabPath,
         preview: "source/building/WaterPool.png",
-        realWidth: 100,
-        realHeight: 100,
+        realWidth: 300,
+        realHeight: 300,
         createBuildingSpeed: 2000,
         useBuildingTime: 5000,
         createPriority: 1,
