@@ -14,8 +14,8 @@ export default class FoodTriggerMgr extends Laya.Script {
     // 添加触发器
     pushFoodTrigger(trigger) {
         let script = trigger.getComponent(FoodTrigger);
-        if (script && trigger.foodTriggerKey != "") {
-            this.triggers[trigger.foodTriggerKey] = trigger
+        if (script && script.foodTriggerKey != "") {
+            this.triggers[script.foodTriggerKey] = trigger;
         }
     }
 

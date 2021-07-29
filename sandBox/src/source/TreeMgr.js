@@ -1,3 +1,4 @@
+import RandomMgr from "../helper/RandomMgr";
 import Treelogic from "./Treelogic";
 
 export default class TreeMgr extends Laya.Script {
@@ -35,18 +36,16 @@ export default class TreeMgr extends Laya.Script {
     }
 
     // 寻找最近的一颗树
-    getNearstTree(x, y) {
-        let distance = 99999999;
-        let ret = null;
+    getNearstTree(x, y, distance) {
+        let ret = [];
         for (let key in this.trees) {
             let tree = this.trees[key];
             let curDistance = new Laya.Point(tree.x, tree.y).distance(x, y);
             if (curDistance < distance) {
-                distance = curDistance;
-                ret = tree;
+                ret.push(tree);
             }
         }
-        return ret;
+        return RandomMgr.randomACellInArray(ret);
     }
 
     onEnable() {

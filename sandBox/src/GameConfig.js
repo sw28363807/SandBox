@@ -5,11 +5,11 @@ import Treelogic from "./source/Treelogic"
 import StoneLogic from "./source/StoneLogic"
 import FoodTrigger from "./source/FoodTrigger"
 import Waterlogic from "./source/Waterlogic"
-import AnimalTrigger from "./animal/AnimalTrigger"
 import MapScrollView from "./helper/MapScrollView"
 import ResourcePanel from "./panel/ResourcePanel"
 import CommandPanel from "./panel/CommandPanel"
 import AnimalLogic from "./animal/AnimalLogic"
+import AnimalTrigger from "./animal/AnimalTrigger"
 import Banklogic from "./building/Banklogic"
 import BloodBuildingLogic from "./building/BloodBuildingLogic"
 import ChildSchoolLogic from "./building/ChildSchoolLogic"
@@ -62,11 +62,11 @@ export default class GameConfig {
 		reg("source/StoneLogic.js",StoneLogic);
 		reg("source/FoodTrigger.js",FoodTrigger);
 		reg("source/Waterlogic.js",Waterlogic);
-		reg("animal/AnimalTrigger.js",AnimalTrigger);
 		reg("helper/MapScrollView.js",MapScrollView);
 		reg("panel/ResourcePanel.js",ResourcePanel);
 		reg("panel/CommandPanel.js",CommandPanel);
 		reg("animal/AnimalLogic.js",AnimalLogic);
+		reg("animal/AnimalTrigger.js",AnimalTrigger);
 		reg("building/Banklogic.js",Banklogic);
 		reg("building/BloodBuildingLogic.js",BloodBuildingLogic);
 		reg("building/ChildSchoolLogic.js",ChildSchoolLogic);

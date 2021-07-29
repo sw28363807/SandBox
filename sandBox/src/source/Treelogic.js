@@ -17,7 +17,7 @@ export default class Treelogic extends Laya.Script {
     }
 
     onStart() {
-        this.ani.play(0, true, "idle1");
+        // this.ani.play(0, true, "idle1");
     }
 
     setTreeID(id) {
