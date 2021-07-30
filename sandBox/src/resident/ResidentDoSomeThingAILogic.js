@@ -107,7 +107,7 @@ export default class ResidentDoSomeThingAILogic extends Laya.Script {
         }
         // 砍树
         else if (key == ResidentMeta.ResidentState.FindTree) {
-            let nearstTree = TreeMgr.getInstance().getNearstTree(this.owner.x, this.owner.y, 2000);
+            let nearstTree = TreeMgr.getInstance().getRandomTree(this.owner.x, this.owner.y, 2000);
             if (!nearstTree) {
                 return null;
             }

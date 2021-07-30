@@ -36,7 +36,7 @@ export default class TreeMgr extends Laya.Script {
     }
 
     // 寻找最近的一颗树
-    getNearstTree(x, y, distance) {
+    getRandomTree(x, y, distance) {
         let ret = [];
         for (let key in this.trees) {
             let tree = this.trees[key];
