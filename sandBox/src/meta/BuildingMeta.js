@@ -161,6 +161,7 @@ BuildingMeta.BuildingDatas = {
         costTree: 0,
         costStone: 0,
         maxSave: 3000,
+        addFood: 100,
         desc: "可以种植增加食物",
     },
     // 牧场

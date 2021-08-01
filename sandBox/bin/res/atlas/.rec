@@ -241,13 +241,14 @@ P 6D95D3AC zhu_15.png
 P 1F89DF0A zhu_16.png
 D source/scene
 D source/ui
-P 226DE563 64x64_blue.png
-P C0E22AB0 64x64_lime.png
-P 36401646 64x64_orange.png
-P F7B7E4FA 64x64_purple.png
-P BAC40AEE 64x64_red.png
-P BE781E65 64x64_yellow.png
+P C56898C2 64x64_blue.png
+P CB2C5FE3 64x64_lime.png
+P BA1CFB04 64x64_orange.png
+P F7698E26 64x64_purple.png
+P 6018D6FA 64x64_red.png
+P 8F1C5614 64x64_yellow.png
 P F4F08B52 btn1.png
+P E98671D5 gold.png
 P 9BE5D38F slider.png
 P A508BEED slider2.png
 P 41CAA2E4 sliderBg.png

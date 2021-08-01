@@ -138,8 +138,14 @@ export default class ResidentSendAILogic extends Laya.Script {
                 sendInfo.send = null;
                 info.addFood = addFoodNum;
             } else if (sendInfo.sendType == 1) {
+                let meta = BuildingMeta.BuildingDatas[BuildingMeta.BuildingType.FarmLandType];
+                let farmScript = sendInfo.send.buildingScript;
+                let foodPoolValue = farmScript.getCurSaveFood();
+                let value = Math.min(foodPoolValue, meta.addFood);
+                farmScript.addFoodToPool(-value);
                 sendInfo.send = null;
-                info.addFood = 100;
+                info.addFood = value;
+                
             }
         }
         // 水源增加值
@@ -218,7 +224,7 @@ export default class ResidentSendAILogic extends Laya.Script {
                     AIType: AIType,
                     send: sendObject,
                     dest: nearstBuilding,
-                    sendType: sendType,
+                    sendType: sendType
                 };
             }
             return null;
