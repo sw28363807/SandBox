@@ -171,14 +171,14 @@ export default class ResidentSendAILogic extends Laya.Script {
     canReachSendCondition(AIType) {
         // 食物判断
         if (AIType == ResidentMeta.ResidentState.FindFoodForSend) {
-            if (this.getModel().getAge() < ResidentMeta.ResidentAdultAge) {
+            if (!this.getModel().isAdult()) {
                 return false;
             }
             return true;
         }
         // 水源判断
         else if (AIType == ResidentMeta.ResidentState.FindWaterForSend) {
-            if (this.getModel().getAge() < ResidentMeta.ResidentAdultAge) {
+            if (!this.getModel().isAdult()) {
                 return false;
             }
             return true;

@@ -53,12 +53,12 @@ export default class ResidentFindBlockForCreateAILogic extends Laya.Script {
         if (findType == ResidentMeta.ResidentState.FindBlockForCreateHome) {
             this.findBlockAIPriority = 1;
             return RandomMgr.randomYes() && this.getModel().getMyHomeId() == 0 && this.getModel().getSex() == 1 &&
-                this.getModel().getAge() >= ResidentMeta.ResidentAdultAge &&
+                this.getModel().isAdult() &&
                 BuildingMgr.getInstance().canCreateBuildingForResource(BuildingMeta.BuildingType.HomeType);
         }
         // 建造火堆
         else if (findType == ResidentMeta.ResidentState.FindBlockForCreateFire) {
-            if (this.getModel().getAge() < ResidentMeta.ResidentAdultAge) {
+            if (!this.getModel().isAdult()) {
                 return false;
             }
             if (!BuildingMgr.getInstance().canCreateBuildingForResource(BuildingMeta.BuildingType.FireType)) {

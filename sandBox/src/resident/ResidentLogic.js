@@ -224,7 +224,7 @@ export default class ResidentLogic extends Laya.Script {
         this.owner.x = this.model.getX();
         this.owner.y = this.model.getY();
 
-        if (this.model.getAge() < ResidentMeta.ResidentAdultAge) {
+        if (!this.model.isAdult()) {
             this.ani = this.babyAni;
             if (this.model.getSex() == 1) {
                 this.womanAni.destroy(true);

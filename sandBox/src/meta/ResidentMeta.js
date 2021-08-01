@@ -102,6 +102,8 @@ ResidentMeta.ResidentState = {
     TakeOutPet: "",                  //领取宠物
     GotoFireForHeating: "",     //赶去火堆取暖
     Heating: "",                  //取暖
+    GoToOfficeForWork: "",        //去工作的路上
+    Working: "",                   //工作
 };
 ResidentMeta.obtainResidentState();
 
@@ -305,6 +307,11 @@ ResidentMeta.ResidentUseBuildingMap = {
         buildingType: BuildingMeta.BuildingType.SpeedBuildingType,
         useType: 1,     //1 隐藏使用 2 周围使用 默认为1
     },
+    [ResidentMeta.ResidentState.GoToOfficeForWork]: {
+        nextState: ResidentMeta.ResidentState.Working,
+        buildingType: BuildingMeta.BuildingType.OfficeType,
+        useType: 1,     //1 隐藏使用 2 周围使用 默认为1
+    },
 }
 // 使用----------------------------------------------------end
 
@@ -341,7 +348,7 @@ ResidentMeta.ResidentAnim = {
 ResidentMeta.CutDownTreeTime = 10000;
 
 // 收集石头的时间
-ResidentMeta.CollectStoneTime = 20*1000;
+ResidentMeta.CollectStoneTime = 20 * 1000;
 
 // 人物移动速度
 ResidentMeta.ResidentMoveSpeed = 4;

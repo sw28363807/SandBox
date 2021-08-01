@@ -42,7 +42,7 @@ export default class ResidentUseBuildingAILogic extends Laya.Script {
         }
         // 去幼儿园
         else if (aiData == ResidentMeta.ResidentState.GotoChildSchoolForLearn) {
-            if (this.getModel().getAge() < ResidentMeta.ResidentAdultAge) {
+            if (!this.getModel().isAdult()) {
                 return true;
             }
             return false;
@@ -81,13 +81,20 @@ export default class ResidentUseBuildingAILogic extends Laya.Script {
         }
         // 去健身房
         else if (aiData == ResidentMeta.ResidentState.GotoSpeedBuildingForAddSpeed) {
-            if (this.getModel().getAge() < ResidentMeta.ResidentAdultAge) {
+            if (!this.getModel().isAdult()) {
                 return false;
             }
             if (this.getModel().getSpeedScale() > 1) {
                 return false;
             }
             return true;
+        }
+        // 去工作
+        else if (aiData == ResidentMeta.ResidentState.GoToOfficeForWork) {
+            if (this.getModel().isAdult()) {
+                return true;
+            }
+            return false;
         }
     }
 

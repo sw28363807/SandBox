@@ -448,4 +448,9 @@ export default class ResidentModel extends Laya.Script {
     getY() {
         return this.y;
     }
+
+    // 是够已经成年
+    isAdult() {
+        return this.age >= ResidentMeta.ResidentAdultAge
+    }
 }

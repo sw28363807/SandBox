@@ -2,7 +2,6 @@ import BuildingMgr from "../building/BuildingMgr";
 import RandomMgr from "../helper/RandomMgr";
 import BuildingMeta from "../meta/BuildingMeta";
 import ResidentMeta from "../meta/ResidentMeta";
-import ResourceMeta from "../meta/ResourceMeta";
 import FoodTriggerMgr from "../source/FoodTriggerMgr";
 import StoneMgr from "../source/StoneMgr";
 import TreeMgr from "../source/TreeMgr";

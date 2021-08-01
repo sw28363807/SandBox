@@ -35,7 +35,7 @@ export default class ResidentHuntAILogic extends Laya.Script {
                 }
             })
         };
-        if (RandomMgr.randomYes() && this.getModel().getAge() >= ResidentMeta.ResidentAdultAge) {
+        if (RandomMgr.randomYes() && this.getModel().isAdult()) {
             level2Results.push(cell);
         }
     }

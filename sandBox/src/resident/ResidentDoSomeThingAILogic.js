@@ -55,7 +55,7 @@ export default class ResidentDoSomeThingAILogic extends Laya.Script {
         // 砍树
         else if (key == ResidentMeta.ResidentState.FindTree) {
             this.doSomeThingAIPriority = 2;
-            if (RandomMgr.randomYes() && this.getModel().getAge() >= ResidentMeta.ResidentAdultAge) {
+            if (RandomMgr.randomYes() && this.getModel().isAdult()) {
                 return true;
             }
             return false;
@@ -63,7 +63,7 @@ export default class ResidentDoSomeThingAILogic extends Laya.Script {
         // 收集石头
         else if (key == ResidentMeta.ResidentState.FindStone) {
             this.doSomeThingAIPriority = 2;
-            if (RandomMgr.randomYes() && this.getModel().getAge() >= ResidentMeta.ResidentAdultAge) {
+            if (RandomMgr.randomYes() && this.getModel().isAdult()) {
                 return true;
             }
             return false;

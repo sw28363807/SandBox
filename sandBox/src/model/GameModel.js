@@ -57,7 +57,7 @@ export default class GameModel extends Laya.Script {
         let childNum = 0;
         for (let key in this.residentModels) {
             let item = this.residentModels[key];
-            if (item.getAge() < ResidentMeta.ResidentAdultAge) {
+            if (!item.isAdult()) {
                 childNum++;
             }
         }
