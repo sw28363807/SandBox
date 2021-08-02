@@ -1,6 +1,7 @@
 import BuildingMgr from "../building/BuildingMgr";
 import BuildingMeta from "../meta/BuildingMeta";
 import ResidentMeta from "../meta/ResidentMeta";
+import GameModel from "../model/GameModel";
 
 export default class ResidentUseBuildingAILogic extends Laya.Script {
 
@@ -170,6 +171,10 @@ export default class ResidentUseBuildingAILogic extends Laya.Script {
         else if (state == ResidentMeta.ResidentState.AddSpeed) {
             this.getModel().setSpeedScale(1.5);
         }
+        // 工作完成
+        else if (state == ResidentMeta.ResidentState.Working) {
+            GameModel.getInstance().addGoldNum(BuildingMeta.BuildingDatas[BuildingMeta.BuildingType.OfficeType].addGold);
+        }
     }
 
     // 获取建筑
@@ -256,6 +261,14 @@ export default class ResidentUseBuildingAILogic extends Laya.Script {
                 2000, [BuildingMeta.BuildingState.Noraml], null, true);
             return building;
         }
+        // 去office
+        else if (aiData == ResidentMeta.ResidentState.GoToOfficeForWork) {
+            let building = BuildingMgr.getInstance().getAlltBuildingForCondition(this.owner.x,
+                this.owner.y, data.buildingType,
+                2000, [BuildingMeta.BuildingState.Noraml], null, true);
+            return building;
+        }
+        return null;
     }
 
 

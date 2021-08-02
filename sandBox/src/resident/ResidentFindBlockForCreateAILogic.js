@@ -64,9 +64,10 @@ export default class ResidentFindBlockForCreateAILogic extends Laya.Script {
             if (!BuildingMgr.getInstance().canCreateBuildingForResource(BuildingMeta.BuildingType.FireType)) {
                 return false;
             }
-            if (this.getModel().getTemperature() >= ResidentMeta.ResidentStandardTemperature - 3) {
+            if (this.getModel().getTemperature() > ResidentMeta.ResidentStandardTemperature - 2) {
                 return false;
             }
+            this.findBlockAIPriority = 1;
             let buildings = BuildingMgr.getInstance().getAlltBuildingForCondition(this.owner.x,
                 this.owner.y, BuildingMeta.BuildingType.FireType,
                 2000, [BuildingMeta.BuildingState.Noraml], null, true);

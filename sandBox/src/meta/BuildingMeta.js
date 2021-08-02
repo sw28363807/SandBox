@@ -224,14 +224,15 @@ BuildingMeta.BuildingDatas = {
     [String(BuildingMeta.BuildingType.OfficeType)]: {
         prefab: ResourceMeta.OfficePrefabPath,
         preview: "source/building/office.png",
-        realWidth: 300,
-        realHeight: 300,
+        realWidth: 400,
+        realHeight: 400,
         createBuildingSpeed: 2000,
         useBuildingTime: 5000,
         createPriority: 1,
         buildingName: "写字楼",
         costTree: 0,
         costStone: 0,
+        addGold: 1,
         desc: "居民收入来源",
     },
     // 餐厅
