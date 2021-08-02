@@ -1,4 +1,5 @@
 import BuildingMgr from "../building/BuildingMgr";
+import RandomMgr from "../helper/RandomMgr";
 import BuildingMeta from "../meta/BuildingMeta";
 import ResidentMeta from "../meta/ResidentMeta";
 import GameModel from "../model/GameModel";
@@ -72,9 +73,6 @@ export default class ResidentUseBuildingAILogic extends Laya.Script {
         // 去火堆周围
         else if (aiData == ResidentMeta.ResidentState.GotoFireForHeating) {
             if (this.getModel().getTemperature() < ResidentMeta.ResidentDangerTemperature) {
-                return true;
-            }
-            if (this.getModel().getTemperature() <= 32) {
                 this.useBuildingAIPriority = 1;
                 return true;
             }

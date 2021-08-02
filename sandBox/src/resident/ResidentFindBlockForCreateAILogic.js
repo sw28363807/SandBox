@@ -68,10 +68,10 @@ export default class ResidentFindBlockForCreateAILogic extends Laya.Script {
                 return false;
             }
             this.findBlockAIPriority = 1;
-            let buildings = BuildingMgr.getInstance().getAlltBuildingForCondition(this.owner.x,
+            let building = BuildingMgr.getInstance().getAlltBuildingForCondition(this.owner.x,
                 this.owner.y, BuildingMeta.BuildingType.FireType,
-                2000, [BuildingMeta.BuildingState.Noraml], null, true);
-            if (!buildings) {
+                1000, [BuildingMeta.BuildingState.Noraml], null, true);
+            if (building) {
                 return false;
             }
             return true;
