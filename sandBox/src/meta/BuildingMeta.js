@@ -184,8 +184,8 @@ BuildingMeta.BuildingDatas = {
     [String(BuildingMeta.BuildingType.OperaType)]: {
         prefab: ResourceMeta.OperaPrefabPath,
         preview: "source/building/center2.png",
-        realWidth: 500,
-        realHeight: 500,
+        realWidth: 400,
+        realHeight: 400,
         createBuildingSpeed: 2000,
         useBuildingTime: 5000,
         createPriority: 1,
