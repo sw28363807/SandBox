@@ -30,11 +30,11 @@ export default class ResourcePanel extends Laya.Script {
         this.treeLabel.text = String(GameModel.getInstance().getTreeNum());
         this.stoneLabel.text = String(GameModel.getInstance().getStoneNum());
         this.goldLabel.text = String(GameModel.getInstance().getGoldNum());
+        let residentNum = GameModel.getInstance().getAllResidentNum();
         let season = GameModel.getInstance().getGameSeason();
         let day = GameModel.getInstance().getGameDay();
         let hour = GameModel.getInstance().getGameHour();
-        this.timeLabel.text = String(this.seasonTextTable[season]) + "  " + String((day).zeroPad(10)) + "日" + String((hour).zeroPad(10)) + "时";
-        
+        this.timeLabel.text = String(this.seasonTextTable[season]) + "  " + String((day).zeroPad(10)) + "日" + String((hour).zeroPad(10)) + "时, 人口: "+ String(residentNum);
     }
 
     onTick() {

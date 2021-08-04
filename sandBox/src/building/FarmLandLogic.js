@@ -2,6 +2,7 @@ import MoveLogic from "../helper/MoveLogic";
 import RandomMgr from "../helper/RandomMgr";
 import BuildingMeta from "../meta/BuildingMeta";
 import ResourceMeta from "../meta/ResourceMeta";
+import GameModel from "../model/GameModel";
 import BuildingBaseLogic from "./BuildingBaseLogic";
 export default class FarmLandLogic extends BuildingBaseLogic {
 
@@ -26,7 +27,10 @@ export default class FarmLandLogic extends BuildingBaseLogic {
     }
 
     onAddFood() {
-        this.addFoodToPool(1);
+        let season = GameModel.getInstance().getGameSeason();
+        if (season == 1 || season == 2) {
+            this.addFoodToPool(1);
+        }
     }
 
     getCurSaveFood() {

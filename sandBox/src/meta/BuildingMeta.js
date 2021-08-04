@@ -162,7 +162,7 @@ BuildingMeta.BuildingDatas = {
         costStone: 0,
         maxSave: 3000,
         addFood: 100,
-        desc: "可以种植增加食物",
+        desc: "可以种植增加食物，夏天秋天可以收获哦~",
     },
     // 牧场
     [String(BuildingMeta.BuildingType.PastureType)]: {
@@ -176,7 +176,9 @@ BuildingMeta.BuildingDatas = {
         buildingName: "牧场",
         costTree: 0,
         costStone: 0,
-        desc: "可以饲养动物增加食物来源",
+        maxSave: 3000,
+        addFood: 100,
+        desc: "可以养殖动物，春天冬天可以收获哦~",
     },
     // 歌剧院
     [String(BuildingMeta.BuildingType.OperaType)]: {
