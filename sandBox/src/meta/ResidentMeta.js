@@ -402,6 +402,6 @@ ResidentMeta.ResidentCollectSendTime = 2000;         //打包寄送物品的时�
 ResidentMeta.ResidentDrinkWaterAddValue = 50;         //喝水增加值
 ResidentMeta.ResidentSaveWaterAddValue = 100;         //储藏水的增加值
 ResidentMeta.ResidentStandardTemperature = 36;         //体温标准值
-ResidentMeta.ResidentDangerTemperature = 35;         //体温危险值
+ResidentMeta.ResidentDangerTemperature = 30;         //体温危险值
 ResidentMeta.ResidentReduceTemperatureValue = 1;      //体温减少值
 ResidentMeta.ResidentReduceTemperatureTickStep = 50;      //体温减少步长

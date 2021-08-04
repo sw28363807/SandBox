@@ -39,6 +39,7 @@ export default class BuildingMgr extends Laya.Script {
         config.parent.addChild(building);
         let script = building.getComponent(BuildingBaseLogic);
         building.buildingScript = script;
+        script.setBuildingMgr(this);
         script.refreshByModel(model);
         this.buildings[String(model.getBuildingId())] = building;
         return building;

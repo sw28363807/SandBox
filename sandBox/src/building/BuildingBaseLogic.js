@@ -9,6 +9,7 @@ export default class BuildingBaseLogic extends Laya.Script {
         super();
         this.residentCreateIdList  = new Set([]);   //建造建筑的人物ID列表
         this.residentUseIdList = new Set([]);       //使用建筑的人物ID列表
+        this.buildingMgr = null;
     }
     
     onEnable() {
@@ -29,6 +30,14 @@ export default class BuildingBaseLogic extends Laya.Script {
 
     stopTimer() {
         Laya.timer.clear(this, this.onCreateProgress);
+    }
+
+    setBuildingMgr(mgr) {
+        this.buildingMgr = mgr;
+    }
+
+    getBuildingMgr() {
+        return this.buildingMgr;
     }
 
     refreshByModel(model) {

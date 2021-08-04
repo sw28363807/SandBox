@@ -51,14 +51,22 @@ export default class ResidentUseBuildingAILogic extends Laya.Script {
         }
         // 去食物库
         else if (aiData == ResidentMeta.ResidentState.GotoFoodPoolForEat) {
-            if (this.getModel().getFood() < 90) {
+            let food = this.getModel().getFood();
+            if (food < 90) {
+                return true;
+            } else if (food < 50) {
+                this.useBuildingAIPriority = 1;
                 return true;
             }
             return false;
         }
         // 去水库
         else if (aiData == ResidentMeta.ResidentState.GotoWaterPoolForDrink) {
+            let water = this.getModel().getWater();
             if (this.getModel().getWater() < 90) {
+                return true;
+            } else if (water < 50) {
+                this.useBuildingAIPriority = 1;
                 return true;
             }
             return false;
@@ -72,8 +80,11 @@ export default class ResidentUseBuildingAILogic extends Laya.Script {
         }
         // 去火堆周围
         else if (aiData == ResidentMeta.ResidentState.GotoFireForHeating) {
-            if (this.getModel().getTemperature() < ResidentMeta.ResidentDangerTemperature) {
+            let temperature = this.getModel().getTemperature();
+            if (temperature < ResidentMeta.ResidentDangerTemperature + 2) {
                 this.useBuildingAIPriority = 1;
+                return true;
+            } else if (temperature < ResidentMeta.ResidentStandardTemperature - 1) {
                 return true;
             }
             return false;

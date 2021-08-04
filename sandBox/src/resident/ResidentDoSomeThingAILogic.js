@@ -35,7 +35,7 @@ export default class ResidentDoSomeThingAILogic extends Laya.Script {
             if (food < ResidentMeta.ResidentFoodNeedValue) {
                 this.doSomeThingAIPriority = 1;
                 return true;
-            } else if (food < 50) {
+            } else if (food < 30) {
                 return true;
             }
             return false;
@@ -47,7 +47,7 @@ export default class ResidentDoSomeThingAILogic extends Laya.Script {
             if (water < ResidentMeta.ResidentWaterNeedValue) {
                 this.doSomeThingAIPriority = 1;
                 return true;
-            } else if (water < 100) {
+            } else if (water < 30) {
                 return true;
             }
             return false;
