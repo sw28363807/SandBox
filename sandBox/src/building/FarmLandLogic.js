@@ -22,10 +22,6 @@ export default class FarmLandLogic extends BuildingBaseLogic {
         super.onDisable();
     }
 
-    onStart() {
-        Laya.timer.loop(1000, this, this.onAddFood);
-    }
-
     onAddFood() {
         let season = GameModel.getInstance().getGameSeason();
         if (season == 1 || season == 2) {

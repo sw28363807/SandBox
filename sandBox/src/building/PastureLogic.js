@@ -23,10 +23,6 @@ export default class PastureLogic extends BuildingBaseLogic {
         super.onDisable();
     }
 
-    onStart() {
-        Laya.timer.loop(1000, this, this.onAddFood);
-    }
-
     onAddFood() {
         let season = GameModel.getInstance().getGameSeason();
         if (season == 0 || season == 3) {

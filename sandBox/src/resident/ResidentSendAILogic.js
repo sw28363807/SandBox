@@ -1,4 +1,5 @@
 import BuildingMgr from "../building/BuildingMgr";
+import RandomMgr from "../helper/RandomMgr";
 import BuildingMeta from "../meta/BuildingMeta";
 import FoodMeta from "../meta/FoodMeta";
 import ResidentMeta from "../meta/ResidentMeta";
@@ -126,6 +127,7 @@ export default class ResidentSendAILogic extends Laya.Script {
         });
     }
 
+    // 用户自定义开始=======================================
     onGetAddValueInfo(info) {
         let sendInfo = info.sendInfo;
         let fsmState = this.getModel().getFSMState();
@@ -145,7 +147,14 @@ export default class ResidentSendAILogic extends Laya.Script {
                 farmScript.addFoodToPool(-value);
                 sendInfo.send = null;
                 info.addFood = value;
-                
+            } else if (sendInfo.sendType == 3) {
+                let meta = BuildingMeta.BuildingDatas[BuildingMeta.BuildingType.PastureType];
+                let pastureScript = sendInfo.send.buildingScript;
+                let foodPoolValue = pastureScript.getCurSaveFood();
+                let value = Math.min(foodPoolValue, meta.addFood);
+                pastureScript.addFoodToPool(-value);
+                sendInfo.send = null;
+                info.addFood = value;
             }
         }
         // 水源增加值
@@ -191,12 +200,17 @@ export default class ResidentSendAILogic extends Laya.Script {
             let sendType = 0;
             let sendObject = null;
             // 寻找农田
-            let farmlandFilterFunc =  function (building) {
+            let filterFunc = function (building) {
                 return building.buildingScript.getCurSaveFood() > 20;
             };
             let nearstFarmland = BuildingMgr.getInstance().getAlltBuildingForCondition(this.owner.x,
                 this.owner.y, BuildingMeta.BuildingType.FarmLandType,
-                2000, [BuildingMeta.BuildingState.Noraml], farmlandFilterFunc, true);
+                2000, [BuildingMeta.BuildingState.Noraml], filterFunc, true);
+
+            let nearstPasture = BuildingMgr.getInstance().getAlltBuildingForCondition(this.owner.x,
+                this.owner.y, BuildingMeta.BuildingType.PastureType,
+                2000, [BuildingMeta.BuildingState.Noraml], filterFunc, true);
+
             // 寻找食物
             let nearstFood = FoodMgr.getInstance().getRandomFood({
                 x: this.owner.x,
@@ -205,9 +219,22 @@ export default class ResidentSendAILogic extends Laya.Script {
                 area: 2000
             });
 
-            if (nearstFarmland) {
-                sendType = 1;
-                sendObject = nearstFarmland;
+            if (nearstFarmland || nearstPasture) {
+                if (nearstFarmland && !nearstPasture) {
+                    sendType = 1;
+                    sendObject = nearstFarmland;
+                } else if (nearstPasture && !nearstFarmland) {
+                    sendType = 3;
+                    sendObject = nearstPasture;
+                } else {
+                    if (RandomMgr.randomYes()) {
+                        sendType = 1;
+                        sendObject = nearstFarmland;
+                    } else {
+                        sendType = 3;
+                        sendObject = nearstPasture;
+                    }
+                }
             } else if (nearstFood) {
                 sendType = 2;
                 sendObject = nearstFood;
@@ -252,7 +279,7 @@ export default class ResidentSendAILogic extends Laya.Script {
     preSend(AIType, sendInfo) {
         if (AIType == ResidentMeta.ResidentState.FindFoodForSend) {
             if (sendInfo.sendType == 2) {
-                sendInfo.send.foodScript.getModel().setFoodState(FoodMeta.FoodState.Occupy);   
+                sendInfo.send.foodScript.getModel().setFoodState(FoodMeta.FoodState.Occupy);
             }
         }
     }
