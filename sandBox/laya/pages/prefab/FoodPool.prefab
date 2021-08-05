@@ -32,7 +32,7 @@
             "x":15,
             "type":"Box",
             "searchKey":"Box,sliderControl",
-            "props":{"y":-29,"x":99,"scaleY":0.5,"scaleX":0.5,"presetID":5,"preset":"laya/pages/prefab/FoodPool.prefab","name":"sliderControl"},
+            "props":{"y":-26,"x":50,"presetID":5,"preset":"laya/pages/prefab/FoodPool.prefab","name":"sliderControl"},
             "nodeParent":83,
             "label":"sliderControl",
             "isOpen":false,

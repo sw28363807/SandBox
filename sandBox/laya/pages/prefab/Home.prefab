@@ -32,7 +32,7 @@
             "x":15,
             "type":"Box",
             "searchKey":"Box,sliderControl",
-            "props":{"y":-1.5,"x":129,"scaleY":0.5,"scaleX":0.5,"presetID":5,"preset":"laya/pages/prefab/Home.prefab","name":"sliderControl"},
+            "props":{"y":-12,"x":75,"presetID":5,"preset":"laya/pages/prefab/Home.prefab","name":"sliderControl"},
             "nodeParent":83,
             "label":"sliderControl",
             "isOpen":false,
