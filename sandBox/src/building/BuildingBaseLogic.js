@@ -17,7 +17,7 @@ export default class BuildingBaseLogic extends Laya.Script {
         this.sliderControl = this.owner.getChildByName("sliderControl");
         this.slider = this.sliderControl.getChildByName("slider");
         this.sliderControl.visible = false;
-        this.sliderMax = 194;
+        this.sliderMax = this.slider.texture.width;
     }
 
     onDisable() {
