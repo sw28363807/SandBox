@@ -132,6 +132,7 @@ BuildingMeta.BuildingDatas = {
         buildingName: "发电厂",
         costTree: 0,
         costStone: 0,
+        addElec: 1,
         desc: "可以为其他建筑发电",
     },
     // 商店
@@ -192,6 +193,7 @@ BuildingMeta.BuildingDatas = {
         buildingName: "歌剧院",
         costTree: 0,
         costStone: 0,
+        addEnjoy: 10,
         desc: "可以让居民快乐的地方",
     },
     // 警察局

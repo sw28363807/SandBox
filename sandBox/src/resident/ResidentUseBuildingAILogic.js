@@ -106,6 +106,20 @@ export default class ResidentUseBuildingAILogic extends Laya.Script {
             }
             return false;
         }
+        // 去歌剧院
+        else if (aiData == ResidentMeta.ResidentState.GotoOperaForWatch) {
+            if (this.getModel().getEnjoy() < 90) {
+                return true;
+            }
+            return false;
+        }
+        // 去发电厂工作
+        else if (aiData == ResidentMeta.ResidentState.GoToPowerPlantForElec) {
+            if (this.getModel().isAdult()) {
+                return true;
+            }
+            return false;
+        }
     }
 
     onFinishUseBuilding(state) {
@@ -183,6 +197,14 @@ export default class ResidentUseBuildingAILogic extends Laya.Script {
         // 工作完成
         else if (state == ResidentMeta.ResidentState.Working) {
             GameModel.getInstance().addGoldNum(BuildingMeta.BuildingDatas[BuildingMeta.BuildingType.OfficeType].addGold);
+        }
+        // 看歌剧完成
+        else if (state == ResidentMeta.ResidentState.WatchOpera) {
+            this.getModel().addEnjoy(BuildingMeta.BuildingDatas[BuildingMeta.BuildingType.OperaType].addEnjoy);
+        }
+        // 发电厂工作完成
+        else if (state == ResidentMeta.ResidentState.Elecing) {
+            GameModel.getInstance().addElecNum(BuildingMeta.BuildingDatas[BuildingMeta.BuildingType.PowerPlantType].addElec);
         }
     }
 
@@ -272,6 +294,20 @@ export default class ResidentUseBuildingAILogic extends Laya.Script {
         }
         // 去office
         else if (aiData == ResidentMeta.ResidentState.GoToOfficeForWork) {
+            let building = BuildingMgr.getInstance().getAlltBuildingForCondition(this.owner.x,
+                this.owner.y, data.buildingType,
+                2000, [BuildingMeta.BuildingState.Noraml], null, true);
+            return building;
+        }
+        // 去歌剧院
+        else if (aiData == ResidentMeta.ResidentState.GotoOperaForWatch) {
+            let building = BuildingMgr.getInstance().getAlltBuildingForCondition(this.owner.x,
+                this.owner.y, data.buildingType,
+                2000, [BuildingMeta.BuildingState.Noraml], null, true);
+            return building;
+        }
+        // 去发电厂
+        else if (aiData == ResidentMeta.ResidentState.GoToPowerPlantForElec) {
             let building = BuildingMgr.getInstance().getAlltBuildingForCondition(this.owner.x,
                 this.owner.y, data.buildingType,
                 2000, [BuildingMeta.BuildingState.Noraml], null, true);

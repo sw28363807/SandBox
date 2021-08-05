@@ -10,7 +10,7 @@ export default class ResidentModel extends Laya.Script {
         // 面上的数值
         this.life = 100;    //生命
         this.water = 100;   //水源
-        this.enjoy = 100;   //快乐
+        this.enjoy = 0;   //快乐
         this.food = 100;    //食物
         this.teach = 0;     //教育
         this.social = 100;  //社交

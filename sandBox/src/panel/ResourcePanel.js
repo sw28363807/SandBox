@@ -12,6 +12,7 @@ export default class ResourcePanel extends Laya.Script {
         this.stoneLabel = this.owner.getChildByName("stone");
         this.goldLabel = this.owner.getChildByName("gold");
         this.timeLabel = this.owner.getChildByName("time");
+        this.elecLabel = this.owner.getChildByName("elec");
         this.seasonTextTable = [
             "春",
             "夏",
@@ -30,6 +31,7 @@ export default class ResourcePanel extends Laya.Script {
         this.treeLabel.text = String(GameModel.getInstance().getTreeNum());
         this.stoneLabel.text = String(GameModel.getInstance().getStoneNum());
         this.goldLabel.text = String(GameModel.getInstance().getGoldNum());
+        this.elecLabel.text = String(GameModel.getInstance().getElecNum());
         let residentNum = GameModel.getInstance().getAllResidentNum();
         let season = GameModel.getInstance().getGameSeason();
         let day = GameModel.getInstance().getGameDay();

@@ -45,6 +45,8 @@ ResidentMeta.ResidentState = {
     CreateToolBuilding: "",     //建造工具工坊
     GotoTreat: "",          //跑去治疗
     Treating: "",           //正在治疗
+    GotoOperaForWatch: "",          //跑去看歌剧
+    WatchOpera: "",           //看歌剧
     GotoSpeedBuildingForAddSpeed: "",   //跑去健身房
     AddSpeed: "",           //锻炼身体增加移动速度
     GotoContinueCreateSchool: "", //跑去建造学校
@@ -104,6 +106,8 @@ ResidentMeta.ResidentState = {
     Heating: "",                  //取暖
     GoToOfficeForWork: "",        //去工作的路上
     Working: "",                   //工作
+    GoToPowerPlantForElec: "",        //去发电厂工作
+    Elecing: "",                   //发电
 };
 ResidentMeta.obtainResidentState();
 
@@ -272,6 +276,11 @@ ResidentMeta.ResidentUseBuildingMap = {
         buildingType: BuildingMeta.BuildingType.HospitalType,
         useType: 1,     //1 隐藏使用 2 周围使用 默认为1
     },
+    [ResidentMeta.ResidentState.GotoOperaForWatch]: {
+        nextState: ResidentMeta.ResidentState.WatchOpera,
+        buildingType: BuildingMeta.BuildingType.OperaType,
+        useType: 1,     //1 隐藏使用 2 周围使用 默认为1
+    },
     [ResidentMeta.ResidentState.GoToSchool]: {
         nextState: ResidentMeta.ResidentState.Learning,
         buildingType: BuildingMeta.BuildingType.SchoolType,
@@ -310,6 +319,11 @@ ResidentMeta.ResidentUseBuildingMap = {
     [ResidentMeta.ResidentState.GoToOfficeForWork]: {
         nextState: ResidentMeta.ResidentState.Working,
         buildingType: BuildingMeta.BuildingType.OfficeType,
+        useType: 1,     //1 隐藏使用 2 周围使用 默认为1
+    },
+    [ResidentMeta.ResidentState.GoToPowerPlantForElec]: {
+        nextState: ResidentMeta.ResidentState.Elecing,
+        buildingType: BuildingMeta.BuildingType.PowerPlantType,
         useType: 1,     //1 隐藏使用 2 周围使用 默认为1
     },
 }
