@@ -5,27 +5,47 @@ import GameEvent from "../meta/GameEvent";
 
 export default class BuildingBaseLogic extends Laya.Script {
 
-    constructor() { 
+    constructor() {
         super();
-        this.residentCreateIdList  = new Set([]);   //建造建筑的人物ID列表
+        this.residentCreateIdList = new Set([]);   //建造建筑的人物ID列表
         this.residentUseIdList = new Set([]);       //使用建筑的人物ID列表
         this.buildingMgr = null;
     }
-    
+
     onEnable() {
-        this.ani = this.owner.getChildByName("ani"); 
+        this.ani = this.owner.getChildByName("ani");
         this.sliderControl = this.owner.getChildByName("sliderControl");
         this.slider = this.sliderControl.getChildByName("slider");
         this.sliderControl.visible = false;
         this.sliderMax = this.slider.texture.width;
+        this.buildingTouch = this.owner.getChildByName("buildingTouch");
+        this.initTouch();
     }
 
     onDisable() {
-       
+
     }
 
     onDestroy() {
         this.stopTimer();
+    }
+
+    initTouch() {
+        if (this.buildingTouch == null || this.buildingTouch == undefined) {
+            return;
+        }
+        this.buildingTouch.on(Laya.Event.MOUSE_DOWN, this, function () {
+            this.touchDownPos = new Laya.Point(Laya.stage.mouseX, Laya.stage.mouseX);
+        });
+
+        this.buildingTouch.on(Laya.Event.MOUSE_UP, this, function (e) {
+            if (this.touchDownPos) {
+                if (this.touchDownPos.distance(Laya.stage.mouseX, Laya.stage.mouseX) < 10) {
+                    this.onClickBuilding();
+                };
+            }
+            this.touchDownPos = null;
+        });
     }
 
     stopTimer() {
@@ -46,7 +66,7 @@ export default class BuildingBaseLogic extends Laya.Script {
         this.owner.y = model.getY();
         let buildingType = this.model.getBuildingType();
         let buildingMeta = BuildingMeta.BuildingDatas[String(buildingType)];
-        this.createAddValue = buildingMeta.createBuildingSpeed/this.sliderMax;
+        this.createAddValue = buildingMeta.createBuildingSpeed / this.sliderMax;
         this.onInitBuilding();
         this.setPreCreate();
     }
@@ -122,6 +142,11 @@ export default class BuildingBaseLogic extends Laya.Script {
 
     // 建筑建造完成
     onCreateBuildingFinish() {
+    }
+
+    // 点击建筑物
+    onClickBuilding() {
+
     }
 
 }

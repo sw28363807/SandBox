@@ -12,4 +12,9 @@ export default class ShopLogic extends BuildingBaseLogic {
     // 建筑建造完成
     onCreateBuildingFinish() {
     }
+
+    // 点击建筑物
+    onClickBuilding() {
+        
+    }
 }
