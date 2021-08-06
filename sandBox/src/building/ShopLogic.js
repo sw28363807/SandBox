@@ -15,6 +15,6 @@ export default class ShopLogic extends BuildingBaseLogic {
 
     // 点击建筑物
     onClickBuilding() {
-        
+        Laya.Dialog.open("scene/ShopDialog.scene");
     }
 }
