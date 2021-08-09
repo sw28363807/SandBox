@@ -6,7 +6,7 @@
     "searchKey":"Dialog",
     "props":{"width":1336,"sceneColor":"#000000","height":750,"autoDestroyAtClosed":true},
     "nodeParent":-1,
-    "maxID":6,
+    "maxID":7,
     "label":"Dialog",
     "isOpen":true,
     "isDirectory":true,
@@ -31,14 +31,31 @@
         {
             "x":15,
             "type":"Button",
-            "searchKey":"Button",
-            "props":{"y":99,"x":1084,"width":27,"stateNum":"1","skin":"source/ui/close.png","scaleY":2,"scaleX":2,"height":27},
+            "searchKey":"Button,closeBtn",
+            "props":{"y":99,"x":1084,"width":27,"stateNum":"1","skin":"source/ui/close.png","scaleY":2,"scaleX":2,"name":"closeBtn","height":27},
             "nodeParent":2,
-            "label":"Button",
+            "label":"closeBtn",
             "isDirectory":false,
             "isAniNode":true,
             "hasChild":false,
             "compId":5,
+            "child":[
+                ]
+        },
+        {
+            "x":15,
+            "type":"Script",
+            "switchAble":true,
+            "source":"src/scene/ShopDialogLogic.js",
+            "searchKey":"Script,ShopDialogLogic",
+            "removeAble":true,
+            "props":{},
+            "nodeParent":2,
+            "label":"ShopDialogLogic",
+            "isDirectory":false,
+            "isAniNode":true,
+            "hasChild":false,
+            "compId":6,
             "child":[
                 ]
         }],
