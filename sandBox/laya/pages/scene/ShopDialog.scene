@@ -2,11 +2,11 @@
     "x":0,
     "type":"Dialog",
     "selectedBox":2,
-    "selecteID":5,
+    "selecteID":18,
     "searchKey":"Dialog",
     "props":{"width":1336,"sceneColor":"#000000","height":750,"autoDestroyAtClosed":true},
     "nodeParent":-1,
-    "maxID":7,
+    "maxID":38,
     "label":"Dialog",
     "isOpen":true,
     "isDirectory":true,
@@ -16,9 +16,23 @@
     "child":[
         {
             "x":15,
+            "type":"Box",
+            "searchKey":"Box,under",
+            "props":{"y":-4260,"x":-4280,"width":10000,"name":"under","height":10000,"bgColor":"#000000","alpha":0.5},
+            "nodeParent":2,
+            "label":"under",
+            "isDirectory":false,
+            "isAniNode":true,
+            "hasChild":false,
+            "compId":17,
+            "child":[
+                ]
+        },
+        {
+            "x":15,
             "type":"Image",
             "searchKey":"Image",
-            "props":{"y":75,"x":168,"width":1000,"skin":"source/ui/64x64_yellow.png","height":600},
+            "props":{"y":275,"x":518,"width":800,"skin":"source/ui/panelUnder.png","pivotY":150,"pivotX":250,"height":500},
             "nodeParent":2,
             "label":"Image",
             "isDirectory":false,
@@ -32,7 +46,7 @@
             "x":15,
             "type":"Button",
             "searchKey":"Button,closeBtn",
-            "props":{"y":99,"x":1084,"width":27,"stateNum":"1","skin":"source/ui/close.png","scaleY":2,"scaleX":2,"name":"closeBtn","height":27},
+            "props":{"y":181,"x":1010,"width":27,"stateNum":"1","skin":"source/ui/close.png","scaleY":1.5,"scaleX":1.5,"pivotY":14,"pivotX":14,"name":"closeBtn","height":27},
             "nodeParent":2,
             "label":"closeBtn",
             "isDirectory":false,
@@ -56,6 +70,90 @@
             "isAniNode":true,
             "hasChild":false,
             "compId":6,
+            "child":[
+                ]
+        },
+        {
+            "x":15,
+            "type":"Button",
+            "searchKey":"Button,leftBtn",
+            "props":{"y":382,"x":621,"width":66,"stateNum":"1","skin":"source/ui/btn4.png","rotation":90,"pivotY":34,"pivotX":33,"name":"leftBtn","height":67},
+            "nodeParent":2,
+            "label":"leftBtn",
+            "isDirectory":false,
+            "isAniNode":true,
+            "hasChild":false,
+            "compId":9,
+            "child":[
+                ]
+        },
+        {
+            "x":15,
+            "type":"Button",
+            "searchKey":"Button,rightBtn",
+            "props":{"y":382,"x":375,"width":66,"stateNum":"1","skin":"source/ui/btn4.png","rotation":270,"pivotY":34,"pivotX":33,"name":"rightBtn","height":67},
+            "nodeParent":2,
+            "label":"rightBtn",
+            "isDirectory":false,
+            "isAniNode":true,
+            "hasChild":false,
+            "compId":10,
+            "child":[
+                ]
+        },
+        {
+            "x":15,
+            "type":"Button",
+            "searchKey":"Button,yesBtn",
+            "props":{"y":528,"x":499,"width":274,"stateNum":"1","skin":"source/ui/btn7.png","scaleY":0.7,"scaleX":0.7,"name":"yesBtn","height":120,"anchorY":0.5,"anchorX":0.5},
+            "nodeParent":2,
+            "label":"yesBtn",
+            "isDirectory":false,
+            "isAniNode":true,
+            "hasChild":false,
+            "compId":15,
+            "child":[
+                ]
+        },
+        {
+            "x":15,
+            "type":"Image",
+            "searchKey":"Image,icon",
+            "props":{"y":384,"x":494,"width":100,"skin":"comp/image.png","name":"icon","height":100,"anchorY":0.5,"anchorX":0.5},
+            "nodeParent":2,
+            "label":"icon",
+            "isDirectory":false,
+            "isAniNode":true,
+            "hasChild":false,
+            "compId":16,
+            "child":[
+                ]
+        },
+        {
+            "x":15,
+            "type":"Text",
+            "searchKey":"Text,nameText",
+            "props":{"y":256,"x":499,"width":200,"valign":"middle","text":"text","pivotY":24,"pivotX":100,"name":"nameText","height":48,"fontSize":48,"font":"Microsoft YaHei","color":"#f674ae","bold":true,"align":"center"},
+            "nodeParent":2,
+            "label":"nameText",
+            "isDirectory":false,
+            "isAniNode":true,
+            "hasChild":false,
+            "compId":18,
+            "child":[
+                ]
+        },
+        {
+            "x":15,
+            "type":"Animation",
+            "searchKey":"Animation",
+            "props":{"y":449,"x":863,"source":"anim/Man.ani","scaleY":2,"scaleX":2,"autoPlay":true,"autoAnimation":"idle"},
+            "nodeParent":2,
+            "label":"Animation",
+            "isDirectory":false,
+            "isAniNode":true,
+            "hasChild":false,
+            "compId":36,
             "child":[
                 ]
         }],

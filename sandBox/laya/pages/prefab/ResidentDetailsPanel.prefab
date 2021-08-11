@@ -18,7 +18,7 @@
             "x":15,
             "type":"Image",
             "searchKey":"Image",
-            "props":{"width":400,"skin":"source/ui/64x64_lime.png","presetID":2,"preset":"laya/pages/prefab/ResidentDetailsPanel.prefab","height":250},
+            "props":{"width":400,"skin":"source/ui/under8.png","presetID":2,"preset":"laya/pages/prefab/ResidentDetailsPanel.prefab","height":250},
             "nodeParent":49,
             "label":"Image(ResidentDetailsPanel)",
             "isDirectory":false,

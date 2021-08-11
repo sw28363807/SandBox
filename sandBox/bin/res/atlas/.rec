@@ -240,6 +240,8 @@ P D3C5DCF5 zhu_13.png
 P 49C41DF4 zhu_14.png
 P 6D95D3AC zhu_15.png
 P 1F89DF0A zhu_16.png
+P 7EBFD0E1 zhuangshi1.png
+P 2CDE6DE6 zhuangshi2.png
 D source/scene
 D source/ui
 P C56898C2 64x64_blue.png
@@ -252,13 +254,23 @@ P 4A35A129 btn2.png
 P F34944F0 btn3.png
 P F3865ED7 btn4.png
 P 2D08341E btn5.png
-P A315048A close.png
+P 43034297 btn6.png
+P 26627B2D btn7.png
+P 3105955B close.png
 P E98671D5 gold.png
+P 0079CEB4 panelUnder.png
+P D8F0BB4B panelUnder1.png
 P CBA7F0F7 slider.png
 P C6FDB623 slider2.png
 P 41CAA2E4 sliderBg.png
 P 76F0627B sliderBg2.png
 P C00D9112 tipunder.png
+P DA3F8475 under10.png
+P 7EF19764 under11.png
 P 454617C6 under2.png
 P 38B6DC1C under4.png
 P 53F91D7B under5.png
+P 48E382A6 under6.png
+P E6A371A5 under7.png
+P ED30B87C under8.png
+P C736FF9B under9.png

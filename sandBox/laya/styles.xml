@@ -9,10 +9,17 @@
    <item name="source/ui/tipunder.png" type="Sprite" compress="0" pack="0" quality="80" props="sizeGrid=26,132,28,152" picType="0" scale="0"/>
    <item name="source/ui/under4.png" type="Sprite" compress="0" pack="0" quality="80" props="sizeGrid=41,41,47,44" picType="0" scale="0"/>
    <item name="source/ui/under5.png" type="Sprite" compress="0" pack="0" quality="80" props="sizeGrid=60,46,75,56" picType="0" scale="0"/>
-   <item name="source/ui/under6.png" type="Sprite" compress="0" pack="0" quality="80" props="sizeGrid=80,126,68,126" picType="0" scale="0"/>
+   <item name="source/ui/under6.png" type="Sprite" compress="0" pack="0" quality="80" props="sizeGrid=51,73,68,80" picType="0" scale="0"/>
    <item name="source/ui/64x64_orange.png" type="Sprite" compress="0" pack="0" quality="80" props="sizeGrid=30,31,31,27" picType="0" scale="0"/>
    <item name="source/ui/64x64_blue.png" type="Sprite" compress="0" pack="0" quality="80" props="sizeGrid=30,31,31,27" picType="0" scale="0"/>
    <item name="source/ui/64x64_purple.png" type="Sprite" compress="0" pack="0" quality="80" props="sizeGrid=30,31,31,27" picType="0" scale="0"/>
    <item name="source/ui/64x64_lime.png" type="Sprite" compress="0" pack="0" quality="80" props="sizeGrid=30,31,31,27" picType="0" scale="0"/>
    <item name="source/ui/64x64_yellow.png" type="Sprite" compress="0" pack="0" quality="80" props="sizeGrid=31,36,28,32" picType="0" scale="0"/>
+   <item name="source/ui/panelUnder.png" type="Sprite" compress="0" pack="0" quality="80" props="sizeGrid=92,110,76,112" picType="0" scale="0"/>
+   <item name="source/ui/panelUnder1.png" type="Sprite" compress="0" pack="0" quality="80" props="sizeGrid=88,117,85,107" picType="0" scale="0"/>
+   <item name="source/ui/under7.png" type="Sprite" compress="0" pack="0" quality="80" props="sizeGrid=51,73,68,80" picType="0" scale="0"/>
+   <item name="source/ui/under8.png" type="Sprite" compress="0" pack="0" quality="80" props="sizeGrid=51,73,68,80" picType="0" scale="0"/>
+   <item name="source/ui/under9.png" type="Sprite" compress="0" pack="0" quality="80" props="sizeGrid=23,47,23,52" picType="0" scale="0"/>
+   <item name="source/ui/under10.png" type="Sprite" compress="0" pack="0" quality="80" props="sizeGrid=23,47,23,52" picType="0" scale="0"/>
+   <item name="source/ui/under11.png" type="Sprite" compress="0" pack="0" quality="80" props="sizeGrid=23,47,23,52" picType="0" scale="0"/>
 </res>
