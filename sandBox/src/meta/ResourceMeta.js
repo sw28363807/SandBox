@@ -2,6 +2,7 @@ export default class ResourceMeta {
 
 }
 
+ResourceMeta.ShopDialogScenePath = "scene/ShopDialog.scene";
 ResourceMeta.ResidentPrefabPath = "prefab/Resident.prefab";   //居民prefab路径
 ResourceMeta.FoodPrefabPath = "prefab/Food.prefab";           //食物prefab路径
 ResourceMeta.ResdientDetailsPanelPath = "prefab/ResidentDetailsPanel.prefab";   //显示居民信息prfab路径

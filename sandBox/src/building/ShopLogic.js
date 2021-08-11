@@ -1,3 +1,4 @@
+import ResourceMeta from "../meta/ResourceMeta";
 import BuildingBaseLogic from "./BuildingBaseLogic";
 export default class ShopLogic extends BuildingBaseLogic {
 
@@ -15,6 +16,6 @@ export default class ShopLogic extends BuildingBaseLogic {
 
     // 点击建筑物
     onClickBuilding() {
-        Laya.Dialog.open("scene/ShopDialog.scene");
+        Laya.Dialog.open(ResourceMeta.ShopDialogScenePath);
     }
 }

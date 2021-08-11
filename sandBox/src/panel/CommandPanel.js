@@ -281,10 +281,10 @@ export default class CommandPanel extends Laya.Script {
         this.switchState = state;
         if (this.switchState == 0) {
             Laya.Tween.to(this.under, { x: -this.under.width }, 200, Laya.Ease.backOut);
-            this.switchBtn.scaleX = 1;
+            this.switchBtn.scaleY = 1;
         } else {
             Laya.Tween.to(this.under, { x: 0 }, 200, Laya.Ease.backIn);
-            this.switchBtn.scaleX = -1;
+            this.switchBtn.scaleY = -1;
         }
     }
 
