@@ -148,6 +148,21 @@ BuildingMeta.BuildingDatas = {
         costTree: 0,
         costStone: 0,
         desc: "可以购买神秘物品",
+        items: [
+            {
+                itemId: 1,
+                num: 1,
+                img: "source/resident/zhuangshi2.png",
+                name: "北辰大翅膀",
+                desc: "可以轻松的飞越天津以及周边区县地区的高大上装饰。",
+                costGold: 0,
+                reviewOrder: 0,       //1 上层 0 下层
+                reviewX: -120,
+                reviewY: -200,
+                scaleX: 1.2,
+                scaleY: 1.2,
+            }
+        ],
     },
     // 农田
     [String(BuildingMeta.BuildingType.FarmLandType)]: {
