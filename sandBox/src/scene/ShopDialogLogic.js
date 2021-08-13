@@ -15,6 +15,8 @@ export default class ShopDialogLogic extends Laya.Script {
     }
 
     onStart() {
+        this.buildingScript = this.owner.selectedBuilding.buildingScript;
+        this.buildingModel = this.buildingScript.getModel();
         this.closeBtn = this.owner.getChildByName("closeBtn");
         this.closeBtn.on(Laya.Event.CLICK, this, function () {
             Laya.Dialog.close(ResourceMeta.ShopDialogScenePath);
@@ -52,5 +54,10 @@ export default class ShopDialogLogic extends Laya.Script {
         }
         this.deco.x = meta.reviewX;
         this.deco.y = meta.reviewY;
+
+        let remainNumText = this.owner.getChildByName("remainNumText");
+        let num = this.buildingScript.getCurSaveDecoNum(meta.itemId);
+        remainNumText.text = String(num);
+        
     }
 }

@@ -21,10 +21,6 @@ export default class FoodPoolLogic extends BuildingBaseLogic {
         return curSaveFood;
     }
 
-    isReachFoodMax() {
-        return this.getCurSaveFood() >= this.maxSave;
-    }
-
     addFoodToPool(num) {
         let model = this.getModel();
         let curSaveFood = this.getCurSaveFood()
@@ -37,6 +33,10 @@ export default class FoodPoolLogic extends BuildingBaseLogic {
         }
         model.setExteraData("curFood", curSaveFood);
         this.foodPoolText.text = String(curSaveFood) + "/" + String(this.maxSave);
+    }
+
+    isReachFoodMax() {
+        return this.getCurSaveFood() >= this.maxSave;
     }
 
     // 建筑初始化
