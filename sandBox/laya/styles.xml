@@ -22,4 +22,5 @@
    <item name="source/ui/under9.png" type="Sprite" compress="0" pack="0" quality="80" props="sizeGrid=23,47,23,52" picType="0" scale="0"/>
    <item name="source/ui/under10.png" type="Sprite" compress="0" pack="0" quality="80" props="sizeGrid=23,47,23,52" picType="0" scale="0"/>
    <item name="source/ui/under11.png" type="Sprite" compress="0" pack="0" quality="80" props="sizeGrid=23,47,23,52" picType="0" scale="0"/>
+   <item name="source/ui/under12.png" type="Sprite" compress="0" pack="0" quality="80" props="sizeGrid=41,49,46,44" picType="0" scale="0"/>
 </res>

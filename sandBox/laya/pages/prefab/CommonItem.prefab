@@ -18,7 +18,7 @@
             "x":15,
             "type":"Image",
             "searchKey":"Image",
-            "props":{"y":4,"x":6,"width":290,"skin":"source/ui/under7.png","presetID":4,"preset":"laya/pages/prefab/CommonItem.prefab","height":200},
+            "props":{"y":4,"x":6,"width":290,"skin":"source/ui/under12.png","presetID":4,"preset":"laya/pages/prefab/CommonItem.prefab","height":200},
             "nodeParent":154,
             "label":"Image(CommonItem)",
             "isOpen":true,

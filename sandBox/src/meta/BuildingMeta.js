@@ -104,7 +104,23 @@ BuildingMeta.BuildingDatas = {
         costTree: 0,
         costStone: 0,
         addTeach: 20,
-        desc: "可以增长教育",
+        desc: "可以增长教育，促进科技发展",
+        teachers: [
+            {
+                teacherId: 1,
+                name: "李翠萍老师",
+                desc: "教学一般般",
+                addTeach: 10,
+                sex: 1, //1 男 2 女
+            },
+            {
+                teacherId: 2,
+                name: "北辰沈老师",
+                desc: "教学一般般",
+                addTeach: 10,
+                sex: 2, //1 男 2 女
+            },
+        ],
     },
     // 幼儿园
     [String(BuildingMeta.BuildingType.ChildSchoolType)]: {

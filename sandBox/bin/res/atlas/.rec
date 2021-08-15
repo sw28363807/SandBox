@@ -1,6 +1,7 @@
 D .
 D source
 D source/building
+P 79E045AD aaa.png
 P 44C1809F bank.png
 P B80D66C6 blood_building.png
 P F6B88FAF building1_1.png
@@ -267,6 +268,7 @@ P 76F0627B sliderBg2.png
 P C00D9112 tipunder.png
 P DA3F8475 under10.png
 P 7EF19764 under11.png
+P D130FBCE under12.png
 P 454617C6 under2.png
 P 38B6DC1C under4.png
 P 53F91D7B under5.png
