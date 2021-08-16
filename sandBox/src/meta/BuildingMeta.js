@@ -111,14 +111,16 @@ BuildingMeta.BuildingDatas = {
                 name: "李翠萍老师",
                 desc: "教学一般般",
                 addTeach: 10,
-                sex: 1, //1 男 2 女
+                sex: 1, //1 男 2 女,
+                costGold: 998,
             },
             {
                 teacherId: 2,
                 name: "北辰沈老师",
-                desc: "教学一般般",
+                desc: "教学一般般，人很漂亮，但是对于提升教育质量似乎没有什么用",
                 addTeach: 10,
                 sex: 2, //1 男 2 女
+                costGold: 48,
             },
         ],
     },

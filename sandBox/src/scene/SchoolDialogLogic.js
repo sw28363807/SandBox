@@ -12,25 +12,53 @@ export default class SchoolDialogLogic extends Laya.Script {
     onDisable() {
     }
 
-    onStart() {
+    onStart() {        
         this.buildingScript = this.owner.selectedBuilding.buildingScript;
         this.buildingModel = this.buildingScript.getModel();
         this.closeBtn = this.owner.getChildByName("closeBtn");
         this.closeBtn.on(Laya.Event.CLICK, this, function () {
             Laya.Dialog.close(ResourceMeta.SchoolDialogScenePath);
         });
-        this.teacherIndex = 1;
+
+        this.teacherIndex = 0;
+        this.leftBtn = this.owner.getChildByName("leftBtn");
+        this.leftBtn.on(Laya.Event.CLICK, this, function () {
+            this.teacherIndex--;
+            this.refreshTeacher();
+        });
+
+        this.rightBtn = this.owner.getChildByName("rightBtn");
+        this.rightBtn.on(Laya.Event.CLICK, this, function () {
+            this.teacherIndex++;
+            this.refreshTeacher();
+        });
+
         this.refreshTeacher();
     }
 
     refreshTeacher() {
         let teacherMetas = BuildingMeta.BuildingDatas[BuildingMeta.BuildingType.SchoolType].teachers;
+
+        if (this.teacherIndex < 0) {
+            this.teacherIndex = 0;
+        }
+
+        if (this.teacherIndex >= teacherMetas.length) {
+            this.teacherIndex = teacherMetas.length - 1;
+        }
+
+        this.leftBtn.visible = this.teacherIndex != 0;
+        this.rightBtn.visible = this.teacherIndex < (teacherMetas.length - 1);
+
         let teacherMeta = teacherMetas[this.teacherIndex];
         let nameText = this.owner.getChildByName("nameText");
         nameText.text = teacherMeta.name;
 
         let descText = this.owner.getChildByName("descText");
         descText.text = teacherMeta.desc;
+
+        let costText = this.owner.getChildByName("costText");
+        costText.text = String(teacherMeta.costGold);
 
         let teacherPos = this.owner.getChildByName("teacherPos");
         if (this.teacherAni) {
