@@ -7,6 +7,7 @@ ResourceMeta.WomanAniPath = "anim/Woman.ani";    //女人动画
 
 ResourceMeta.ShopDialogScenePath = "scene/ShopDialog.scene";
 ResourceMeta.SchoolDialogScenePath = "scene/SchoolDialog.scene";
+ResourceMeta.PowerPlantDialogScenePath = "scene/PowerPlantDialog.scene";
 ResourceMeta.ResidentPrefabPath = "prefab/Resident.prefab";   //居民prefab路径
 ResourceMeta.FoodPrefabPath = "prefab/Food.prefab";           //食物prefab路径
 ResourceMeta.ResdientDetailsPanelPath = "prefab/ResidentDetailsPanel.prefab";   //显示居民信息prfab路径
