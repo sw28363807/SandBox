@@ -77,6 +77,22 @@ BuildingMeta.BuildingDatas = {
         costStone: 0,
         desc: "居住的地方"
     },
+    // 工厂
+    [String(BuildingMeta.BuildingType.FactoryType)]: {
+        prefab: ResourceMeta.FactoryPrefabPath,
+        preview: "source/building/factory.png",
+        realWidth: 500,
+        realHeight: 500,
+        createBuildingSpeed: 2000,
+        useBuildingTime: 5000,
+        createPriority: 1,
+        buildingName: "工厂",
+        costTree: 0,
+        costStone: 0,
+        desc: "可以制造各种工业产品的地方",
+        addGoldPerResident: 1,
+        maxResident: 10,
+    },
     // 医院
     [String(BuildingMeta.BuildingType.HospitalType)]: {
         prefab: ResourceMeta.HospitalPrefabPath,
@@ -90,6 +106,24 @@ BuildingMeta.BuildingDatas = {
         costTree: 0,
         costStone: 0,
         desc: "可以治疗疾病",
+        doctors: [
+            {
+                doctorId: 1,
+                name: "王二狗大夫",
+                desc: "医术一般般",
+                healProbability: 50,
+                sex: 1, //1 男 2 女,
+                costGold: 1,
+            },
+            {
+                doctorId: 2,
+                name: "赵德柱大夫",
+                desc: "医术还可以",
+                healProbability: 90,
+                sex: 2, //1 男 2 女,
+                costGold: 2,
+            },
+        ]
     },
     // 学校
     [String(BuildingMeta.BuildingType.SchoolType)]: {
@@ -428,19 +462,5 @@ BuildingMeta.BuildingDatas = {
         costTree: 0,
         costStone: 0,
         desc: "可以提炼开采发展石油工业",
-    },
-    // 工厂
-    [String(BuildingMeta.BuildingType.FactoryType)]: {
-        prefab: ResourceMeta.FactoryPrefabPath,
-        preview: "source/building/factory.png",
-        realWidth: 500,
-        realHeight: 500,
-        createBuildingSpeed: 2000,
-        useBuildingTime: 5000,
-        createPriority: 1,
-        buildingName: "工厂",
-        costTree: 0,
-        costStone: 0,
-        desc: "可以制造各种工业产品的地方",
     },
 };

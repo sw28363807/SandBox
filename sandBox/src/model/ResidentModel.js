@@ -31,6 +31,7 @@ export default class ResidentModel extends Laya.Script {
         this.sex = 1;   // 性别 1 男 2 女
         this.married = 1; //1 未婚 2 已婚
         this.sick = 1;  //1 健康 2 生病
+        this.isWorking = false;
         this.residentName = NameMeta.randomOneName();
 
 
@@ -106,6 +107,14 @@ export default class ResidentModel extends Laya.Script {
                 this.speedScale = data.speedScale;
             }
         }
+    }
+
+    setIsWorking(isWorking) {
+        this.isWorking = isWorking;
+    }
+
+    getIsWorking() {
+        return this.isWorking;
     }
 
     setSpeedScale(scale) {
