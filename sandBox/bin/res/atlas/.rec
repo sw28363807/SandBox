@@ -244,6 +244,14 @@ P 1F89DF0A zhu_16.png
 P 7EBFD0E1 zhuangshi1.png
 P 55EDC307 zhuangshi2.png
 D source/scene
+D source/sound
+R 99672D37 1.mp3
+R 5A5F307C 2.mp3
+R 3AAFF181 3.mp3
+R 2A2F3AF0 4.mp3
+R F3341A42 5.mp3
+R C82DDD27 6.mp3
+R 754AD491 7.mp3
 D source/ui
 P C56898C2 64x64_blue.png
 P CB2C5FE3 64x64_lime.png
@@ -251,6 +259,7 @@ P BA1CFB04 64x64_orange.png
 P F7698E26 64x64_purple.png
 P 6018D6FA 64x64_red.png
 P 8F1C5614 64x64_yellow.png
+P 689B3A74 arrow_1.png
 P BE9A146F btn2.png
 P 874A0794 btn3.png
 P CE1B7C4D btn4.png
@@ -276,3 +285,7 @@ P 48E382A6 under6.png
 P E6A371A5 under7.png
 P ED30B87C under8.png
 P C736FF9B under9.png
+P 647C6760 升级按钮.png
+P D0B3E823 形状_1228.png
+P 06530343 组_2.png
+P A1F864EF 组_60.png

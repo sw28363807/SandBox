@@ -2,11 +2,11 @@
     "x":0,
     "type":"Box",
     "selectedBox":83,
-    "selecteID":87,
+    "selecteID":96,
     "searchKey":"Box,Building",
     "props":{"y":0,"x":0,"width":350,"presetID":1,"preset":"laya/pages/prefab/ChildSchool.prefab","name":"Building","isPresetRoot":true,"height":350},
     "nodeParent":-1,
-    "maxID":96,
+    "maxID":97,
     "label":"Building",
     "isOpen":true,
     "isDirectory":true,
@@ -72,6 +72,20 @@
                     "$LOCKED":true
                 }],
             "$HIDDEN":false
+        },
+        {
+            "x":15,
+            "type":"Box",
+            "searchKey":"Box,buildingTouch",
+            "props":{"y":0,"x":0,"width":350,"presetID":10,"preset":"laya/pages/prefab/ChildSchool.prefab","name":"buildingTouch","height":350},
+            "nodeParent":83,
+            "label":"buildingTouch",
+            "isDirectory":false,
+            "isAniNode":true,
+            "hasChild":false,
+            "compId":96,
+            "child":[
+                ]
         },
         {
             "x":15,

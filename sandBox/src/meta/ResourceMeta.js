@@ -2,14 +2,24 @@ export default class ResourceMeta {
 
 }
 
+ResourceMeta.SoundPiano1Path = "source/sound/1.mp3";
+ResourceMeta.SoundPiano2Path = "source/sound/2.mp3";
+ResourceMeta.SoundPiano3Path = "source/sound/3.mp3";
+ResourceMeta.SoundPiano4Path = "source/sound/4.mp3";
+ResourceMeta.SoundPiano5Path = "source/sound/5.mp3";
+ResourceMeta.SoundPiano6Path = "source/sound/6.mp3";
+ResourceMeta.SoundPiano7Path = "source/sound/7.mp3";
+
 ResourceMeta.ManAniPath = "anim/Man.ani";    //男人动画
 ResourceMeta.WomanAniPath = "anim/Woman.ani";    //女人动画
 
 ResourceMeta.ShopDialogScenePath = "scene/ShopDialog.scene";
 ResourceMeta.SchoolDialogScenePath = "scene/SchoolDialog.scene";
+ResourceMeta.ChildSchoolDialogScenePath = "scene/ChildSchoolDialog.scene";
 ResourceMeta.PowerPlantDialogScenePath = "scene/PowerPlantDialog.scene";
 ResourceMeta.HospitalDialogScenePath = "scene/HospitalDialog.scene";
 ResourceMeta.FactoryDialogScenePath = "scene/FactoryDialog.scene";
+ResourceMeta.OperaDialogScenePath = "scene/OperaDialog.scene";
 
 ResourceMeta.ResidentPrefabPath = "prefab/Resident.prefab";   //居民prefab路径
 ResourceMeta.FoodPrefabPath = "prefab/Food.prefab";           //食物prefab路径
@@ -54,6 +64,34 @@ ResourceMeta.FactoryPrefabPath = "prefab/Factory.prefab";    //工厂prefab路�
 
 // 图集map
 ResourceMeta.ResourceMap = [
+    {
+        type: Laya.Loader.SOUND,
+        url: ResourceMeta.SoundPiano1Path
+    },
+    {
+        type: Laya.Loader.SOUND,
+        url: ResourceMeta.SoundPiano2Path
+    },
+    {
+        type: Laya.Loader.SOUND,
+        url: ResourceMeta.SoundPiano3Path
+    },
+    {
+        type: Laya.Loader.SOUND,
+        url: ResourceMeta.SoundPiano4Path
+    },
+    {
+        type: Laya.Loader.SOUND,
+        url: ResourceMeta.SoundPiano5Path
+    },
+    {
+        type: Laya.Loader.SOUND,
+        url: ResourceMeta.SoundPiano6Path
+    },
+    {
+        type: Laya.Loader.SOUND,
+        url: ResourceMeta.SoundPiano7Path
+    },
     {
         type: Laya.Loader.ATLAS,
         url: ResourceMeta.BuildingAtlasPath

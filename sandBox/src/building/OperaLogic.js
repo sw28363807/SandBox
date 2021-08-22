@@ -1,3 +1,4 @@
+import ResourceMeta from "../meta/ResourceMeta";
 import BuildingBaseLogic from "./BuildingBaseLogic";
 
 export default class OperaLogic extends BuildingBaseLogic {
@@ -14,4 +15,10 @@ export default class OperaLogic extends BuildingBaseLogic {
     onCreateBuildingFinish() {
     }
 
+    // 点击建筑物
+    onClickBuilding() {
+        Laya.Dialog.open(ResourceMeta.OperaDialogScenePath, null, null, Laya.Handler.create(this, function (scene) {
+            scene.selectedBuilding = this.owner;
+        }));
+    }
 }

@@ -171,6 +171,24 @@ BuildingMeta.BuildingDatas = {
         costTree: 0,
         costStone: 0,
         desc: "可以让孩子快速成长",
+        teachers: [
+            {
+                teacherId: 1,
+                name: "李翠萍老师",
+                desc: "教学一般般",
+                sex: 1, //1 男 2 女,
+                costGold: 333,
+                addAgePriority: 90,
+            },
+            {
+                teacherId: 2,
+                name: "北辰沈老师",
+                desc: "教学一般般，人很漂亮，但是对于提升教育质量似乎没有什么用",
+                sex: 2, //1 男 2 女
+                costGold: 444,
+                addAgePriority: 100,
+            },
+        ],
     },
     // 发电厂
     [String(BuildingMeta.BuildingType.PowerPlantType)]: {
