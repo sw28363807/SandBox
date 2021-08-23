@@ -1,3 +1,4 @@
+import BuildingMeta from "../meta/BuildingMeta";
 import ResourceMeta from "../meta/ResourceMeta";
 export default class OperaDialogLogic extends Laya.Script {
 
@@ -12,14 +13,20 @@ export default class OperaDialogLogic extends Laya.Script {
     }
 
     onStart() {
+        this.addTouchEnjoy = BuildingMeta.BuildingDatas[BuildingMeta.BuildingType.OperaType].addTouchEnjoy;
         this.buildingScript = this.owner.selectedBuilding.buildingScript;
         this.buildingModel = this.buildingScript.getModel();
         this.closeBtn = this.owner.getChildByName("closeBtn");
         this.closeBtn.on(Laya.Event.CLICK, this, function () {
             Laya.Dialog.close(ResourceMeta.OperaDialogScenePath);
         });
-
+        this.descText = this.owner.getChildByName("descText");
         this.initTouch();
+    }
+
+    refreshNum() {
+        let num = this.owner.selectedBuildingScript.getCurSaveEnjoy();
+        this.descText.text = String(num);
     }
 
     initTouch() {
@@ -51,6 +58,8 @@ export default class OperaDialogLogic extends Laya.Script {
         control.state2.visible = false;
         let key = "source/sound/" + String(index) + ".mp3"
         Laya.SoundManager.playSound(key, 1);
+        this.owner.selectedBuildingScript.addEnjoyToOpera(this.addTouchEnjoy);
+        this.refreshNum();
     }
 
     onTouchUpControl(index, control) {

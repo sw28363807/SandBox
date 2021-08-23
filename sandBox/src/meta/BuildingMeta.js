@@ -279,6 +279,7 @@ BuildingMeta.BuildingDatas = {
         costTree: 0,
         costStone: 0,
         addEnjoy: 10,
+        addTouchEnjoy: 1,
         desc: "可以让居民快乐的地方",
     },
     // 警察局
