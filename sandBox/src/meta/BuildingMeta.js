@@ -444,8 +444,8 @@ BuildingMeta.BuildingDatas = {
     [String(BuildingMeta.BuildingType.BankType)]: {
         prefab: ResourceMeta.BankPrefabPath,
         preview: "source/building/bank.png",
-        realWidth: 350,
-        realHeight: 350,
+        realWidth: 400,
+        realHeight: 400,
         createBuildingSpeed: 2000,
         useBuildingTime: 5000,
         createPriority: 1,
@@ -453,6 +453,12 @@ BuildingMeta.BuildingDatas = {
         costTree: 0,
         costStone: 0,
         desc: "可以各种资源之间互相兑换",
+        changeList: {
+            tree: 20,
+            stone: 20,
+            elec: 20
+        }
+        
     },
     // 养生堂
     [String(BuildingMeta.BuildingType.BloodBuildingType)]: {

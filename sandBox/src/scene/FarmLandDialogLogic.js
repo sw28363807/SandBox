@@ -32,7 +32,7 @@ export default class FarmLandDialogLogic extends Laya.Script {
         this.foodId = 0;
         this.foods = {};
         Laya.timer.frameLoop(1, this, this.onUpdateMiniGame);
-        Laya.timer.loop(200, this, this.onTriggerFood);
+        Laya.timer.loop(150, this, this.onTriggerFood);
         this.root.on(Laya.Event.MOUSE_DOWN, this, function () {
             let x = Laya.stage.mouseX;
             let y = Laya.stage.mouseY;
@@ -63,12 +63,13 @@ export default class FarmLandDialogLogic extends Laya.Script {
         this.root.addChild(spr);
         this.foodId++;
         this.foods[String(this.foodId)] = spr;
-        let x = RandomMgr.randomNumber(50, this.root.width - 50);
+        let x = RandomMgr.randomNumber(100, this.root.width - 100);
         let y = 0;
         spr.x = x;
         spr.y = y;
         let speed = RandomMgr.randomNumber(6, 12);
         spr.speed = speed;
+        spr.rotation = RandomMgr.randomNumber(0, 359);
     }
 
     onTouchDownFood(food) {
@@ -76,7 +77,7 @@ export default class FarmLandDialogLogic extends Laya.Script {
     }
 
     onTriggerFood() {
-        if (RandomMgr.randomYes(0.6)) {
+        if (RandomMgr.randomYes()) {
             this.triggerFood();
         }
     }
