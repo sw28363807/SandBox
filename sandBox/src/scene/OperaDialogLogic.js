@@ -10,6 +10,7 @@ export default class OperaDialogLogic extends Laya.Script {
     }
 
     onDisable() {
+        Laya.timer.clear(this, this.refreshNum);
     }
 
     onStart() {
@@ -22,19 +23,19 @@ export default class OperaDialogLogic extends Laya.Script {
         });
         this.descText = this.owner.getChildByName("descText");
         this.initTouch();
+
+        Laya.timer.loop(1000, this, this.refreshNum);
     }
 
     refreshNum() {
-        let num = this.owner.selectedBuildingScript.getCurSaveEnjoy();
+        let num = this.buildingScript.getCurSaveEnjoy();
         this.descText.text = String(num);
     }
 
     initTouch() {
         this.touchs = {};
         for (let index = 0; index < 7; index++) {
-            // "source/sound/" + String(index + 1) + ".mp3"
             let control = this.owner.getChildByName("sound" + String(index + 1));
-            // source/sound/1.mp3
             this.touchs[String(index + 1)] = control;
             let numText = control.getChildByName("num");
             numText.text = String(index + 1);
@@ -58,7 +59,7 @@ export default class OperaDialogLogic extends Laya.Script {
         control.state2.visible = false;
         let key = "source/sound/" + String(index) + ".mp3"
         Laya.SoundManager.playSound(key, 1);
-        this.owner.selectedBuildingScript.addEnjoyToOpera(this.addTouchEnjoy);
+        this.buildingScript.addEnjoyToOpera(this.addTouchEnjoy);
         this.refreshNum();
     }
 

@@ -22,6 +22,13 @@ export default class FarmLandLogic extends BuildingBaseLogic {
         super.onDisable();
     }
 
+    // 点击建筑物
+    onClickBuilding() {
+        Laya.Dialog.open(ResourceMeta.FarmLandDialogScenePath, null, null, Laya.Handler.create(this, function (scene) {
+            scene.selectedBuilding = this.owner;
+        }));
+    }
+
     onAddFood() {
         let season = GameModel.getInstance().getGameSeason();
         if (season == 1 || season == 2) {
@@ -95,8 +102,8 @@ export default class FarmLandLogic extends BuildingBaseLogic {
             upFunc: upFunc,
             downFunc: downFunc,
         });
-        let centerX = this.owner.width/2;
-        let centerY = this.owner.height/2;
+        let centerX = this.owner.width / 2;
+        let centerY = this.owner.height / 2;
         animal.x = centerX;
         animal.y = centerY;
         this.startWalk(animal);

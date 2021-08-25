@@ -28,7 +28,6 @@ export default class OperaLogic extends BuildingBaseLogic {
     onClickBuilding() {
         Laya.Dialog.open(ResourceMeta.OperaDialogScenePath, null, null, Laya.Handler.create(this, function (scene) {
             scene.selectedBuilding = this.owner;
-            scene.selectedBuildingScript = this;
         }));
     }
 
