@@ -77,6 +77,26 @@ BuildingMeta.BuildingDatas = {
         costStone: 0,
         desc: "居住的地方"
     },
+    // 银行
+    [String(BuildingMeta.BuildingType.BankType)]: {
+        prefab: ResourceMeta.BankPrefabPath,
+        preview: "source/building/bank.png",
+        realWidth: 400,
+        realHeight: 400,
+        createBuildingSpeed: 2000,
+        useBuildingTime: 5000,
+        createPriority: 1,
+        buildingName: "银行",
+        costTree: 0,
+        costStone: 0,
+        desc: "可以各种资源之间互相兑换",
+        changeList: {
+            tree: 20,
+            stone: 20,
+            elec: 20
+        }
+
+    },
     // 工厂
     [String(BuildingMeta.BuildingType.FactoryType)]: {
         prefab: ResourceMeta.FactoryPrefabPath,
@@ -439,26 +459,6 @@ BuildingMeta.BuildingDatas = {
         costTree: 0,
         costStone: 0,
         desc: "可以增加采集食物水源速度",
-    },
-    // 银行
-    [String(BuildingMeta.BuildingType.BankType)]: {
-        prefab: ResourceMeta.BankPrefabPath,
-        preview: "source/building/bank.png",
-        realWidth: 400,
-        realHeight: 400,
-        createBuildingSpeed: 2000,
-        useBuildingTime: 5000,
-        createPriority: 1,
-        buildingName: "银行",
-        costTree: 0,
-        costStone: 0,
-        desc: "可以各种资源之间互相兑换",
-        changeList: {
-            tree: 20,
-            stone: 20,
-            elec: 20
-        }
-        
     },
     // 养生堂
     [String(BuildingMeta.BuildingType.BloodBuildingType)]: {
