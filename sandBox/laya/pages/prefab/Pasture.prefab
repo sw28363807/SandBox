@@ -2,11 +2,11 @@
     "x":0,
     "type":"Box",
     "selectedBox":83,
-    "selecteID":87,
+    "selecteID":98,
     "searchKey":"Box,Building",
     "props":{"width":500,"presetID":1,"preset":"laya/pages/prefab/Pasture.prefab","name":"Building","isPresetRoot":true,"height":300},
     "nodeParent":-1,
-    "maxID":98,
+    "maxID":99,
     "label":"Building",
     "isOpen":true,
     "isDirectory":true,
@@ -75,23 +75,6 @@
         },
         {
             "x":15,
-            "type":"Script",
-            "switchAble":true,
-            "source":"src/building/PastureLogic.js",
-            "searchKey":"Script,PastureLogic",
-            "removeAble":true,
-            "props":{"presetID":9,"preset":"laya/pages/prefab/Pasture.prefab"},
-            "nodeParent":83,
-            "label":"PastureLogic",
-            "isDirectory":false,
-            "isAniNode":true,
-            "hasChild":false,
-            "compId":95,
-            "child":[
-                ]
-        },
-        {
-            "x":15,
             "type":"Text",
             "searchKey":"Text,foodPoolText",
             "props":{"y":-18,"x":250,"width":100,"valign":"middle","text":"text","presetID":10,"preset":"laya/pages/prefab/Pasture.prefab","pivotY":18,"pivotX":50,"name":"foodPoolText","height":36,"fontSize":36,"font":"Microsoft YaHei","color":"#d2462c","bold":true,"align":"center"},
@@ -101,6 +84,37 @@
             "isAniNode":true,
             "hasChild":false,
             "compId":97,
+            "child":[
+                ]
+        },
+        {
+            "x":15,
+            "type":"Box",
+            "searchKey":"Box,buildingTouch",
+            "props":{"width":500,"presetID":11,"preset":"laya/pages/prefab/Pasture.prefab","name":"buildingTouch","height":300},
+            "nodeParent":83,
+            "label":"buildingTouch",
+            "isDirectory":false,
+            "isAniNode":true,
+            "hasChild":false,
+            "compId":98,
+            "child":[
+                ]
+        },
+        {
+            "x":15,
+            "type":"Script",
+            "switchAble":true,
+            "source":"src/building/PastureLogic.js",
+            "searchKey":"Script,PastureLogic",
+            "removeAble":true,
+            "props":{"y":0,"x":0,"presetID":9,"preset":"laya/pages/prefab/Pasture.prefab"},
+            "nodeParent":83,
+            "label":"PastureLogic",
+            "isDirectory":false,
+            "isAniNode":true,
+            "hasChild":false,
+            "compId":95,
             "child":[
                 ]
         }],

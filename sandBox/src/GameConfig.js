@@ -5,6 +5,7 @@ import FactoryDialogLogic from "./scene/FactoryDialogLogic"
 import FarmLandDialogLogic from "./scene/FarmLandDialogLogic"
 import HospitalDialogLogic from "./scene/HospitalDialogLogic"
 import OperaDialogLogic from "./scene/OperaDialogLogic"
+import PastureDialogLogic from "./scene/PastureDialogLogic"
 import PowerPlantDialogLogic from "./scene/PowerPlantDialogLogic"
 import SchoolDialogLogic from "./scene/SchoolDialogLogic"
 import ShopDialogLogic from "./scene/ShopDialogLogic"
@@ -71,6 +72,7 @@ export default class GameConfig {
 		reg("scene/FarmLandDialogLogic.js",FarmLandDialogLogic);
 		reg("scene/HospitalDialogLogic.js",HospitalDialogLogic);
 		reg("scene/OperaDialogLogic.js",OperaDialogLogic);
+		reg("scene/PastureDialogLogic.js",PastureDialogLogic);
 		reg("scene/PowerPlantDialogLogic.js",PowerPlantDialogLogic);
 		reg("scene/SchoolDialogLogic.js",SchoolDialogLogic);
 		reg("scene/ShopDialogLogic.js",ShopDialogLogic);

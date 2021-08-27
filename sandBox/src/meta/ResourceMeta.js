@@ -22,6 +22,7 @@ ResourceMeta.FactoryDialogScenePath = "scene/FactoryDialog.scene";
 ResourceMeta.OperaDialogScenePath = "scene/OperaDialog.scene";
 ResourceMeta.FarmLandDialogScenePath = "scene/FarmLandDialog.scene";
 ResourceMeta.BankDialogScenePath = "scene/BankDialog.scene";
+ResourceMeta.PastureDialogScenePath = "scene/PastureDialog.scene";
 
 ResourceMeta.ResidentPrefabPath = "prefab/Resident.prefab";   //居民prefab路径
 ResourceMeta.FoodPrefabPath = "prefab/Food.prefab";           //食物prefab路径

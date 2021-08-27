@@ -77,6 +77,21 @@ BuildingMeta.BuildingDatas = {
         costStone: 0,
         desc: "居住的地方"
     },
+    // 牧场
+    [String(BuildingMeta.BuildingType.PastureType)]: {
+        prefab: ResourceMeta.PasturePrefabPath,
+        preview: "source/building/pasture_big.png",
+        realWidth: 500,
+        realHeight: 300,
+        createBuildingSpeed: 2000,
+        useBuildingTime: 5000,
+        createPriority: 1,
+        buildingName: "牧场",
+        costTree: 0,
+        maxSave: 3000,
+        addFood: 100,
+        desc: "可以养殖动物，春天冬天可以收获哦~",
+    },
     // 银行
     [String(BuildingMeta.BuildingType.BankType)]: {
         prefab: ResourceMeta.BankPrefabPath,
@@ -95,7 +110,6 @@ BuildingMeta.BuildingDatas = {
             stone: 20,
             elec: 20
         }
-
     },
     // 工厂
     [String(BuildingMeta.BuildingType.FactoryType)]: {
@@ -269,22 +283,6 @@ BuildingMeta.BuildingDatas = {
         maxSave: 3000,
         addFood: 100,
         desc: "可以种植增加食物，夏天秋天可以收获哦~",
-    },
-    // 牧场
-    [String(BuildingMeta.BuildingType.PastureType)]: {
-        prefab: ResourceMeta.PasturePrefabPath,
-        preview: "source/building/pasture_big.png",
-        realWidth: 500,
-        realHeight: 300,
-        createBuildingSpeed: 2000,
-        useBuildingTime: 5000,
-        createPriority: 1,
-        buildingName: "牧场",
-        costTree: 0,
-        costStone: 0,
-        maxSave: 3000,
-        addFood: 100,
-        desc: "可以养殖动物，春天冬天可以收获哦~",
     },
     // 歌剧院
     [String(BuildingMeta.BuildingType.OperaType)]: {
