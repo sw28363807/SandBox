@@ -77,6 +77,20 @@ BuildingMeta.BuildingDatas = {
         costStone: 0,
         desc: "居住的地方"
     },
+    // 实验室
+    [String(BuildingMeta.BuildingType.LabType)]: {
+        prefab: ResourceMeta.LabPrefabPath,
+        preview: "source/building/scienceLab.png",
+        realWidth: 500,
+        realHeight: 500,
+        createBuildingSpeed: 2000,
+        useBuildingTime: 5000,
+        createPriority: 1,
+        buildingName: "科学实验室",
+        costTree: 0,
+        costStone: 0,
+        desc: "快速增长科技研究",
+    },
     // 牧场
     [String(BuildingMeta.BuildingType.PastureType)]: {
         prefab: ResourceMeta.PasturePrefabPath,
@@ -313,20 +327,6 @@ BuildingMeta.BuildingDatas = {
         costTree: 0,
         costStone: 0,
         desc: "可以平息冲突",
-    },
-    // 实验室
-    [String(BuildingMeta.BuildingType.LabType)]: {
-        prefab: ResourceMeta.LabPrefabPath,
-        preview: "source/building/scienceLab.png",
-        realWidth: 500,
-        realHeight: 500,
-        createBuildingSpeed: 2000,
-        useBuildingTime: 5000,
-        createPriority: 1,
-        buildingName: "科学实验室",
-        costTree: 0,
-        costStone: 0,
-        desc: "快速增长科技研究",
     },
     // 写字楼
     [String(BuildingMeta.BuildingType.OfficeType)]: {
