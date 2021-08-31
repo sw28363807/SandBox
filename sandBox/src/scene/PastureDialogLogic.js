@@ -13,6 +13,7 @@ export default class PastureDialogLogic extends Laya.Script {
 
     onDisable() {
         Laya.timer.clear(this, this.onTriggerBug);
+        Laya.timer.clear(this, this.refreshRemainTimeText);
     }
 
     onStart() {
@@ -26,17 +27,37 @@ export default class PastureDialogLogic extends Laya.Script {
     }
 
     initMiniGame() {
+        this.score = 0;
+        this.remainTime = 25;
         this.dongs = {};
         this.dongSprs = {};
+        this.scoreText = this.owner.getChildByName("scoreText");
+        this.remainTimeText = this.owner.getChildByName("remainTimeText");
         for (let index = 0; index < 3; index++) {
             let key = String(index + 1);
             this.dongs[key] = this.owner.getChildByName("dong" + key);
         }
+        Laya.timer.loop(1000, this, this.refreshRemainTimeText);
         Laya.timer.loop(100, this, this.onTriggerBug);
+        this.refreshScoreText();
+        this.refreshRemainTimeText();
+    }
+
+
+    refreshRemainTimeText() {
+        this.remainTime -= 1;
+        if (this.remainTime < 0) {
+            this.remainTime = 0;
+        }
+        if (this.remainTime == 0) {
+            this.remainTimeText.text = "已结束";
+        } else {
+            this.remainTimeText.text = "剩余:"+String(this.remainTime);
+        }
     }
 
     onTriggerBug() {
-        if (RandomMgr.randomYes(0.7)) {
+        if (RandomMgr.randomYes(0.8)) {
             let index = RandomMgr.randomNumber(1, 3);
             let spr = this.dongSprs[String(index)];
             if (spr == null || spr == undefined) {
@@ -49,8 +70,19 @@ export default class PastureDialogLogic extends Laya.Script {
                 bug.y = parentNode.height;
                 bug.state = 0;
                 bug.destHeight = parentNode.height;
+                bug.on(Laya.Event.MOUSE_DOWN, this, function () {
+                    bug.destroy(true);
+                    delete this.dongSprs[String(index)];
+                    this.score++;
+                    this.refreshScoreText();
+                });
             }
         }
+    }
+
+
+    refreshScoreText() {
+        this.scoreText.text = "积分: " + String(this.score);
     }
 
     onUpdate() {
