@@ -3,7 +3,7 @@ export default class QuestionMeta {
 
 QuestionMeta.question = [
     {
-        question: "问题1",
+        question: "问题",
         option: [
             "答案1",
             "答案2",
