@@ -77,6 +77,21 @@ BuildingMeta.BuildingDatas = {
         costStone: 0,
         desc: "居住的地方"
     },
+    // 写字楼
+    [String(BuildingMeta.BuildingType.OfficeType)]: {
+        prefab: ResourceMeta.OfficePrefabPath,
+        preview: "source/building/office.png",
+        realWidth: 400,
+        realHeight: 400,
+        createBuildingSpeed: 2000,
+        useBuildingTime: 5000,
+        createPriority: 1,
+        buildingName: "写字楼",
+        costTree: 0,
+        costStone: 0,
+        addGold: 1,
+        desc: "居民收入来源",
+    },
     // 实验室
     [String(BuildingMeta.BuildingType.LabType)]: {
         prefab: ResourceMeta.LabPrefabPath,
@@ -327,21 +342,6 @@ BuildingMeta.BuildingDatas = {
         costTree: 0,
         costStone: 0,
         desc: "可以平息冲突",
-    },
-    // 写字楼
-    [String(BuildingMeta.BuildingType.OfficeType)]: {
-        prefab: ResourceMeta.OfficePrefabPath,
-        preview: "source/building/office.png",
-        realWidth: 400,
-        realHeight: 400,
-        createBuildingSpeed: 2000,
-        useBuildingTime: 5000,
-        createPriority: 1,
-        buildingName: "写字楼",
-        costTree: 0,
-        costStone: 0,
-        addGold: 1,
-        desc: "居民收入来源",
     },
     // 餐厅
     [String(BuildingMeta.BuildingType.RestaurantType)]: {
