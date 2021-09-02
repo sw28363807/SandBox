@@ -2,6 +2,7 @@ import RandomMgr from "../helper/RandomMgr";
 import BuildingMeta from "../meta/BuildingMeta";
 import QuestionMeta from "../meta/QuestionMeta";
 import ResourceMeta from "../meta/ResourceMeta";
+import TipMgr from "../helper/TipMgr";
 export default class OfficeDialogLogic extends Laya.Script {
 
     constructor() {
@@ -21,6 +22,12 @@ export default class OfficeDialogLogic extends Laya.Script {
         this.closeBtn.on(Laya.Event.CLICK, this, function () {
             Laya.Dialog.close(ResourceMeta.OfficeDialogScenePath);
         });
+        this.changeBtn = this.owner.getChildByName("changeBtn");
+        this.changeBtn.on(Laya.Event.CLICK, this, function () {
+            this.roundStart = true;
+            this.refreshQuestion();
+        });
+        this.roundStart = true;
         this.initQuestion();
     }
 
@@ -54,19 +61,37 @@ export default class OfficeDialogLogic extends Laya.Script {
             }
             this.answers[index].text = prefile +  data.option[index];
         }
-
-        let answer = data.answer;
+        for (const key in this.answers) {
+            let control = this.answers[key];
+            control.color = "#ea8323";
+            control.typeset();
+        }
+        this.answerIndex = data.answer;
         let answerText = "正确答案: A";
-        if (answer == 1) {
+        if (this.answerIndex == 1) {
             answerText = "正确答案: B";
-        } else if (answer == 2) {
+        } else if (this.answerIndex == 2) {
             answerText = "正确答案: C";
         }
         this.rightText.text = answerText;
+        this.rightText.visible = false;
     }
 
     onClickAnswer(index) {
-
+        if (this.roundStart == false) {
+            TipMgr.getInstance().showTip("请换一道题~");
+            return;
+        }
+        if (this.roundStart == true) {
+            this.roundStart = false;
+        }
+        if (this.answerIndex == index) {
+            this.answers[index].color = "#30bc15";
+        } else {
+            this.answers[index].color = "#ea234a";
+        }
+        this.rightText.visible = true;
+        this.answers[index].typeset();
     }
 
 }

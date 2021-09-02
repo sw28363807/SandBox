@@ -15,6 +15,7 @@ export default class TipLogic extends Laya.Script {
 
     setString(str) {
         this.textLabel.text = str;
+        this.owner.zOrder = 65535;
         this.owner.x = Laya.stage.width / 2;
         this.owner.y = Laya.stage.height / 2;
         Laya.Tween.to(this.owner, { y: this.owner.y - 70 }, 300, Laya.Ease.linearOut, Laya.Handler.create(this, function () {

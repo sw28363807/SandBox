@@ -3,20 +3,20 @@ export default class QuestionMeta {
 
 QuestionMeta.question = [
     {
-        question: "问题",
+        question: "沈老师体重是多少？",
         option: [
-            "答案1",
-            "答案2",
-            "答案3",
+            "90斤",
+            "100斤",
+            "102斤",
         ],
-        answer: 1,
+        answer: 2,
     },
     {
-        question: "问题2",
+        question: "吃爆米花会胖么？",
         option: [
-            "答案1",
-            "答案2",
-            "答案3",
+            "不会胖",
+            "会胖很多",
+            "只有沈老师吃了不会胖",
         ],
         answer: 2,
     },
