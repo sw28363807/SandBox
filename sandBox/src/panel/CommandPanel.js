@@ -1,5 +1,4 @@
 import BuildingMgr from "../building/BuildingMgr";
-import ResourceMgr from "../game/ResourceMgr";
 import TipMgr from "../helper/TipMgr";
 import BuildingMeta from "../meta/BuildingMeta";
 import GameContext from "../meta/GameContext";

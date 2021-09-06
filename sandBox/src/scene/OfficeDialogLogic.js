@@ -27,11 +27,12 @@ export default class OfficeDialogLogic extends Laya.Script {
             this.roundStart = true;
             this.refreshQuestion();
         });
-        this.roundStart = true;
+        this.scoreText = this.owner.getChildByName("scoreText");
         this.initQuestion();
     }
 
     initQuestion() {
+        this.roundStart = true;
         this.answers = [];
         for (let index = 0; index < 3; index++) {
             let a = this.owner.getChildByName("a" + String(index));
@@ -43,6 +44,7 @@ export default class OfficeDialogLogic extends Laya.Script {
         this.questionText = this.owner.getChildByName("question");
         this.rightText = this.owner.getChildByName("right");
         this.refreshQuestion();
+        this.refreshScoreText();
     }
 
     refreshQuestion() {
@@ -59,7 +61,7 @@ export default class OfficeDialogLogic extends Laya.Script {
             } else if (index == 2) {
                 prefile = "C. ";
             }
-            this.answers[index].text = prefile +  data.option[index];
+            this.answers[index].text = prefile + data.option[index];
         }
         for (const key in this.answers) {
             let control = this.answers[key];
@@ -87,11 +89,18 @@ export default class OfficeDialogLogic extends Laya.Script {
         }
         if (this.answerIndex == index) {
             this.answers[index].color = "#30bc15";
+            this.buildingScript.addGoldToOffice(1);
         } else {
             this.answers[index].color = "#ea234a";
+            this.buildingScript.addGoldToOffice(-1);
         }
         this.rightText.visible = true;
         this.answers[index].typeset();
+        this.refreshScoreText();
+    }
+
+    refreshScoreText() {
+        this.scoreText.text = "当前积分: " + String(this.buildingScript.getCurSaveGold());
     }
 
 }

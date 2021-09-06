@@ -91,6 +91,7 @@ BuildingMeta.BuildingDatas = {
         costStone: 0,
         addGold: 1,
         desc: "居民收入来源",
+        maxSave: 10,
     },
     // 实验室
     [String(BuildingMeta.BuildingType.LabType)]: {
