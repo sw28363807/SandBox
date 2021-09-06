@@ -196,7 +196,11 @@ export default class ResidentUseBuildingAILogic extends Laya.Script {
         }
         // 工作完成
         else if (state == ResidentMeta.ResidentState.Working) {
-            GameModel.getInstance().addGoldNum(BuildingMeta.BuildingDatas[BuildingMeta.BuildingType.OfficeType].addGold);
+            let addGoldMetaNum = BuildingMeta.BuildingDatas[BuildingMeta.BuildingType.OfficeType].addGold;
+            let buildingScript = this.useBuilding.buildingScript;
+            let addGold = Math.min(addGoldMetaNum, buildingScript.getCurSaveGold());
+            buildingScript.addGoldToOffice(-addGold);
+            GameModel.getInstance().addGoldNum(addGold);
         }
         // 看歌剧完成
         else if (state == ResidentMeta.ResidentState.WatchOpera) {
@@ -294,9 +298,17 @@ export default class ResidentUseBuildingAILogic extends Laya.Script {
         }
         // 去office
         else if (aiData == ResidentMeta.ResidentState.GoToOfficeForWork) {
+            let filterFunc = function (building) {
+                if (building.buildingScript.getCurSaveGold() == 0) {
+                    return false;
+                } else if (building.buildingScript.isReachGoldMax()) {
+                    return false;
+                }
+                return true;
+            }
             let building = BuildingMgr.getInstance().getAlltBuildingForCondition(this.owner.x,
                 this.owner.y, data.buildingType,
-                2000, [BuildingMeta.BuildingState.Noraml], null, true);
+                2000, [BuildingMeta.BuildingState.Noraml], filterFunc, true);
             return building;
         }
         // 去歌剧院
