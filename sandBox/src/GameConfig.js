@@ -6,6 +6,7 @@ import FarmLandDialogLogic from "./scene/FarmLandDialogLogic"
 import HospitalDialogLogic from "./scene/HospitalDialogLogic"
 import LabDialogLogic from "./scene/LabDialogLogic"
 import OfficeDialogLogic from "./scene/OfficeDialogLogic"
+import OilDialogLogic from "./scene/OilDialogLogic"
 import OperaDialogLogic from "./scene/OperaDialogLogic"
 import PastureDialogLogic from "./scene/PastureDialogLogic"
 import PowerPlantDialogLogic from "./scene/PowerPlantDialogLogic"
@@ -75,6 +76,7 @@ export default class GameConfig {
 		reg("scene/HospitalDialogLogic.js",HospitalDialogLogic);
 		reg("scene/LabDialogLogic.js",LabDialogLogic);
 		reg("scene/OfficeDialogLogic.js",OfficeDialogLogic);
+		reg("scene/OilDialogLogic.js",OilDialogLogic);
 		reg("scene/OperaDialogLogic.js",OperaDialogLogic);
 		reg("scene/PastureDialogLogic.js",PastureDialogLogic);
 		reg("scene/PowerPlantDialogLogic.js",PowerPlantDialogLogic);

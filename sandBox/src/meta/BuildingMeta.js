@@ -77,6 +77,20 @@ BuildingMeta.BuildingDatas = {
         costStone: 0,
         desc: "居住的地方"
     },
+    // 炼油厂
+    [String(BuildingMeta.BuildingType.OilType)]: {
+        prefab: ResourceMeta.OilPrefabPath,
+        preview: "source/building/oil.png",
+        realWidth: 500,
+        realHeight: 500,
+        createBuildingSpeed: 2000,
+        useBuildingTime: 5000,
+        createPriority: 1,
+        buildingName: "炼油厂",
+        costTree: 0,
+        costStone: 0,
+        desc: "可以提炼开采发展石油工业",
+    },
     // 写字楼
     [String(BuildingMeta.BuildingType.OfficeType)]: {
         prefab: ResourceMeta.OfficePrefabPath,
@@ -472,19 +486,5 @@ BuildingMeta.BuildingDatas = {
         costTree: 0,
         costStone: 0,
         desc: "可以恢复少量生命值",
-    },
-    // 炼油厂
-    [String(BuildingMeta.BuildingType.OilType)]: {
-        prefab: ResourceMeta.OilPrefabPath,
-        preview: "source/building/oil.png",
-        realWidth: 500,
-        realHeight: 500,
-        createBuildingSpeed: 2000,
-        useBuildingTime: 5000,
-        createPriority: 1,
-        buildingName: "炼油厂",
-        costTree: 0,
-        costStone: 0,
-        desc: "可以提炼开采发展石油工业",
     },
 };
