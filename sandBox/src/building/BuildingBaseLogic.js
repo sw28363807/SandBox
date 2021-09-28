@@ -1,4 +1,5 @@
 import EventMgr from "../helper/EventMgr";
+import TipMgr from "../helper/TipMgr";
 import Utils from "../helper/Utils";
 import BuildingMeta from "../meta/BuildingMeta";
 import GameEvent from "../meta/GameEvent";
@@ -41,7 +42,11 @@ export default class BuildingBaseLogic extends Laya.Script {
         this.buildingTouch.on(Laya.Event.MOUSE_UP, this, function (e) {
             if (this.touchDownPos) {
                 if (this.touchDownPos.distance(Laya.stage.mouseX, Laya.stage.mouseX) < 10) {
-                    this.onClickBuilding();
+                    if (this.model.getBuildingState() == BuildingMeta.BuildingState.Noraml) {
+                        this.onClickBuilding();
+                    } else {
+                        TipMgr.getInstance().showTip("还未建造完成哦");
+                    }
                 };
             }
             this.touchDownPos = null;

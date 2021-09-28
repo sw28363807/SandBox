@@ -77,6 +77,68 @@ BuildingMeta.BuildingDatas = {
         costStone: 0,
         desc: "居住的地方"
     },
+    // 医院
+    [String(BuildingMeta.BuildingType.HospitalType)]: {
+        prefab: ResourceMeta.HospitalPrefabPath,
+        preview: "source/building/hospital1_1.png",
+        realWidth: 400,
+        realHeight: 400,
+        createBuildingSpeed: 2000,
+        useBuildingTime: 5000,
+        createPriority: 1,
+        buildingName: "医院",
+        costTree: 0,
+        costStone: 0,
+        desc: "可以治疗疾病",
+        doctors: [
+            {
+                doctorId: 1,
+                name: "王二狗大夫",
+                desc: "医术一般般",
+                healProbability: 50,
+                sex: 1, //1 男 2 女,
+                costGold: 1,
+            },
+            {
+                doctorId: 2,
+                name: "赵德柱大夫",
+                desc: "医术还可以",
+                healProbability: 90,
+                sex: 2, //1 男 2 女,
+                costGold: 2,
+            },
+        ]
+    },
+    // 水仓库
+    [String(BuildingMeta.BuildingType.WaterPoolType)]: {
+        prefab: ResourceMeta.WaterPoolPrefabPath,
+        preview: "source/building/WaterPool.png",
+        realWidth: 300,
+        realHeight: 300,
+        createBuildingSpeed: 2000,
+        useBuildingTime: 5000,
+        createPriority: 1,
+        buildingName: "水仓库",
+        costTree: 5,
+        costStone: 5,
+        maxSave: 1000,
+        desc: "可以保存水源以便今后使用",
+    },
+    // 食物仓库
+    [String(BuildingMeta.BuildingType.FoodPoolType)]: {
+        prefab: ResourceMeta.FoodPoolPrefabPath,
+        preview: "source/building/FoodPool.png",
+        realWidth: 300,
+        realHeight: 300,
+        createBuildingSpeed: 2000,
+        useBuildingTime: 5000,
+        createPriority: 1,
+        buildingName: "食物仓库",
+        costTree: 5,
+        costStone: 5,
+        maxSave: 600,
+        desc: "可以保存食物以便今后使用",
+    },
     // 炼油厂
     [String(BuildingMeta.BuildingType.OilType)]: {
         prefab: ResourceMeta.OilPrefabPath,
@@ -170,38 +232,6 @@ BuildingMeta.BuildingDatas = {
         desc: "可以制造各种工业产品的地方",
         addGoldPerResident: 1,
         maxResident: 10,
-    },
-    // 医院
-    [String(BuildingMeta.BuildingType.HospitalType)]: {
-        prefab: ResourceMeta.HospitalPrefabPath,
-        preview: "source/building/hospital1_1.png",
-        realWidth: 400,
-        realHeight: 400,
-        createBuildingSpeed: 2000,
-        useBuildingTime: 5000,
-        createPriority: 1,
-        buildingName: "医院",
-        costTree: 0,
-        costStone: 0,
-        desc: "可以治疗疾病",
-        doctors: [
-            {
-                doctorId: 1,
-                name: "王二狗大夫",
-                desc: "医术一般般",
-                healProbability: 50,
-                sex: 1, //1 男 2 女,
-                costGold: 1,
-            },
-            {
-                doctorId: 2,
-                name: "赵德柱大夫",
-                desc: "医术还可以",
-                healProbability: 90,
-                sex: 2, //1 男 2 女,
-                costGold: 2,
-            },
-        ]
     },
     // 学校
     [String(BuildingMeta.BuildingType.SchoolType)]: {
@@ -385,36 +415,6 @@ BuildingMeta.BuildingDatas = {
         costTree: 0,
         costStone: 0,
         desc: "饲养宠物可以不减快乐值哦",
-    },
-    // 食物仓库
-    [String(BuildingMeta.BuildingType.FoodPoolType)]: {
-        prefab: ResourceMeta.FoodPoolPrefabPath,
-        preview: "source/building/FoodPool.png",
-        realWidth: 300,
-        realHeight: 300,
-        createBuildingSpeed: 2000,
-        useBuildingTime: 5000,
-        createPriority: 1,
-        buildingName: "食物仓库",
-        costTree: 0,
-        costStone: 0,
-        maxSave: 600,
-        desc: "可以保存食物以便今后使用",
-    },
-    // 水仓库
-    [String(BuildingMeta.BuildingType.WaterPoolType)]: {
-        prefab: ResourceMeta.WaterPoolPrefabPath,
-        preview: "source/building/WaterPool.png",
-        realWidth: 300,
-        realHeight: 300,
-        createBuildingSpeed: 2000,
-        useBuildingTime: 5000,
-        createPriority: 1,
-        buildingName: "水仓库",
-        costTree: 0,
-        costStone: 0,
-        maxSave: 1000,
-        desc: "可以保存水源以便今后使用",
     },
     // 火堆
     [String(BuildingMeta.BuildingType.FireType)]: {
