@@ -20,4 +20,25 @@ export default class OilLogic extends BuildingBaseLogic {
             scene.selectedBuilding = this.owner;
         }));
     }
+
+    getCurWorkersIdArray() {
+        let workersArray = this.getModel().getExteraData("workersArray");
+        if (workersArray == undefined || workersArray == null) {
+            workersArray = [];
+        }
+        return workersArray;
+    }
+
+    addWorkerId(workerId) {
+        let model = this.getModel();
+        let workersArray = this.getCurWorkersIdArray();
+        for (let index = 0; index < workersArray.length; index++) {
+            const item = workersArray[index];
+            if (String(item) == String(workerId)) {
+                return
+            }
+        }
+        workersArray.push(workerId);
+        model.setExteraData("workersArray", workersArray);
+    }
 }

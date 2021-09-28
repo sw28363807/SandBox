@@ -3,6 +3,7 @@ import BuildingMeta from "../meta/BuildingMeta";
 import QuestionMeta from "../meta/QuestionMeta";
 import ResourceMeta from "../meta/ResourceMeta";
 import TipMgr from "../helper/TipMgr";
+import GameModel from "../model/GameModel";
 export default class OfficeDialogLogic extends Laya.Script {
 
     constructor() {
@@ -13,6 +14,7 @@ export default class OfficeDialogLogic extends Laya.Script {
     }
 
     onDisable() {
+        GameModel.getInstance().addGoldNum(Number(this.buildingScript.getCurSaveGold()));
     }
 
     onStart() {
