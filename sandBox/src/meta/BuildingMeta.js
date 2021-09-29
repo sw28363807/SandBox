@@ -139,6 +139,54 @@ BuildingMeta.BuildingDatas = {
         maxSave: 600,
         desc: "可以保存食物以便今后使用",
     },
+    // 写字楼
+    [String(BuildingMeta.BuildingType.OfficeType)]: {
+        prefab: ResourceMeta.OfficePrefabPath,
+        preview: "source/building/office.png",
+        realWidth: 400,
+        realHeight: 400,
+        createBuildingSpeed: 2000,
+        useBuildingTime: 5000,
+        createPriority: 1,
+        buildingName: "写字楼",
+        costTree: 20,
+        costStone: 20,
+        addGold: 1,
+        maxSave: 10,
+        desc: "居民收入来源",
+    },
+    // 幼儿园
+    [String(BuildingMeta.BuildingType.ChildSchoolType)]: {
+        prefab: ResourceMeta.ChildSchoolPrefabPath,
+        preview: "source/building/child_school.png",
+        realWidth: 350,
+        realHeight: 350,
+        createBuildingSpeed: 2000,
+        useBuildingTime: 5000,
+        createPriority: 1,
+        buildingName: "幼儿园",
+        costTree: 15,
+        costStone: 15,
+        desc: "可以让孩子快速成长",
+        teachers: [
+            {
+                teacherId: 1,
+                name: "李翠萍老师",
+                desc: "教学一般般",
+                sex: 1, //1 男 2 女,
+                costGold: 333,
+                addAgePriority: 90,
+            },
+            {
+                teacherId: 2,
+                name: "北辰沈老师",
+                desc: "教学一般般，人很漂亮，但是对于提升教育质量似乎没有什么用",
+                sex: 2, //1 男 2 女
+                costGold: 444,
+                addAgePriority: 100,
+            },
+        ],
+    },
     // 炼油厂
     [String(BuildingMeta.BuildingType.OilType)]: {
         prefab: ResourceMeta.OilPrefabPath,
@@ -152,22 +200,6 @@ BuildingMeta.BuildingDatas = {
         costTree: 0,
         costStone: 0,
         desc: "可以提炼开采发展石油工业",
-    },
-    // 写字楼
-    [String(BuildingMeta.BuildingType.OfficeType)]: {
-        prefab: ResourceMeta.OfficePrefabPath,
-        preview: "source/building/office.png",
-        realWidth: 400,
-        realHeight: 400,
-        createBuildingSpeed: 2000,
-        useBuildingTime: 5000,
-        createPriority: 1,
-        buildingName: "写字楼",
-        costTree: 0,
-        costStone: 0,
-        addGold: 1,
-        maxSave: 10,
-        desc: "居民收入来源",
     },
     // 实验室
     [String(BuildingMeta.BuildingType.LabType)]: {
@@ -263,38 +295,6 @@ BuildingMeta.BuildingDatas = {
                 addTeach: 10,
                 sex: 2, //1 男 2 女
                 costGold: 48,
-            },
-        ],
-    },
-    // 幼儿园
-    [String(BuildingMeta.BuildingType.ChildSchoolType)]: {
-        prefab: ResourceMeta.ChildSchoolPrefabPath,
-        preview: "source/building/child_school.png",
-        realWidth: 350,
-        realHeight: 350,
-        createBuildingSpeed: 2000,
-        useBuildingTime: 5000,
-        createPriority: 1,
-        buildingName: "幼儿园",
-        costTree: 0,
-        costStone: 0,
-        desc: "可以让孩子快速成长",
-        teachers: [
-            {
-                teacherId: 1,
-                name: "李翠萍老师",
-                desc: "教学一般般",
-                sex: 1, //1 男 2 女,
-                costGold: 333,
-                addAgePriority: 90,
-            },
-            {
-                teacherId: 2,
-                name: "北辰沈老师",
-                desc: "教学一般般，人很漂亮，但是对于提升教育质量似乎没有什么用",
-                sex: 2, //1 男 2 女
-                costGold: 444,
-                addAgePriority: 100,
             },
         ],
     },
