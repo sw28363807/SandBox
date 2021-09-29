@@ -1,5 +1,7 @@
+import TipMgr from "../helper/TipMgr";
 import BuildingMeta from "../meta/BuildingMeta";
 import ResourceMeta from "../meta/ResourceMeta";
+import GameModel from "../model/GameModel";
 export default class SchoolDialogLogic extends Laya.Script {
 
     constructor() {
@@ -15,12 +17,34 @@ export default class SchoolDialogLogic extends Laya.Script {
     onStart() {        
         this.buildingScript = this.owner.selectedBuilding.buildingScript;
         this.buildingModel = this.buildingScript.getModel();
+
+        this.yesBtn = this.owner.getChildByName("yesBtn");
+        this.yesBtn.on(Laya.Event.CLICK, this, function () {
+            let teacherMetas = BuildingMeta.BuildingDatas[BuildingMeta.BuildingType.SchoolType].teachers;
+            let teacherMeta = teacherMetas[this.teacherIndex];
+            let hasGold = GameModel.getInstance().getGoldNum();
+            if (hasGold >= teacherMeta.costGold) {
+                if (this.teacherIndex == this.selectTeacherIndex) {
+                    TipMgr.getInstance().showTip("老师正在上班中~");
+                    return;
+                }
+                this.selectTeacherIndex = this.teacherIndex;
+                GameModel.getInstance().addGoldNum(-teacherMeta.costGold);
+                this.buildingScript.setTeacherIndex(this.selectTeacherIndex);
+                this.refreshTeacher();
+            } else {
+                TipMgr.getInstance().showTip("钱不够啦~");
+            }
+        });
+        
         this.closeBtn = this.owner.getChildByName("closeBtn");
         this.closeBtn.on(Laya.Event.CLICK, this, function () {
             Laya.Dialog.close(ResourceMeta.SchoolDialogScenePath);
         });
 
-        this.teacherIndex = 0;
+        this.teacherIndex = this.buildingScript.getTeacherIndex();
+        this.selectTeacherIndex = this.buildingScript.getTeacherIndex();
+
         this.leftBtn = this.owner.getChildByName("leftBtn");
         this.leftBtn.on(Laya.Event.CLICK, this, function () {
             this.teacherIndex--;
@@ -45,6 +69,12 @@ export default class SchoolDialogLogic extends Laya.Script {
 
         if (this.teacherIndex >= teacherMetas.length) {
             this.teacherIndex = teacherMetas.length - 1;
+        }
+
+        if (this.teacherIndex == this.selectTeacherIndex) {
+            this.yesBtn.label = "上班中";
+        } else {
+            this.yesBtn.label = "雇佣";
         }
 
         this.leftBtn.visible = this.teacherIndex != 0;
