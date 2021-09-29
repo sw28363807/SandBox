@@ -44,6 +44,9 @@ export default class ResidentUseBuildingAILogic extends Laya.Script {
         }
         // 去幼儿园
         else if (aiData == ResidentMeta.ResidentState.GotoChildSchoolForLearn) {
+            if (!RandomMgr.randomYes()) {
+                return false;
+            }
             if (!this.getModel().isAdult()) {
                 return true;
             }
@@ -136,7 +139,6 @@ export default class ResidentUseBuildingAILogic extends Laya.Script {
         // 在幼儿园学习完成
         else if (state == ResidentMeta.ResidentState.ChildLearn) {
             let addAgePriority = this.useBuilding.buildingScript.getAddAgePriority();
-            console.debug(addAgePriority);
             if (RandomMgr.randomYes(addAgePriority)) {
                 this.getModel().addAgeExp(Math.round(ResidentMeta.ResidentAgePeriod/5), true);   
             }

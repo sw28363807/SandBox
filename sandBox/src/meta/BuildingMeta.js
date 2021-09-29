@@ -165,10 +165,8 @@ BuildingMeta.BuildingDatas = {
         useBuildingTime: 5000,
         createPriority: 1,
         buildingName: "幼儿园",
-        costTree: 0,
-        costStone: 0,
-        // costTree: 15,
-        // costStone: 15,
+        costTree: 15,
+        costStone: 15,
         desc: "可以让孩子快速成长",
         teachers: [
             {
@@ -197,6 +195,22 @@ BuildingMeta.BuildingDatas = {
             },
         ],
     },
+    // 牧场
+    [String(BuildingMeta.BuildingType.PastureType)]: {
+        prefab: ResourceMeta.PasturePrefabPath,
+        preview: "source/building/pasture_big.png",
+        realWidth: 500,
+        realHeight: 300,
+        createBuildingSpeed: 2000,
+        useBuildingTime: 5000,
+        createPriority: 1,
+        buildingName: "牧场",
+        costTree: 60,
+        costStone: 60,
+        maxSave: 3000,
+        addFood: 100,
+        desc: "可以养殖动物，春天冬天可以收获哦~",
+    },
     // 炼油厂
     [String(BuildingMeta.BuildingType.OilType)]: {
         prefab: ResourceMeta.OilPrefabPath,
@@ -224,21 +238,6 @@ BuildingMeta.BuildingDatas = {
         costTree: 0,
         costStone: 0,
         desc: "快速增长科技研究",
-    },
-    // 牧场
-    [String(BuildingMeta.BuildingType.PastureType)]: {
-        prefab: ResourceMeta.PasturePrefabPath,
-        preview: "source/building/pasture_big.png",
-        realWidth: 500,
-        realHeight: 300,
-        createBuildingSpeed: 2000,
-        useBuildingTime: 5000,
-        createPriority: 1,
-        buildingName: "牧场",
-        costTree: 0,
-        maxSave: 3000,
-        addFood: 100,
-        desc: "可以养殖动物，春天冬天可以收获哦~",
     },
     // 银行
     [String(BuildingMeta.BuildingType.BankType)]: {

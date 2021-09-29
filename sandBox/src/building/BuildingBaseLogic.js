@@ -45,6 +45,7 @@ export default class BuildingBaseLogic extends Laya.Script {
                     if (this.model.getBuildingState() == BuildingMeta.BuildingState.Noraml) {
                         this.onClickBuilding();
                     } else {
+                        this.onClickBuilding();
                         TipMgr.getInstance().showTip("还未建造完成哦");
                     }
                 };

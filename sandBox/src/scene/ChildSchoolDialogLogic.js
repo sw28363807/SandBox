@@ -24,6 +24,10 @@ export default class ChildSchoolDialogLogic extends Laya.Script {
             let teacherMeta = teacherMetas[this.teacherIndex];
             let hasGold = GameModel.getInstance().getGoldNum();
             if (hasGold >= teacherMeta.costGold) {
+                if (this.teacherIndex == this.selectTeacherIndex) {
+                    TipMgr.getInstance().showTip("老师正在上班中~");
+                    return;
+                }
                 this.selectTeacherIndex = this.teacherIndex;
                 GameModel.getInstance().addGoldNum(-teacherMeta.costGold);
                 this.buildingScript.setChildTeacherIndex(this.selectTeacherIndex);

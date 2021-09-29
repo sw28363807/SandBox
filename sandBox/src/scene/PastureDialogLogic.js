@@ -74,6 +74,7 @@ export default class PastureDialogLogic extends Laya.Script {
                     bug.destroy(true);
                     delete this.dongSprs[String(index)];
                     this.score++;
+                    this.buildingScript.addFoodToPool(1);
                     this.refreshScoreText();
                 });
             }
