@@ -135,7 +135,11 @@ export default class ResidentUseBuildingAILogic extends Laya.Script {
         }
         // 在幼儿园学习完成
         else if (state == ResidentMeta.ResidentState.ChildLearn) {
-            this.getModel().addAgeExp(Math.round(ResidentMeta.ResidentAgePeriod / 2), true);
+            let addAgePriority = this.useBuilding.buildingScript.getAddAgePriority();
+            console.debug(addAgePriority);
+            if (RandomMgr.randomYes(addAgePriority)) {
+                this.getModel().addAgeExp(Math.round(ResidentMeta.ResidentAgePeriod/5), true);   
+            }
         }
         // 在食物库吃饭完成
         else if (state == ResidentMeta.ResidentState.EatFoodInFoodPool) {
