@@ -175,7 +175,7 @@ BuildingMeta.BuildingDatas = {
                 desc: "教学很一般",
                 sex: 1, //1 男 2 女,
                 costGold: 0,
-                addAgePriority: 10,
+                addAgePriority: 0.5,
             },
             {
                 teacherId: 2,
@@ -183,7 +183,7 @@ BuildingMeta.BuildingDatas = {
                 desc: "教学一般般，人很漂亮，但是对于提升教育质量似乎没有什么用",
                 sex: 2, //1 男 2 女
                 costGold: 0,
-                addAgePriority: 30,
+                addAgePriority: 0.3,
             },
             {
                 teacherId: 3,
@@ -191,7 +191,7 @@ BuildingMeta.BuildingDatas = {
                 desc: "教学还可以",
                 sex: 1, //1 男 2 女,
                 costGold: 0,
-                addAgePriority: 50,
+                addAgePriority: 0.1,
             },
         ],
     },
@@ -223,7 +223,6 @@ BuildingMeta.BuildingDatas = {
         buildingName: "学校",
         costTree: 0,
         costStone: 0,
-        addTeach: 20,
         desc: "可以增长教育，促进科技发展",
         teachers: [
             {
@@ -231,7 +230,7 @@ BuildingMeta.BuildingDatas = {
                 name: "李翠萍老师",
                 desc: "教学一般般",
                 addTeach: 10,
-                addTeachPriority: 10,
+                addTeachPriority: 0.5,
                 sex: 1, //1 男 2 女,
                 costGold: 0,
             },
@@ -240,18 +239,18 @@ BuildingMeta.BuildingDatas = {
                 name: "北辰沈老师",
                 desc: "教学一般般，人很漂亮，但是对于提升教育质量似乎没有什么用",
                 addTeach: 15,
-                addTeachPriority: 20,
+                addTeachPriority: 0.2,
                 sex: 2, //1 男 2 女
-                costGold: 100,
+                costGold: 0,
             },
             {
                 teacherId: 3,
                 name: "大嘚嘞老师",
                 desc: "教学一般般，人很漂亮，但是对于提升教育质量似乎也没有什么用",
                 addTeach: 17,
-                addTeachPriority: 50,
+                addTeachPriority: 0.1,
                 sex: 2, //1 男 2 女
-                costGold: 200,
+                costGold: 0,
             },
         ],
     },

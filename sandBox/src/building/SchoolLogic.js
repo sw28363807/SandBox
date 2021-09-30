@@ -1,5 +1,6 @@
 import BuildingBaseLogic from "./BuildingBaseLogic";
 import ResourceMeta from "../meta/ResourceMeta";
+import BuildingMeta from "../meta/BuildingMeta";
 export default class SchoolLogic extends BuildingBaseLogic {
 
     constructor() {
@@ -22,6 +23,19 @@ export default class SchoolLogic extends BuildingBaseLogic {
             curTeacherIndex = 0;
         }
         return Number(curTeacherIndex);
+    }
+
+    // 获得老师增长知识的概率
+    getAddTeachInfo() {
+        let index = this.getTeacherIndex();
+        if (index == -1) {
+            return 0;
+        }
+        let meta = BuildingMeta.BuildingDatas[String(BuildingMeta.BuildingType.SchoolType)].teachers[index];
+        return {
+            addTeach: meta.addTeach,
+            addTeachPriority: meta.addTeachPriority,
+        };
     }
 
     // 设置老师的索引

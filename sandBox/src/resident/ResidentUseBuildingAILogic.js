@@ -134,7 +134,12 @@ export default class ResidentUseBuildingAILogic extends Laya.Script {
         }
         // 学习完成
         else if (state == ResidentMeta.ResidentState.Learning) {
-            this.getModel().addTeach(BuildingMeta.BuildingDatas[String(BuildingMeta.BuildingType.SchoolType)].addTeach);
+            let addTeachInfo = this.useBuilding.buildingScript.getAddTeachInfo();
+            console.debug(addTeachInfo);
+            if (RandomMgr.randomYes(addTeachInfo.addTeachPriority)) {
+                console.debug("成功教育");
+                this.getModel().addTeach(addTeachInfo.addTeach); 
+            }
         }
         // 在幼儿园学习完成
         else if (state == ResidentMeta.ResidentState.ChildLearn) {
