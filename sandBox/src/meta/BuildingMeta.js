@@ -209,6 +209,7 @@ BuildingMeta.BuildingDatas = {
         costStone: 60,
         maxSave: 3000,
         addFood: 100,
+        gameAddFood: 10,
         desc: "可以养殖动物，春天冬天可以收获哦~",
     },
     // 学校
@@ -221,8 +222,8 @@ BuildingMeta.BuildingDatas = {
         useBuildingTime: 5000,
         createPriority: 1,
         buildingName: "学校",
-        costTree: 0,
-        costStone: 0,
+        costTree: 20,
+        costStone: 20,
         desc: "可以增长教育，促进科技发展",
         teachers: [
             {
@@ -253,6 +254,56 @@ BuildingMeta.BuildingDatas = {
                 costGold: 0,
             },
         ],
+    },
+    // 农田
+    [String(BuildingMeta.BuildingType.FarmLandType)]: {
+        prefab: ResourceMeta.FarmLandPrefabPath,
+        preview: "source/building/farmland.png",
+        realWidth: 400,
+        realHeight: 300,
+        createBuildingSpeed: 2000,
+        useBuildingTime: 5000,
+        createPriority: 1,
+        buildingName: "农田",
+        costTree: 50,
+        costStone: 50,
+        maxSave: 3000,
+        addFood: 100,
+        gameAddFood: 10,
+        desc: "可以种植增加食物，夏天秋天可以收获哦~",
+    },
+    // 发电厂
+    [String(BuildingMeta.BuildingType.PowerPlantType)]: {
+        prefab: ResourceMeta.PowerPlantPrefabPath,
+        preview: "source/building/power_plant.png",
+        realWidth: 500,
+        realHeight: 500,
+        createBuildingSpeed: 2000,
+        useBuildingTime: 5000,
+        createPriority: 1,
+        buildingName: "发电厂",
+        costTree: 0,
+        costStone: 0,
+        addElec: 1,
+        maxElec: 10,
+        timeStep: 5000,
+        desc: "可以为其他建筑发电",
+    },
+    // 工厂
+    [String(BuildingMeta.BuildingType.FactoryType)]: {
+        prefab: ResourceMeta.FactoryPrefabPath,
+        preview: "source/building/factory.png",
+        realWidth: 500,
+        realHeight: 500,
+        createBuildingSpeed: 2000,
+        useBuildingTime: 5000,
+        createPriority: 1,
+        buildingName: "工厂",
+        costTree: 0,
+        costStone: 0,
+        desc: "可以制造各种工业产品的地方",
+        addGoldPerResident: 1,
+        maxResident: 10,
     },
     // 炼油厂
     [String(BuildingMeta.BuildingType.OilType)]: {
@@ -301,37 +352,6 @@ BuildingMeta.BuildingDatas = {
             elec: 20
         }
     },
-    // 工厂
-    [String(BuildingMeta.BuildingType.FactoryType)]: {
-        prefab: ResourceMeta.FactoryPrefabPath,
-        preview: "source/building/factory.png",
-        realWidth: 500,
-        realHeight: 500,
-        createBuildingSpeed: 2000,
-        useBuildingTime: 5000,
-        createPriority: 1,
-        buildingName: "工厂",
-        costTree: 0,
-        costStone: 0,
-        desc: "可以制造各种工业产品的地方",
-        addGoldPerResident: 1,
-        maxResident: 10,
-    },
-    // 发电厂
-    [String(BuildingMeta.BuildingType.PowerPlantType)]: {
-        prefab: ResourceMeta.PowerPlantPrefabPath,
-        preview: "source/building/power_plant.png",
-        realWidth: 500,
-        realHeight: 500,
-        createBuildingSpeed: 2000,
-        useBuildingTime: 5000,
-        createPriority: 1,
-        buildingName: "发电厂",
-        costTree: 0,
-        costStone: 0,
-        addElec: 1,
-        desc: "可以为其他建筑发电",
-    },
     // 商店
     [String(BuildingMeta.BuildingType.ShopType)]: {
         prefab: ResourceMeta.ShopPrefabPath,
@@ -360,22 +380,6 @@ BuildingMeta.BuildingDatas = {
                 scaleY: 1.2,
             }
         ],
-    },
-    // 农田
-    [String(BuildingMeta.BuildingType.FarmLandType)]: {
-        prefab: ResourceMeta.FarmLandPrefabPath,
-        preview: "source/building/farmland.png",
-        realWidth: 400,
-        realHeight: 300,
-        createBuildingSpeed: 2000,
-        useBuildingTime: 5000,
-        createPriority: 1,
-        buildingName: "农田",
-        costTree: 0,
-        costStone: 0,
-        maxSave: 3000,
-        addFood: 100,
-        desc: "可以种植增加食物，夏天秋天可以收获哦~",
     },
     // 歌剧院
     [String(BuildingMeta.BuildingType.OperaType)]: {

@@ -64,7 +64,6 @@ export default class PastureDialogLogic extends Laya.Script {
                 let sprIndex = RandomMgr.randomNumber(1, 3);
                 let bug = new Laya.Sprite();
                 bug.loadImage("source/ui/bug" + String(sprIndex) + ".png");
-                this.dongSprs[String(index)] = bug;
                 let parentNode = this.dongs[String(index)];
                 parentNode.addChild(bug);
                 bug.y = parentNode.height;
@@ -74,7 +73,8 @@ export default class PastureDialogLogic extends Laya.Script {
                     bug.destroy(true);
                     delete this.dongSprs[String(index)];
                     this.score++;
-                    this.buildingScript.addFoodToPool(1);
+                    let gameAddFood = BuildingMeta.BuildingDatas[String(BuildingMeta.BuildingType.PastureType)].gameAddFood;
+                    this.buildingScript.addFoodToPool(gameAddFood);
                     this.refreshScoreText();
                 });
             }

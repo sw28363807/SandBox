@@ -1,3 +1,4 @@
+import BuildingMeta from "../meta/BuildingMeta";
 import ResourceMeta from "../meta/ResourceMeta";
 
 export default class PowerPlantDialogLogic extends Laya.Script {
@@ -15,6 +16,12 @@ export default class PowerPlantDialogLogic extends Laya.Script {
     onStart() {
         this.buildingScript = this.owner.selectedBuilding.buildingScript;
         this.buildingModel = this.buildingScript.getModel();
+
+        this.yesBtn = this.owner.getChildByName("yesBtn");
+        this.yesBtn.on(Laya.Event.CLICK, this, function () {
+
+        });
+
         this.closeBtn = this.owner.getChildByName("closeBtn");
         this.closeBtn.on(Laya.Event.CLICK, this, function () {
             Laya.Dialog.close(ResourceMeta.PowerPlantDialogScenePath);

@@ -73,7 +73,8 @@ export default class FarmLandDialogLogic extends Laya.Script {
     }
 
     onTouchDownFood(food) {
-        this.buildingScript.addFoodToPool(1);
+        let gameAddFood = BuildingMeta.BuildingDatas[String(BuildingMeta.BuildingType.FarmLandType)].gameAddFood;
+        this.buildingScript.addFoodToPool(gameAddFood);
     }
 
     onTriggerFood() {
