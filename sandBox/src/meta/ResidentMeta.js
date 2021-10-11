@@ -106,8 +106,8 @@ ResidentMeta.ResidentState = {
     Heating: "",                  //取暖
     GoToOfficeForWork: "",        //去工作的路上
     Working: "",                   //工作
-    GoToPowerPlantForElec: "",        //去发电厂工作
-    Elecing: "",                   //发电
+    // GoToPowerPlantForElec: "",        //去发电厂工作
+    // Elecing: "",                   //发电
 };
 ResidentMeta.obtainResidentState();
 
@@ -319,11 +319,6 @@ ResidentMeta.ResidentUseBuildingMap = {
     [ResidentMeta.ResidentState.GoToOfficeForWork]: {
         nextState: ResidentMeta.ResidentState.Working,
         buildingType: BuildingMeta.BuildingType.OfficeType,
-        useType: 1,     //1 隐藏使用 2 周围使用 默认为1
-    },
-    [ResidentMeta.ResidentState.GoToPowerPlantForElec]: {
-        nextState: ResidentMeta.ResidentState.Elecing,
-        buildingType: BuildingMeta.BuildingType.PowerPlantType,
         useType: 1,     //1 隐藏使用 2 周围使用 默认为1
     },
 }

@@ -287,6 +287,8 @@ BuildingMeta.BuildingDatas = {
         addElec: 1,
         maxElec: 10,
         timeStep: 5000,
+        damageStep: 5000,
+        damageProbability: 0.95,
         desc: "可以为其他建筑发电",
     },
     // 工厂
