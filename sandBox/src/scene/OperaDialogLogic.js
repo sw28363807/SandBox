@@ -25,11 +25,12 @@ export default class OperaDialogLogic extends Laya.Script {
         this.initTouch();
 
         Laya.timer.loop(1000, this, this.refreshNum);
+        this.refreshNum();
     }
 
     refreshNum() {
         let num = this.buildingScript.getCurSaveEnjoy();
-        this.descText.text = String(num);
+        this.descText.text = "当前储存快乐值: " + String(num);
     }
 
     initTouch() {

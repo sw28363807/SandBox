@@ -42,7 +42,7 @@ export default class OperaLogic extends BuildingBaseLogic {
     setEnjoyToOpera(num) {
         let model = this.getModel();
         model.setExteraData("curEnjoy", num);
-        this.enjoyPoolText.text = String(num);
+        this.enjoyPoolText.text = "储存快乐值: " + String(num);
     }
 
     addEnjoyToOpera(num) {

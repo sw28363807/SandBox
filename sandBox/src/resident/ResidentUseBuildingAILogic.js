@@ -208,7 +208,9 @@ export default class ResidentUseBuildingAILogic extends Laya.Script {
         }
         // 看歌剧完成
         else if (state == ResidentMeta.ResidentState.WatchOpera) {
-            this.getModel().addEnjoy(BuildingMeta.BuildingDatas[BuildingMeta.BuildingType.OperaType].addEnjoy);
+            let addEnjoy = this.useBuilding.buildingScript.getCurSaveEnjoy();
+            this.getModel().addEnjoy(addEnjoy);
+            this.useBuilding.buildingScript.setEnjoyToOpera(0);
         }
     }
 
