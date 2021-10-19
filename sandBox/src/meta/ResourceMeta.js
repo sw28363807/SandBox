@@ -16,7 +16,6 @@ ResourceMeta.WomanAniPath = "anim/Woman.ani";    //女人动画
 ResourceMeta.ShopDialogScenePath = "scene/ShopDialog.scene";
 ResourceMeta.SchoolDialogScenePath = "scene/SchoolDialog.scene";
 ResourceMeta.ChildSchoolDialogScenePath = "scene/ChildSchoolDialog.scene";
-ResourceMeta.PowerPlantDialogScenePath = "scene/PowerPlantDialog.scene";
 ResourceMeta.HospitalDialogScenePath = "scene/HospitalDialog.scene";
 ResourceMeta.FactoryDialogScenePath = "scene/FactoryDialog.scene";
 ResourceMeta.OperaDialogScenePath = "scene/OperaDialog.scene";
@@ -40,23 +39,18 @@ ResourceMeta.TipPrefabPath = "prefab/Tip.prefab";   //Tips路径
 ResourceMeta.CommonItemPrefabPath = "prefab/CommonItem.prefab";   //菜单选项
 
 ResourceMeta.BuildingAtlasPath = "res/atlas/source/building.atlas"; //建筑引用的图片
-ResourceMeta.FoodAtlasPath = "res/atlas/source/food.atlas";         //食物所引用的图片
 ResourceMeta.ResidentAtlasPath = "res/atlas/source/resident.atlas"; //居民所引用的图片
 
 ResourceMeta.HomePrefabPath = "prefab/Home.prefab";       //家prefab路径
 ResourceMeta.HospitalPrefabPath = "prefab/Hospital.prefab";       //医院prefab路径
 ResourceMeta.SchoolPrefabPath = "prefab/School.prefab";       //学校prefab路径
 ResourceMeta.ChildSchoolPrefabPath = "prefab/ChildSchool.prefab";       //幼儿园prefab路径
-ResourceMeta.PowerPlantPrefabPath = "prefab/PowerPlant.prefab";       //发电厂prefab路径
 ResourceMeta.ShopPrefabPath = "prefab/Shop.prefab";       //商店prefab路径
 ResourceMeta.FarmLandPrefabPath = "prefab/FarmLand.prefab";       //农田prefab路径
 ResourceMeta.PasturePrefabPath = "prefab/Pasture.prefab";       //牧场prefab路径
 ResourceMeta.OperaPrefabPath = "prefab/Opera.prefab";       //歌剧院prefab路径
 ResourceMeta.OfficePrefabPath = "prefab/Office.prefab";       //写字楼prefab路径
-ResourceMeta.RestaurantPrefabPath = "prefab/Restaurant.prefab";       //餐厅prefab路径
-ResourceMeta.PoliceStationPrefabPath = "prefab/PoliceStation.prefab";    //警察局prefab路径
 ResourceMeta.LabPrefabPath = "prefab/Lab.prefab";    //实验室prefab路径
-ResourceMeta.PetShopPrefabPath = "prefab/PetShop.prefab";    //宠物店prefab路径
 ResourceMeta.FoodPoolPrefabPath = "prefab/FoodPool.prefab";    //食物仓库prefab路径
 ResourceMeta.WaterPoolPrefabPath = "prefab/WaterPool.prefab";    //水仓库prefab路径
 ResourceMeta.FirePrefabPath = "prefab/Fire.prefab";    //火堆prefab路径
@@ -176,10 +170,6 @@ ResourceMeta.ResourceMap = [
     },
     {
         type: Laya.Loader.PREFAB,
-        url: ResourceMeta.PowerPlantPrefabPath
-    },
-    {
-        type: Laya.Loader.PREFAB,
         url: ResourceMeta.FarmLandPrefabPath
     },
     {
@@ -196,19 +186,7 @@ ResourceMeta.ResourceMap = [
     },
     {
         type: Laya.Loader.PREFAB,
-        url: ResourceMeta.PoliceStationPrefabPath
-    },
-    {
-        type: Laya.Loader.PREFAB,
         url: ResourceMeta.LabPrefabPath
-    },
-    {
-        type: Laya.Loader.PREFAB,
-        url: ResourceMeta.PetShopPrefabPath
-    },
-    {
-        type: Laya.Loader.PREFAB,
-        url: ResourceMeta.RestaurantPrefabPath
     },
     {
         type: Laya.Loader.PREFAB,

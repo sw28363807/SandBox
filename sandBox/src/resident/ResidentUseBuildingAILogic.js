@@ -74,13 +74,6 @@ export default class ResidentUseBuildingAILogic extends Laya.Script {
             }
             return false;
         }
-        // 去宠物店
-        else if (aiData == ResidentMeta.ResidentState.GotoPetShopForTakeOutPet) {
-            if (this.getModel().getPetType() != 0) {
-                return false;
-            }
-            return true;
-        }
         // 去火堆周围
         else if (aiData == ResidentMeta.ResidentState.GotoFireForHeating) {
             let temperature = this.getModel().getTemperature();
@@ -175,13 +168,6 @@ export default class ResidentUseBuildingAILogic extends Laya.Script {
             this.useBuilding.buildingScript.addWaterToPool(-deltay);
             this.getModel().addWater(deltay);
         }
-        // 宠物店领取宠物完成
-        else if (state == ResidentMeta.ResidentState.TakeOutPet) {
-            let first = this.useBuilding.buildingScript.popFirstPet();
-            this.getModel().setPetType(first);
-            this.owner.residentLogicScript.addPetByPetType(first);
-            this.useBuilding.buildingScript.getModel().setBuildingState(BuildingMeta.BuildingState.Noraml);
-        }
         // 火堆烤火完成
         else if (state == ResidentMeta.ResidentState.Heating) {
             this.getModel().setTemperature(ResidentMeta.ResidentStandardTemperature);
@@ -196,7 +182,8 @@ export default class ResidentUseBuildingAILogic extends Laya.Script {
         }
         // 健身房锻炼完成
         else if (state == ResidentMeta.ResidentState.AddSpeed) {
-            this.getModel().setSpeedScale(1.5);
+            let addSpeedScale = BuildingMeta.BuildingDatas[BuildingMeta.BuildingType.SpeedBuildingType].addSpeedScale;
+            this.getModel().setSpeedScale(addSpeedScale);
         }
         // 工作完成
         else if (state == ResidentMeta.ResidentState.Working) {
@@ -264,23 +251,6 @@ export default class ResidentUseBuildingAILogic extends Laya.Script {
                 this.owner.y, data.buildingType,
                 2000, [BuildingMeta.BuildingState.Noraml], filterFunc, true);
             return building;
-        }
-        // 去宠物店
-        else if (aiData == ResidentMeta.ResidentState.GotoPetShopForTakeOutPet) {
-
-            let filterFunc = function (building) {
-                let petTypeId = building.buildingScript.getFirstPetInPetList();
-                return petTypeId > 0;
-            }
-
-            let building = BuildingMgr.getInstance().getAlltBuildingForCondition(this.owner.x,
-                this.owner.y, data.buildingType,
-                2000, [BuildingMeta.BuildingState.Noraml], filterFunc, true);
-            if (building) {
-                building.buildingScript.getModel().setBuildingState(BuildingMeta.BuildingState.Occupy);
-                return building;
-            }
-            return null;
         }
         // 去火堆
         else if (aiData == ResidentMeta.ResidentState.GotoFireForHeating) {

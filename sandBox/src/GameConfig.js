@@ -9,7 +9,6 @@ import OfficeDialogLogic from "./scene/OfficeDialogLogic"
 import OilDialogLogic from "./scene/OilDialogLogic"
 import OperaDialogLogic from "./scene/OperaDialogLogic"
 import PastureDialogLogic from "./scene/PastureDialogLogic"
-import PowerPlantDialogLogic from "./scene/PowerPlantDialogLogic"
 import SchoolDialogLogic from "./scene/SchoolDialogLogic"
 import ShopDialogLogic from "./scene/ShopDialogLogic"
 import TestSceneLogic from "./scene/TestSceneLogic"
@@ -40,9 +39,6 @@ import OilLogic from "./building/OilLogic"
 import OperaLogic from "./building/OperaLogic"
 import PastureLogic from "./building/PastureLogic"
 import PetLogic from "./animal/PetLogic"
-import PetShopLogic from "./building/PetShopLogic"
-import PoliceStationLogic from "./building/PoliceStationLogic"
-import PowerPlantLogic from "./building/PowerPlantLogic"
 import ResidentLogic from "./resident/ResidentLogic"
 import ResidentAILogic from "./resident/ResidentAILogic"
 import ResidentCreateBuildingAILogic from "./resident/ResidentCreateBuildingAILogic"
@@ -56,7 +52,6 @@ import ResidentHuntAILogic from "./resident/ResidentHuntAILogic"
 import ResidentFightAILogic from "./resident/ResidentFightAILogic"
 import ResidentLookForLoverAILogic from "./resident/ResidentLookForLoverAILogic"
 import ResidentDetailsPanel from "./panel/ResidentDetailsPanel"
-import RestaurantLogic from "./building/RestaurantLogic"
 import SchoolLogic from "./building/SchoolLogic"
 import ShopLogic from "./building/ShopLogic"
 import SpeedBuildingLogic from "./building/SpeedBuildingLogic"
@@ -79,7 +74,6 @@ export default class GameConfig {
 		reg("scene/OilDialogLogic.js",OilDialogLogic);
 		reg("scene/OperaDialogLogic.js",OperaDialogLogic);
 		reg("scene/PastureDialogLogic.js",PastureDialogLogic);
-		reg("scene/PowerPlantDialogLogic.js",PowerPlantDialogLogic);
 		reg("scene/SchoolDialogLogic.js",SchoolDialogLogic);
 		reg("scene/ShopDialogLogic.js",ShopDialogLogic);
 		reg("scene/TestSceneLogic.js",TestSceneLogic);
@@ -110,9 +104,6 @@ export default class GameConfig {
 		reg("building/OperaLogic.js",OperaLogic);
 		reg("building/PastureLogic.js",PastureLogic);
 		reg("animal/PetLogic.js",PetLogic);
-		reg("building/PetShopLogic.js",PetShopLogic);
-		reg("building/PoliceStationLogic.js",PoliceStationLogic);
-		reg("building/PowerPlantLogic.js",PowerPlantLogic);
 		reg("resident/ResidentLogic.js",ResidentLogic);
 		reg("resident/ResidentAILogic.js",ResidentAILogic);
 		reg("resident/ResidentCreateBuildingAILogic.js",ResidentCreateBuildingAILogic);
@@ -126,7 +117,6 @@ export default class GameConfig {
 		reg("resident/ResidentFightAILogic.js",ResidentFightAILogic);
 		reg("resident/ResidentLookForLoverAILogic.js",ResidentLookForLoverAILogic);
 		reg("panel/ResidentDetailsPanel.js",ResidentDetailsPanel);
-		reg("building/RestaurantLogic.js",RestaurantLogic);
 		reg("building/SchoolLogic.js",SchoolLogic);
 		reg("building/ShopLogic.js",ShopLogic);
 		reg("building/SpeedBuildingLogic.js",SpeedBuildingLogic);

@@ -19,17 +19,13 @@ BuildingMeta.BuildingType = {
     HomeType: "",    //居民的家
     HospitalType: "",    //医院
     SchoolType: "",      //学校
-    PowerPlantType: "",  //发电厂
     ShopType: "",       //商店
     FarmLandType: "",   //农田
     PastureType: "",    //牧场
     OperaType: "",    //歌剧院
-    PoliceStationType: "",   //警察局
     LabType: "",            //科学实验室
     OfficeType: "",         //鞋子楼
     ChildSchoolType: "",        //幼儿园
-    RestaurantType: "",         //餐厅
-    PetShopType: "",         //宠物店
     FoodPoolType: "",         //食物仓库
     WaterPoolType: "",         //水仓库
     FireType: "",              //火堆
@@ -296,9 +292,8 @@ BuildingMeta.BuildingDatas = {
         useBuildingTime: 5000,
         createPriority: 1,
         buildingName: "歌剧院",
-        costTree: 0,
-        costStone: 0,
-        addEnjoy: 10,
+        costTree: 100,
+        costStone: 100,
         addTouchEnjoy: 1,
         desc: "可以让居民快乐的地方",
     },
@@ -327,8 +322,9 @@ BuildingMeta.BuildingDatas = {
         useBuildingTime: 5000,
         createPriority: 1,
         buildingName: "健身房",
-        costTree: 0,
-        costStone: 0,
+        costTree: 50,
+        costStone: 50,
+        addSpeedScale: 1.5,
         desc: "可以健身增加居民移动速度",
     },
     // 工具工坊
@@ -373,48 +369,6 @@ BuildingMeta.BuildingDatas = {
         costStone: 0,
         desc: "可以恢复少量生命值",
     },
-    // // 警察局
-    // [String(BuildingMeta.BuildingType.PoliceStationType)]: {
-    //     prefab: ResourceMeta.PoliceStationPrefabPath,
-    //     preview: "source/building/police.png",
-    //     realWidth: 300,
-    //     realHeight: 300,
-    //     createBuildingSpeed: 2000,
-    //     useBuildingTime: 5000,
-    //     createPriority: 1,
-    //     buildingName: "警察局",
-    //     costTree: 0,
-    //     costStone: 0,
-    //     desc: "可以平息冲突",
-    // },
-    // // 餐厅
-    // [String(BuildingMeta.BuildingType.RestaurantType)]: {
-    //     prefab: ResourceMeta.RestaurantPrefabPath,
-    //     preview: "source/building/restaurant.png",
-    //     realWidth: 200,
-    //     realHeight: 200,
-    //     createBuildingSpeed: 2000,
-    //     useBuildingTime: 5000,
-    //     createPriority: 1,
-    //     buildingName: "餐厅",
-    //     costTree: 0,
-    //     costStone: 0,
-    //     desc: "可以囤积食物，增加食物增长值",
-    // },
-    // // 宠物店
-    // [String(BuildingMeta.BuildingType.PetShopType)]: {
-    //     prefab: ResourceMeta.PetShopPrefabPath,
-    //     preview: "source/building/pet_shop.png",
-    //     realWidth: 200,
-    //     realHeight: 200,
-    //     createBuildingSpeed: 2000,
-    //     useBuildingTime: 5000,
-    //     createPriority: 1,
-    //     buildingName: "宠物店",
-    //     costTree: 0,
-    //     costStone: 0,
-    //     desc: "饲养宠物可以不减快乐值哦",
-    // },
     // // 银行
     // [String(BuildingMeta.BuildingType.BankType)]: {
     //     prefab: ResourceMeta.BankPrefabPath,
@@ -462,25 +416,6 @@ BuildingMeta.BuildingDatas = {
     //             scaleY: 1.2,
     //         }
     //     ],
-    // },
-    // // 发电厂
-    // [String(BuildingMeta.BuildingType.PowerPlantType)]: {
-    //     prefab: ResourceMeta.PowerPlantPrefabPath,
-    //     preview: "source/building/power_plant.png",
-    //     realWidth: 500,
-    //     realHeight: 500,
-    //     createBuildingSpeed: 2000,
-    //     useBuildingTime: 5000,
-    //     createPriority: 1,
-    //     buildingName: "发电厂",
-    //     costTree: 50,
-    //     costStone: 50,
-    //     addElec: 1,
-    //     maxElec: 10,
-    //     timeStep: 5000,
-    //     damageStep: 5000,
-    //     damageProbability: 0.95,
-    //     desc: "可以为其他建筑发电",
     // },
     // // 工厂
     // [String(BuildingMeta.BuildingType.FactoryType)]: {

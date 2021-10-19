@@ -53,8 +53,6 @@ ResidentMeta.ResidentState = {
     CreateSchool: "",     //建造学校
     GoToSchool: "",         //去上学的路上
     Learning: "",           //正在学习
-    GotoContinueCreatePowerPlant: "", //跑去建造发电厂
-    CreatePowerPlant: "",     //建造发电厂
     GotoContinueCreateOil: "", //跑去建造炼油厂
     CreateOil: "",     //建造炼油厂
     GotoContinueCreateFactory: "", //跑去建造工厂
@@ -69,8 +67,6 @@ ResidentMeta.ResidentState = {
     CreateOpera: "",     //建造歌剧院
     JoinFight: "",         //加入打群架
     Fighting: "",             //打架
-    GotoContinueCreatePoliceStation: "", //跑去建造警察局
-    CreatePoliceStation: "",     //建造警察局
     GotoContinueCreateLab: "", //跑去建造科学实验室
     CreateLab: "",     //建造科学实验室
     GotoContinueCreateBank: "", //跑去建造银行
@@ -84,8 +80,6 @@ ResidentMeta.ResidentState = {
     CreateChildSchool: "",     //建造幼儿园
     GotoChildSchoolForLearn: "",     //赶去幼儿园学习
     ChildLearn: "",                 //去幼儿园学习
-    GotoContinueCreatePetShop: "", //跑去建造宠物店
-    CreatePetShop: "",     //建造宠物店
     GotoContinueCreateFoodPool: "", //跑去建造食物仓库
     CreateFoodPool: "",     //建造食物仓库
     GotoContinueCreateWaterPool: "", //跑去建造水仓库
@@ -100,14 +94,10 @@ ResidentMeta.ResidentState = {
     EatFoodInFoodPool: "",      //去食物仓库吃饭
     GotoWaterPoolForDrink: "",     //赶去水库
     DrinkWaterInWaterPool: "",      //去水仓库喝水
-    GotoPetShopForTakeOutPet: "",     //赶去宠物店去领取宠物
-    TakeOutPet: "",                  //领取宠物
     GotoFireForHeating: "",     //赶去火堆取暖
     Heating: "",                  //取暖
     GoToOfficeForWork: "",        //去工作的路上
     Working: "",                   //工作
-    // GoToPowerPlantForElec: "",        //去发电厂工作
-    // Elecing: "",                   //发电
 };
 ResidentMeta.obtainResidentState();
 
@@ -170,11 +160,6 @@ ResidentMeta.ResidentContinueCreateMap = {
         buildingType: BuildingMeta.BuildingType.SchoolType,
         isContinueCreate: true,
     },
-    [ResidentMeta.ResidentState.GotoContinueCreatePowerPlant]: {
-        nextState: ResidentMeta.ResidentState.CreatePowerPlant,
-        buildingType: BuildingMeta.BuildingType.PowerPlantType,
-        isContinueCreate: true,
-    },
     [ResidentMeta.ResidentState.GotoContinueCreateOil]: {
         nextState: ResidentMeta.ResidentState.CreateOil,
         buildingType: BuildingMeta.BuildingType.OilType,
@@ -205,11 +190,6 @@ ResidentMeta.ResidentContinueCreateMap = {
         buildingType: BuildingMeta.BuildingType.OperaType,
         isContinueCreate: true,
     },
-    [ResidentMeta.ResidentState.GotoContinueCreatePoliceStation]: {
-        nextState: ResidentMeta.ResidentState.CreatePoliceStation,
-        buildingType: BuildingMeta.BuildingType.PoliceStationType,
-        isContinueCreate: true,
-    },
     [ResidentMeta.ResidentState.GotoContinueCreateLab]: {
         nextState: ResidentMeta.ResidentState.CreateLab,
         buildingType: BuildingMeta.BuildingType.LabType,
@@ -223,11 +203,6 @@ ResidentMeta.ResidentContinueCreateMap = {
     [ResidentMeta.ResidentState.GotoContinueCreateChildSchool]: {
         nextState: ResidentMeta.ResidentState.CreateChildSchool,
         buildingType: BuildingMeta.BuildingType.ChildSchoolType,
-        isContinueCreate: true,
-    },
-    [ResidentMeta.ResidentState.GotoContinueCreatePetShop]: {
-        nextState: ResidentMeta.ResidentState.CreatePetShop,
-        buildingType: BuildingMeta.BuildingType.PetShopType,
         isContinueCreate: true,
     },
     [ResidentMeta.ResidentState.GotoContinueCreateFoodPool]: {
@@ -299,11 +274,6 @@ ResidentMeta.ResidentUseBuildingMap = {
     [ResidentMeta.ResidentState.GotoWaterPoolForDrink]: {
         nextState: ResidentMeta.ResidentState.DrinkWaterInWaterPool,
         buildingType: BuildingMeta.BuildingType.WaterPoolType,
-        useType: 1,     //1 隐藏使用 2 周围使用 默认为1
-    },
-    [ResidentMeta.ResidentState.GotoPetShopForTakeOutPet]: {
-        nextState: ResidentMeta.ResidentState.TakeOutPet,
-        buildingType: BuildingMeta.BuildingType.PetShopType,
         useType: 1,     //1 隐藏使用 2 周围使用 默认为1
     },
     [ResidentMeta.ResidentState.GotoFireForHeating]: {
