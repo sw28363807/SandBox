@@ -20,7 +20,6 @@ ResourceMeta.HospitalDialogScenePath = "scene/HospitalDialog.scene";
 ResourceMeta.FactoryDialogScenePath = "scene/FactoryDialog.scene";
 ResourceMeta.OperaDialogScenePath = "scene/OperaDialog.scene";
 ResourceMeta.FarmLandDialogScenePath = "scene/FarmLandDialog.scene";
-ResourceMeta.BankDialogScenePath = "scene/BankDialog.scene";
 ResourceMeta.PastureDialogScenePath = "scene/PastureDialog.scene";
 ResourceMeta.LabDialogScenePath = "scene/LabDialog.scene";
 ResourceMeta.OfficeDialogScenePath = "scene/OfficeDialog.scene";
@@ -57,7 +56,6 @@ ResourceMeta.FirePrefabPath = "prefab/Fire.prefab";    //火堆prefab路径
 ResourceMeta.SpeedBuildingPrefabPath = "prefab/SpeedBuilding.prefab";    //健身房prefab路径
 ResourceMeta.ToolBuildingPrefabPath = "prefab/ToolBuilding.prefab";    //工具工坊prefab路径
 ResourceMeta.VillageComPrefabPath = "prefab/VillageCom.prefab";    //采集课堂prefab路径
-ResourceMeta.BankPrefabPath = "prefab/Bank.prefab";    //银行prefab路径
 ResourceMeta.BloodBuildingPrefabPath = "prefab/BloodBuilding.prefab";    //养生堂prefab路径
 ResourceMeta.OilPrefabPath = "prefab/Oil.prefab";    //炼油厂prefab路径
 ResourceMeta.FactoryPrefabPath = "prefab/Factory.prefab";    //工厂prefab路径
@@ -215,10 +213,6 @@ ResourceMeta.ResourceMap = [
     {
         type: Laya.Loader.PREFAB,
         url: ResourceMeta.VillageComPrefabPath
-    },
-    {
-        type: Laya.Loader.PREFAB,
-        url: ResourceMeta.BankPrefabPath
     },
     {
         type: Laya.Loader.PREFAB,

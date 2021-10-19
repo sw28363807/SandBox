@@ -69,8 +69,6 @@ ResidentMeta.ResidentState = {
     Fighting: "",             //打架
     GotoContinueCreateLab: "", //跑去建造科学实验室
     CreateLab: "",     //建造科学实验室
-    GotoContinueCreateBank: "", //跑去建造银行
-    CreateBank: "",     //建造银行
     GotoContinueCreateBloodBuilding: "", //跑去建造养生堂
     CreateBloodBuilding: "",     //建造养生堂
     GotoContinueCreateOffice: "", //跑去建造写字楼
@@ -228,11 +226,6 @@ ResidentMeta.ResidentContinueCreateMap = {
     [ResidentMeta.ResidentState.GotoContinueCreateVillageCom]: {
         nextState: ResidentMeta.ResidentState.CreateVillageCom,
         buildingType: BuildingMeta.BuildingType.VilllageComType,
-        isContinueCreate: true,
-    },
-    [ResidentMeta.ResidentState.GotoContinueCreateBank]: {
-        nextState: ResidentMeta.ResidentState.CreateBank,
-        buildingType: BuildingMeta.BuildingType.BankType,
         isContinueCreate: true,
     },
     [ResidentMeta.ResidentState.GotoContinueCreateBloodBuilding]: {
