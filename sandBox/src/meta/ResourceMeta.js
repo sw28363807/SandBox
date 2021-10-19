@@ -13,17 +13,14 @@ ResourceMeta.SoundPiano7Path = "source/sound/7.mp3";
 ResourceMeta.ManAniPath = "anim/Man.ani";    //男人动画
 ResourceMeta.WomanAniPath = "anim/Woman.ani";    //女人动画
 
-ResourceMeta.ShopDialogScenePath = "scene/ShopDialog.scene";
 ResourceMeta.SchoolDialogScenePath = "scene/SchoolDialog.scene";
 ResourceMeta.ChildSchoolDialogScenePath = "scene/ChildSchoolDialog.scene";
 ResourceMeta.HospitalDialogScenePath = "scene/HospitalDialog.scene";
-ResourceMeta.FactoryDialogScenePath = "scene/FactoryDialog.scene";
 ResourceMeta.OperaDialogScenePath = "scene/OperaDialog.scene";
 ResourceMeta.FarmLandDialogScenePath = "scene/FarmLandDialog.scene";
 ResourceMeta.PastureDialogScenePath = "scene/PastureDialog.scene";
 ResourceMeta.LabDialogScenePath = "scene/LabDialog.scene";
 ResourceMeta.OfficeDialogScenePath = "scene/OfficeDialog.scene";
-ResourceMeta.OilDialogScenePath = "scene/OilDialog.scene";
 
 ResourceMeta.ResidentPrefabPath = "prefab/Resident.prefab";   //居民prefab路径
 ResourceMeta.FoodPrefabPath = "prefab/Food.prefab";           //食物prefab路径
@@ -44,7 +41,6 @@ ResourceMeta.HomePrefabPath = "prefab/Home.prefab";       //家prefab路径
 ResourceMeta.HospitalPrefabPath = "prefab/Hospital.prefab";       //医院prefab路径
 ResourceMeta.SchoolPrefabPath = "prefab/School.prefab";       //学校prefab路径
 ResourceMeta.ChildSchoolPrefabPath = "prefab/ChildSchool.prefab";       //幼儿园prefab路径
-ResourceMeta.ShopPrefabPath = "prefab/Shop.prefab";       //商店prefab路径
 ResourceMeta.FarmLandPrefabPath = "prefab/FarmLand.prefab";       //农田prefab路径
 ResourceMeta.PasturePrefabPath = "prefab/Pasture.prefab";       //牧场prefab路径
 ResourceMeta.OperaPrefabPath = "prefab/Opera.prefab";       //歌剧院prefab路径
@@ -57,8 +53,6 @@ ResourceMeta.SpeedBuildingPrefabPath = "prefab/SpeedBuilding.prefab";    //健�
 ResourceMeta.ToolBuildingPrefabPath = "prefab/ToolBuilding.prefab";    //工具工坊prefab路径
 ResourceMeta.VillageComPrefabPath = "prefab/VillageCom.prefab";    //采集课堂prefab路径
 ResourceMeta.BloodBuildingPrefabPath = "prefab/BloodBuilding.prefab";    //养生堂prefab路径
-ResourceMeta.OilPrefabPath = "prefab/Oil.prefab";    //炼油厂prefab路径
-ResourceMeta.FactoryPrefabPath = "prefab/Factory.prefab";    //工厂prefab路径
 
 // 图集map
 ResourceMeta.ResourceMap = [
@@ -93,10 +87,6 @@ ResourceMeta.ResourceMap = [
     {
         type: Laya.Loader.ATLAS,
         url: ResourceMeta.BuildingAtlasPath
-    },
-    {
-        type: Laya.Loader.ATLAS,
-        url: ResourceMeta.FoodAtlasPath
     },
     {
         type: Laya.Loader.ATLAS,
@@ -188,10 +178,6 @@ ResourceMeta.ResourceMap = [
     },
     {
         type: Laya.Loader.PREFAB,
-        url: ResourceMeta.ShopPrefabPath
-    },
-    {
-        type: Laya.Loader.PREFAB,
         url: ResourceMeta.FoodPoolPrefabPath
     },
     {
@@ -217,13 +203,5 @@ ResourceMeta.ResourceMap = [
     {
         type: Laya.Loader.PREFAB,
         url: ResourceMeta.BloodBuildingPrefabPath
-    },
-    {
-        type: Laya.Loader.PREFAB,
-        url: ResourceMeta.OilPrefabPath
-    },
-    {
-        type: Laya.Loader.PREFAB,
-        url: ResourceMeta.FactoryPrefabPath
     },
 ];

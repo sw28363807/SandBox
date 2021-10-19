@@ -1,5 +1,4 @@
 <page>
    <item name="TestScene.scene" props="" ifExport="默认" aName="TestScene"/>
    <item name="GameScene.scene" props="" ifExport="默认" aName="GameScene"/>
-   <item name="scene/ShopDialog.scene" props="" ifExport="默认" aName="ShopDialog"/>
 </page>

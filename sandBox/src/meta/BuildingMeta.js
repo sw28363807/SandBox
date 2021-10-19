@@ -19,7 +19,6 @@ BuildingMeta.BuildingType = {
     HomeType: "",    //居民的家
     HospitalType: "",    //医院
     SchoolType: "",      //学校
-    ShopType: "",       //商店
     FarmLandType: "",   //农田
     PastureType: "",    //牧场
     OperaType: "",    //歌剧院
@@ -33,8 +32,6 @@ BuildingMeta.BuildingType = {
     ToolBuildingType: "",    //工具工坊,
     VilllageComType: "",       //采集课堂,
     BloodBuildingType: "",      //养生堂
-    OilType: "",      //炼油厂
-    FactoryType: "",  //工厂
 };
 
 BuildingMeta.obtainBuildingType();
@@ -368,61 +365,4 @@ BuildingMeta.BuildingDatas = {
         costStone: 0,
         desc: "可以恢复少量生命值",
     },
-    // // 商店
-    // [String(BuildingMeta.BuildingType.ShopType)]: {
-    //     prefab: ResourceMeta.ShopPrefabPath,
-    //     preview: "source/building/shop_1.png",
-    //     realWidth: 400,
-    //     realHeight: 400,
-    //     createBuildingSpeed: 2000,
-    //     useBuildingTime: 5000,
-    //     createPriority: 1,
-    //     buildingName: "商店",
-    //     costTree: 0,
-    //     costStone: 0,
-    //     desc: "可以购买神秘物品",
-    //     items: [
-    //         {
-    //             itemId: 1,
-    //             num: 1,
-    //             img: "source/resident/zhuangshi2.png",
-    //             name: "北辰大翅膀",
-    //             desc: "可以轻松的飞越天津以及周边区县地区的高大上装饰。",
-    //             costGold: 0,
-    //             reviewOrder: 0,       //1 上层 0 下层
-    //             reviewX: -120,
-    //             reviewY: -200,
-    //             scaleX: 1.2,
-    //             scaleY: 1.2,
-    //         }
-    //     ],
-    // },
-    // // 工厂
-    // [String(BuildingMeta.BuildingType.FactoryType)]: {
-    //     prefab: ResourceMeta.FactoryPrefabPath,
-    //     preview: "source/building/factory.png",
-    //     realWidth: 500,
-    //     realHeight: 500,
-    //     createBuildingSpeed: 2000,
-    //     useBuildingTime: 5000,
-    //     createPriority: 1,
-    //     buildingName: "工厂",
-    //     costTree: 0,
-    //     costStone: 0,
-    //     desc: "可以制造各种工业产品的地方",
-    // },
-    // // 炼油厂
-    // [String(BuildingMeta.BuildingType.OilType)]: {
-    //     prefab: ResourceMeta.OilPrefabPath,
-    //     preview: "source/building/oil.png",
-    //     realWidth: 500,
-    //     realHeight: 500,
-    //     createBuildingSpeed: 2000,
-    //     useBuildingTime: 5000,
-    //     createPriority: 1,
-    //     buildingName: "炼油厂",
-    //     costTree: 0,
-    //     costStone: 0,
-    //     desc: "可以提炼开采发展石油工业",
-    // },
 };
