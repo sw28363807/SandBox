@@ -1,4 +1,3 @@
-import GameContext from "../meta/GameContext";
 import ResidentMgr from "../resident/ResidentMgr";
 
 export default class TestSceneLogic extends Laya.Script {
@@ -17,12 +16,7 @@ export default class TestSceneLogic extends Laya.Script {
 
         ResidentMgr.getInstance().createResidentByConfig({
             parent: this.container,
-            x: this.container.width/2 - 200, y: this.container.height/2, sex: 1, age: 28
-        });
-
-        ResidentMgr.getInstance().createResidentByConfig({
-            parent: this.container,
-            x: this.container.width/2 - 200, y: this.container.height/2, sex: 1, age: 1
+            x: this.container.width/2 - 200, y: this.container.height/2, sex: 1, age: 33
         });
     }
 

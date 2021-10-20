@@ -77,6 +77,7 @@ export default class PastureDialogLogic extends Laya.Script {
                     this.buildingScript.addFoodToPool(gameAddFood);
                     this.refreshScoreText();
                 });
+                this.dongSprs[String(index)] = bug;
             }
         }
     }

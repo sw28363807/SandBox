@@ -8,6 +8,8 @@ import WaterMgr from "../source/WaterMgr";
 import GameMeta from "../meta/GameMeta";
 import FoodTrigger from "../source/FoodTrigger";
 import FoodTriggerMgr from "../source/FoodTriggerMgr";
+import GameEvent from "../meta/GameEvent";
+import EventMgr from "./EventMgr";
 
 export default class MapScrollView extends Laya.Script {
 
@@ -16,6 +18,7 @@ export default class MapScrollView extends Laya.Script {
     }
 
     onEnable() {
+        EventMgr.getInstance().registEvent(GameEvent.MOVE_TO_MAP_X_Y, this, this.onMoveToMap);
         this.startPos = null;
         this.container = this.owner.getChildByName("container");
         GameContext.mapContainer = this.container;
@@ -24,6 +27,7 @@ export default class MapScrollView extends Laya.Script {
     }
 
     onDisable() {
+        EventMgr.getInstance().removeEvent(GameEvent.MOVE_TO_MAP_X_Y, this, this.onMoveToMap);
     }
 
     onStart() {
@@ -93,6 +97,12 @@ export default class MapScrollView extends Laya.Script {
         return { x: toX, y: toY };
     }
 
+    onMoveToMap(param) {
+        if (param == undefined || param == null) {
+            this.lookAt(GameContext.mapWidth/2, GameContext.mapHeight/2, true);
+        }
+    }
+
     // 设置地图位置
     lookAt(mapX, mapY, anim) {
         if (anim == undefined || anim == null) {
@@ -114,7 +124,7 @@ export default class MapScrollView extends Laya.Script {
         let toY = this.container.y + offY;
         if (anim) {
             let p = this.getMapPos(toX, toY);
-            this.tweenObject = Laya.Tween.to(this.container, { x: p.x, y: p.y }, 1000,
+            this.tweenObject = Laya.Tween.to(this.container, { x: p.x, y: p.y }, 500,
                 Laya.Ease.sineOut, Laya.Handler.create(this, function () {
                     if (this.tweenObject) {
                         Laya.Tween.clear(this.tweenObject);

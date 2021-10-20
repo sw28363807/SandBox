@@ -32,7 +32,6 @@ export default class GameModel extends Laya.Script {
         this.treeNum = 0;
         this.stoneNum = 0;
         this.goldNum = 0;
-        this.elecNum = 0;
 
         this.gameYear = 0;
         this.gameDay = 0;
@@ -136,21 +135,6 @@ export default class GameModel extends Laya.Script {
 
     addGoldNum(num) {
         this.setGoldNum(this.getGoldNum() + num);
-    }
-    
-    setElecNum(num) {
-        this.elecNum = num;
-        if (this.elecNum < 0) {
-            this.elecNum = 0;
-        }
-    }
-
-    getElecNum() {
-        return this.elecNum;
-    }
-
-    addElecNum(num) {
-        this.setElecNum(this.getElecNum() + num);
     }
 
     // 新建一个动物Model

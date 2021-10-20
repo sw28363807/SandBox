@@ -2,31 +2,24 @@ D .
 D source
 D source/building
 P 79E045AD aaa.png
-P 162EBDDD bank.png
-P B80D66C6 blood_building.png
+P 162EBDDD blood_building.png
 P F6B88FAF building1_1.png
 P 9EA9FC45 center2.png
 P AD0159FE child_school.png
-P 63081062 factory.png
 P A7FF6896 farmland.png
 P 14815FA5 FoodPool.png
 P 1CF80236 hospital1_1.png
 P AA04A559 mask.png
 P C5F26416 mask2.png
 P C403B1F6 office.png
-P F2DF8C14 oil.png
 P 95646BC3 pasture.png
 P 6E105225 pasture_big.png
-P 535961C3 pet_shop.png
-P CA7007E2 police.png
 P 87E13359 power_plant.png
-P C36D5CB8 restaurant.png
 P FCAB52E0 school_1.png
 P A4AA3535 scienceLab.png
-P 8CF6BD01 shop_1.png
 P 69D3B37B speedBuilding.png
-P 5F4E7C62 ToolBuilding.png
-P 2FF27650 villageCom.png
+P 63081062 ToolBuilding.png
+P F2DF8C14 villageCom.png
 P A4FE1240 WaterPool.png
 D source/landscape
 P C28F2A84 aaa.png
