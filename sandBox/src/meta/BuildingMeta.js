@@ -355,8 +355,8 @@ BuildingMeta.BuildingDatas = {
     [String(BuildingMeta.BuildingType.BloodBuildingType)]: {
         prefab: ResourceMeta.BloodBuildingPrefabPath,
         preview: "source/building/blood_building.png",
-        realWidth: 350,
-        realHeight: 350,
+        realWidth: 400,
+        realHeight: 400,
         createBuildingSpeed: 2000,
         useBuildingTime: 5000,
         createPriority: 1,
