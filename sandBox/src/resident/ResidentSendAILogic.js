@@ -98,7 +98,7 @@ export default class ResidentSendAILogic extends Laya.Script {
         this.owner.residentLogicScript.setAnim(ResidentMeta.ResidentAnim.Work);
         this.owner.residentLogicScript.setStateAniVisible(true);
         this.owner.residentLogicScript.setStateAni("ani9");
-        Laya.timer.once(ResidentMeta.ResidentCollectSendTime, this, this.onCollectSendFinish, [info]);
+        Laya.timer.once(ResidentMeta.ResidentCollectSendTime * this.getModel().getFarmScale(), this, this.onCollectSendFinish, [info]);
     }
 
     onCollectSendFinish(info) {

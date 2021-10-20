@@ -22,7 +22,9 @@ export default class ResidentModel extends Laya.Script {
         this.ageExp = 0;
         this.makeLoveSystemTime = 0;    //生孩子间隔时间
         this.petType = 0;               //宠物ID
-        this.speedScale = 1;
+        this.speedScale = 1;            //移动速度因子
+        this.collectionScale = 1;       //收集速度因子
+        this.farmScale = 1;             //采集吃喝的速度因子
 
 
         this.temperature = ResidentMeta.ResidentStandardTemperature;  //体温
@@ -115,6 +117,22 @@ export default class ResidentModel extends Laya.Script {
 
     getIsWorking() {
         return this.isWorking;
+    }
+
+    setFarmScale(scale) {
+        this.farmScale = scale;
+    }
+
+    getFarmScale() {
+        return this.farmScale;
+    }
+
+    setCollectionSpeedScale(scale) {
+        this.collectionScale = scale;
+    }
+
+    getCollectionSpeedScale() {
+        return this.collectionScale;
     }
 
     setSpeedScale(scale) {

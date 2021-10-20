@@ -185,7 +185,7 @@ export default class ResidentDoSomeThingAILogic extends Laya.Script {
             this.owner.residentLogicScript.setAnim(ResidentMeta.ResidentAnim.Work);
             this.owner.residentLogicScript.setStateAniVisible(true);
             this.owner.residentLogicScript.setStateAni("ani1");
-            Laya.timer.once(ResidentMeta.CutDownTreeTime,
+            Laya.timer.once(ResidentMeta.CutDownTreeTime * this.getModel().getCollectionSpeedScale(),
                 this.owner.residentLogicScript,
                 this.owner.residentLogicScript.onDoWorkFinish,
                 [this.owner.residentLogicScript.makeParam(null)]);
@@ -195,7 +195,7 @@ export default class ResidentDoSomeThingAILogic extends Laya.Script {
             this.owner.residentLogicScript.setAnim(ResidentMeta.ResidentAnim.Work);
             this.owner.residentLogicScript.setStateAniVisible(true);
             this.owner.residentLogicScript.setStateAni("ani2");
-            Laya.timer.once(ResidentMeta.CollectStoneTime,
+            Laya.timer.once(ResidentMeta.CollectStoneTime * this.getModel().getCollectionSpeedScale(),
                 this.owner.residentLogicScript,
                 this.owner.residentLogicScript.onDoWorkFinish,
                 [this.owner.residentLogicScript.makeParam(null)]);

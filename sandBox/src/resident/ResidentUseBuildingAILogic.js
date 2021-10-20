@@ -35,6 +35,52 @@ export default class ResidentUseBuildingAILogic extends Laya.Script {
             }
             return false;
         }
+        // 去工具工坊
+        else if (aiData == ResidentMeta.ResidentState.GotoToolBuilding) {
+            if (!this.getModel().isAdult()) {
+                return false;
+            }
+            if (this.getModel().getCollectionSpeedScale() != 1) {
+                return false;
+            }
+            if (this.getModel().getTeach() >= 0) {
+                return true;
+            }
+            return false;
+        }
+        // 去农学堂
+        else if (aiData == ResidentMeta.ResidentState.GotoVillageCom) {
+            if (!this.getModel().isAdult()) {
+                return false;
+            }
+            if (this.getModel().getFarmScale() != 1) {
+                return false;
+            }
+            if (this.getModel().getTeach() >= 0) {
+                return true;
+            }
+            return false;
+        }
+        // 去养生堂
+        else if (aiData == ResidentMeta.ResidentState.GotoBloodBuilding) {
+            let life = this.getModel().getLife();
+            if (life >= 80) {
+                return false;
+            }
+            if (life >= 50) {
+                return RandomMgr.randomYes(0.8);
+            }
+            if (life >= 30) {
+                return RandomMgr.randomYes(0.3);
+            }
+            if (life >= 10) {
+                return RandomMgr.randomYes(0.15);
+            }
+            if (life >= 0) {
+                return true;
+            }
+            return false;
+        }
         // 去学校
         else if (aiData == ResidentMeta.ResidentState.GoToSchool) {
             if (this.getModel().getTeach() < 100) {
@@ -118,20 +164,32 @@ export default class ResidentUseBuildingAILogic extends Laya.Script {
             this.owner.residentLogicScript.setBuffAniVisible(false);
             this.owner.residentLogicScript.stopBuffAni();
         }
+        // 农学堂学习完成
+        else if (state == ResidentMeta.ResidentState.UpdateFarmSpeed) {
+            this.getModel().setFarmScale(0.1);
+        }
+        // 养生堂完成
+        else if (state == ResidentMeta.ResidentState.AddBlood) {
+            this.getModel().addLife(1);
+        }
+        // 升级工具完成
+        else if (state == ResidentMeta.ResidentState.UpdateTool) {
+            this.getModel().setCollectionSpeedScale(0.1);
+        }
         // 学习完成
         else if (state == ResidentMeta.ResidentState.Learning) {
             let addTeachInfo = this.useBuilding.buildingScript.getAddTeachInfo();
             console.debug(addTeachInfo);
             if (RandomMgr.randomYes(addTeachInfo.addTeachPriority)) {
                 console.debug("成功教育");
-                this.getModel().addTeach(addTeachInfo.addTeach); 
+                this.getModel().addTeach(addTeachInfo.addTeach);
             }
         }
         // 在幼儿园学习完成
         else if (state == ResidentMeta.ResidentState.ChildLearn) {
             let addAgePriority = this.useBuilding.buildingScript.getAddAgePriority();
             if (RandomMgr.randomYes(addAgePriority)) {
-                this.getModel().addAgeExp(Math.round(ResidentMeta.ResidentAgePeriod/5), true);   
+                this.getModel().addAgeExp(Math.round(ResidentMeta.ResidentAgePeriod / 5), true);
             }
         }
         // 在食物库吃饭完成
@@ -205,6 +263,20 @@ export default class ResidentUseBuildingAILogic extends Laya.Script {
     onGetBuilding(aiData, data) {
         // 去治疗
         if (aiData == ResidentMeta.ResidentState.GotoTreat) {
+            let building = BuildingMgr.getInstance().getAlltBuildingForCondition(this.owner.x,
+                this.owner.y, data.buildingType,
+                2000, [BuildingMeta.BuildingState.Noraml], null, true);
+            return building
+        }
+        // 去工具工坊
+        else if (aiData == ResidentMeta.ResidentState.GotoToolBuilding) {
+            let building = BuildingMgr.getInstance().getAlltBuildingForCondition(this.owner.x,
+                this.owner.y, data.buildingType,
+                2000, [BuildingMeta.BuildingState.Noraml], null, true);
+            return building
+        }
+        // 去农学堂
+        else if (aiData == ResidentMeta.ResidentState.GotoVillageCom) {
             let building = BuildingMgr.getInstance().getAlltBuildingForCondition(this.owner.x,
                 this.owner.y, data.buildingType,
                 2000, [BuildingMeta.BuildingState.Noraml], null, true);

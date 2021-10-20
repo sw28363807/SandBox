@@ -38,11 +38,15 @@ ResidentMeta.ResidentState = {
     GotoContinueCreateHospital: "", //跑去建造医院
     CreateHospital: "",     //建造医院
     GotoContinueCreateVillageCom: "", //跑去建造农学堂
-    CreateVillageCom: "",     //建造农学堂
+    CreateVillageCom: "",     //建造农学堂,
+    GotoVillageCom: "",        //赶去农学堂
+    UpdateFarmSpeed: "",  //增加农学收集的速度
     GotoContinueCreateSpeedBuilding: "", //跑去建造健身房
     CreateSpeedBuilding: "",     //建造健身房
     GotoContinueCreateToolBuilding: "", //跑去建造工具工坊
     CreateToolBuilding: "",     //建造工具工坊
+    GotoToolBuilding: "",       //跑去工具工坊
+    UpdateTool: "",             //在工具工坊升级工具
     GotoTreat: "",          //跑去治疗
     Treating: "",           //正在治疗
     GotoOperaForWatch: "",          //跑去看歌剧
@@ -65,6 +69,8 @@ ResidentMeta.ResidentState = {
     CreateLab: "",     //建造科学实验室
     GotoContinueCreateBloodBuilding: "", //跑去建造养生堂
     CreateBloodBuilding: "",     //建造养生堂
+    GotoBloodBuilding: "",       //赶去养生堂
+    AddBlood: "",                //在养生堂回血
     GotoContinueCreateOffice: "", //跑去建造写字楼
     CreateOffice: "",     //建造写字楼
     RandomWalk: "",     //随机走一个位置
@@ -263,6 +269,16 @@ ResidentMeta.ResidentUseBuildingMap = {
         buildingType: BuildingMeta.BuildingType.OfficeType,
         useType: 1,     //1 隐藏使用 2 周围使用 默认为1
     },
+    [ResidentMeta.ResidentState.GotoToolBuilding]: {
+        nextState: ResidentMeta.ResidentState.UpdateTool,
+        buildingType: BuildingMeta.BuildingType.ToolBuildingType,
+        useType: 1,     //1 隐藏使用 2 周围使用 默认为1
+    },
+    [ResidentMeta.ResidentState.GotoVillageCom]: {
+        nextState: ResidentMeta.ResidentState.UpdateFarmSpeed,
+        buildingType: BuildingMeta.BuildingType.VilllageComType,
+        useType: 1,     //1 隐藏使用 2 周围使用 默认为1
+    },
 }
 // 使用----------------------------------------------------end
 
@@ -349,7 +365,7 @@ ResidentMeta.ResidentMarryAge = ResidentMeta.ResidentAdultAge + 2;         //结
 ResidentMeta.ResidentAgePeriod = 500 * 100;         //年龄的增长周期
 ResidentMeta.ResidentGotoYOff = 10;         //走向某个建筑物的y轴off
 ResidentMeta.ResidentChildSchoolSearchArea = 1000;         //寻找幼儿园的搜索范围
-ResidentMeta.ResidentCollectSendTime = 2000;         //打包寄送物品的时间
+ResidentMeta.ResidentCollectSendTime = 10*1000;         //打包寄送物品的时间
 ResidentMeta.ResidentDrinkWaterAddValue = 50;         //喝水增加值
 ResidentMeta.ResidentSaveWaterAddValue = 100;         //储藏水的增加值
 ResidentMeta.ResidentStandardTemperature = 36;         //体温标准值
