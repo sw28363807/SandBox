@@ -78,10 +78,10 @@ BuildingMeta.BuildingDatas = {
         createBuildingSpeed: 2000,
         useBuildingTime: 5000,
         createPriority: 1,
-        buildingName: "医院",
+        buildingName: "小医院",
         costTree: 0,
         costStone: 0,
-        desc: "可以治疗疾病",
+        desc: "可以治疗居民的疾病，快快建造吧",
         doctors: [
             {
                 doctorId: 1,
@@ -110,11 +110,11 @@ BuildingMeta.BuildingDatas = {
         createBuildingSpeed: 2000,
         useBuildingTime: 5000,
         createPriority: 1,
-        buildingName: "水仓库",
+        buildingName: "蓄水池",
         costTree: 0,
         costStone: 0,
         maxSave: 1000,
-        desc: "可以保存水源以便今后使用",
+        desc: "要多多储存水哦，冬天时水都结冰了，好可怕,没水喝会挂掉哦",
     },
     // 食物仓库
     [String(BuildingMeta.BuildingType.FoodPoolType)]: {
@@ -125,11 +125,11 @@ BuildingMeta.BuildingDatas = {
         createBuildingSpeed: 2000,
         useBuildingTime: 5000,
         createPriority: 1,
-        buildingName: "食物仓库",
+        buildingName: "粮仓",
         costTree: 0,
         costStone: 0,
         maxSave: 600,
-        desc: "可以保存食物以便今后使用",
+        desc: "可以保存食物哦，有了它，冬天就不怕没有吃的了",
     },
     // 写字楼
     [String(BuildingMeta.BuildingType.OfficeType)]: {
@@ -145,7 +145,7 @@ BuildingMeta.BuildingDatas = {
         costStone: 0,
         addGold: 1,
         maxSave: 10,
-        desc: "居民收入来源",
+        desc: "聚集了高端白领，可以赚取金币哦",
     },
     // 幼儿园
     [String(BuildingMeta.BuildingType.ChildSchoolType)]: {

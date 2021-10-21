@@ -22,13 +22,6 @@ P F2DF8C14 villageCom.png
 P A4FE1240 WaterPool.png
 D source/landscape
 P C28F2A84 aaa.png
-P C54733E9 animal1.png
-P 422E632E animal2.png
-P D891FC0E animal3.png
-P 1B96A93D animal4.png
-P AB35A39B b12.png
-P 2C725E53 b13.png
-P D96B34DD b7.png
 P 783CA351 cao.png
 P 793A43DF cao2.png
 P F3326145 cao3.png
@@ -57,6 +50,8 @@ P B61DBBA1 stone4.png
 P E4EF3E30 stoneicon.png
 P C11BF038 tree1.png
 P 881E7D62 tree2.png
+P 7F04D47F tree3.png
+P 58AC793E tree4.png
 P 920C3CF0 treeicon.png
 P A2663D43 water.png
 P F00114D0 waterIcon.png
